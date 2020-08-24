@@ -4,10 +4,15 @@ public class User {
     private Long userId;
     private String email;
     private String password;
+    private String name;
+    private String surname;
 
-    public User(String email, String password) {
+    public User(Long userId, String email, String password, String name, String surname) {
+        this.userId = userId;
         this.email = email;
         this.password = password;
+        this.name = name;
+        this.surname = surname;
     }
 
     public Long getUserId() {
@@ -34,6 +39,22 @@ public class User {
         this.password = password;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -49,7 +70,13 @@ public class User {
         if (email != null ? !email.equals(user.email) : user.email != null) {
             return false;
         }
-        return password != null ? password.equals(user.password) : user.password == null;
+        if (password != null ? !password.equals(user.password) : user.password != null) {
+            return false;
+        }
+        if (name != null ? !name.equals(user.name) : user.name != null) {
+            return false;
+        }
+        return surname != null ? surname.equals(user.surname) : user.surname == null;
     }
 
     @Override
@@ -57,6 +84,8 @@ public class User {
         int result = userId != null ? userId.hashCode() : 0;
         result = 31 * result + (email != null ? email.hashCode() : 0);
         result = 31 * result + (password != null ? password.hashCode() : 0);
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (surname != null ? surname.hashCode() : 0);
         return result;
     }
 
@@ -66,6 +95,8 @@ public class User {
         sb.append("userId=").append(userId);
         sb.append(", email='").append(email).append('\'');
         sb.append(", password='").append(password).append('\'');
+        sb.append(", name='").append(name).append('\'');
+        sb.append(", surname='").append(surname).append('\'');
         sb.append('}');
         return sb.toString();
     }
