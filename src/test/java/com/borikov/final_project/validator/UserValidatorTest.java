@@ -46,13 +46,53 @@ public class UserValidatorTest {
                 {"3@YanDEX.com"},
                 {"@qwe.qwe"},
                 {"dsa_fds?@qwe.qwe"},
-                {"dsa_fds?@qqweqweqweqwewe.qwe"}
+                {"dsa_fds?@qqweqweqweqwewe.qwe"},
+                {""},
+                {"   "},
+                {null}
         };
     }
 
     @Test(dataProvider = "isEmailCorrectNegativeData")
     public void isEmailCorrectNegativeTest(String email) {
         boolean result = userValidator.isEmailCorrect(email);
+        assertFalse(result);
+    }
+
+    @DataProvider(name = "isLoginCorrectPositiveData")
+    public Object[][] createIsLoginCorrectPositiveData() {
+        return new Object[][]{
+                {"oleg"},
+                {"qwe_qwe.."},
+                {"..."},
+                {"__oleg__"},
+                {"o12"}
+        };
+    }
+
+    @Test(dataProvider = "isLoginCorrectPositiveData")
+    public void isLoginCorrectPositiveTest(String login) {
+        boolean result = userValidator.isLoginCorrect(login);
+        assertTrue(result);
+    }
+
+    @DataProvider(name = "isLoginCorrectNegativeData")
+    public Object[][] createIsLoginCorrectNegativeData() {
+        return new Object[][]{
+                {"olegolegolegolegoelgoleg"},
+                {"qwe_qwe..?"},
+                {"qw"},
+                {"#fsdfsdf"},
+                {"1"},
+                {""},
+                {"   "},
+                {null}
+        };
+    }
+
+    @Test(dataProvider = "isLoginCorrectNegativeData")
+    public void isLoginCorrectNegativeTest(String login) {
+        boolean result = userValidator.isLoginCorrect(login);
         assertFalse(result);
     }
 
@@ -81,7 +121,10 @@ public class UserValidatorTest {
                 {"12345678"},
                 {"qwertyui2"},
                 {"123Q123433"},
-                {"qweQwertyev"}
+                {"qweQwertyev"},
+                {""},
+                {"   "},
+                {null}
         };
     }
 
@@ -116,7 +159,10 @@ public class UserValidatorTest {
                 {"Alex_Black"},
                 {"12345678"},
                 {"qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq"},
-                {"q"}
+                {"q"},
+                {""},
+                {"   "},
+                {null}
         };
     }
 
@@ -151,7 +197,10 @@ public class UserValidatorTest {
                 {"Alex_Black"},
                 {"12345678"},
                 {"qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq"},
-                {"q"}
+                {"q"},
+                {""},
+                {"   "},
+                {null}
         };
     }
 

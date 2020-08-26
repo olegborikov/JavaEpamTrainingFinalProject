@@ -3,13 +3,16 @@ package com.borikov.final_project.entity;
 public class User {
     private Long userId;
     private String email;
+    private String login;
     private String password;
     private String name;
     private String surname;
 
-    public User(Long userId, String email, String password, String name, String surname) {
+    public User(Long userId, String email, String login,
+                String password, String name, String surname) {
         this.userId = userId;
         this.email = email;
+        this.login = login;
         this.password = password;
         this.name = name;
         this.surname = surname;
@@ -29,6 +32,14 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
     }
 
     public String getPassword() {
@@ -70,6 +81,9 @@ public class User {
         if (email != null ? !email.equals(user.email) : user.email != null) {
             return false;
         }
+        if (login != null ? !login.equals(user.login) : user.login != null) {
+            return false;
+        }
         if (password != null ? !password.equals(user.password) : user.password != null) {
             return false;
         }
@@ -83,6 +97,7 @@ public class User {
     public int hashCode() {
         int result = userId != null ? userId.hashCode() : 0;
         result = 31 * result + (email != null ? email.hashCode() : 0);
+        result = 31 * result + (login != null ? login.hashCode() : 0);
         result = 31 * result + (password != null ? password.hashCode() : 0);
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (surname != null ? surname.hashCode() : 0);
@@ -94,6 +109,7 @@ public class User {
         final StringBuilder sb = new StringBuilder("User{");
         sb.append("userId=").append(userId);
         sb.append(", email='").append(email).append('\'');
+        sb.append(", login='").append(login).append('\'');
         sb.append(", password='").append(password).append('\'');
         sb.append(", name='").append(name).append('\'');
         sb.append(", surname='").append(surname).append('\'');

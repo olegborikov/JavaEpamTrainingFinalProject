@@ -1,7 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
-</html>
 <html>
+<head>
+    <title>Login</title>
+</head>
 <body>
-<jsp:forward page="jsp/login.jsp"/>
+
 </body>
 </html>

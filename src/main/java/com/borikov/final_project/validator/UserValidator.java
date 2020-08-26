@@ -3,6 +3,7 @@ package com.borikov.final_project.validator;
 public class UserValidator {
     private static final String EMAIL_REGEX =
             "^[\\w.+-]{3,30}@[\\w.-]{2,15}\\.[\\p{Lower}]{2,4}$";
+    private static final String LOGIN_REGEX = "^[\\w.]{3,20}$";
     private static final String PASSWORD_REGEX =
             "^(?=.*[\\p{Lower}])(?=.*[\\p{Upper}])(?=.*\\d)[\\p{Alnum}]{8,20}$";
     private static final String NAME_REGEX = "^\\p{L}{2,25}$";
@@ -12,6 +13,14 @@ public class UserValidator {
         boolean result = false;
         if (email != null) {
             result = email.matches(EMAIL_REGEX);
+        }
+        return result;
+    }
+
+    public boolean isLoginCorrect(String login) {
+        boolean result = false;
+        if (login != null) {
+            result = login.matches(LOGIN_REGEX);
         }
         return result;
     }
