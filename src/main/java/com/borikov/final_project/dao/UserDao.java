@@ -12,7 +12,10 @@ import java.util.Optional;
 
 public interface UserDao {
     Logger LOGGER = LogManager.getLogger();
+
     Optional<User> findByLogin(String login) throws DaoException;
+
+    boolean add(User user) throws DaoException;
 
     default void closeResultSet(ResultSet resultSet) { // TODO: 02.09.2020 move to common dao
         try {

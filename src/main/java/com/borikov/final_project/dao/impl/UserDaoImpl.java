@@ -45,6 +45,12 @@ public class UserDaoImpl implements UserDao {
         }
     }
 
+    @Override
+    public boolean add(User user) throws DaoException {
+        return false;
+    }
+
+
     private User createUserFromResultSet(ResultSet resultSet) throws SQLException {
         long userId = resultSet.getLong(ColumnName.USER_ID);
         String login = resultSet.getString(ColumnName.LOGIN);

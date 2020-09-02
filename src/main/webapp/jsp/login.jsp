@@ -3,21 +3,34 @@
 <head>
     <title>Login</title>
     <link rel="stylesheet" type="text/css" href="css\bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css\login.css">
     <script type="text/javascript" src="js\bootstrap.min.js"></script>
 </head>
 <body>
-<div class="container">
-    <div>
-        <form name="loginForm" method="post" action="controller" autocomplete="off">
-            <input type="hidden" name="commandName" value="login_command">
-            Login:<br/>
-            <input type="text" name="login"/><br/>
-            Password:<br/>
-            <input type="password" name="password"/><br/>
-            <div style="color: red">${errorLoginPasswordMessage}</div>
-            <br/>
-            <input type="submit" value="Login"/>
-        </form>
+
+<div class="sidenav">
+    <div class="login-main-text">
+        <h2>Application<br> Login Page</h2>
+        <p>Login or register from here to access.</p>
+    </div>
+</div>
+<div class="main">
+    <div class="col-md-6 col-sm-12">
+        <div class="login-form">
+            <form name="loginRegisterForm" method="post" action="controller" autocomplete="off">
+                <div class="form-group">
+                    <label>Login</label>
+                    <input type="text" class="form-control" placeholder="Login" name="login">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" class="form-control" placeholder="Password" name="password">
+                </div>
+                <div style="color: red">${errorLoginPasswordMessage}</div>
+                <button type="submit" class="btn btn-black" name="commandName" value="login_command">Login</button>
+                <button type="submit" class="btn btn-secondary" name="commandName" value="register_command">Register</button>
+            </form>
+        </div>
     </div>
 </div>
 </body>
