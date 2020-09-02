@@ -8,6 +8,12 @@ public class User {
     private String name;
     private String surname;
 
+    public User(Long userId, String login, String password) {// TODO: 02.09.2020 delete
+        this.userId = userId;
+        this.login = login;
+        this.password = password;
+    }
+
     public User(Long userId, String email, String login,
                 String password, String name, String surname) {
         this.userId = userId;
