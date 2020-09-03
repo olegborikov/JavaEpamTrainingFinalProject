@@ -1,13 +1,13 @@
 package com.borikov.final_project.controller.command;
 
-import com.borikov.final_project.controller.command.impl.LoginCommand;
-import com.borikov.final_project.controller.command.impl.LogoutCommand;
-import com.borikov.final_project.controller.command.impl.RegisterCommand;
+import com.borikov.final_project.controller.command.impl.*;
 
 public enum CommandType {
     LOGIN_COMMAND(new LoginCommand()),
     LOGOUT_COMMAND(new LogoutCommand()),
-    REGISTER_COMMAND(new RegisterCommand());
+    REGISTRATION_COMMAND(new RegistrationCommand()),
+    BROWSE_REGISTRATION_COMMAND(new BrowseRegistrationCommand()),
+    BROWSE_LOGIN_COMMAND(new BrowseLoginCommand());
 
     private final Command command;
 

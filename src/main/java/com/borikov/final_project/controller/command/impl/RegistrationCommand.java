@@ -12,7 +12,7 @@ import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class RegisterCommand implements Command {
+public class RegistrationCommand implements Command {
     private static final Logger LOGGER = LogManager.getLogger();
     private static final UserService userService = new UserServiceImpl();
 
@@ -27,7 +27,7 @@ public class RegisterCommand implements Command {
             } else {
                 request.setAttribute(RequestParameter.ERROR_LOGIN_PASSWORD_MESSAGE,
                         "Incorrect login or password");
-                page = PagePath.LOGIN;
+                page = PagePath.REGISTRATION;
             }
         } catch (ServiceException e) {
             LOGGER.log(Level.ERROR, "Error while register user", e);
