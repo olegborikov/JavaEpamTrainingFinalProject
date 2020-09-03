@@ -40,4 +40,26 @@ public class UserServiceImpl implements UserService {
             throw new ServiceException("Error while checking user for existing", e);
         }
     }
+
+    @Override
+    public boolean addUser(String login, String password) throws ServiceException {
+        try {
+            UserValidator userValidator = new UserValidator();
+            UserDao userDao = new UserDaoImpl();
+            MessageDigest messageDigest = MessageDigest.getInstance("SHA-1");
+            boolean result = false;
+            if (userValidator.isLoginCorrect(login)
+                    && userValidator.isPasswordCorrect(password)) {
+                messageDigest.update(password.getBytes(StandardCharsets.UTF_8));
+                byte[] passwordEncodedBytes = messageDigest.digest();
+                BigInteger passwordBigInt = new BigInteger(1, passwordEncodedBytes);
+                String passwordEncrypted = passwordBigInt.toString(16);
+                User user = new User(null, login, passwordEncrypted);
+                result = userDao.add(user);
+            }
+            return result;
+        } catch (DaoException | NoSuchAlgorithmException e) {
+            throw new ServiceException("Error while checking user for existing", e);
+        }
+    }
 }
