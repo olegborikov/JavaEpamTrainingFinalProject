@@ -12,7 +12,7 @@ import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class RegistrationCommand implements Command {
+public class RegistrationCommand implements Command {// TODO: 04.09.2020 rename sign up
     private static final Logger LOGGER = LogManager.getLogger();
     private static final UserService userService = new UserServiceImpl();
 

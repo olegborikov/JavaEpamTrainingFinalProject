@@ -6,6 +6,7 @@ import com.borikov.final_project.entity.User;
 import com.borikov.final_project.exception.DaoException;
 import com.borikov.final_project.exception.ServiceException;
 import com.borikov.final_project.service.UserService;
+import com.borikov.final_project.util.PasswordEncryption;
 import com.borikov.final_project.validator.UserValidator;
 
 import java.math.BigInteger;
@@ -20,19 +21,15 @@ public class UserServiceImpl implements UserService {
         try {
             UserValidator userValidator = new UserValidator();
             UserDao userDao = new UserDaoImpl();
-            MessageDigest messageDigest = MessageDigest.getInstance("SHA-1");
             boolean result = false;
             if (userValidator.isLoginCorrect(login)
                     && userValidator.isPasswordCorrect(password)) {
                 Optional<User> userOptional = userDao.findByLogin(login);
                 if (userOptional.isPresent()) {
                     User user = userOptional.get();
-                    messageDigest.update(password.getBytes(StandardCharsets.UTF_8));
-                    byte[] passwordEncodedBytes = messageDigest.digest();
-                    BigInteger passwordBigInt = new BigInteger(1, passwordEncodedBytes);
-                    String passwordEncrypted = passwordBigInt.toString(16);
+                    String encryptedPassword = PasswordEncryption.encrypt(password);
                     result = user.getLogin().equals(login)
-                            && user.getPassword().equals(passwordEncrypted);
+                            && user.getPassword().equals(encryptedPassword);
                 }
             }
             return result;
@@ -46,15 +43,11 @@ public class UserServiceImpl implements UserService {
         try {
             UserValidator userValidator = new UserValidator();
             UserDao userDao = new UserDaoImpl();
-            MessageDigest messageDigest = MessageDigest.getInstance("SHA-1");
             boolean result = false;
             if (userValidator.isLoginCorrect(login)
                     && userValidator.isPasswordCorrect(password)) {
-                messageDigest.update(password.getBytes(StandardCharsets.UTF_8));
-                byte[] passwordEncodedBytes = messageDigest.digest();
-                BigInteger passwordBigInt = new BigInteger(1, passwordEncodedBytes);
-                String passwordEncrypted = passwordBigInt.toString(16);
-                User user = new User(null, login, passwordEncrypted);
+                String encryptedPassword = PasswordEncryption.encrypt(password);
+                User user = new User(null, login, encryptedPassword);
                 result = userDao.add(user);
             }
             return result;
