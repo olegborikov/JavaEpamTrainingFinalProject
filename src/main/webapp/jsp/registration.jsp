@@ -11,18 +11,18 @@
 
 <div class="sidenav">
     <div class="login-main-text">
-        <h2>Application<br> Registration Page</h2>
-        <p>Register from here to access</p>
+        <h2>Bullfinch<br> Registration Page</h2>
+        <p>Sign up from here to access</p>
     </div>
 </div>
 <div class="main">
     <div class="col-md-6 col-sm-12">
         <div class="register-form">
-            <form name="registerForm" method="post" action="controller" autocomplete="off">
+            <form name="registrationForm" method="post" action="controller" autocomplete="off">
                 <div class="form-group">
                     <label>Email</label>
                     <input type="text" class="form-control" placeholder="Email" name="email">
-                    <p class="help-block">Please provide your E-mail</p>
+                    <p class="help-block">Please provide your Email</p>
                 </div>
                 <div class="form-group">
                     <label>Login</label>
@@ -42,7 +42,7 @@
                 </div>
                 <div style="color: red">${errorLoginPasswordMessage}</div>
                 <button type="submit" class="btn btn-black" name="commandName" value="registration_command">
-                    Registration
+                    Sign up
                 </button>
                 <button type="submit" class="btn btn-secondary" name="commandName" value="browse_login_command">
                     Login

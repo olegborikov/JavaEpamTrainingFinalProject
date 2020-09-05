@@ -11,8 +11,8 @@
 
 <div class="sidenav">
     <div class="login-main-text">
-        <h2>Application<br> Login Page</h2>
-        <p>Login from here to access</p>
+        <h2>Bullfinch<br> Login Page</h2>
+        <p>Sign in from here to access</p>
     </div>
 </div>
 <div class="main">
@@ -28,7 +28,9 @@
                     <input type="password" class="form-control" placeholder="Password" name="password">
                 </div>
                 <div style="color: red">${errorLoginPasswordMessage}</div>
-                <button type="submit" class="btn btn-black" name="commandName" value="login_command">Login</button>
+                <button type="submit" class="btn btn-black" name="commandName" value="login_command">
+                    Sign in
+                </button>
                 <button type="submit" class="btn btn-secondary" name="commandName" value="browse_registration_command">
                     Registration
                 </button>
