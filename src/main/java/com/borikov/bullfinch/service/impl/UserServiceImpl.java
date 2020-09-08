@@ -45,8 +45,8 @@ public class UserServiceImpl implements UserService {
             if (userValidator.isLoginCorrect(login)
                     && userValidator.isPasswordCorrect(password)) {
                 Optional<String> encryptedPassword = PasswordEncryption.encrypt(password);
-                Optional<User> existingГser = userDao.findByLogin(login);
-                if (existingГser.isEmpty() && encryptedPassword.isPresent()) {
+                Optional<User> existingUser = userDao.findByLogin(login);
+                if (existingUser.isEmpty() && encryptedPassword.isPresent()) {
                     User user = new User(null, login, encryptedPassword.get());
                     result = userDao.add(user);
                 }

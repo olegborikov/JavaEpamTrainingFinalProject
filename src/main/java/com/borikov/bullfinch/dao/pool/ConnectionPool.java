@@ -21,10 +21,10 @@ public enum ConnectionPool {
     private final BlockingDeque<ProxyConnection> freeConnections;
     private final Queue<ProxyConnection> givenConnections;
     private static final String FILE_NAME = "database";
-    private static final String DATABASE_DRIVER = "database.driverClassName";
-    private static final String DATABASE_URL = "database.url";
-    private static final String DATABASE_USERNAME = "database.username";
-    private static final String DATABASE_PASSWORD = "database.password";
+    private static final String DATABASE_DRIVER = "driverClassName";
+    private static final String DATABASE_URL = "url";
+    private static final String DATABASE_USERNAME = "username";
+    private static final String DATABASE_PASSWORD = "password";
     private static final int POOL_SIZE = 8;
 
     ConnectionPool() {
@@ -53,7 +53,7 @@ public enum ConnectionPool {
             givenConnections.offer(connection);
             return connection;
         } catch (InterruptedException e) {
-           throw new ConnectionPoolException();
+           throw new ConnectionPoolException("Throw was interrupted", e);
         }
     }
 
