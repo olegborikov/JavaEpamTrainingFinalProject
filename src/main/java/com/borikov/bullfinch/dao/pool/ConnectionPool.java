@@ -58,11 +58,9 @@ public enum ConnectionPool {
     }
 
     public void releaseConnection(Connection connection) {
-        if (connection instanceof ProxyConnection) {
-            boolean result = givenConnections.remove(connection);
-            if (result) {
-                freeConnections.offer((ProxyConnection) connection);
-            }
+        if (connection instanceof ProxyConnection
+                && givenConnections.remove(connection)) {
+            freeConnections.offer((ProxyConnection) connection);
         } else {
             logger.log(Level.ERROR, "Connection {} is invalid", connection);
         }

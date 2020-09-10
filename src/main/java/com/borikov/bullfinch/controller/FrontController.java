@@ -2,6 +2,7 @@ package com.borikov.bullfinch.controller;
 
 import com.borikov.bullfinch.controller.command.Command;
 import com.borikov.bullfinch.controller.command.CommandProvider;
+import com.borikov.bullfinch.dao.pool.ConnectionPool;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -34,5 +35,11 @@ public class FrontController extends HttpServlet {
         String page = command.execute(request);
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(page);
         dispatcher.forward(request, response);
+    }
+
+    @Override
+    public void destroy() {
+        super.destroy();
+        ConnectionPool.INSTANCE.destroyPool();
     }
 }
