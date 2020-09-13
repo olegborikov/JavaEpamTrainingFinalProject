@@ -4,10 +4,10 @@ import java.util.ResourceBundle;
 
 public class DatabaseConfig {
     private static final String FILE_NAME = "database";
-    private static final String DATABASE_DRIVER_NAME = "driverName";
-    private static final String DATABASE_URL = "url";
-    private static final String DATABASE_USERNAME = "username";
-    private static final String DATABASE_PASSWORD = "password";
+    private static final String DATABASE_DRIVER_NAME = "database.driverName";
+    private static final String DATABASE_URL = "database.url";
+    private static final String DATABASE_USERNAME = "database.username";
+    private static final String DATABASE_PASSWORD = "database.password";
     private final String driverName;
     private final String url;
     private final String username;
