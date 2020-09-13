@@ -25,8 +25,8 @@ public class RegistrationCommand implements Command {
             if (userService.addUser(login, password)) {
                 page = PagePath.MAIN;
             } else {
-                request.setAttribute(RequestParameter.ERROR_LOGIN_PASSWORD_MESSAGE,
-                        "Incorrect login or password");
+                request.setAttribute(RequestParameter.ERROR_DATA_MESSAGE,
+                        "Incorrect data");
                 page = PagePath.REGISTRATION;
             }
         } catch (ServiceException e) {

@@ -1,11 +1,11 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
     <title>Login</title>
     <meta name="viewport" content="width=device-width , initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="css\bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="css\login_registration.css">
-    <script type="text/javascript" src="js\bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/login_registration.css">
+    <script type="text/javascript" src="assets/bootstrap/js/bootstrap.min.js"></script>
 </head>
 <body>
 

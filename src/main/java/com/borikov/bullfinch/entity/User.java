@@ -7,21 +7,15 @@ public class User {
     private String password;
     private String name;
     private String surname;
+    private String phoneNumber;
+    private boolean isBlocked;
+    private boolean isActivated;
+    private UserRole userRole;
 
     public User(Long userId, String login, String password) {// TODO: 02.09.2020 delete
         this.userId = userId;
         this.login = login;
         this.password = password;
-    }
-
-    public User(Long userId, String email, String login,
-                String password, String name, String surname) {
-        this.userId = userId;
-        this.email = email;
-        this.login = login;
-        this.password = password;
-        this.name = name;
-        this.surname = surname;
     }
 
     public Long getUserId() {
@@ -72,6 +66,38 @@ public class User {
         this.surname = surname;
     }
 
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public boolean isBlocked() {
+        return isBlocked;
+    }
+
+    public void setBlocked(boolean blocked) {
+        isBlocked = blocked;
+    }
+
+    public boolean isActivated() {
+        return isActivated;
+    }
+
+    public void setActivated(boolean activated) {
+        isActivated = activated;
+    }
+
+    public UserRole getUserRole() {
+        return userRole;
+    }
+
+    public void setUserRole(UserRole userRole) {
+        this.userRole = userRole;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -81,6 +107,12 @@ public class User {
             return false;
         }
         User user = (User) o;
+        if (isBlocked != user.isBlocked) {
+            return false;
+        }
+        if (isActivated != user.isActivated) {
+            return false;
+        }
         if (userId != null ? !userId.equals(user.userId) : user.userId != null) {
             return false;
         }
@@ -96,7 +128,13 @@ public class User {
         if (name != null ? !name.equals(user.name) : user.name != null) {
             return false;
         }
-        return surname != null ? surname.equals(user.surname) : user.surname == null;
+        if (surname != null ? !surname.equals(user.surname) : user.surname != null) {
+            return false;
+        }
+        if (phoneNumber != null ? !phoneNumber.equals(user.phoneNumber) : user.phoneNumber != null) {
+            return false;
+        }
+        return userRole == user.userRole;
     }
 
     @Override
@@ -107,6 +145,10 @@ public class User {
         result = 31 * result + (password != null ? password.hashCode() : 0);
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (surname != null ? surname.hashCode() : 0);
+        result = 31 * result + (phoneNumber != null ? phoneNumber.hashCode() : 0);
+        result = 31 * result + (isBlocked ? 1 : 0);
+        result = 31 * result + (isActivated ? 1 : 0);
+        result = 31 * result + (userRole != null ? userRole.hashCode() : 0);
         return result;
     }
 
@@ -119,6 +161,10 @@ public class User {
         sb.append(", password='").append(password).append('\'');
         sb.append(", name='").append(name).append('\'');
         sb.append(", surname='").append(surname).append('\'');
+        sb.append(", phoneNumber='").append(phoneNumber).append('\'');
+        sb.append(", isBlocked=").append(isBlocked);
+        sb.append(", isActivated=").append(isActivated);
+        sb.append(", userRole=").append(userRole);
         sb.append('}');
         return sb.toString();
     }

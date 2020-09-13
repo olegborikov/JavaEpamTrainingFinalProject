@@ -3,9 +3,10 @@
 <head>
     <title>Registration</title>
     <meta name="viewport" content="width=device-width , initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="css\bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="css\login_registration.css">
-    <script type="text/javascript" src="js\bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/login_registration.css">
+    <script type="text/javascript" src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="assets/js/registration.js"></script>
 </head>
 <body>
 
@@ -31,17 +32,18 @@
                 </div>
                 <div class="form-group">
                     <label>Password</label>
-                    <input type="password" class="form-control" placeholder="Password" name="password">
+                    <input type="password" id="password" class="form-control" placeholder="Password" name="password">
                     <p class="help-block">Password should be at least 4 characters</p>
                 </div>
                 <div class="form-group">
                     <label>Password(Confirm)</label>
-                    <input type="password" class="form-control" placeholder="Password(Confirm)"
+                    <input type="password" id="passwordConfirm" class="form-control" placeholder="Password(Confirm)"
                            name="passwordConfirm">
                     <p class="help-block">Please confirm password</p>
                 </div>
-                <div style="color: red">${errorLoginPasswordMessage}</div>
-                <button type="submit" class="btn btn-black" name="commandName" value="registration_command">
+                <div style="color: red">${errorDataMessage}</div>
+                <button type="submit" class="btn btn-black" onclick="ansValidation(event)" name="commandName"
+                        value="registration_command">
                     Sign up
                 </button>
                 <button type="submit" class="btn btn-secondary" name="commandName" value="browse_login_command">

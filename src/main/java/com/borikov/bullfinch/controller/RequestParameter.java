@@ -7,6 +7,7 @@ public class RequestParameter {
     public static final String COMMAND_NAME = "commandName";
     public static final String ERROR_MESSAGE = "errorMessage";
     public static final String ERROR_LOGIN_PASSWORD_MESSAGE = "errorLoginPasswordMessage";
+    public static final String ERROR_DATA_MESSAGE = "errorDataMessage";
 
     private RequestParameter() {
     }

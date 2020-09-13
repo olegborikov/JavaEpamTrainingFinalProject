@@ -40,8 +40,7 @@ public class MailSender {
     }
 
     private void initMessage() throws MessagingException {
-        Session mailSession = MailSessionFactory.createSession(properties);
-        mailSession.setDebug(true);
+        Session mailSession = MailSessionCreator.createSession(properties);
         message = new MimeMessage(mailSession);
         message.setSubject(mailSubject);
         message.setContent(mailText, "text/html");
