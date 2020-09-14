@@ -25,13 +25,16 @@
                 </div>
                 <div class="form-group">
                     <label>Password</label>
-                    <input type="password" class="form-control" placeholder="Password" name="password">
+                    <input type="password" class="form-control" placeholder="Password"
+                           name="password">
                 </div>
                 <div style="color: red">${errorLoginPasswordMessage}</div>
-                <button type="submit" class="btn btn-black" name="commandName" value="login_command">
+                <button type="submit" class="btn btn-black" name="commandName"
+                        value="login_command">
                     Sign in
                 </button>
-                <button type="submit" class="btn btn-secondary" name="commandName" value="browse_registration_command">
+                <button type="submit" class="btn btn-secondary" name="commandName"
+                        value="browse_registration_command">
                     Registration
                 </button>
             </form>
