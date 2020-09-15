@@ -12,7 +12,7 @@ public class User {
     private boolean isActivated;
     private UserRole userRole;
 
-    public User(Long userId, String login, String password) {// TODO: 02.09.2020 delete
+    public User(Long userId, String login, String password) {// TODO: 02.09.2020 refactor
         this.userId = userId;
         this.login = login;
         this.password = password;

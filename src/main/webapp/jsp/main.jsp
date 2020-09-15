@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
@@ -31,25 +32,36 @@
                     <button style="color:white" class="btn navbar-brand js-scroll-trigger">Catalog
                     </button>
                 </li>
+                <c:if test="${role.equals('guest')}">
                 <form name="loginFrom" method="post" action="controller">
                     <li class="nav-item nav-link js-scroll-trigger" role="presentation">
                         <button style="color:white" class="btn navbar-brand js-scroll-trigger"
-                                name="commandName" value="browse_login_command">Log in
+                                name="commandName" value="browse_login_page_command">Log in
                         </button>
                     </li>
                 </form>
                 <form name="registrationFrom" method="post" action="controller">
                     <li class="nav-item nav-link js-scroll-trigger" role="presentation">
                         <button style="color:white" class="btn navbar-brand js-scroll-trigger"
-                                name="commandName" value="browse_registration_command">Sign up
+                                name="commandName" value="browse_registration_page_command">Sign up
                         </button>
                     </li>
                 </form>
+                </c:if>
+                <c:if test="${!role.equals('guest')}">
+                    <form name="loginFrom" method="post" action="controller">
+                        <li class="nav-item nav-link js-scroll-trigger" role="presentation">
+                            <button style="color:white" class="btn navbar-brand js-scroll-trigger"
+                                    name="commandName" value="logout_command">Log out
+                            </button>
+                        </li>
+                    </form>
+                </c:if>
             </ul>
         </div>
     </div>
 </nav>
-<header class="masthead" style="background-image:url('assets/image/reception.jpg');">
+<header class="masthead" style="background-image:url('static/assets/image/reception.jpg');">
     <div class="intro-body">
         <div class="container">
             <div class="row">
@@ -77,7 +89,7 @@
         </div>
     </div>
 </section>
-<section class="masthead content-section text-center" style="background-image:url('assets/image/work_space.jpg');">
+<section class="masthead content-section text-center" style="background-image:url('static/assets/image/work_space.jpg');">
     <div class="container">
         <div class="col-lg-8 mx-auto">
 

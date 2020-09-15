@@ -6,8 +6,9 @@ public enum CommandType {
     LOGIN_COMMAND(new LoginCommand()),
     LOGOUT_COMMAND(new LogoutCommand()),
     REGISTRATION_COMMAND(new RegistrationCommand()),
-    BROWSE_REGISTRATION_COMMAND(new BrowseRegistrationCommand()),
-    BROWSE_LOGIN_COMMAND(new BrowseLoginCommand());
+    BROWSE_REGISTRATION_PAGE_COMMAND(new BrowseRegistrationPageCommand()),
+    BROWSE_LOGIN_PAGE_COMMAND(new BrowseLoginPageCommand()),
+    BROWSE_MAIN_PAGE_COMMAND(new BrowseMainPageCommand());
 
     private final Command command;
 

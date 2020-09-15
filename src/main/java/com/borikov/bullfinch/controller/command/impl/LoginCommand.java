@@ -11,6 +11,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 public class LoginCommand implements Command {
     private static final Logger LOGGER = LogManager.getLogger();
@@ -24,6 +25,8 @@ public class LoginCommand implements Command {
         try {
             if (userService.isUserExists(login, password)) {
                 page = PagePath.MAIN;
+                HttpSession session = request.getSession();
+                session.setAttribute("role", "user");
             } else {
                 request.setAttribute(RequestParameter.ERROR_LOGIN_PASSWORD_MESSAGE,
                         "Incorrect login or password");

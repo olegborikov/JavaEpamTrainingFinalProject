@@ -34,7 +34,7 @@
                     Sign in
                 </button>
                 <button type="submit" class="btn btn-secondary" name="commandName"
-                        value="browse_registration_command">
+                        value="browse_registration_page_command">
                     Registration
                 </button>
             </form>
