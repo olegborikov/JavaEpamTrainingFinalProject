@@ -70,3 +70,7 @@ body {
     background-color: #000 !important;
     color: #fff;
 }
+.stroke {
+    font: 2em Arial, sans-serif;
+    text-shadow: black 0 0 2px;
+}
