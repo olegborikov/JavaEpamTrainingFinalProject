@@ -13,24 +13,24 @@ import java.util.Optional;
 
 public class UserServiceImpl implements UserService {
     @Override
-    public boolean isUserExists(String login, String password) throws ServiceException {
+    public Optional<User> isUserExists(String login, String password) throws ServiceException {
         try {
             UserValidator userValidator = new UserValidator();
             UserDao userDao = new UserDaoImpl();
-            boolean result = false;
+            Optional<User> userOptional = Optional.empty();
             if (userValidator.isLoginCorrect(login)
                     && userValidator.isPasswordCorrect(password)) {
-                Optional<User> userOptional = userDao.findByLogin(login);
-                if (userOptional.isPresent()) {
-                    User user = userOptional.get();
+                Optional<User> foundUserOptional = userDao.findByLogin(login);
+                if (foundUserOptional.isPresent()) {
+                    User user = foundUserOptional.get();
                     Optional<String> encryptedPassword = PasswordEncryption.encrypt(password);
-                    if (encryptedPassword.isPresent()) {
-                        result = user.getLogin().equals(login)
-                                && user.getPassword().equals(encryptedPassword.get());
+                    if (encryptedPassword.isPresent() && user.getLogin().equals(login)
+                            && user.getPassword().equals(encryptedPassword.get())) {
+                        userOptional = foundUserOptional;
                     }
                 }
             }
-            return result;
+            return userOptional;
         } catch (DaoException e) {
             throw new ServiceException("Error while checking user for existing", e);
         }
@@ -38,7 +38,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean addUser(String login, String password) throws ServiceException {
-        try {
+        /*try {
             UserValidator userValidator = new UserValidator();
             UserDao userDao = new UserDaoImpl();
             boolean result = false;
@@ -54,6 +54,7 @@ public class UserServiceImpl implements UserService {
             return result;
         } catch (DaoException e) {
             throw new ServiceException("Error while checking user for existing", e);
-        }
+        }*/
+        return false;
     }
 }

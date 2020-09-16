@@ -4,6 +4,7 @@ import com.borikov.bullfinch.dao.ColumnName;
 import com.borikov.bullfinch.dao.UserDao;
 import com.borikov.bullfinch.dao.pool.ConnectionPool;
 import com.borikov.bullfinch.entity.User;
+import com.borikov.bullfinch.entity.UserRole;
 import com.borikov.bullfinch.exception.ConnectionPoolException;
 import com.borikov.bullfinch.exception.DaoException;
 import org.apache.logging.log4j.LogManager;
@@ -17,7 +18,9 @@ public class UserDaoImpl implements UserDao {
     private static final Logger LOGGER = LogManager.getLogger();
     private static final ConnectionPool connectionPool = ConnectionPool.INSTANCE;
     private static final String FIND_USER_BY_LOGIN = "SELECT user_account_id, login, " +
-            "password FROM user_account WHERE login LIKE ?";
+            "password, role_name FROM user_account " +
+            "INNER JOIN role ON user_account.role_id_fk = role.role_id " +
+            "WHERE login LIKE ?";
     private static final String ADD_USER = "INSERT INTO user_account (login, password)" +
             "VALUES (?, ?);";
 
@@ -78,11 +81,12 @@ public class UserDaoImpl implements UserDao {
         return null;
     }
 
-
     private User createUserFromResultSet(ResultSet resultSet) throws SQLException {
         long userId = resultSet.getLong(ColumnName.USER_ACCOUNT_ID);
-        String login = resultSet.getString(ColumnName.USER_ACCOUNT_LOGIN);
-        String password = resultSet.getString(ColumnName.USER_ACCOUNT_PASSWORD);
-        return new User(userId, login, password);
+        String login = resultSet.getString(ColumnName.LOGIN);
+        String password = resultSet.getString(ColumnName.PASSWORD);
+        int rolePosition = resultSet.getInt(ColumnName.ROLE_NAME);
+        UserRole userRole = UserRole.values()[rolePosition];
+        return new User(userId, login, password, userRole);
     }
 }

@@ -32,7 +32,8 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="nav navbar-nav ml-auto">
                 <li class="nav-item nav-link js-scroll-trigger" role="presentation">
-                    <button style="color:white" class="btn navbar-brand js-scroll-trigger">Catalog
+                    <button style="color:white" class="btn navbar-brand js-scroll-trigger"
+                            name="commandName" value="browse_login_page_command">Catalog
                     </button>
                 </li>
                 <c:if test="${role.equals('guest')}">
@@ -53,6 +54,13 @@
                     </form>
                 </c:if>
                 <c:if test="${role.equals('user')}">
+                    <form name="loginFrom" method="post" action="controller">
+                        <li class="nav-item nav-link js-scroll-trigger" role="presentation">
+                            <button style="color:white" class="btn navbar-brand js-scroll-trigger"
+                                    name="commandName" value="browse_profile_page_command">${login}
+                            </button>
+                        </li>
+                    </form>
                     <form name="loginFrom" method="post" action="controller">
                         <li class="nav-item nav-link js-scroll-trigger" role="presentation">
                             <button style="color:white" class="btn navbar-brand js-scroll-trigger"

@@ -14,10 +14,12 @@ public class User {
     private UserRating userRating;
     private Wallet wallet;
 
-    public User(Long userId, String login, String password) {
+    public User(Long userId, String login,
+                String password, UserRole userRole) {
         this.userId = userId;
         this.login = login;
         this.password = password;
+        this.userRole = userRole;
     }
 
     public Long getUserId() {

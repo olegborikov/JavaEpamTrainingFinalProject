@@ -3,6 +3,8 @@ package com.borikov.bullfinch.controller.command.impl;
 import com.borikov.bullfinch.controller.PagePath;
 import com.borikov.bullfinch.controller.RequestParameter;
 import com.borikov.bullfinch.controller.command.Command;
+import com.borikov.bullfinch.entity.User;
+import com.borikov.bullfinch.entity.UserRole;
 import com.borikov.bullfinch.exception.ServiceException;
 import com.borikov.bullfinch.service.UserService;
 import com.borikov.bullfinch.service.impl.UserServiceImpl;
@@ -12,6 +14,7 @@ import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.Optional;
 
 public class LoginCommand implements Command {
     private static final Logger LOGGER = LogManager.getLogger();
@@ -23,10 +26,17 @@ public class LoginCommand implements Command {
         String login = request.getParameter(RequestParameter.LOGIN);
         String password = request.getParameter(RequestParameter.PASSWORD);
         try {
-            if (userService.isUserExists(login, password)) {
-                page = PagePath.HOME;
+            Optional<User> userOptional = userService.isUserExists(login, password);
+            if (userOptional.isPresent()) {
+                User user = userOptional.get();
+                if (user.getUserRole().equals(UserRole.ADMIN)) {
+                    page = PagePath.HOME_ADMIN;
+                } else {
+                    page = PagePath.HOME;
+                }
                 HttpSession session = request.getSession();
-                session.setAttribute("role", "user");
+                session.setAttribute(RequestParameter.ROLE, user.getUserRole().getName());
+                session.setAttribute(RequestParameter.LOGIN, user.getLogin());
             } else {
                 request.setAttribute(RequestParameter.ERROR_LOGIN_PASSWORD_MESSAGE,
                         "Incorrect login or password");
