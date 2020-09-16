@@ -66,7 +66,7 @@
     </div>
 </nav>
 <header class="masthead"
-        style="background-image:url('${pageContext.request.contextPath}/static/assets/image/reception.jpg');">
+        style="background-image:url('${pageContext.request.contextPath}/image/reception.jpg');">
     <div class="intro-body">
         <div class="container">
             <div class="row">
@@ -103,7 +103,7 @@
     </div>
 </section>
 <section class="masthead content-section text-center"
-         style="background-image:url('${pageContext.request.contextPath}/static/assets/image/work_space.jpg');">
+         style="background-image:url('${pageContext.request.contextPath}/image/work_space.jpg');">
     <div class="container">
         <div class="col-lg-8 mx-auto">
 

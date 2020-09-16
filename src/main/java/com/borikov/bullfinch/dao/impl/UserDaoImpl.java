@@ -16,9 +16,9 @@ import java.util.Optional;
 public class UserDaoImpl implements UserDao {
     private static final Logger LOGGER = LogManager.getLogger();
     private static final ConnectionPool connectionPool = ConnectionPool.INSTANCE;
-    private static final String FIND_USER_BY_LOGIN = "SELECT user_id, login, " +
-            "password FROM user WHERE login LIKE ?";
-    private static final String ADD_USER = "INSERT INTO user (login, password)" +
+    private static final String FIND_USER_BY_LOGIN = "SELECT user_account_id, login, " +
+            "password FROM user_account WHERE login LIKE ?";
+    private static final String ADD_USER = "INSERT INTO user_account (login, password)" +
             "VALUES (?, ?);";
 
     @Override
@@ -80,9 +80,9 @@ public class UserDaoImpl implements UserDao {
 
 
     private User createUserFromResultSet(ResultSet resultSet) throws SQLException {
-        long userId = resultSet.getLong(ColumnName.USER_ID);
-        String login = resultSet.getString(ColumnName.LOGIN);
-        String password = resultSet.getString(ColumnName.PASSWORD);
+        long userId = resultSet.getLong(ColumnName.USER_ACCOUNT_ID);
+        String login = resultSet.getString(ColumnName.USER_ACCOUNT_LOGIN);
+        String password = resultSet.getString(ColumnName.USER_ACCOUNT_PASSWORD);
         return new User(userId, login, password);
     }
 }

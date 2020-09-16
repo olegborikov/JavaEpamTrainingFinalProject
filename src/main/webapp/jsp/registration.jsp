@@ -21,34 +21,45 @@
     </div>
 </div>
 <div class="main">
-    <div class="col-md-6 col-sm-12">
+    <div class="col-md-6 col-sm-12 col-sm-6">
         <div class="register-form">
             <form name="registrationForm" method="post" action="controller" autocomplete="off">
                 <div class="form-group">
                     <label>Email</label>
                     <input type="text" class="form-control" placeholder="Email" name="email">
-                    <p class="help-block">Please provide your Email</p>
                 </div>
                 <div class="form-group">
                     <label>Login</label>
                     <input type="text" class="form-control" placeholder="Login" name="login">
-                    <p class="help-block">Username can contain any letters or numbers, without
-                        spaces</p>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <label>First name</label>
+                        <input type="text" class="form-control" placeholder="First name"
+                               name="firstName">
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>Second name</label>
+                        <input type="text" class="form-control" placeholder="Second name"
+                               name="secondName">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Phone number</label>
+                    <input type="password" class="form-control" placeholder="Phone number"
+                           name="password">
                 </div>
                 <div class="form-group">
                     <label>Password</label>
                     <input type="password" id="password" class="form-control" placeholder="Password"
                            name="password">
-                    <p class="help-block">Password should be at least 4 characters</p>
                 </div>
                 <div class="form-group">
                     <label>Password(Confirm)</label>
-                    <input type="password" id="passwordConfirm" class="form-control"
+                    <input type="password" id="confirmedPassword" class="form-control"
                            placeholder="Password(Confirm)"
-                           name="passwordConfirm">
-                    <p class="help-block">Please confirm password</p>
+                           name="confirmedPassword">
                 </div>
-                <div style="color: red">${errorDataMessage}</div>
                 <button type="submit" class="btn btn-black" onclick="ansValidation(event)"
                         name="commandName"
                         value="registration_command">

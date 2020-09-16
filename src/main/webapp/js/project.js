@@ -40,7 +40,7 @@
 function ansValidation(ev) {
     ev.preventDefault
     const password = document.getElementById("password").value
-    const confirmedPassword = document.getElementById("passwordConfirm").value
+    const confirmedPassword = document.getElementById("confirmedPassword").value
     if (password !== confirmedPassword) {
         window.alert("Passwords do not match!")
     }
