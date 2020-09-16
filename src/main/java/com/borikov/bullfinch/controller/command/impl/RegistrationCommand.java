@@ -23,7 +23,7 @@ public class RegistrationCommand implements Command {
         String password = request.getParameter(RequestParameter.PASSWORD);
         try {
             if (userService.addUser(login, password)) {
-                page = PagePath.MAIN;
+                page = PagePath.HOME;
             } else {
                 request.setAttribute(RequestParameter.ERROR_DATA_MESSAGE,
                         "Incorrect data");

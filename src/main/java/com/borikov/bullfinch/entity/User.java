@@ -4,18 +4,18 @@ public class User {
     private Long userId;
     private String email;
     private String login;
-    private String password;
-    private String name;
-    private String surname;
+    private String firstName;
+    private String secondName;
     private String phoneNumber;
     private boolean isBlocked;
     private boolean isActivated;
     private UserRole userRole;
+    private UserRating userRating;
+    private Wallet wallet;
 
-    public User(Long userId, String login, String password) {// TODO: 02.09.2020 refactor
-        this.userId = userId;
+    public User(String login, UserRole userRole) {
         this.login = login;
-        this.password = password;
+        this.userRole = userRole;
     }
 
     public Long getUserId() {
@@ -42,28 +42,20 @@ public class User {
         this.login = login;
     }
 
-    public String getPassword() {
-        return password;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getName() {
-        return name;
+    public String getSecondName() {
+        return secondName;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
+    public void setSecondName(String secondName) {
+        this.secondName = secondName;
     }
 
     public String getPhoneNumber() {
@@ -98,6 +90,22 @@ public class User {
         this.userRole = userRole;
     }
 
+    public UserRating getUserRating() {
+        return userRating;
+    }
+
+    public void setUserRating(UserRating userRating) {
+        this.userRating = userRating;
+    }
+
+    public Wallet getWallet() {
+        return wallet;
+    }
+
+    public void setWallet(Wallet wallet) {
+        this.wallet = wallet;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -122,19 +130,26 @@ public class User {
         if (login != null ? !login.equals(user.login) : user.login != null) {
             return false;
         }
-        if (password != null ? !password.equals(user.password) : user.password != null) {
+        if (firstName != null ? !firstName.equals(user.firstName)
+                : user.firstName != null) {
             return false;
         }
-        if (name != null ? !name.equals(user.name) : user.name != null) {
+        if (secondName != null ? !secondName.equals(user.secondName)
+                : user.secondName != null) {
             return false;
         }
-        if (surname != null ? !surname.equals(user.surname) : user.surname != null) {
+        if (phoneNumber != null ? !phoneNumber.equals(user.phoneNumber)
+                : user.phoneNumber != null) {
             return false;
         }
-        if (phoneNumber != null ? !phoneNumber.equals(user.phoneNumber) : user.phoneNumber != null) {
+        if (userRole != user.userRole) {
             return false;
         }
-        return userRole == user.userRole;
+        if (userRating != null ? !userRating.equals(user.userRating)
+                : user.userRating != null) {
+            return false;
+        }
+        return wallet != null ? wallet.equals(user.wallet) : user.wallet == null;
     }
 
     @Override
@@ -142,13 +157,14 @@ public class User {
         int result = userId != null ? userId.hashCode() : 0;
         result = 31 * result + (email != null ? email.hashCode() : 0);
         result = 31 * result + (login != null ? login.hashCode() : 0);
-        result = 31 * result + (password != null ? password.hashCode() : 0);
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (surname != null ? surname.hashCode() : 0);
+        result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
+        result = 31 * result + (secondName != null ? secondName.hashCode() : 0);
         result = 31 * result + (phoneNumber != null ? phoneNumber.hashCode() : 0);
         result = 31 * result + (isBlocked ? 1 : 0);
         result = 31 * result + (isActivated ? 1 : 0);
         result = 31 * result + (userRole != null ? userRole.hashCode() : 0);
+        result = 31 * result + (userRating != null ? userRating.hashCode() : 0);
+        result = 31 * result + (wallet != null ? wallet.hashCode() : 0);
         return result;
     }
 
@@ -158,13 +174,14 @@ public class User {
         sb.append("userId=").append(userId);
         sb.append(", email='").append(email).append('\'');
         sb.append(", login='").append(login).append('\'');
-        sb.append(", password='").append(password).append('\'');
-        sb.append(", name='").append(name).append('\'');
-        sb.append(", surname='").append(surname).append('\'');
+        sb.append(", firstName='").append(firstName).append('\'');
+        sb.append(", secondName='").append(secondName).append('\'');
         sb.append(", phoneNumber='").append(phoneNumber).append('\'');
         sb.append(", isBlocked=").append(isBlocked);
         sb.append(", isActivated=").append(isActivated);
         sb.append(", userRole=").append(userRole);
+        sb.append(", userRating=").append(userRating);
+        sb.append(", wallet=").append(wallet);
         sb.append('}');
         return sb.toString();
     }

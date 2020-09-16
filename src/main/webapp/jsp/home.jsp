@@ -21,7 +21,7 @@
     <div class="container">
         <form name="registrationFrom" method="post" action="controller">
             <button style="color:white" class="btn navbar-brand js-scroll-trigger"
-                    name="commandName" value="browse_main_page_command">Home
+                    name="commandName" value="browse_home_page_command">Home
             </button>
         </form>
         <button data-toggle="collapse" class="navbar-toggler navbar-toggler-right"
@@ -52,7 +52,7 @@
                         </li>
                     </form>
                 </c:if>
-                <c:if test="${!role.equals('guest')}">
+                <c:if test="${role.equals('user')}">
                     <form name="loginFrom" method="post" action="controller">
                         <li class="nav-item nav-link js-scroll-trigger" role="presentation">
                             <button style="color:white" class="btn navbar-brand js-scroll-trigger"
@@ -77,6 +77,7 @@
                 </div>
             </div>
         </div>
+    </div>
 </header>
 <section class="content-section text-center">
     <div class="container">

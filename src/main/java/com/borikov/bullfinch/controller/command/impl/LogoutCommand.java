@@ -11,6 +11,6 @@ public class LogoutCommand implements Command {
     public String execute(HttpServletRequest request) {
         HttpSession session = request.getSession();
         session.setAttribute("role", "guest");
-        return PagePath.MAIN;
+        return PagePath.HOME;
     }
 }

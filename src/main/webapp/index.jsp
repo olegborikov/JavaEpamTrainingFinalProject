@@ -2,7 +2,7 @@
 <html>
 <body>
 <jsp:forward page="controller">
-    <jsp:param name="commandName" value="browse_main_page_command"/>
+    <jsp:param name="commandName" value="browse_home_page_command"/>
 </jsp:forward>
 </body>
 </html>

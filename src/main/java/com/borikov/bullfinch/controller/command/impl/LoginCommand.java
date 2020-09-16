@@ -24,7 +24,7 @@ public class LoginCommand implements Command {
         String password = request.getParameter(RequestParameter.PASSWORD);
         try {
             if (userService.isUserExists(login, password)) {
-                page = PagePath.MAIN;
+                page = PagePath.HOME;
                 HttpSession session = request.getSession();
                 session.setAttribute("role", "user");
             } else {
