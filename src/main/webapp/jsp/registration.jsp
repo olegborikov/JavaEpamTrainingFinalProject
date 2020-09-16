@@ -47,7 +47,7 @@
                 <div class="form-group">
                     <label>Phone number</label>
                     <input type="password" class="form-control" placeholder="Phone number"
-                           name="password">
+                           name="phoneNumber">
                 </div>
                 <div class="form-group">
                     <label>Password</label>
@@ -60,7 +60,7 @@
                            placeholder="Password(Confirm)"
                            name="confirmedPassword">
                 </div>
-                <button type="submit" class="btn btn-black" onclick="ansValidation(event)"
+                <button type="submit" class="btn btn-black" <%--onclick="ansValidation(event)"--%>
                         name="commandName"
                         value="registration_command">
                     Sign up

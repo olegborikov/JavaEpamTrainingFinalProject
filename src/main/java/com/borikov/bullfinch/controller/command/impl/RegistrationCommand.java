@@ -3,6 +3,7 @@ package com.borikov.bullfinch.controller.command.impl;
 import com.borikov.bullfinch.controller.PagePath;
 import com.borikov.bullfinch.controller.RequestParameter;
 import com.borikov.bullfinch.controller.command.Command;
+import com.borikov.bullfinch.entity.User;
 import com.borikov.bullfinch.exception.ServiceException;
 import com.borikov.bullfinch.service.UserService;
 import com.borikov.bullfinch.service.impl.UserServiceImpl;
@@ -11,6 +12,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Optional;
 
 public class RegistrationCommand implements Command {
     private static final Logger LOGGER = LogManager.getLogger();
@@ -19,10 +21,16 @@ public class RegistrationCommand implements Command {
     @Override
     public String execute(HttpServletRequest request) {
         String page;
+        String email = request.getParameter(RequestParameter.EMAIL);
         String login = request.getParameter(RequestParameter.LOGIN);
+        String firstName = request.getParameter(RequestParameter.FIRST_NAME);
+        String secondName = request.getParameter(RequestParameter.SECOND_NAME);
+        String phoneNumber = request.getParameter(RequestParameter.PHONE_NUMBER);
         String password = request.getParameter(RequestParameter.PASSWORD);
+        String confirmedPassword = request.getParameter(RequestParameter.PASSWORD);
         try {
-            if (userService.addUser(login, password)) {
+            if (userService.addUser(email, login,
+                    firstName, secondName, phoneNumber, password, confirmedPassword)) {
                 page = PagePath.HOME;
             } else {
                 request.setAttribute(RequestParameter.ERROR_DATA_MESSAGE,

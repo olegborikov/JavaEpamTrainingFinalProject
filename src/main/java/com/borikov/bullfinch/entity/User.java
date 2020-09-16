@@ -22,6 +22,25 @@ public class User {
         this.userRole = userRole;
     }
 
+    public User(Long userId, String email, String login,
+                String password, String firstName, String secondName,
+                String phoneNumber, boolean isBlocked,
+                boolean isActivated, UserRole userRole,
+                UserRating userRating, Wallet wallet) {
+        this.userId = userId;
+        this.email = email;
+        this.login = login;
+        this.password = password;
+        this.firstName = firstName;
+        this.secondName = secondName;
+        this.phoneNumber = phoneNumber;
+        this.isBlocked = isBlocked;
+        this.isActivated = isActivated;
+        this.userRole = userRole;
+        this.userRating = userRating;
+        this.wallet = wallet;
+    }
+
     public Long getUserId() {
         return userId;
     }
