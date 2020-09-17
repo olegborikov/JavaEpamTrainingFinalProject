@@ -9,10 +9,14 @@ import com.borikov.bullfinch.entity.Wallet;
 import com.borikov.bullfinch.exception.DaoException;
 import com.borikov.bullfinch.exception.ServiceException;
 import com.borikov.bullfinch.service.UserService;
+import com.borikov.bullfinch.util.EmailSender;
 import com.borikov.bullfinch.util.PasswordEncryption;
 import com.borikov.bullfinch.validator.UserValidator;
 
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Optional;
+import java.util.Properties;
 
 public class UserServiceImpl implements UserService {
     @Override
@@ -58,14 +62,30 @@ public class UserServiceImpl implements UserService {
                 Optional<User> existingUser = userDao.findByLogin(login);
                 if (existingUser.isEmpty() && encryptedPassword.isPresent()) {
                     User user = new User(null, email, login, encryptedPassword.get(),
-                            firstName, secondName, phoneNumber, false, true,
-                            UserRole.USER, UserRating.BEGINNER, new Wallet(null, 0));
+                            firstName, secondName, phoneNumber, false, false,
+                            UserRole.USER, UserRating.BEGINNER, new Wallet(null, 0));// TODO: 17.09.2020 refactor creating of wallet
                     result = userDao.add(user);
+                    EmailSender.sendConfirmMessage(user.getEmail(), user.getLogin());
                 }
             }
             return result;
         } catch (DaoException e) {
             throw new ServiceException("Error while checking user for existing", e);
         }
+    }
+
+    @Override
+    public boolean confirmUserEmail(String login) throws ServiceException {
+        boolean result = false;
+        try {
+            UserDao userDao = new UserDaoImpl();
+            Optional<User> existingUser = userDao.findByLogin(login);
+            if (existingUser.isPresent()) {
+                result = userDao.confirmEmail(login);
+            }
+        } catch (DaoException e) {
+            throw new ServiceException("Error while confirm email", e);
+        }
+        return result;
     }
 }

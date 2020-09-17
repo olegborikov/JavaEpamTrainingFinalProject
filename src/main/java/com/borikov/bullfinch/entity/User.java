@@ -14,11 +14,12 @@ public class User {
     private UserRating userRating;
     private Wallet wallet;
 
-    public User(Long userId, String login,
-                String password, UserRole userRole) {
+    public User(Long userId, String login, String password,
+                boolean isActivated, UserRole userRole) {
         this.userId = userId;
         this.login = login;
         this.password = password;
+        this.isActivated = isActivated;
         this.userRole = userRole;
     }
 

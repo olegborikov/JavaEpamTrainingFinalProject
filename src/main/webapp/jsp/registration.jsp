@@ -46,7 +46,7 @@
                 </div>
                 <div class="form-group">
                     <label>Phone number</label>
-                    <input type="password" class="form-control" placeholder="Phone number"
+                    <input type="text" class="form-control" placeholder="Phone number"
                            name="phoneNumber">
                 </div>
                 <div class="form-group">

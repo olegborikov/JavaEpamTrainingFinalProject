@@ -12,23 +12,28 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;
 
-public class MailSender {
-    private final static Logger LOGGER = LogManager.getLogger();
+public class EmailSender {// TODO: 17.09.2020 refactor to 2 classes?
+    private static final Logger LOGGER = LogManager.getLogger();
+    private static final String TEXT_TYPE = "text/html";
+    private static final String EMAIL_HEAD = "Bullfinch tattoo";
+    private static final String EMAIL_BODY = "Follow link to confirm your " +
+            "mail to register on site bullfinch: " +
+            "http://localhost:8080/controller?commandName=confirm_email_command&login=";
     private MimeMessage message;
     private final String sendToEmail;
     private final String mailSubject;
     private final String mailText;
     private final Properties properties;
 
-    public MailSender(String sendToEmail, String mailSubject,
-                      String mailText, Properties properties) {
+    private EmailSender(String sendToEmail, String mailSubject,
+                        String mailText, Properties properties) {
         this.sendToEmail = sendToEmail;
         this.mailSubject = mailSubject;
         this.mailText = mailText;
         this.properties = properties;
     }
 
-    public void send() {
+    private void send() {
         try {
             initMessage();
             Transport.send(message);
@@ -40,24 +45,21 @@ public class MailSender {
     }
 
     private void initMessage() throws MessagingException {
-        Session mailSession = MailSessionCreator.createSession(properties);
+        Session mailSession = EmailSessionCreator.createSession(properties);
         message = new MimeMessage(mailSession);
         message.setSubject(mailSubject);
-        message.setContent(mailText, "text/html");
+        message.setContent(mailText, TEXT_TYPE);
         message.setRecipient(Message.RecipientType.TO, new InternetAddress(sendToEmail));
     }
 
-    public static void main(String[] args) {
+    public static void sendConfirmMessage(String email, String login) {
         Properties properties = new Properties();
         try {
             properties.load(new FileReader("src/main/resources/mail.properties"));// TODO: 13.09.2020 refactor
         } catch (IOException e) {
             e.printStackTrace();
         }
-        String mailTo = "olegborikov999@gmail.com";
-        String subject = "Bullfinch tattoo";
-        String body = "Confirm your mail";
-        MailSender sender = new MailSender(mailTo, subject, body, properties);
+        EmailSender sender = new EmailSender(email, EMAIL_HEAD, EMAIL_BODY + login, properties);
         sender.send();
     }
 }

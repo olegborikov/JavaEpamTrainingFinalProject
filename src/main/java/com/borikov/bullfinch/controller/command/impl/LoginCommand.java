@@ -28,15 +28,24 @@ public class LoginCommand implements Command {
         try {
             Optional<User> userOptional = userService.isUserExists(login, password);
             if (userOptional.isPresent()) {
+                HttpSession session = request.getSession();
                 User user = userOptional.get();
                 if (user.getUserRole().equals(UserRole.ADMIN)) {
+                    session.setAttribute(RequestParameter.ROLE, user.getUserRole().getName());
                     page = PagePath.HOME_ADMIN;
                 } else {
-                    page = PagePath.HOME;
+                    if (user.isActivated()) {
+                        page = PagePath.HOME;
+                        session.setAttribute(RequestParameter.ROLE, user.getUserRole().getName());
+                        session.setAttribute(RequestParameter.LOGIN, user.getLogin());
+                    } else {
+                        page = PagePath.EMAIL_CONFIRM;
+                        request.setAttribute(RequestParameter.CONFIRM_EMAIL_MESSAGE,
+                                "You need to confirm your mail by following the " +
+                                        "link in massage, that was send to your email");
+                    }
                 }
-                HttpSession session = request.getSession();
-                session.setAttribute(RequestParameter.ROLE, user.getUserRole().getName());
-                session.setAttribute(RequestParameter.LOGIN, user.getLogin());
+
             } else {
                 request.setAttribute(RequestParameter.ERROR_LOGIN_PASSWORD_MESSAGE,
                         "Incorrect login or password");

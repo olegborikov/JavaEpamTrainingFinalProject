@@ -11,4 +11,6 @@ public interface UserService {
     boolean addUser(String email, String login, String firstName,
                            String secondName, String phoneNumber, String password,
                            String confirmedPassword) throws ServiceException;
+
+    boolean confirmUserEmail(String login) throws ServiceException;
 }
