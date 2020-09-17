@@ -146,7 +146,7 @@ public class UserValidatorTest {
 
     @Test(dataProvider = "isNameCorrectPositiveData")
     public void isNameCorrectPositiveTest(String name) {
-        boolean result = userValidator.isNameCorrect(name);
+        boolean result = userValidator.isFirstNameCorrect(name);
         assertTrue(result);
     }
 
@@ -168,7 +168,7 @@ public class UserValidatorTest {
 
     @Test(dataProvider = "isNameCorrectNegativeData")
     public void isNameCorrectNegativeTest(String name) {
-        boolean result = userValidator.isNameCorrect(name);
+        boolean result = userValidator.isFirstNameCorrect(name);
         assertFalse(result);
     }
 
@@ -184,7 +184,7 @@ public class UserValidatorTest {
 
     @Test(dataProvider = "isSurnameCorrectPositiveData")
     public void isSurnameCorrectPositiveTest(String surname) {
-        boolean result = userValidator.isSurnameCorrect(surname);
+        boolean result = userValidator.isSecondNameCorrect(surname);
         assertTrue(result);
     }
 
@@ -206,7 +206,7 @@ public class UserValidatorTest {
 
     @Test(dataProvider = "isSurnameCorrectNegativeData")
     public void isSurnameCorrectNegativeTest(String surname) {
-        boolean result = userValidator.isSurnameCorrect(surname);
+        boolean result = userValidator.isSecondNameCorrect(surname);
         assertFalse(result);
     }
 }

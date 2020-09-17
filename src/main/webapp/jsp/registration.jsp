@@ -60,6 +60,7 @@
                            placeholder="Password(Confirm)"
                            name="confirmedPassword">
                 </div>
+                <div style="color: red"> ${errorDataMessage}</div>
                 <button type="submit" class="btn btn-black" <%--onclick="ansValidation(event)"--%>
                         name="commandName"
                         value="registration_command">
