@@ -65,7 +65,7 @@ public class UserServiceImpl implements UserService {
                             firstName, secondName, phoneNumber, false, false,
                             UserRole.USER, UserRating.BEGINNER, new Wallet(null, 0));// TODO: 17.09.2020 refactor creating of wallet
                     result = userDao.add(user);
-                    EmailSender.sendConfirmMessage(user.getEmail(), user.getLogin());
+                    EmailSender.sendMessage(user.getEmail(), user.getLogin());
                 }
             }
             return result;
