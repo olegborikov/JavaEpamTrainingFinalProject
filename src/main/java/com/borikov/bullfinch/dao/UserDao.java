@@ -9,6 +9,8 @@ import java.util.Optional;
 public interface UserDao extends CommonDao<User> {
     Optional<User> findByLogin(String login) throws DaoException;
 
+    Optional<User> findByEmail(String email) throws DaoException;
+
     boolean confirmEmail(String login) throws DaoException;
 
     boolean add(User user) throws DaoException;

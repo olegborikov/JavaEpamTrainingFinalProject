@@ -11,26 +11,26 @@ import javax.mail.Transport;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import java.util.ResourceBundle;
+import java.util.Properties;
 
 public class EmailThread extends Thread {
     private MimeMessage message;
     private final String sendToEmail;
     private final String mailSubject;
     private final String mailText;
-    private final ResourceBundle bundle;
+    private final Properties properties;
     private static final Logger LOGGER = LogManager.getLogger();
     private static final String TEXT_TYPE = "text/html";
 
-    public EmailThread(String sendToEmail, String mailSubject, String mailText, ResourceBundle bundle) {
+    public EmailThread(String sendToEmail, String mailSubject, String mailText, Properties properties) {
         this.sendToEmail = sendToEmail;
         this.mailSubject = mailSubject;
         this.mailText = mailText;
-        this.bundle = bundle;
+        this.properties = properties;
     }
 
     private void initMessage() {
-        Session mailSession = EmailSessionCreator.createSession(bundle);
+        Session mailSession = EmailSessionCreator.createSession(properties);
         try {
             message = new MimeMessage(mailSession);
             message.setSubject(mailSubject);

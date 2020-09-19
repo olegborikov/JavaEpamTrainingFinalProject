@@ -1,9 +1,16 @@
 package com.borikov.bullfinch.dao.pool;
 
-import java.util.ResourceBundle;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
 
 public class DatabaseConfig {
-    private static final String FILE_NAME = "database";
+    private static final Logger LOGGER = LogManager.getLogger();
+    private static final String FILE_NAME = "data/database.properties";
     private static final String DATABASE_DRIVER_NAME = "database.driverName";
     private static final String DATABASE_URL = "database.url";
     private static final String DATABASE_USERNAME = "database.username";
@@ -14,11 +21,18 @@ public class DatabaseConfig {
     private final String password;
 
     DatabaseConfig() {
-        ResourceBundle bundle = ResourceBundle.getBundle(FILE_NAME);
-        driverName = bundle.getString(DATABASE_DRIVER_NAME);
-        url = bundle.getString(DATABASE_URL);
-        username = bundle.getString(DATABASE_USERNAME);
-        password = bundle.getString(DATABASE_PASSWORD);
+        Properties properties = new Properties();
+        try {
+            InputStream inputStream = getClass().getClassLoader().getResourceAsStream(FILE_NAME);
+            properties.load(inputStream);
+        } catch (IOException e) {
+            LOGGER.log(Level.FATAL, "Error with database properties file", e);
+            throw new RuntimeException("Error with database properties file", e);
+        }
+        driverName = properties.getProperty(DATABASE_DRIVER_NAME);
+        url = properties.getProperty(DATABASE_URL);
+        username = properties.getProperty(DATABASE_USERNAME);
+        password = properties.getProperty(DATABASE_PASSWORD);
     }
 
     public String getDriverName() {

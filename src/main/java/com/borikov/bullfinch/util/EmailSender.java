@@ -1,20 +1,33 @@
 package com.borikov.bullfinch.util;
 
-import java.util.ResourceBundle;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
 
 public class EmailSender {
+    private static final Logger LOGGER = LogManager.getLogger();
     private static final String EMAIL_HEAD = "Bullfinch tattoo";
     private static final String EMAIL_BODY = "Follow link to confirm your " +
             "mail to register on site bullfinch: " +
             "http://localhost:8080/controller?commandName=confirm_email_command&login=";
-    private static final String FILE_NAME = "mail";
+    private static final String FILE_NAME = "data/mail.properties";
 
     private EmailSender() {
     }
 
     public static void sendMessage(String email, String login) {
-        ResourceBundle bundle = ResourceBundle.getBundle(FILE_NAME);
-        EmailThread sender = new EmailThread(email, EMAIL_HEAD, EMAIL_BODY + login, bundle);
-        sender.start();
+        try {
+            Properties properties = new Properties();
+            InputStream inputStream = EmailSender.class.getClassLoader().getResourceAsStream(FILE_NAME);
+            properties.load(inputStream);
+            EmailThread sender = new EmailThread(email, EMAIL_HEAD, EMAIL_BODY + login, properties);
+            sender.start();
+        } catch (IOException e) {
+            LOGGER.log(Level.ERROR, "Error with mail properties file", e);
+        }
     }
 }

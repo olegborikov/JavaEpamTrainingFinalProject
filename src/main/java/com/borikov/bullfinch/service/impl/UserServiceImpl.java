@@ -13,10 +13,7 @@ import com.borikov.bullfinch.util.EmailSender;
 import com.borikov.bullfinch.util.PasswordEncryption;
 import com.borikov.bullfinch.validator.UserValidator;
 
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.Optional;
-import java.util.Properties;
 
 public class UserServiceImpl implements UserService {
     @Override
@@ -59,8 +56,10 @@ public class UserServiceImpl implements UserService {
                     && userValidator.isPasswordCorrect(password)
                     && password.equals(confirmedPassword)) {
                 Optional<String> encryptedPassword = PasswordEncryption.encrypt(password);
-                Optional<User> existingUser = userDao.findByLogin(login);
-                if (existingUser.isEmpty() && encryptedPassword.isPresent()) {
+                Optional<User> existingUserLogin = userDao.findByLogin(login);
+                Optional<User> existingUserEmail = userDao.findByEmail(email);
+                if (existingUserLogin.isEmpty() && existingUserEmail.isEmpty()
+                        && encryptedPassword.isPresent()) {
                     User user = new User(null, email, login, encryptedPassword.get(),
                             firstName, secondName, phoneNumber, false, false,
                             UserRole.USER, UserRating.BEGINNER, new Wallet(null, 0));// TODO: 17.09.2020 refactor creating of wallet

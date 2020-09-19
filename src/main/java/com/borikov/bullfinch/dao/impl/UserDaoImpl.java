@@ -21,6 +21,10 @@ public class UserDaoImpl implements UserDao {
             "password, is_activated, role_name FROM user_account " +
             "INNER JOIN role ON user_account.role_id_fk = role.role_id " +
             "WHERE login LIKE ?";
+    private static final String FIND_USER_BY_EMAIL = "SELECT user_account_id, login, " +
+            "password, is_activated, role_name FROM user_account " +
+            "INNER JOIN role ON user_account.role_id_fk = role.role_id " +
+            "WHERE email LIKE ?";
     private static final String ADD_USER = "INSERT INTO user_account (email, login, password," +
             " first_name, second_name, phone_number, is_blocked, " +
             "is_activated, role_id_fk, wallet_id_fk, rating_id_fk) " +
@@ -45,6 +49,24 @@ public class UserDaoImpl implements UserDao {
             return userOptional;
         } catch (SQLException | ConnectionPoolException e) {
             throw new DaoException("Finding user by login error", e);
+        }
+    }
+
+    @Override
+    public Optional<User> findByEmail(String email) throws DaoException {
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement statement =
+                     connection.prepareStatement(FIND_USER_BY_EMAIL)) {
+            statement.setString(1, email);
+            ResultSet resultSet = statement.executeQuery();
+            Optional<User> userOptional = Optional.empty();
+            if (resultSet.next()) {
+                User user = createUserFromResultSet(resultSet);
+                userOptional = Optional.of(user);
+            }
+            return userOptional;
+        } catch (SQLException | ConnectionPoolException e) {
+            throw new DaoException("Finding user by email error", e);
         }
     }
 
