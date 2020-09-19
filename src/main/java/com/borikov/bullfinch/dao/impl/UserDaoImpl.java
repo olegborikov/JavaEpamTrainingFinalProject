@@ -113,9 +113,9 @@ public class UserDaoImpl implements UserDao {
         long userId = resultSet.getLong(ColumnName.USER_ACCOUNT_ID);
         String login = resultSet.getString(ColumnName.LOGIN);
         String password = resultSet.getString(ColumnName.PASSWORD);
-        int rolePosition = resultSet.getInt(ColumnName.ROLE_NAME);
+        String roleName = resultSet.getString(ColumnName.ROLE_NAME);
+        UserRole userRole = UserRole.valueOf(roleName.toUpperCase());
         boolean isActivated = resultSet.getInt(ColumnName.IS_ACTIVATED) != 0;
-        UserRole userRole = UserRole.values()[rolePosition];
         return new User(userId, login, password, isActivated, userRole);
     }
 }

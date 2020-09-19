@@ -1,6 +1,6 @@
 package com.borikov.bullfinch.entity;
 
-public enum UserRating {// TODO: 16.09.2020 refactor
+public enum UserRating {
     BEGINNER(1, "beginner"),
     MIDDLE(2, "middle"),
     ADVANCED(3, "advanced"),

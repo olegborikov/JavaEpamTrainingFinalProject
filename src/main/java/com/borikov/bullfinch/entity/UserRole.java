@@ -1,6 +1,6 @@
 package com.borikov.bullfinch.entity;
 
-public enum UserRole {// TODO: 16.09.2020 refactor
+public enum UserRole {
     GUEST(1, "guest"),
     USER(2, "user"),
     ADMIN(3, "admin");
