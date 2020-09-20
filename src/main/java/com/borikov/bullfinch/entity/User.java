@@ -4,7 +4,6 @@ public class User {
     private Long userId;
     private String email;
     private String login;
-    private String password;
     private String firstName;
     private String secondName;
     private String phoneNumber;
@@ -14,24 +13,22 @@ public class User {
     private UserRating userRating;
     private Wallet wallet;
 
-    public User(Long userId, String login, String password,
+    public User(Long userId, String login,
                 boolean isActivated, UserRole userRole) {
         this.userId = userId;
         this.login = login;
-        this.password = password;
         this.isActivated = isActivated;
         this.userRole = userRole;
     }
 
     public User(Long userId, String email, String login,
-                String password, String firstName, String secondName,
+                String firstName, String secondName,
                 String phoneNumber, boolean isBlocked,
                 boolean isActivated, UserRole userRole,
                 UserRating userRating, Wallet wallet) {
         this.userId = userId;
         this.email = email;
         this.login = login;
-        this.password = password;
         this.firstName = firstName;
         this.secondName = secondName;
         this.phoneNumber = phoneNumber;
@@ -64,14 +61,6 @@ public class User {
 
     public void setLogin(String login) {
         this.login = login;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getFirstName() {
@@ -162,10 +151,6 @@ public class User {
         if (login != null ? !login.equals(user.login) : user.login != null) {
             return false;
         }
-        if (password != null ? !password.equals(user.password)
-                : user.password != null) {
-            return false;
-        }
         if (firstName != null ? !firstName.equals(user.firstName)
                 : user.firstName != null) {
             return false;
@@ -192,7 +177,6 @@ public class User {
         int result = userId != null ? userId.hashCode() : 0;
         result = 31 * result + (email != null ? email.hashCode() : 0);
         result = 31 * result + (login != null ? login.hashCode() : 0);
-        result = 31 * result + (password != null ? password.hashCode() : 0);
         result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
         result = 31 * result + (secondName != null ? secondName.hashCode() : 0);
         result = 31 * result + (phoneNumber != null ? phoneNumber.hashCode() : 0);
@@ -210,7 +194,6 @@ public class User {
         sb.append("userId=").append(userId);
         sb.append(", email='").append(email).append('\'');
         sb.append(", login='").append(login).append('\'');
-        sb.append(", password='").append(password).append('\'');
         sb.append(", firstName='").append(firstName).append('\'');
         sb.append(", secondName='").append(secondName).append('\'');
         sb.append(", phoneNumber='").append(phoneNumber).append('\'');

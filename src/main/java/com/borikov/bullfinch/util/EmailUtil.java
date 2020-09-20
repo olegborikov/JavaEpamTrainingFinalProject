@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-public class EmailSender {
+public class EmailUtil {
     private static final Logger LOGGER = LogManager.getLogger();
     private static final String EMAIL_HEAD = "Bullfinch tattoo";
     private static final String EMAIL_BODY = "Follow link to confirm your " +
@@ -16,13 +16,13 @@ public class EmailSender {
             "http://localhost:8080/controller?commandName=confirm_email_command&login=";
     private static final String FILE_NAME = "data/mail.properties";
 
-    private EmailSender() {
+    private EmailUtil() {
     }
 
     public static void sendMessage(String email, String login) {
         try {
             Properties properties = new Properties();
-            InputStream inputStream = EmailSender.class.getClassLoader().getResourceAsStream(FILE_NAME);
+            InputStream inputStream = EmailUtil.class.getClassLoader().getResourceAsStream(FILE_NAME);
             properties.load(inputStream);
             Thread thread = new Thread(new EmailSenderThread(
                     email, EMAIL_HEAD, EMAIL_BODY + login, properties));

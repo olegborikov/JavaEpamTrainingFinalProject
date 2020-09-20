@@ -10,11 +10,11 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Optional;
 
-public class PasswordEncryption {
+public class PasswordEncryptor {
     private static final String ENCRYPTION_ALGORITHM = "SHA-1";
     private static final Logger LOGGER = LogManager.getLogger();
 
-    private PasswordEncryption() {
+    private PasswordEncryptor() {
     }
 
     public static Optional<String> encrypt(String password) {

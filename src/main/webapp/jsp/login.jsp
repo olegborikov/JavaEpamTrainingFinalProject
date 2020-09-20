@@ -16,12 +16,12 @@
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/project.js"></script>
 </head>
 
-<body >
+<body>
 
 <jsp:include page="navbar.jsp"/>
 
 <section class="masthead"
-        style="background-image:url('${pageContext.request.contextPath}/image/reception.jpg');">
+         style="background-image:url('${pageContext.request.contextPath}/image/reception.jpg');">
     <div class="intro-body">
         <div class="container">
             <div class="row">
@@ -29,14 +29,15 @@
                     <form name="loginForm" method="post" action="controller" autocomplete="off">
                         <div class="form-group">
                             <label>Login</label>
-                            <input type="text" class="form-control" placeholder="Login" name="login">
+                            <input type="text" class="form-control" placeholder="Login"
+                                   name="login">
                         </div>
                         <div class="form-group">
                             <label>Password</label>
                             <input type="password" class="form-control" placeholder="Password"
                                    name="password">
                         </div>
-
+                        <div style="color: red">${errorLoginPasswordMessage}</div>
                         <button type="submit" class="btn btn-black" name="commandName"
                                 value="login_command">
                             Sign in

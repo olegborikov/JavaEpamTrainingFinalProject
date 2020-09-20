@@ -17,8 +17,12 @@ import java.util.Optional;
 public class UserDaoImpl implements UserDao {
     private static final Logger LOGGER = LogManager.getLogger();
     private static final ConnectionPool connectionPool = ConnectionPool.INSTANCE;
+    private static final String CHECK_USER_EXISTING_BY_LOGIN = "SELECT password " +
+            "FROM user_account WHERE login LIKE ?";
+    private static final String CHECK_USER_EXISTING_BY_EMAIL = "SELECT user_account_id " +
+            "FROM user_account WHERE email LIKE ?";
     private static final String FIND_USER_BY_LOGIN = "SELECT user_account_id, login, " +
-            "password, is_activated, role_name FROM user_account " +
+            "is_activated, role_name FROM user_account " +
             "INNER JOIN role ON user_account.role_id_fk = role.role_id " +
             "WHERE login LIKE ?";
     private static final String FIND_USER_BY_EMAIL = "SELECT user_account_id, login, " +
@@ -33,6 +37,41 @@ public class UserDaoImpl implements UserDao {
             "SET is_activated = 1 WHERE login LIKE ?";
     private static final String ADD_WALLET = "INSERT INTO wallet (balance)" +
             "VALUES (?)";
+
+    @Override
+    public Optional<String> checkExistingByLogin(String login) throws DaoException {
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement statement =
+                     connection.prepareStatement(CHECK_USER_EXISTING_BY_LOGIN)) {
+            statement.setString(1, login);
+            ResultSet resultSet = statement.executeQuery();
+            Optional<String> passwordOptional = Optional.empty();
+            if (resultSet.next()) {
+                String password = resultSet.getString(ColumnName.PASSWORD);
+                passwordOptional = Optional.of(password);
+            }
+            return passwordOptional;
+        } catch (SQLException | ConnectionPoolException e) {
+            throw new DaoException("Finding user by login error", e);
+        }
+    }
+
+    @Override
+    public boolean checkExistingByEmail(String email) throws DaoException {
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement statement =
+                     connection.prepareStatement(FIND_USER_BY_EMAIL)) {
+            statement.setString(1, email);
+            ResultSet resultSet = statement.executeQuery();
+            boolean result = false;
+            if (resultSet.next()) {
+                result = true;
+            }
+            return result;
+        } catch (SQLException | ConnectionPoolException e) {
+            throw new DaoException("Finding user by login error", e);
+        }
+    }
 
     @Override
     public Optional<User> findByLogin(String login) throws DaoException {
@@ -52,7 +91,7 @@ public class UserDaoImpl implements UserDao {
         }
     }
 
-    @Override
+/*    @Override
     public Optional<User> findByEmail(String email) throws DaoException {
         try (Connection connection = connectionPool.getConnection();
              PreparedStatement statement =
@@ -68,7 +107,7 @@ public class UserDaoImpl implements UserDao {
         } catch (SQLException | ConnectionPoolException e) {
             throw new DaoException("Finding user by email error", e);
         }
-    }
+    }*/
 
     @Override
     public boolean confirmEmail(String login) throws DaoException {
@@ -84,7 +123,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public boolean add(User user) throws DaoException {// TODO: 16.09.2020 refactor
+    public boolean add(User user, String password) throws DaoException {// TODO: 16.09.2020 refactor
         try (Connection connection = connectionPool.getConnection();
              PreparedStatement statementWallet =
                      connection.prepareStatement(ADD_WALLET, Statement.RETURN_GENERATED_KEYS);
@@ -98,7 +137,7 @@ public class UserDaoImpl implements UserDao {
             }
             statementUser.setString(1, user.getEmail());
             statementUser.setString(2, user.getLogin());
-            statementUser.setString(3, user.getPassword());
+            statementUser.setString(3, password);
             statementUser.setString(4, user.getFirstName());
             statementUser.setString(5, user.getSecondName());
             statementUser.setString(6, user.getPhoneNumber());
@@ -134,10 +173,9 @@ public class UserDaoImpl implements UserDao {
     private User createUserFromResultSet(ResultSet resultSet) throws SQLException {
         long userId = resultSet.getLong(ColumnName.USER_ACCOUNT_ID);
         String login = resultSet.getString(ColumnName.LOGIN);
-        String password = resultSet.getString(ColumnName.PASSWORD);
         String roleName = resultSet.getString(ColumnName.ROLE_NAME);
         UserRole userRole = UserRole.valueOf(roleName.toUpperCase());
         boolean isActivated = resultSet.getInt(ColumnName.IS_ACTIVATED) != 0;
-        return new User(userId, login, password, isActivated, userRole);
+        return new User(userId, login, isActivated, userRole);
     }
 }

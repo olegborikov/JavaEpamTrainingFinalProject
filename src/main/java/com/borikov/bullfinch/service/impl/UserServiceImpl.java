@@ -9,28 +9,29 @@ import com.borikov.bullfinch.entity.Wallet;
 import com.borikov.bullfinch.exception.DaoException;
 import com.borikov.bullfinch.exception.ServiceException;
 import com.borikov.bullfinch.service.UserService;
-import com.borikov.bullfinch.util.EmailSender;
-import com.borikov.bullfinch.util.PasswordEncryption;
+import com.borikov.bullfinch.util.EmailUtil;
+import com.borikov.bullfinch.util.PasswordEncryptor;
 import com.borikov.bullfinch.validator.UserValidator;
 
 import java.util.Optional;
 
 public class UserServiceImpl implements UserService {
+    private final UserDao userDao = new UserDaoImpl();
+
     @Override
     public Optional<User> isUserExists(String login, String password) throws ServiceException {
         try {
             UserValidator userValidator = new UserValidator();
-            UserDao userDao = new UserDaoImpl();
             Optional<User> userOptional = Optional.empty();
             if (userValidator.isLoginCorrect(login)
                     && userValidator.isPasswordCorrect(password)) {
-                Optional<User> existingUser = userDao.findByLogin(login);
-                if (existingUser.isPresent()) {
-                    User user = existingUser.get();
-                    Optional<String> encryptedPassword = PasswordEncryption.encrypt(password);
-                    if (encryptedPassword.isPresent() && user.getLogin().equals(login)
-                            && user.getPassword().equals(encryptedPassword.get())) {
-                        userOptional = existingUser;
+                Optional<String> userPasswordOptional = userDao.checkExistingByLogin(login);
+                if (userPasswordOptional.isPresent()) {
+                    String userPassword = userPasswordOptional.get();
+                    Optional<String> encryptedPassword = PasswordEncryptor.encrypt(password);
+                    if (encryptedPassword.isPresent()
+                            && userPassword.equals(encryptedPassword.get())) {
+                        userOptional = userDao.findByLogin(login);
                     }
                 }
             }
@@ -46,7 +47,6 @@ public class UserServiceImpl implements UserService {
                            String confirmedPassword) throws ServiceException {
         try {
             UserValidator userValidator = new UserValidator();
-            UserDao userDao = new UserDaoImpl();
             boolean result = false;
             if (userValidator.isEmailCorrect(email)
                     && userValidator.isLoginCorrect(login)
@@ -55,16 +55,16 @@ public class UserServiceImpl implements UserService {
                     && userValidator.isPhoneCorrect(phoneNumber)
                     && userValidator.isPasswordCorrect(password)
                     && password.equals(confirmedPassword)) {
-                Optional<String> encryptedPassword = PasswordEncryption.encrypt(password);
-                Optional<User> existingUserLogin = userDao.findByLogin(login);
-                Optional<User> existingUserEmail = userDao.findByEmail(email);
-                if (existingUserLogin.isEmpty() && existingUserEmail.isEmpty()
+                Optional<String> encryptedPassword = PasswordEncryptor.encrypt(password);
+                Optional<String> existingUserPassword = userDao.checkExistingByLogin(login);// TODO: 20.09.2020 is it correct to get password of random user in registration
+                boolean existingUserEmail = userDao.checkExistingByEmail(email);
+                if (existingUserPassword.isEmpty() && !existingUserEmail
                         && encryptedPassword.isPresent()) {
-                    User user = new User(null, email, login, encryptedPassword.get(),
+                    User user = new User(null, email, login,
                             firstName, secondName, phoneNumber, false, false,
                             UserRole.USER, UserRating.BEGINNER, new Wallet(null, 0));// TODO: 17.09.2020 refactor creating of wallet
-                    result = userDao.add(user);
-                    EmailSender.sendMessage(user.getEmail(), user.getLogin());
+                    result = userDao.add(user, encryptedPassword.get());
+                    EmailUtil.sendMessage(user.getEmail(), user.getLogin());
                 }
             }
             return result;
@@ -77,7 +77,6 @@ public class UserServiceImpl implements UserService {
     public boolean confirmUserEmail(String login) throws ServiceException {
         boolean result = false;
         try {
-            UserDao userDao = new UserDaoImpl();
             Optional<User> existingUser = userDao.findByLogin(login);
             if (existingUser.isPresent()) {
                 result = userDao.confirmEmail(login);
