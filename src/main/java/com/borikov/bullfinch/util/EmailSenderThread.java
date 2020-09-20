@@ -13,7 +13,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.util.Properties;
 
-public class EmailThread extends Thread {
+public class EmailSenderThread implements Runnable {
     private MimeMessage message;
     private final String sendToEmail;
     private final String mailSubject;
@@ -22,7 +22,7 @@ public class EmailThread extends Thread {
     private static final Logger LOGGER = LogManager.getLogger();
     private static final String TEXT_TYPE = "text/html";
 
-    public EmailThread(String sendToEmail, String mailSubject, String mailText, Properties properties) {
+    public EmailSenderThread(String sendToEmail, String mailSubject, String mailText, Properties properties) {
         this.sendToEmail = sendToEmail;
         this.mailSubject = mailSubject;
         this.mailText = mailText;

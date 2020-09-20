@@ -24,8 +24,9 @@ public class EmailSender {
             Properties properties = new Properties();
             InputStream inputStream = EmailSender.class.getClassLoader().getResourceAsStream(FILE_NAME);
             properties.load(inputStream);
-            EmailThread sender = new EmailThread(email, EMAIL_HEAD, EMAIL_BODY + login, properties);
-            sender.start();
+            Thread thread = new Thread(new EmailSenderThread(
+                    email, EMAIL_HEAD, EMAIL_BODY + login, properties));
+            thread.start();
         } catch (IOException e) {
             LOGGER.log(Level.ERROR, "Error with mail properties file", e);
         }

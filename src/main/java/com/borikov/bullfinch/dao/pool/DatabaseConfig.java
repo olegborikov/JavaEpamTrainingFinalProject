@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-public class DatabaseConfig {
+class DatabaseConfig {
     private static final Logger LOGGER = LogManager.getLogger();
     private static final String FILE_NAME = "data/database.properties";
     private static final String DATABASE_DRIVER_NAME = "database.driverName";
