@@ -7,15 +7,12 @@ import com.borikov.bullfinch.entity.User;
 import com.borikov.bullfinch.entity.UserRole;
 import com.borikov.bullfinch.exception.ConnectionPoolException;
 import com.borikov.bullfinch.exception.DaoException;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
 import java.util.List;
 import java.util.Optional;
 
 public class UserDaoImpl implements UserDao {
-    private static final Logger LOGGER = LogManager.getLogger();
     private static final ConnectionPool connectionPool = ConnectionPool.INSTANCE;
     private static final String CHECK_USER_EXISTING_BY_LOGIN = "SELECT password " +
             "FROM user_account WHERE login LIKE ?";

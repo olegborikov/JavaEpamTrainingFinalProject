@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 
 <head>
@@ -27,58 +28,19 @@
 <section class="content-section text-center">
     <div class="container-fluid" data-aos="fade" data-aos-delay="500">
         <div class="row">
-            <div class="col-lg-4">
-                <div class="image-wrap-2">
-                    <div class="image-info">
-                        <h2 class="mb-3">Nature</h2>
-                        <button class="btn btn-outline-white py-2 px-4">More
-                            Photos
-                        </button>
+            <c:forEach var="tattoo" items="${tattoos}">
+                <div class="col-lg-4">
+                    <div class="image-wrap-2">
+                        <div class="image-info">
+                            <h2 class="mb-3">${tattoo.name}</h2>
+                            <button class="btn btn-outline-white py-2 px-4">More info</button>
+                        </div>
+                        <img src="${pageContext.request.contextPath}/assets/image/${tattoo.imageName}.jpg"
+                             alt="Image"
+                             class="img-fluid">
                     </div>
-                    <img src="${pageContext.request.contextPath}/assets/image/1.jpg" alt="Image"
-                         class="img-fluid">
                 </div>
-
-            </div>
-            <div class="col-lg-4">
-                <div class="image-wrap-2">
-                    <div class="image-info">
-                        <h2 class="mb-3">Portrait</h2>
-                        <button class="btn btn-outline-white py-2 px-4">More
-                            Photos
-                        </button>
-                    </div>
-                    <img src="${pageContext.request.contextPath}/assets/image/2.jpg" alt="Image"
-                         class="img-fluid">
-                </div>
-            </div>
-
-            <div class="col-lg-4">
-                <div class="image-wrap-2">
-                    <div class="image-info">
-                        <h2 class="mb-3">People</h2>
-                        <button class="btn btn-outline-white py-2 px-4">More
-                            Photos
-                        </button>
-                    </div>
-                    <img src="${pageContext.request.contextPath}/assets/image/3.jpg" alt="Image"
-                         class="img-fluid">
-                </div>
-            </div>
-
-            <div class="col-lg-4">
-                <div class="image-wrap-2">
-                    <div class="image-info">
-                        <h2 class="mb-3">Architecture</h2>
-                        <button class="btn btn-outline-white py-2 px-4">More
-                            Photos
-                        </button>
-                    </div>
-                    <img src="${pageContext.request.contextPath}/assets/image/4.jpg" alt="Image"
-                         class="img-fluid">
-                </div>
-            </div>
-
+            </c:forEach>
         </div>
     </div>
 </section>
