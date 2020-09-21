@@ -26,8 +26,34 @@
 <jsp:include page="navbar.jsp"/>
 
 <section class="content-section text-center">
+
+    <div class="row col-12">
+        <div class="col-md-9"></div>
+        <div class="col-12 col-md-3">
+            <form name="findTattooForm" method="post" action="controller" autocomplete="off">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search..."
+                           name="tattooName" value="${tattooName}">
+                    <div class="input-group-btn">
+                        <button type="submit" class="btn btn-outline-secondary" name="commandName"
+                                value="find_tattoo_command">Search
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <br/>
     <div class="container-fluid" data-aos="fade" data-aos-delay="500">
         <div class="row">
+            <c:if test="${empty tattoos}">
+                <section class="masthead content-section text-center">
+                    <div class="container">
+                        <h3>Nothing found</h3>
+                    </div>
+                </section>
+            </c:if>
             <c:forEach var="tattoo" items="${tattoos}">
                 <div class="col-lg-4">
                     <div class="image-wrap-2">

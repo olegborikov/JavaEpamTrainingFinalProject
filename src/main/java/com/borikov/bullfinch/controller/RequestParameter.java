@@ -15,6 +15,7 @@ public class RequestParameter {
     public static final String ERROR_DATA_MESSAGE = "errorDataMessage";
     public static final String CONFIRM_EMAIL_MESSAGE = "confirmEmailMessage";
     public static final String TATTOOS = "tattoos";
+    public static final String TATTOO_NAME = "tattooName";
 
     private RequestParameter() {
     }

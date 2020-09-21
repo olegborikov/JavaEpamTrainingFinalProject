@@ -75,11 +75,11 @@
                 <h2>Contact us</h2>
                 <ul class="list-inline banner-social-buttons">
                     <li class="list-inline-item">
-                        <div class="btn btn-lg btn-default">
+                        <div class="btn btn-outline-secondary">
                             <span>+375259542181</span></div>
                     </li>
                     <li class="list-inline-item">
-                        <div class="btn  btn-lg btn-default">
+                        <div class="btn btn-outline-secondary">
                             <span>проспект Победителей 100</span></div>
                     </li>
                 </ul>

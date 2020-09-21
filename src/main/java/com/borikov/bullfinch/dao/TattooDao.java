@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface TattooDao {
     List<Tattoo> findAll() throws DaoException;
+
+    List<Tattoo> findByName(String name) throws DaoException;
 }

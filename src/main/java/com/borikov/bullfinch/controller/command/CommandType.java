@@ -10,7 +10,8 @@ public enum CommandType {
     BROWSE_LOGIN_PAGE_COMMAND(new BrowseLoginPageCommand()),
     BROWSE_HOME_PAGE_COMMAND(new BrowseHomePageCommand()),
     CONFIRM_EMAIL_COMMAND(new ConfirmEmailCommand()),
-    BROWSE_CATALOG_PAGE_COMMAND(new BrowseCatalogPageCommand());
+    BROWSE_CATALOG_PAGE_COMMAND(new BrowseCatalogPageCommand()),
+    FIND_TATTOO_COMMAND(new FindTattooCommand());
 
     private final Command command;
 

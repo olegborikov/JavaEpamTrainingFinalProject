@@ -14,19 +14,21 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
-public class BrowseCatalogPageCommand implements Command {
+public class FindTattooCommand implements Command {
     private static final Logger LOGGER = LogManager.getLogger();
     private static final TattooService tattooService = new TattooServiceImpl();
 
     @Override
     public String execute(HttpServletRequest request) {
         String page;
+        String tattooName = request.getParameter(RequestParameter.TATTOO_NAME);
         try {
-            List<Tattoo> tattoos = tattooService.findAllTattoos();
+            List<Tattoo> tattoos = tattooService.findTattoosByName(tattooName);
             request.setAttribute(RequestParameter.TATTOOS, tattoos);
+            request.setAttribute(RequestParameter.TATTOO_NAME, tattooName);
             page = PagePath.CATALOG;
         } catch (ServiceException e) {
-            LOGGER.log(Level.ERROR, "Error while finding tattoos", e);
+            LOGGER.log(Level.ERROR, "Error while finding tattoos by name", e);
             request.setAttribute(RequestParameter.ERROR_MESSAGE, e);
             page = PagePath.ERROR;
         }

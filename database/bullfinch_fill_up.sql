@@ -28,10 +28,10 @@ INSERT INTO bullfinch.user_account (email, login, password, first_name, second_n
                                     is_blocked, is_activated, role_id_fk, wallet_id_fk,
                                     rating_id_fk)
 VALUES ('ob375259542181@gmail.com', 'oleg', 'e43713ad9e2fc4c55c1e2b373d3f548bd1ffed6e', 'Oleg',
-        'Borikov', '375251234567', 0, 1, 2, 1, 1)
+        'Borikov', '375251234567', 0, 1, 2, 1, 1);
 
 INSERT INTO bullfinch.image (image_name)
- VALUES ('c56bf5bc-0727-4475-b9a2-0ea6053c5ef5');
+VALUES ('c56bf5bc-0727-4475-b9a2-0ea6053c5ef5');
 INSERT INTO bullfinch.image (image_name)
 VALUES ('02d0e060-80ec-4e14-9a4a-9b474c8f3d89');
 INSERT INTO bullfinch.image (image_name)
