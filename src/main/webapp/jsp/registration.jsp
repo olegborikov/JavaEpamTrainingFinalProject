@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
-    <title>Home</title>
+    <title>Registration</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <link rel="stylesheet" type="text/css"
           href="${pageContext.request.contextPath}/css/bootstrap.min.css">
@@ -81,5 +81,6 @@
         </div>
     </div>
 </section>
+<jsp:include page="footer.jsp"/>
 </body>
 </html>

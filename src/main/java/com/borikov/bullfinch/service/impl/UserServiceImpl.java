@@ -9,7 +9,7 @@ import com.borikov.bullfinch.entity.Wallet;
 import com.borikov.bullfinch.exception.DaoException;
 import com.borikov.bullfinch.exception.ServiceException;
 import com.borikov.bullfinch.service.UserService;
-import com.borikov.bullfinch.util.EmailUtil;
+import com.borikov.bullfinch.util.EmailSenderUtil;
 import com.borikov.bullfinch.util.PasswordEncryptor;
 import com.borikov.bullfinch.validator.UserValidator;
 
@@ -64,7 +64,7 @@ public class UserServiceImpl implements UserService {
                             firstName, secondName, phoneNumber, false, false,
                             UserRole.USER, UserRating.BEGINNER, new Wallet(null, 0));// TODO: 17.09.2020 refactor creating of wallet
                     result = userDao.add(user, encryptedPassword.get());
-                    EmailUtil.sendMessage(user.getEmail(), user.getLogin());
+                    EmailSenderUtil.sendMessage(user.getEmail(), user.getLogin());
                 }
             }
             return result;

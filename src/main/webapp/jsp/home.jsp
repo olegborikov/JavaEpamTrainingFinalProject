@@ -26,7 +26,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 mx-auto">
-                    <h1 class="brand-heading">Bullfinch</h1>
+                    <h1 class="brand-heading stroke">Bullfinch</h1>
                     <h2 class="stroke">A free, responsive, one page Bootstrap theme.<br>Created with
                         love.</h2>
                 </div>
@@ -39,20 +39,22 @@
         <div class="row">
             <div class="col-lg-8 mx-auto">
                 <h2>About Bullfinch</h2>
-                <p>Студия «Bullfinch» - это то, что Вы искали. Ведь придя к нам, Вам больше не
-                    захочется искать себе мастера в дальнейшем. </p>
-                <p>Татуировку здесь воспринимают как искусство: подобно художнику, который работает
-                    с красками и холстом, мастер наносит рисунок на кожу.
-                    Более того, команда салона состоит из людей, имеющих огромный опыт работы,
-                    художественное образование и навыки художника.
-                    А приятные цены и СКИДКИ дополнят и так приятные ощущения от Наших
-                    профессионалов.</p>
-                <p>Краски, используемые при нанесении являются высококачественными и
-                    гипоаллергенными,
-                    а оборудование исключительно из последних новинок современных брендов.
-                    Расходный материал только одноразовый и стерильный.
-                    Поэтому, переживания следует оставить за порогом, а внутри – только
-                    решительность, стойкость и смелость.</p>
+                <p> Bullfinch Studio is what you were looking for. After all, having come to us, you
+                    no longer
+                    want to look for a master in the future.</p>
+                <p> Tattoo is perceived here as art: like an artist who works
+                    with paints and canvas, the master applies the drawing to the skin.
+                    Moreover, the salon team consists of people with vast experience,
+                    art education and artist skills.
+                    And pleasant prices and DISCOUNTS will complement the already pleasant
+                    sensations from Our
+                    professionals.</p>
+                <p> The paints used for application are of high quality and
+                    hypoallergenic,
+                    and the equipment is exclusively from the latest novelties of modern brands.
+                    Consumables are only disposable and sterile.
+                    Therefore, experiences should be left behind the threshold, and inside - only
+                    decisiveness, resilience and courage.</p>
             </div>
         </div>
     </div>
@@ -71,11 +73,13 @@
             <div class="col-lg-8 mx-auto">
                 <h2>Contact us</h2>
                 <ul class="list-inline banner-social-buttons">
-                    <li class="list-inline-item">&nbsp;<div class="btn btn-lg btn-default">
-                        <span>+375259542181</span></div>
+                    <li class="list-inline-item">
+                        <div class="btn btn-lg btn-default">
+                            <span>+375259542181</span></div>
                     </li>
-                    <li class="list-inline-item">&nbsp;<div class="btn  btn-lg btn-default">
-                        <span>проспект Победителей 100</span></div>
+                    <li class="list-inline-item">
+                        <div class="btn  btn-lg btn-default">
+                            <span>проспект Победителей 100</span></div>
                     </li>
                 </ul>
             </div>
