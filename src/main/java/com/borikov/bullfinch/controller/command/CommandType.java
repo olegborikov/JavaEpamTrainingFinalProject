@@ -9,7 +9,8 @@ public enum CommandType {
     BROWSE_REGISTRATION_PAGE_COMMAND(new BrowseRegistrationPageCommand()),
     BROWSE_LOGIN_PAGE_COMMAND(new BrowseLoginPageCommand()),
     BROWSE_HOME_PAGE_COMMAND(new BrowseHomePageCommand()),
-    CONFIRM_EMAIL_COMMAND(new ConfirmEmailCommand());
+    CONFIRM_EMAIL_COMMAND(new ConfirmEmailCommand()),
+    BROWSE_CATALOG_PAGE_COMMAND(new BrowseCatalogPageCommand());
 
     private final Command command;
 

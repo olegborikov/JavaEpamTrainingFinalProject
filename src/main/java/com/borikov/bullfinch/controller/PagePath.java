@@ -8,6 +8,7 @@ public class PagePath {
     public static final String ERROR = "/jsp/error.jsp";
     public static final String REGISTRATION = "/jsp/registration.jsp";
     public static final String EMAIL_CONFIRM = "/jsp/email_confirm.jsp";
+    public static final String CATALOG = "/jsp/catalog.jsp";
 
     private PagePath() {
     }
