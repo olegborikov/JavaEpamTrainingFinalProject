@@ -8,11 +8,11 @@ public class Tattoo {
     private byte rating;
     private boolean isAllowed;
     private boolean isArchived;
-    private String imageName;
+    private Image image;
 
     public Tattoo(Long tattooId, String name, String description,
                   double price, byte rating, boolean isAllowed,
-                  boolean isArchived, String imageName) {
+                  boolean isArchived, Image image) {
         this.tattooId = tattooId;
         this.name = name;
         this.description = description;
@@ -20,7 +20,7 @@ public class Tattoo {
         this.rating = rating;
         this.isAllowed = isAllowed;
         this.isArchived = isArchived;
-        this.imageName = imageName;
+        this.image = image;
     }
 
     public Long getTattooId() {
@@ -79,12 +79,12 @@ public class Tattoo {
         isArchived = archived;
     }
 
-    public String getImageName() {
-        return imageName;
+    public Image getImage() {
+        return image;
     }
 
-    public void setImageName(String imageName) {
-        this.imageName = imageName;
+    public void setImage(Image image) {
+        this.image = image;
     }
 
     @Override
@@ -118,8 +118,8 @@ public class Tattoo {
                 : tattoo.description != null) {
             return false;
         }
-        return imageName != null ? imageName.equals(tattoo.imageName)
-                : tattoo.imageName == null;
+        return image != null ? image.equals(tattoo.image)
+                : tattoo.image == null;
     }
 
     @Override
@@ -134,7 +134,7 @@ public class Tattoo {
         result = 31 * result + (int) rating;
         result = 31 * result + (isAllowed ? 1 : 0);
         result = 31 * result + (isArchived ? 1 : 0);
-        result = 31 * result + (imageName != null ? imageName.hashCode() : 0);
+        result = 31 * result + (image != null ? image.hashCode() : 0);
         return result;
     }
 
@@ -148,7 +148,7 @@ public class Tattoo {
         sb.append(", rating=").append(rating);
         sb.append(", isAllowed=").append(isAllowed);
         sb.append(", isArchived=").append(isArchived);
-        sb.append(", imageName='").append(imageName).append('\'');
+        sb.append(", image=").append(image);
         sb.append('}');
         return sb.toString();
     }

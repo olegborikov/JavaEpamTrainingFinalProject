@@ -6,7 +6,7 @@ import com.borikov.bullfinch.exception.DaoException;
 import java.util.List;
 import java.util.Optional;
 
-public interface UserDao{
+public interface UserDao {
     Optional<String> checkExistingByLogin(String login) throws DaoException;
 
     boolean checkExistingByEmail(String email) throws DaoException;

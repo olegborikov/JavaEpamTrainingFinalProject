@@ -16,11 +16,8 @@
     <script type="text/javascript"
             src="${pageContext.request.contextPath}/assets/js/project.js"></script>
 </head>
-
 <body>
-
 <jsp:include page="navbar.jsp"/>
-
 <section class="masthead"
          style="background-image:url('${pageContext.request.contextPath}/assets/image/reception.jpg');">
     <div class="intro-body">
@@ -29,12 +26,12 @@
                 <div class="col-lg-4 mx-auto">
                     <form name="loginForm" method="post" action="controller" autocomplete="off">
                         <div class="form-group">
-                            <label>Login</label>
+                            <label class="stroke">Login</label>
                             <input type="text" class="form-control" placeholder="Login"
                                    name="login">
                         </div>
                         <div class="form-group">
-                            <label>Password</label>
+                            <label class="stroke">Password</label>
                             <input type="password" class="form-control" placeholder="Password"
                                    name="password">
                         </div>

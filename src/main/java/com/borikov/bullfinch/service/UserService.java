@@ -9,8 +9,8 @@ public interface UserService {
     Optional<User> isUserExists(String login, String password) throws ServiceException;
 
     boolean addUser(String email, String login, String firstName,
-                           String secondName, String phoneNumber, String password,
-                           String confirmedPassword) throws ServiceException;
+                    String secondName, String phoneNumber, String password,
+                    String confirmedPassword) throws ServiceException;
 
     boolean confirmUserEmail(String login) throws ServiceException;
 }

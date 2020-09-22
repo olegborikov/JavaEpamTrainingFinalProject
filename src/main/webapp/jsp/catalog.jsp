@@ -61,7 +61,7 @@
                             <h2 class="mb-3">${tattoo.name}</h2>
                             <button class="btn btn-outline-white py-2 px-4">More info</button>
                         </div>
-                        <img src="${pageContext.request.contextPath}/assets/image/${tattoo.imageName}.jpg"
+                        <img src="${pageContext.request.contextPath}/assets/image/${tattoo.image.name}.jpg"
                              alt="Image"
                              class="img-fluid">
                     </div>
