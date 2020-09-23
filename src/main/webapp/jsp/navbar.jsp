@@ -1,5 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<fmt:setLocale value="ru_RU"/>
+<fmt:setBundle basename="i18n.applicationMessage"/>
 
 <div>
     <nav class="navbar navbar-light navbar-expand-md navbar navbar-expand-lg fixed-top"
@@ -7,7 +11,14 @@
         <div class="container">
             <form name="homeButtonFrom" method="post" action="controller">
                 <button style="color:white" class="btn navbar-brand js-scroll-trigger"
-                        name="commandName" value="browse_home_page_command">Home
+                        name="commandName" value="browse_home_page_command">
+                    <fmt:message key="navbar.home"/>
+                </button>
+            </form>
+            <form name="homeButtonFrom" method="post" action="controller">
+                <button style="color:white" class="btn navbar-brand js-scroll-trigger"
+                        name="commandName" value="browse_home_page_command">
+                    <fmt:message key="navbar.language"/>
                 </button>
             </form>
             <button data-toggle="collapse" class="navbar-toggler navbar-toggler-right"
@@ -20,7 +31,8 @@
                     <form name="catalogButtonFrom" method="post" action="controller">
                         <li class="nav-item nav-link js-scroll-trigger" role="presentation">
                             <button style="color:white" class="btn navbar-brand js-scroll-trigger"
-                                    name="commandName" value="browse_catalog_page_command">Catalog
+                                    name="commandName" value="browse_catalog_page_command">
+                                <fmt:message key="navbar.catalog"/>
                             </button>
                         </li>
                     </form>
@@ -29,7 +41,8 @@
                             <li class="nav-item nav-link js-scroll-trigger" role="presentation">
                                 <button style="color:white"
                                         class="btn navbar-brand js-scroll-trigger"
-                                        name="commandName" value="browse_login_page_command">Log in
+                                        name="commandName" value="browse_login_page_command">
+                                    <fmt:message key="navbar.login"/>
                                 </button>
                             </li>
                         </form>
@@ -38,8 +51,7 @@
                                 <button style="color:white"
                                         class="btn navbar-brand js-scroll-trigger"
                                         name="commandName" value="browse_registration_page_command">
-                                    Sign
-                                    up
+                                    <fmt:message key="navbar.signup"/>
                                 </button>
                             </li>
                         </form>
@@ -58,7 +70,8 @@
                             <li class="nav-item nav-link js-scroll-trigger" role="presentation">
                                 <button style="color:white"
                                         class="btn navbar-brand js-scroll-trigger"
-                                        name="commandName" value="logout_command">Log out
+                                        name="commandName" value="logout_command">
+                                    <fmt:message key="navbar.logout"/>
                                 </button>
                             </li>
                         </form>
