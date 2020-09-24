@@ -1,9 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <fmt:setLocale value="ru_RU"/>
-<fmt:setBundle basename="i18n.applicationMessage"/>
+<fmt:setBundle basename="i18n.application_message"/>
 
 <div>
     <nav class="navbar navbar-light navbar-expand-md navbar navbar-expand-lg fixed-top"
@@ -42,7 +42,7 @@
                                 <button style="color:white"
                                         class="btn navbar-brand js-scroll-trigger"
                                         name="commandName" value="browse_login_page_command">
-                                    <fmt:message key="navbar.login"/>
+                                    <fmt:message key="navbar.logIn"/>
                                 </button>
                             </li>
                         </form>
@@ -51,7 +51,7 @@
                                 <button style="color:white"
                                         class="btn navbar-brand js-scroll-trigger"
                                         name="commandName" value="browse_registration_page_command">
-                                    <fmt:message key="navbar.signup"/>
+                                    <fmt:message key="navbar.signUp"/>
                                 </button>
                             </li>
                         </form>
@@ -71,7 +71,7 @@
                                 <button style="color:white"
                                         class="btn navbar-brand js-scroll-trigger"
                                         name="commandName" value="logout_command">
-                                    <fmt:message key="navbar.logout"/>
+                                    <fmt:message key="navbar.logOut"/>
                                 </button>
                             </li>
                         </form>

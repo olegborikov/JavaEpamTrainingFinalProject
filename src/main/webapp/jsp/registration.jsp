@@ -1,7 +1,11 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<fmt:setLocale value="ru_RU"/>
+<fmt:setBundle basename="i18n.application_message"/>
 <html>
 <head>
-    <title>Registration</title>
+    <title><fmt:message key="registration.title"/></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <link rel="stylesheet" type="text/css"
           href="${pageContext.request.contextPath}/assets/css/bootstrap.min.css">
@@ -31,55 +35,64 @@
                         <form name="registrationForm" method="post" action="controller"
                               autocomplete="off">
                             <div class="form-group">
-                                <label>Email</label>
-                                <input type="text" class="form-control" placeholder="Email"
-                                       name="email">
+                                <label><fmt:message key="registration.email"/></label>
+                                <input type="text" class="form-control"
+                                       placeholder=
+                                       <fmt:message key="registration.email"/>
+                                               name="email">
                             </div>
                             <div class="form-group">
-                                <label>Login</label>
-                                <input type="text" class="form-control" placeholder="Login"
-                                       name="login">
+                                <label><fmt:message key="registration.login"/></label>
+                                <input type="text" class="form-control"
+                                       placeholder=
+                                       <fmt:message key="registration.login"/>
+                                               name="login">
                             </div>
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <label>First name</label>
-                                    <input type="text" class="form-control" placeholder="First name"
-                                           name="firstName">
+                                    <label><fmt:message key="registration.firstName"/></label>
+                                    <input type="text" class="form-control" placeholder=
+                                    <fmt:message key="registration.firstName"/>
+                                            name="firstName">
                                 </div>
                                 <div class="form-group col-sm-6">
-                                    <label>Second name</label>
+                                    <label><fmt:message key="registration.secondName"/></label>
                                     <input type="text" class="form-control"
-                                           placeholder="Second name"
-                                           name="secondName">
+                                           placeholder=
+                                           <fmt:message key="registration.secondName"/>
+                                                   name="secondName">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label>Phone number</label>
-                                <input type="text" class="form-control" placeholder="Phone number"
-                                       name="phoneNumber">
+                                <label> <fmt:message key="registration.phoneNumber"/></label>
+                                <input type="text" class="form-control" placeholder=
+                                <fmt:message key="registration.phoneNumber"/>
+                                        name="phoneNumber">
                             </div>
                             <div class="form-group">
-                                <label>Password</label>
+                                <label><fmt:message key="registration.password"/></label>
                                 <input type="password" id="password" class="form-control"
-                                       placeholder="Password"
-                                       name="password">
+                                       placeholder=
+                                       <fmt:message key="registration.password"/>
+                                               name="password">
                             </div>
                             <div class="form-group">
-                                <label>Password(Confirm)</label>
+                                <label><fmt:message key="registration.passwordConfirm"/></label>
                                 <input type="password" id="confirmedPassword" class="form-control"
-                                       placeholder="Password(Confirm)"
-                                       name="confirmedPassword">
+                                       placeholder=
+                                       <fmt:message key="registration.passwordConfirm"/>
+                                               name="confirmedPassword">
                             </div>
                             <div style="color: red"> ${errorDataMessage}</div>
                             <button type="submit"
-                                    class="btn btn-black" <%--onclick="ansValidation(event)"--%>
+                                    class="btn btn-black"
                                     name="commandName"
                                     value="registration_command">
-                                Sign up
+                                <fmt:message key="registration.signUp"/>
                             </button>
                             <button type="submit" class="btn btn-secondary" name="commandName"
                                     value="browse_login_page_command">
-                                Login
+                                <fmt:message key="registration.logIn"/>
                             </button>
                         </form>
                     </div>
