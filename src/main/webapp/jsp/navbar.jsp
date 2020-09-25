@@ -57,7 +57,7 @@
                             </li>
                         </form>
                     </c:if>
-                    <c:if test="${role.equals('user')}">
+                    <c:if test="${!role.equals('guest')}">
                         <form name="loginNameFrom" method="post" action="controller">
                             <li class="nav-item nav-link js-scroll-trigger" role="presentation">
                                 <button style="color:white"

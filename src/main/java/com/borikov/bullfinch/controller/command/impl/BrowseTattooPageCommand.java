@@ -1,0 +1,41 @@
+package com.borikov.bullfinch.controller.command.impl;
+
+import com.borikov.bullfinch.controller.PagePath;
+import com.borikov.bullfinch.controller.RequestParameter;
+import com.borikov.bullfinch.controller.command.Command;
+import com.borikov.bullfinch.entity.Tattoo;
+import com.borikov.bullfinch.exception.ServiceException;
+import com.borikov.bullfinch.service.TattooService;
+import com.borikov.bullfinch.service.impl.TattooServiceImpl;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.Optional;
+
+public class BrowseTattooPageCommand implements Command {
+    private static final Logger LOGGER = LogManager.getLogger();
+    private static final TattooService tattooService = new TattooServiceImpl();
+
+    @Override
+    public String execute(HttpServletRequest request) {
+        String page;
+        String tattooId = request.getParameter(RequestParameter.TATTOO_ID);
+        try {
+            Optional<Tattoo> tattoo = tattooService.findTattooById(tattooId);
+            if (tattoo.isPresent()) {
+                request.setAttribute(RequestParameter.TATTOO, tattoo.get());
+                page = PagePath.TATTOO;
+            } else {
+                // TODO: 25.09.2020 add smth
+                page = PagePath.ERROR;
+            }
+        } catch (ServiceException e) {
+            LOGGER.log(Level.ERROR, "Error while finding tattoos by name", e);
+            request.setAttribute(RequestParameter.ERROR_MESSAGE, e);
+            page = PagePath.ERROR;
+        }
+        return page;
+    }
+}

@@ -14,6 +14,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class TattooDaoImpl implements TattooDao {
     private static final ConnectionPool connectionPool = ConnectionPool.INSTANCE;
@@ -24,6 +25,10 @@ public class TattooDaoImpl implements TattooDao {
             "tattoo_description, tattoo_price,tattoo_rating, is_allowed, is_archived, " +
             "image_id, image_name FROM tattoo INNER JOIN image ON tattoo.image_id_fk = image.image_id " +
             "WHERE tattoo_name LIKE ?";
+    private static final String FIND_TATTOOS_BY_ID = "SELECT tattoo_id, tattoo_name, " +
+            "tattoo_description, tattoo_price,tattoo_rating, is_allowed, is_archived, " +
+            "image_id, image_name FROM tattoo INNER JOIN image ON tattoo.image_id_fk = image.image_id " +
+            "WHERE tattoo_id = ?";
     private static final String PERCENT = "%";
 
     @Override
@@ -58,6 +63,24 @@ public class TattooDaoImpl implements TattooDao {
             return tattoos;
         } catch (SQLException | ConnectionPoolException e) {
             throw new DaoException("Finding tattoos by name error", e);
+        }
+    }
+
+    @Override
+    public Optional<Tattoo> findById(long id) throws DaoException {
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement statement =
+                     connection.prepareStatement(FIND_TATTOOS_BY_ID)) {
+            statement.setLong(1, id);
+            ResultSet resultSet = statement.executeQuery();
+            Optional<Tattoo> tattooOptional = Optional.empty();
+            if (resultSet.next()) {
+                Tattoo tattoo = createTattooFromResultSet(resultSet);
+                tattooOptional = Optional.of(tattoo);
+            }
+            return tattooOptional;
+        } catch (SQLException | ConnectionPoolException e) {
+            throw new DaoException("Finding tattoos by id error", e);
         }
     }
 

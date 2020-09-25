@@ -25,8 +25,7 @@
 
 <jsp:include page="navbar.jsp"/>
 
-<section class="masthead"
-         style="background-image:url('${pageContext.request.contextPath}/assets/image/reception.jpg');">
+<section class="masthead">
     <div class="intro-body">
         <div class="container">
             <div class="row">
@@ -84,13 +83,11 @@
                                                name="confirmedPassword">
                             </div>
                             <div style="color: red"> ${errorDataMessage}</div>
-                            <button type="submit"
-                                    class="btn btn-black"
-                                    name="commandName"
-                                    value="registration_command">
+                            <button type="submit" class="btn btn-dark"
+                                    name="commandName" value="registration_command">
                                 <fmt:message key="registration.signUp"/>
                             </button>
-                            <button type="submit" class="btn btn-secondary" name="commandName"
+                            <button type="submit" class="btn btn-dark" name="commandName"
                                     value="browse_login_page_command">
                                 <fmt:message key="registration.logIn"/>
                             </button>

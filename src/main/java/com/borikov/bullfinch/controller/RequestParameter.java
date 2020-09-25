@@ -17,6 +17,8 @@ public class RequestParameter {
     public static final String TATTOOS = "tattoos";
     public static final String TATTOO_NAME = "tattooName";
     public static final String LOCALE = "locale";
+    public static final String TATTOO_ID = "tattooId";
+    public static final String TATTOO = "tattoo";
 
     private RequestParameter() {
     }

@@ -23,29 +23,28 @@
 </head>
 <body>
 <jsp:include page="navbar.jsp"/>
-<section class="masthead"
-         style="background-image:url('${pageContext.request.contextPath}/assets/image/reception.jpg');">
+<section class="masthead">
     <div class="intro-body">
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 mx-auto">
                     <form name="loginForm" method="post" action="controller" autocomplete="off">
                         <div class="form-group">
-                            <label class="stroke"><fmt:message key="login.login"/></label>
+                            <label><fmt:message key="login.login"/></label>
                             <input type="text" class="form-control" placeholder="Login"
                                    name="login">
                         </div>
                         <div class="form-group">
-                            <label class="stroke"><fmt:message key="login.password"/></label>
+                            <label><fmt:message key="login.password"/></label>
                             <input type="password" class="form-control" placeholder="Password"
                                    name="password">
                         </div>
                         <div style="color: red">${errorLoginPasswordMessage}</div>
-                        <button type="submit" class="btn btn-black" name="commandName"
+                        <button type="submit" class="btn btn-dark" name="commandName"
                                 value="login_command">
                             <fmt:message key="login.signIn"/>
                         </button>
-                        <button type="submit" class="btn btn-secondary" name="commandName"
+                        <button type="submit" class="btn btn-dark" name="commandName"
                                 value="browse_registration_page_command">
                             <fmt:message key="login.registration"/>
                         </button>

@@ -55,19 +55,19 @@ INSERT INTO bullfinch.tattoo (tattoo_name, tattoo_description, tattoo_price,
 VALUES ('Samurai', 'dark, cool', 50, 5, 1, 0, 2);
 INSERT INTO bullfinch.tattoo (tattoo_name, tattoo_description, tattoo_price,
                               tattoo_rating, is_allowed, is_archived, image_id_fk)
-VALUES ('Black queen', 'dark, cool', 150, 5, 1, 0, 3);
+VALUES ('Child of the devil', 'dark, cool', 150, 5, 1, 0, 3);
 INSERT INTO bullfinch.tattoo (tattoo_name, tattoo_description, tattoo_price,
                               tattoo_rating, is_allowed, is_archived, image_id_fk)
-VALUES ('Sfinks', 'dark, cool', 200, 5, 1, 0, 4);
+VALUES ('Odi et amo', 'dark, cool', 200, 5, 1, 0, 4);
 INSERT INTO bullfinch.tattoo (tattoo_name, tattoo_description, tattoo_price,
                               tattoo_rating, is_allowed, is_archived, image_id_fk)
-VALUES ('Man', 'dark, cool', 75, 5, 1, 0, 5);
+VALUES ('Demons in my head', 'dark, cool', 75, 5, 1, 0, 5);
 INSERT INTO bullfinch.tattoo (tattoo_name, tattoo_description, tattoo_price,
                               tattoo_rating, is_allowed, is_archived, image_id_fk)
-VALUES ('Hand', 'dark, cool', 125, 5, 1, 0, 6);
+VALUES ('Key to all doors', 'dark, cool', 125, 5, 1, 0, 6);
 INSERT INTO bullfinch.tattoo (tattoo_name, tattoo_description, tattoo_price,
                               tattoo_rating, is_allowed, is_archived, image_id_fk)
-VALUES ('Samurai', 'dark, cool', 250, 5, 1, 0, 7);
+VALUES ('Warrior', 'dark, cool', 250, 5, 1, 0, 7);
 INSERT INTO bullfinch.tattoo (tattoo_name, tattoo_description, tattoo_price,
                               tattoo_rating, is_allowed, is_archived, image_id_fk)
 VALUES ('Dead space', 'dark, cool', 175, 5, 1, 0, 8);

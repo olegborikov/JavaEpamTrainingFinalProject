@@ -26,8 +26,7 @@
 
 <jsp:include page="navbar.jsp"/>
 
-<section class="content-section text-center">
-
+<section style="padding-top: 120px;padding-bottom: 120px" class="text-center">
     <div class="row col-12">
         <div class="col-md-9"></div>
         <div class="col-12 col-md-3">
@@ -61,12 +60,16 @@
                     <div class="image-wrap-2">
                         <div class="image-info">
                             <h2 class="mb-3">${tattoo.name}</h2>
-                            <button class="btn btn-outline-white py-2 px-4">
-                                <fmt:message key="catalog.info"/></button>
+                            <form name="tattooInfoForm" method="post" action="controller">
+                                <input type="hidden" name="commandName"
+                                       value="browse_tattoo_page_command">
+                                <button class="btn btn-outline-white py-2 px-4"
+                                        name="tattooId" value="${tattoo.tattooId}">
+                                    <fmt:message key="catalog.info"/></button>
+                            </form>
                         </div>
                         <img src="${pageContext.request.contextPath}/assets/image/${tattoo.image.name}.jpg"
-                             alt="Image"
-                             class="img-fluid">
+                             alt="Image" class="img-fluid">
                     </div>
                 </div>
             </c:forEach>

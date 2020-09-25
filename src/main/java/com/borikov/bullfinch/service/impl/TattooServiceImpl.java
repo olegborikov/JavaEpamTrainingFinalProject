@@ -8,6 +8,7 @@ import com.borikov.bullfinch.exception.ServiceException;
 import com.borikov.bullfinch.service.TattooService;
 
 import java.util.List;
+import java.util.Optional;
 
 public class TattooServiceImpl implements TattooService {
     private final TattooDao tattooDao = new TattooDaoImpl();
@@ -27,6 +28,17 @@ public class TattooServiceImpl implements TattooService {
         try {
             List<Tattoo> tattoos = tattooDao.findByName(name);
             return tattoos;
+        } catch (DaoException e) {
+            throw new ServiceException("Error while finding tattoos by name", e);
+        }
+    }
+
+    @Override
+    public Optional<Tattoo> findTattooById(String tattooId) throws ServiceException {
+        try {
+            long id = Long.parseLong(tattooId);
+            Optional<Tattoo> tattoo = tattooDao.findById(id);
+            return tattoo;
         } catch (DaoException e) {
             throw new ServiceException("Error while finding tattoos by name", e);
         }

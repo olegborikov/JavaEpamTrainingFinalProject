@@ -12,7 +12,8 @@ public enum CommandType {
     CONFIRM_EMAIL_COMMAND(new ConfirmEmailCommand()),
     BROWSE_CATALOG_PAGE_COMMAND(new BrowseCatalogPageCommand()),
     FIND_TATTOO_COMMAND(new FindTattooCommand()),
-    SWITCH_LOCALE_COMMAND(new SwitchLocaleCommand());
+    SWITCH_LOCALE_COMMAND(new SwitchLocaleCommand()),
+    BROWSE_TATTOO_PAGE_COMMAND(new BrowseTattooPageCommand());
 
     private final Command command;
 
