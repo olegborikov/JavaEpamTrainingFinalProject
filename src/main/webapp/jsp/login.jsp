@@ -31,20 +31,23 @@
                     <form name="loginForm" method="post" action="controller" autocomplete="off">
                         <div class="form-group">
                             <label><fmt:message key="login.login"/></label>
-                            <input type="text" class="form-control" placeholder="Login"
+                            <input style="background-color: black" type="text"
+                                   class="form-control text-white"
+                                   placeholder="Login"
                                    name="login">
                         </div>
                         <div class="form-group">
                             <label><fmt:message key="login.password"/></label>
-                            <input type="password" class="form-control" placeholder="Password"
+                            <input style="background-color: black" type="password"
+                                   class="form-control text-white" placeholder="Password"
                                    name="password">
                         </div>
                         <div style="color: red">${errorLoginPasswordMessage}</div>
-                        <button type="submit" class="btn btn-dark" name="commandName"
+                        <button type="submit" class="btn btn-outline-secondary" name="commandName"
                                 value="login_command">
                             <fmt:message key="login.signIn"/>
                         </button>
-                        <button type="submit" class="btn btn-dark" name="commandName"
+                        <button type="submit" class="btn btn-outline-secondary" name="commandName"
                                 value="browse_registration_page_command">
                             <fmt:message key="login.registration"/>
                         </button>

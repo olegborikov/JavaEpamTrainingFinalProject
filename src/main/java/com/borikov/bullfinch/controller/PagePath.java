@@ -10,6 +10,7 @@ public class PagePath {
     public static final String EMAIL_CONFIRM = "/jsp/email_confirm.jsp";
     public static final String CATALOG = "/jsp/catalog.jsp";
     public static final String TATTOO = "/jsp/tattoo.jsp";
+    public static final String TATTOO_OFFER = "/jsp/tattoo_offer.jsp";
 
     private PagePath() {
     }

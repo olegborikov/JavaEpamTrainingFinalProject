@@ -30,7 +30,20 @@
     <div class="intro-body">
         <div class="container-fluid">
             <div class="row col-12">
-                <div class="col-md-9"></div>
+                <div class="col-md-3">
+                    <c:if test="${role.equals('user')}">
+                        <form name="offerForm" method="post" action="controller">
+                            <button class="btn btn-outline-secondary"
+                                    name="commandName"
+                                    value="browse_tattoo_offer_page_command">
+                                <fmt:message key="catalog.offer"/>
+                            </button>
+                        </form>
+                    </c:if>
+                </div>
+                <div class="col-md-6">
+                    <br/>
+                </div>
                 <div class="col-12 col-md-3">
                     <form name="findTattooForm" method="post" action="controller"
                           autocomplete="off">
@@ -40,16 +53,14 @@
                                     name="tattooName" value="${tattooName}">
                             <div class="input-group-btn">
                                 <button type="submit" class="btn btn-outline-secondary"
-                                        name="commandName"
-                                        value="find_tattoo_command"><fmt:message
-                                        key="catalog.search"/>
+                                        name="commandName" value="find_tattoo_command">
+                                    <fmt:message key="catalog.search"/>
                                 </button>
                             </div>
                         </div>
                     </form>
                 </div>
             </div>
-
             <br/>
             <div class="container-fluid">
                 <div class="row">
