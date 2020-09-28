@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<fmt:setLocale value="${locale}"/>
+<fmt:setLocale value="${currentLocale}"/>
 <fmt:setBundle basename="i18n.application_message"/>
 <html>
 <head>
@@ -71,8 +71,7 @@
                             <div class="form-group">
                                 <label><fmt:message key="registration.password"/></label>
                                 <input type="password" id="password" class="form-control"
-                                       placeholder=
-                                       <fmt:message key="registration.password"/>
+                                       placeholder=<fmt:message key="registration.password"/>
                                                name="password">
                             </div>
                             <div class="form-group">

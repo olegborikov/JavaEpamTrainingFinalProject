@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<fmt:setLocale value="${locale}"/>
+<fmt:setLocale value="${currentLocale}"/>
 <fmt:setBundle basename="i18n.application_message"/>
 <html>
 
@@ -23,20 +23,23 @@
 </head>
 <body>
 <jsp:include page="navbar.jsp"/>
-<section style="padding-top: 150px;padding-bottom: 120px">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-2"></div>
-            <div class="col-md-5">
-                <img src="${pageContext.request.contextPath}/assets/image/${tattoo.image.name}.jpg"
-                     alt="Images" class="img-fluid">
-            </div>
-            <div class="col-md-5 ml-auto">
-                <h3 class="text-white"><fmt:message key="tattoo.information"/></h3>
-                <p><fmt:message key="tattoo.name"/>: ${tattoo.name}</p>
-                <p><fmt:message key="tattoo.description"/>: ${tattoo.description}</p>
-                <p><fmt:message key="tattoo.price"/>: ${tattoo.price}</p>
-                <p><fmt:message key="tattoo.rating"/>: ${tattoo.rating}</p>
+<section style="text-align: left;" class="masthead">
+    <div class="intro-body">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-5">
+                    <img style="max-width: 70%"
+                         src="${pageContext.request.contextPath}/assets/image/${tattoo.image.name}.jpg"
+                         alt="Responsive image" class="img-fluid">
+                </div>
+                <div class="col-md-5 ml-auto">
+                    <h3 class="text-white"><fmt:message key="tattoo.information"/></h3>
+                    <p><fmt:message key="tattoo.name"/>: ${tattoo.name}</p>
+                    <p><fmt:message key="tattoo.description"/>: ${tattoo.description}</p>
+                    <p><fmt:message key="tattoo.price"/>: ${tattoo.price}</p>
+                    <p><fmt:message key="tattoo.rating"/>: ${tattoo.rating}</p>
+                </div>
             </div>
         </div>
     </div>

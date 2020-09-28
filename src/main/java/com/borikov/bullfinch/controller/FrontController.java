@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Optional;
 
@@ -33,6 +34,8 @@ public class FrontController extends HttpServlet {
         Optional<Command> commandOptional = CommandProvider.defineCommand(commandName);
         Command command = commandOptional.orElseThrow(IllegalArgumentException::new);
         String page = command.execute(request);
+        HttpSession session = request.getSession();
+        session.setAttribute(RequestParameter.CURRENT_PAGE, page);
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(page);
         dispatcher.forward(request, response);
     }

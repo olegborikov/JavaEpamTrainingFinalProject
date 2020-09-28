@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<fmt:setLocale value="${locale}"/>
+<fmt:setLocale value="${currentLocale}"/>
 <fmt:setBundle basename="i18n.application_message"/>
 <html>
 <head>
@@ -26,53 +26,60 @@
 
 <jsp:include page="navbar.jsp"/>
 
-<section style="padding-top: 120px;padding-bottom: 120px" class="text-center">
-    <div class="row col-12">
-        <div class="col-md-9"></div>
-        <div class="col-12 col-md-3">
-            <form name="findTattooForm" method="post" action="controller" autocomplete="off">
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder=
-                    <fmt:message key="catalog.search"/>
-                            name="tattooName" value="${tattooName}">
-                    <div class="input-group-btn">
-                        <button type="submit" class="btn btn-outline-secondary" name="commandName"
-                                value="find_tattoo_command"><fmt:message key="catalog.search"/>
-                        </button>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <br/>
-    <div class="container-fluid" data-aos="fade" data-aos-delay="500">
-        <div class="row">
-            <c:if test="${empty tattoos}">
-                <section class="masthead content-section text-center">
-                    <div class="container">
-                        <h3><fmt:message key="catalog.empty"/></h3>
-                    </div>
-                </section>
-            </c:if>
-            <c:forEach var="tattoo" items="${tattoos}">
-                <div class="col-lg-4">
-                    <div class="image-wrap-2">
-                        <div class="image-info">
-                            <h2 class="mb-3">${tattoo.name}</h2>
-                            <form name="tattooInfoForm" method="post" action="controller">
-                                <input type="hidden" name="commandName"
-                                       value="browse_tattoo_page_command">
-                                <button class="btn btn-outline-white py-2 px-4"
-                                        name="tattooId" value="${tattoo.tattooId}">
-                                    <fmt:message key="catalog.info"/></button>
-                            </form>
+<section style="padding-top: 120px" class="masthead content-section text-center">
+    <div class="intro-body">
+        <div class="container-fluid">
+            <div class="row col-12">
+                <div class="col-md-9"></div>
+                <div class="col-12 col-md-3">
+                    <form name="findTattooForm" method="post" action="controller"
+                          autocomplete="off">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder=
+                            <fmt:message key="catalog.search"/>
+                                    name="tattooName" value="${tattooName}">
+                            <div class="input-group-btn">
+                                <button type="submit" class="btn btn-outline-secondary"
+                                        name="commandName"
+                                        value="find_tattoo_command"><fmt:message
+                                        key="catalog.search"/>
+                                </button>
+                            </div>
                         </div>
-                        <img src="${pageContext.request.contextPath}/assets/image/${tattoo.image.name}.jpg"
-                             alt="Image" class="img-fluid">
-                    </div>
+                    </form>
                 </div>
-            </c:forEach>
+            </div>
+
+            <br/>
+            <div class="container-fluid">
+                <div class="row">
+                    <c:if test="${empty tattoos}">
+                        <div class="masthead content-section text-center">
+                            <div class="container">
+                                <h3><fmt:message key="catalog.empty"/></h3>
+                            </div>
+                        </div>
+                    </c:if>
+                    <c:forEach var="tattoo" items="${tattoos}">
+                        <div class="col-lg-4">
+                            <div class="image-wrap-2">
+                                <div class="image-info">
+                                    <h2 class="mb-3">${tattoo.name}</h2>
+                                    <form name="tattooInfoForm" method="post" action="controller">
+                                        <input type="hidden" name="commandName"
+                                               value="browse_tattoo_page_command">
+                                        <button class="btn btn-outline-white py-2 px-4"
+                                                name="tattooId" value="${tattoo.tattooId}">
+                                            <fmt:message key="catalog.info"/></button>
+                                    </form>
+                                </div>
+                                <img src="${pageContext.request.contextPath}/assets/image/${tattoo.image.name}.jpg"
+                                     alt="Image" class="img-fluid">
+                            </div>
+                        </div>
+                    </c:forEach>
+                </div>
+            </div>
         </div>
     </div>
 </section>

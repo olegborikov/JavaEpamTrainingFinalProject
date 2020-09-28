@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<fmt:setLocale value="${locale}"/>
+<fmt:setLocale value="${currentLocale}"/>
 <fmt:setBundle basename="i18n.application_message"/>
 
 <div>
@@ -18,7 +18,7 @@
             <form name="homeButtonFrom" method="post" action="controller">
                 <input type="hidden" name="commandName" value="switch_locale_command">
                 <button style="color:white" class="btn navbar-brand js-scroll-trigger"
-                        name="locale" value=<fmt:message key="navbar.switchLanguage"/>>
+                        name="newLocale" value=<fmt:message key="navbar.switchLanguage"/>>
                     <fmt:message key="navbar.language"/>
                 </button>
             </form>

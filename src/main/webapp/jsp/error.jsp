@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ page isErrorPage="true" contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <fmt:setLocale value="${locale}"/>
@@ -22,10 +22,13 @@
 </head>
 <body>
 <jsp:include page="navbar.jsp"/>
-<section class="masthead content-section text-center">
-    <div class="container">
-        <h2><fmt:message key="error.title"/></h2>
-        <h2>${errorMessage}</h2>
+<section class="masthead">
+    <div class="intro-body">
+        <div class="container">
+            <h5><fmt:message key="error.request"/> ${pageContext.errorData.requestURI}
+                <fmt:message key="error.failed"/></h5> <br/>
+            <h5><fmt:message key="error.code"/> : ${pageContext.errorData.statusCode}</h5> <br/>
+        </div>
     </div>
 </section>
 <jsp:include page="footer.jsp"/>

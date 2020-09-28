@@ -15,7 +15,7 @@ import java.util.Optional;
 public class UserDaoImpl implements UserDao {
     private static final ConnectionPool connectionPool = ConnectionPool.INSTANCE;
     private static final String CHECK_USER_EXISTING_BY_LOGIN = "SELECT password " +
-            "FROM user_account WHERE login LIKE ?";
+            "FROM user_account WHERE BINARY login LIKE ?";
     private static final String CHECK_USER_EXISTING_BY_EMAIL = "SELECT user_account_id " +
             "FROM user_account WHERE email LIKE ?";
     private static final String FIND_USER_BY_LOGIN = "SELECT user_account_id, login, " +
