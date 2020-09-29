@@ -33,13 +33,14 @@
                             <label><fmt:message key="login.login"/></label>
                             <input style="background-color: black" type="text"
                                    class="form-control text-white"
-                                   placeholder="Login"
+                                   placeholder=<fmt:message key="login.login"/>
                                    name="login">
                         </div>
                         <div class="form-group">
                             <label><fmt:message key="login.password"/></label>
                             <input style="background-color: black" type="password"
-                                   class="form-control text-white" placeholder="Password"
+                                   class="form-control text-white"
+                                   placeholder=<fmt:message key="login.password"/>
                                    name="password">
                         </div>
                         <div style="color: red">${errorLoginPasswordMessage}</div>
