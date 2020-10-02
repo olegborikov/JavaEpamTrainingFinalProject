@@ -11,7 +11,7 @@ package com.borikov.bullfinch.controller;
     public static final String PHONE_NUMBER = "phoneNumber";
     public static final String COMMAND_NAME = "commandName";
     public static final String ERROR_MESSAGE = "errorMessage";
-    public static final String ERROR_LOGIN_PASSWORD_MESSAGE = "errorLoginPasswordMessage";
+    public static final String INCORRECT_DATA_MESSAGE = "incorrectDataMessage";
     public static final String ERROR_DATA_MESSAGE = "errorDataMessage";
     public static final String CONFIRM_EMAIL_MESSAGE = "confirmEmailMessage";
     public static final String TATTOOS = "tattoos";

@@ -27,7 +27,8 @@
         <div class="container">
             <h5><fmt:message key="error.request"/> ${pageContext.errorData.requestURI}
                 <fmt:message key="error.failed"/></h5> <br/>
-            <h5><fmt:message key="error.code"/> : ${pageContext.errorData.statusCode}</h5> <br/>
+            <h5><fmt:message key="error.code"/> : ${pageContext.errorData.statusCode}</h5>
+            <br/>
         </div>
     </div>
 </section>

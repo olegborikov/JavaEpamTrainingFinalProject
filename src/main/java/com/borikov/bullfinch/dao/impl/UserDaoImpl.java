@@ -30,6 +30,7 @@ public class UserDaoImpl implements UserDao {
             "SET is_activated = 1 WHERE login LIKE ?";
     private static final String ADD_WALLET = "INSERT INTO wallet (balance)" +
             "VALUES (?)";
+    private static final String FIND_ALL_USERS = "";
 
     @Override
     public Optional<String> checkExistingByLogin(String login) throws DaoException {

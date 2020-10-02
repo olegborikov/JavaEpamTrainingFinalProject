@@ -47,8 +47,7 @@ public class LoginCommand implements Command {
                 }
 
             } else {
-                request.setAttribute(RequestParameter.ERROR_LOGIN_PASSWORD_MESSAGE,
-                        "Incorrect login or password");
+                request.setAttribute(RequestParameter.INCORRECT_DATA_MESSAGE, true);
                 page = PagePath.LOGIN;
             }
         } catch (ServiceException e) {

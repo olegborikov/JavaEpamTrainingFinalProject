@@ -17,11 +17,8 @@
             src="${pageContext.request.contextPath}/assets/js/project.js"></script>
 </head>
 <body>
-
 <jsp:include page="navbar.jsp"/>
-
-<section class="masthead"
-         style="background-image:url('${pageContext.request.contextPath}/assets/image/reception.jpg');">
+<section class="masthead">
     <div class="intro-body">
         <div class="container">
             <h2> ${confirmEmailMessage}</h2>

@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <fmt:setLocale value="${currentLocale}"/>
@@ -32,18 +33,18 @@
                         <div class="form-group">
                             <label><fmt:message key="login.login"/></label>
                             <input style="background-color: black" type="text"
-                                   class="form-control text-white"
-                                   placeholder=<fmt:message key="login.login"/>
-                                   name="login">
+                                   class="form-control text-white" name="login"
+                                   placeholder=<fmt:message key="login.login"/>>
                         </div>
                         <div class="form-group">
                             <label><fmt:message key="login.password"/></label>
                             <input style="background-color: black" type="password"
-                                   class="form-control text-white"
-                                   placeholder=<fmt:message key="login.password"/>
-                                   name="password">
+                                   name="password" class="form-control text-white"
+                                   placeholder=<fmt:message key="login.password"/>>
                         </div>
-                        <div style="color: red">${errorLoginPasswordMessage}</div>
+                        <c:if test="${incorrectDataMessage}">
+                            <div style="color: red"><fmt:message key="login.errorMessage"/></div>
+                        </c:if>
                         <button type="submit" class="btn btn-outline-secondary" name="commandName"
                                 value="login_command">
                             <fmt:message key="login.signIn"/>

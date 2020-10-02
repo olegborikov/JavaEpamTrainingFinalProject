@@ -37,57 +37,46 @@
                                 <label><fmt:message key="registration.email"/></label>
                                 <input style="background-color: black" type="text"
                                        class="form-control text-white"
-                                       placeholder=
-                                       <fmt:message key="registration.email"/>
-                                               name="email">
+                                       placeholder=<fmt:message key="registration.email"/>>
                             </div>
                             <div class="form-group">
                                 <label><fmt:message key="registration.login"/></label>
                                 <input style="background-color: black" type="text"
-                                       class="form-control text-white"
-                                       placeholder=
-                                       <fmt:message key="registration.login"/>
-                                               name="login">
+                                       class="form-control text-white" name="login"
+                                       placeholder=<fmt:message key="registration.login"/>>
                             </div>
                             <div class="row">
                                 <div class="col-sm-6">
                                     <label><fmt:message key="registration.firstName"/></label>
                                     <input style="background-color: black" type="text"
-                                           class="form-control text-white" placeholder=
-                                           <fmt:message key="registration.firstName"/>
-                                                   name="firstName">
+                                           class="form-control text-white" name="firstName"
+                                           placeholder=<fmt:message key="registration.firstName"/>>
                                 </div>
                                 <div class="form-group col-sm-6">
                                     <label><fmt:message key="registration.secondName"/></label>
                                     <input style="background-color: black" type="text"
-                                           class="form-control text-white"
-                                           placeholder=
-                                           <fmt:message key="registration.secondName"/>
-                                                   name="secondName">
+                                           class="form-control text-white" name="secondName"
+                                           placeholder=<fmt:message key="registration.secondName"/>>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label> <fmt:message key="registration.phoneNumber"/></label>
                                 <input style="background-color: black" type="text"
-                                       class="form-control text-white" placeholder=
-                                       <fmt:message key="registration.phoneNumber"/>
-                                               name="phoneNumber">
+                                       class="form-control text-white" name="phoneNumber"
+                                       placeholder=<fmt:message key="registration.phoneNumber"/>>
                             </div>
                             <div class="form-group">
                                 <label><fmt:message key="registration.password"/></label>
                                 <input style="background-color: black" type="password" id="password"
-                                       class="form-control text-white"
-                                       placeholder=
-                                       <fmt:message key="registration.password"/>
-                                               name="password">
+                                       class="form-control text-white" name="password"
+                                       placeholder=<fmt:message key="registration.password"/>>
                             </div>
                             <div class="form-group">
                                 <label><fmt:message key="registration.passwordConfirm"/></label>
                                 <input style="background-color: black" type="password"
                                        id="confirmedPassword" class="form-control text-white"
-                                       placeholder=
-                                       <fmt:message key="registration.passwordConfirm"/>
-                                               name="confirmedPassword">
+                                       name="confirmedPassword"
+                                       placeholder=<fmt:message key="registration.passwordConfirm"/>>
                             </div>
                             <div style="color: red"> ${errorDataMessage}</div>
                             <button type="submit" class="btn btn-outline-secondary"

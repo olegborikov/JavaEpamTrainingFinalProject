@@ -32,22 +32,31 @@
                     <form action="#">
                         <div class="row form-group">
                             <div class="col-md-6 mb-3 mb-md-0">
-                                <label class="text-white"><fmt:message key="tattooOffer.name"/></label>
-                                <input style="background-color: black" type="text" class="form-control text-white" placeholder=<fmt:message key="tattooOffer.name"/>>
+                                <label class="text-white">
+                                    <fmt:message key="tattooOffer.name"/>
+                                </label>
+                                <input style="background-color: black"
+                                       type="text" class="form-control text-white"
+                                       placeholder=<fmt:message key="tattooOffer.name"/>>
                             </div>
                         </div>
                         <div class="row form-group">
                             <div class="col-md-12">
                                 <label class="text-white">Subject</label>
-                                <input style="background-color: black" type="text" class="form-control text-white">
+                                <input style="background-color: black" type="text"
+                                       class="form-control text-white">
                             </div>
                         </div>
                         <div class="row form-group">
                             <div class="col-md-12">
-                                <label class="text-white"><fmt:message key="tattooOffer.description"/></label>
-                                <textarea style="background-color: black" name="message" cols="30" rows="7"
+                                <label class="text-white">
+                                    <fmt:message key="tattooOffer.description"/>
+                                </label>
+                                <textarea style="background-color: black"
+                                          name="message" cols="30" rows="7"
                                           class="form-control text-white"
-                                          placeholder=<fmt:message key="tattooOffer.description"/>></textarea>
+                                          placeholder=<fmt:message key="tattooOffer.description"/>>
+                                </textarea>
                             </div>
                         </div>
                         <button type="submit" class="btn btn-outline-secondary" name="commandName"

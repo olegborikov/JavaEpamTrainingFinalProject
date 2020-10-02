@@ -13,6 +13,7 @@ public class LogoutCommand implements Command {
     public String execute(HttpServletRequest request) {
         HttpSession session = request.getSession();
         session.setAttribute(RequestParameter.ROLE, UserRole.GUEST.getName());
+        session.setAttribute(RequestParameter.LOGIN, null);
         return PagePath.HOME;
     }
 }

@@ -21,11 +21,8 @@
     <script type="text/javascript"
             src="${pageContext.request.contextPath}/assets/js/project.js"></script>
 </head>
-
 <body id="page-top">
-
 <jsp:include page="navbar.jsp"/>
-
 <header class="masthead"
         style="background-image:url('${pageContext.request.contextPath}/assets/image/reception.jpg');">
     <div class="intro-body">
@@ -54,9 +51,7 @@
 <section class="masthead content-section text-center"
          style="background-image:url('${pageContext.request.contextPath}/assets/image/work_space.jpg');">
     <div class="container">
-        <div class="col-lg-8 mx-auto">
-
-        </div>
+        <div class="col-lg-8 mx-auto"></div>
     </div>
 </section>
 <section class="content-section text-center">
@@ -78,8 +73,6 @@
         </div>
     </div>
 </section>
-
 <jsp:include page="footer.jsp"/>
-
 </body>
 </html>
