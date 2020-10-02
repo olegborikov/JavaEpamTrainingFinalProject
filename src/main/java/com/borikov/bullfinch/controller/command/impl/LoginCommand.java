@@ -45,7 +45,6 @@ public class LoginCommand implements Command {
                                         "link in massage, that was send to your email");
                     }
                 }
-
             } else {
                 request.setAttribute(RequestParameter.INCORRECT_DATA_MESSAGE, true);
                 page = PagePath.LOGIN;

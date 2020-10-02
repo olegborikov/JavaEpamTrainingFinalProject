@@ -34,12 +34,21 @@
                             <label><fmt:message key="login.login"/></label>
                             <input style="background-color: black" type="text"
                                    class="form-control text-white" name="login"
+                                   maxlength="20" required
+                                   oninvalid="this.setCustomValidity('<fmt:message
+                                           key="login.loginValidate"/>')"
+                                   onchange="this.setCustomValidity('')"
+                                   pattern="^[\w.]{3,20}$"
                                    placeholder=<fmt:message key="login.login"/>>
                         </div>
                         <div class="form-group">
                             <label><fmt:message key="login.password"/></label>
                             <input style="background-color: black" type="password"
+                                   maxlength="20" required
                                    name="password" class="form-control text-white"
+                                   oninvalid="this.setCustomValidity('<fmt:message
+                                           key="login.passwordValidate"/>')"
+                                   onchange="this.setCustomValidity('')"
                                    placeholder=<fmt:message key="login.password"/>>
                         </div>
                         <c:if test="${incorrectDataMessage}">

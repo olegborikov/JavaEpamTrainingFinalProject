@@ -23,9 +23,7 @@
 </head>
 
 <body id="page-top">
-
 <jsp:include page="navbar.jsp"/>
-
 <section style="padding-top: 120px" class="masthead content-section text-center">
     <div class="intro-body">
         <div class="container-fluid">
