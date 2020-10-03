@@ -21,6 +21,7 @@ package com.borikov.bullfinch.controller;
     public static final String TATTOO_ID = "tattooId";
     public static final String TATTOO = "tattoo";
     public static final String CURRENT_PAGE = "currentPage";
+    public static final String CURRENT_ATTRIBUTE_MAP = "currentAttributeMap";
 
     private RequestParameter() {
     }

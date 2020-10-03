@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.Optional;
+import java.util.*;
 
 @WebServlet(urlPatterns = "/controller")
 public class FrontController extends HttpServlet {
@@ -36,6 +36,8 @@ public class FrontController extends HttpServlet {
         String page = command.execute(request);
         HttpSession session = request.getSession();
         session.setAttribute(RequestParameter.CURRENT_PAGE, page);
+        session.setAttribute(RequestParameter.CURRENT_ATTRIBUTE_MAP,
+                getAttributeMapFromRequest(request));
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(page);
         dispatcher.forward(request, response);
     }
@@ -44,5 +46,15 @@ public class FrontController extends HttpServlet {
     public void destroy() {
         super.destroy();
         ConnectionPool.INSTANCE.destroyPool();
+    }
+
+    private Map<String, Object> getAttributeMapFromRequest(HttpServletRequest request) {
+        Map<String, Object> requestAttributes = new HashMap<>();
+        Enumeration<String> parameterNames = request.getAttributeNames();
+        while (parameterNames.hasMoreElements()) {
+            String paramName = parameterNames.nextElement();
+            requestAttributes.put(paramName, request.getAttribute(paramName));
+        }
+        return requestAttributes;
     }
 }
