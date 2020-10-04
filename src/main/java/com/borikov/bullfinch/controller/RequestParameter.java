@@ -14,6 +14,7 @@ package com.borikov.bullfinch.controller;
     public static final String INCORRECT_DATA_MESSAGE = "incorrectDataMessage";
     public static final String ERROR_DATA_MESSAGE = "errorDataMessage";
     public static final String CONFIRM_EMAIL_MESSAGE = "confirmEmailMessage";
+    public static final String ALL_TATTOOS = "allTattoos";
     public static final String TATTOOS = "tattoos";
     public static final String TATTOO_NAME = "tattooName";
     public static final String CURRENT_LOCALE = "currentLocale";
@@ -22,6 +23,8 @@ package com.borikov.bullfinch.controller;
     public static final String TATTOO = "tattoo";
     public static final String CURRENT_PAGE = "currentPage";
     public static final String CURRENT_ATTRIBUTE_MAP = "currentAttributeMap";
+    public static final String USERS = "users";
+    public static final String PAGE_NUMBER = "pageNumber";
 
     private RequestParameter() {
     }

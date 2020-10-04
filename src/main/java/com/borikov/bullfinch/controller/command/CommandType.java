@@ -14,7 +14,8 @@ public enum CommandType {
     FIND_TATTOO_COMMAND(new FindTattooCommand()),
     SWITCH_LOCALE_COMMAND(new SwitchLocaleCommand()),
     BROWSE_TATTOO_PAGE_COMMAND(new BrowseTattooPageCommand()),
-    BROWSE_TATTOO_OFFER_PAGE_COMMAND(new BrowseTattooOfferPageCommand());
+    BROWSE_TATTOO_OFFER_PAGE_COMMAND(new BrowseTattooOfferPageCommand()),
+    PAGINATION_CATALOG_COMMAND(new PaginationCatalogCommand());
 
     private final Command command;
 

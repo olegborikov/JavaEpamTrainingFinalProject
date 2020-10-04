@@ -46,9 +46,10 @@
                     <form name="findTattooForm" method="post" action="controller"
                           autocomplete="off">
                         <div class="input-group">
-                            <input type="text" class="form-control" placeholder=
-                            <fmt:message key="catalog.search"/>
-                                    name="tattooName" value="${tattooName}">
+                            <input style="background-color: black" maxlength="25"
+                                   type="text" class="form-control text-white"
+                                   name="tattooName" value="${tattooName}"
+                                   placeholder=<fmt:message key="catalog.search"/>>
                             <div class="input-group-btn">
                                 <button type="submit" class="btn btn-outline-secondary"
                                         name="commandName" value="find_tattoo_command">
@@ -88,6 +89,39 @@
                         </div>
                     </c:forEach>
                 </div>
+                <c:if test="${not empty tattoos}">
+                    <form name="paginationForm" method="post" action="controller">
+                        <input type="hidden" name="commandName" value="pagination_catalog_command">
+                        <c:choose>
+                            <c:when test="${pageNumber!=1}">
+                                <button type="submit" class="btn btn-outline-secondary"
+                                        name="pageNumber" value=${pageNumber-1}>
+                                    <fmt:message key="catalog.paginationPrevious"/>
+                                </button>
+                            </c:when>
+                            <c:otherwise>
+                                <button type="submit" class="btn btn-outline-secondary" disabled>
+                                    <fmt:message key="catalog.paginationPrevious"/>
+                                </button>
+                            </c:otherwise>
+                        </c:choose>
+                        <input type="button" class="btn btn-outline-secondary" disabled
+                               value=${pageNumber}>
+                        <c:choose>
+                            <c:when test="${pageNumber<allTattoos.size()/3}">
+                                <button type="submit" class="btn btn-outline-secondary"
+                                        name="pageNumber" value=${pageNumber+1}>
+                                    <fmt:message key="catalog.paginationNext"/>
+                                </button>
+                            </c:when>
+                            <c:otherwise>
+                                <button type="submit" class="btn btn-outline-secondary" disabled>
+                                    <fmt:message key="catalog.paginationNext"/>
+                                </button>
+                            </c:otherwise>
+                        </c:choose>
+                    </form>
+                </c:if>
             </div>
         </div>
     </div>
