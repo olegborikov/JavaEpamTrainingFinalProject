@@ -29,14 +29,17 @@
                     value="Menu"><i class="fa fa-bars"></i></button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="nav navbar-nav ml-auto">
-                    <form name="catalogButtonFrom" method="post" action="controller">
-                        <li class="nav-item nav-link js-scroll-trigger" role="presentation">
-                            <button style="color:white" class="btn navbar-brand js-scroll-trigger"
-                                    name="commandName" value="browse_catalog_page_command">
-                                <fmt:message key="navbar.catalog"/>
-                            </button>
-                        </li>
-                    </form>
+                    <c:if test="${!role.equals('admin')}">
+                        <form name="catalogButtonFrom" method="post" action="controller">
+                            <li class="nav-item nav-link js-scroll-trigger" role="presentation">
+                                <button style="color:white"
+                                        class="btn navbar-brand js-scroll-trigger"
+                                        name="commandName" value="browse_catalog_page_command">
+                                    <fmt:message key="navbar.catalog"/>
+                                </button>
+                            </li>
+                        </form>
+                    </c:if>
                     <c:if test="${role.equals('guest')}">
                         <form name="loginButtonFrom" method="post" action="controller">
                             <li class="nav-item nav-link js-scroll-trigger" role="presentation">
@@ -57,7 +60,7 @@
                             </li>
                         </form>
                     </c:if>
-                    <c:if test="${!role.equals('guest')}">
+                    <c:if test="${role.equals('user')}">
                         <form name="loginNameFrom" method="post" action="controller">
                             <li class="nav-item nav-link js-scroll-trigger" role="presentation">
                                 <button style="color:white"
@@ -67,6 +70,30 @@
                                 </button>
                             </li>
                         </form>
+                    </c:if>
+                    <c:if test="${role.equals('admin')}">
+                        <form name="loginNameFrom" method="post" action="controller">
+                            <li class="nav-item nav-link js-scroll-trigger" role="presentation">
+                                <button style="color:white"
+                                        class="btn navbar-brand js-scroll-trigger"
+                                        name="commandName"
+                                        value="browse_tattoos_page_command">
+                                    <fmt:message key="navbar.tattoos"/>
+                                </button>
+                            </li>
+                        </form>
+                        <form name="loginNameFrom" method="post" action="controller">
+                            <li class="nav-item nav-link js-scroll-trigger" role="presentation">
+                                <button style="color:white"
+                                        class="btn navbar-brand js-scroll-trigger"
+                                        name="commandName"
+                                        value="browse_users_page_command">
+                                    <fmt:message key="navbar.users"/>
+                                </button>
+                            </li>
+                        </form>
+                    </c:if>
+                    <c:if test="${!role.equals('guest')}">
                         <form name="logoutButtonFrom" method="post" action="controller">
                             <li class="nav-item nav-link js-scroll-trigger" role="presentation">
                                 <button style="color:white"

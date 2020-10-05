@@ -3,6 +3,7 @@ package com.borikov.bullfinch.service;
 import com.borikov.bullfinch.entity.User;
 import com.borikov.bullfinch.exception.ServiceException;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface UserService {
@@ -13,4 +14,6 @@ public interface UserService {
                     String confirmedPassword) throws ServiceException;
 
     boolean confirmUserEmail(String login) throws ServiceException;
+
+    List<User> findAllUsers() throws ServiceException;
 }

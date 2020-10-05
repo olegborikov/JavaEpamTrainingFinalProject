@@ -25,8 +25,25 @@
 <jsp:include page="navbar.jsp"/>
 <section style="padding-top: 120px" class="masthead content-section text-center">
     <div class="intro-body">
-        <div class="container-fluid">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-2"></div>
+                <div class="col-lg-8 mb-5">
+                    <form action="#">
+                        <div class="row form-group">
+                            <c:forEach var="user" items="${users}">
+                                <div class="col-md-12">
+                                    <input style="background-color: black; text-align: left"
+                                           type="submit"
+                                           class="form-control text-white" value=" ${user.login}">
+                                    <br/>
+                                </div>
+                            </c:forEach>
+                        </div>
+                    </form>
+                </div>
 
+            </div>
         </div>
     </div>
 </section>

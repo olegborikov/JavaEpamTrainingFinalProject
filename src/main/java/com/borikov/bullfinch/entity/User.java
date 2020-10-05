@@ -13,6 +13,10 @@ public class User {
     private UserRating userRating;
     private Wallet wallet;
 
+    public User(String login) {
+        this.login = login;
+    }
+
     public User(Long userId, String login,
                 boolean isActivated, UserRole userRole) {
         this.userId = userId;

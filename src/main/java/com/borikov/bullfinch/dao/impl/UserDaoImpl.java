@@ -9,6 +9,7 @@ import com.borikov.bullfinch.exception.ConnectionPoolException;
 import com.borikov.bullfinch.exception.DaoException;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,7 +31,7 @@ public class UserDaoImpl implements UserDao {
             "SET is_activated = 1 WHERE login LIKE ?";
     private static final String ADD_WALLET = "INSERT INTO wallet (balance)" +
             "VALUES (?)";
-    private static final String FIND_ALL_USERS = "";
+    private static final String FIND_ALL_USERS = "SELECT login FROM user_account";
 
     @Override
     public Optional<String> checkExistingByLogin(String login) throws DaoException {
@@ -143,7 +144,19 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public List<User> findAll() throws DaoException {
-        return null;
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement statement =
+                     connection.prepareStatement(FIND_ALL_USERS)) {
+            ResultSet resultSet = statement.executeQuery();
+            List<User> users = new ArrayList<>();
+            while (resultSet.next()) {
+                User user = new User(resultSet.getString(ColumnName.LOGIN));
+                users.add(user);
+            }
+            return users;
+        } catch (SQLException | ConnectionPoolException e) {
+            throw new DaoException("Finding all users error", e);
+        }
     }
 
     private User createUserFromResultSet(ResultSet resultSet) throws SQLException {

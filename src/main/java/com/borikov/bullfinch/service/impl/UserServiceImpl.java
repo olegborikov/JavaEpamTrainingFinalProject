@@ -13,6 +13,7 @@ import com.borikov.bullfinch.util.EmailSenderUtil;
 import com.borikov.bullfinch.util.PasswordEncryptor;
 import com.borikov.bullfinch.validator.UserValidator;
 
+import java.util.List;
 import java.util.Optional;
 
 public class UserServiceImpl implements UserService {
@@ -81,9 +82,19 @@ public class UserServiceImpl implements UserService {
             if (existingUser.isPresent()) {
                 result = userDao.confirmEmail(login);
             }
+            return result;
         } catch (DaoException e) {
             throw new ServiceException("Error while confirm email", e);
         }
-        return result;
+    }
+
+    @Override
+    public List<User> findAllUsers() throws ServiceException {
+        try {
+            List<User> users = userDao.findAll();
+            return users;
+        } catch (DaoException e) {
+            throw new ServiceException("Error while confirm email", e);
+        }
     }
 }

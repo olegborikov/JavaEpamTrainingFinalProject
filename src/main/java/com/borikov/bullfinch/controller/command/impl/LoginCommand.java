@@ -32,7 +32,7 @@ public class LoginCommand implements Command {
                 User user = userOptional.get();
                 if (user.getUserRole().equals(UserRole.ADMIN)) {
                     session.setAttribute(RequestParameter.ROLE, user.getUserRole().getName());
-                    page = PagePath.HOME_ADMIN;
+                    page = PagePath.HOME;
                 } else {
                     if (user.isActivated()) {
                         page = PagePath.HOME;
