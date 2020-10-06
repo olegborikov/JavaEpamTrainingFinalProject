@@ -29,22 +29,29 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 mb-5">
-                    <form action="#">
+                    <form action="/upload" enctype="multipart/form-data" method="post" autocomplete="off">
+                        <input type="hidden" name="commandName" value="add_tattoo_command">
                         <div class="row form-group">
                             <div class="col-md-6 mb-3 mb-md-0">
                                 <label class="text-white">
                                     <fmt:message key="tattooOffer.name"/>
                                 </label>
-                                <input style="background-color: black"
+                                <input style="background-color: black" name="name" required maxlength="25"
                                        type="text" class="form-control text-white"
-                                       placeholder=<fmt:message key="tattooOffer.name"/>>
+                                       oninvalid="this.setCustomValidity('<fmt:message
+                                               key="tattooOffer.nameValidate"/>')"
+                                       onchange="this.setCustomValidity('')"
+                                       pattern="^[\p{L}]{2,25}"
+                                       title='<fmt:message key="tattooOffer.nameValidate"/>'
+                                       placeholder='<fmt:message key="tattooOffer.name"/>'>
                             </div>
                         </div>
                         <div class="row form-group">
                             <div class="col-md-12">
-                                <label class="text-white">Subject</label>
-                                <input style="background-color: black" type="text"
-                                       class="form-control text-white">
+                                Upload File: <input type="file" name="content" accept="image/jpeg" required>
+                                <c:if test="${errorImageMessage}">
+                                    <div style="color: red"><fmt:message key="emailOfferConfirm.errorImageMessage"/></div>
+                                </c:if>
                             </div>
                         </div>
                         <div class="row form-group">
@@ -53,14 +60,17 @@
                                     <fmt:message key="tattooOffer.description"/>
                                 </label>
                                 <textarea style="background-color: black"
-                                          name="message" cols="30" rows="7"
-                                          class="form-control text-white"
-                                          placeholder=<fmt:message key="tattooOffer.description"/>>
-                                </textarea>
+                                          name="description" cols="30" rows="7" required
+                                          class="form-control text-white" maxlength="1000"
+                                          oninvalid="this.setCustomValidity('<fmt:message
+                                                  key="tattooOffer.descriptionValidate"/>')"
+                                          onchange="this.setCustomValidity('')"
+                                          title='<fmt:message key="tattooOffer.descriptionValidate"/>'
+                                          placeholder='<fmt:message key="tattooOffer.description"/>'></textarea>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-outline-secondary" name="commandName"
-                                value="browse_registration_page_command">
+                        <div style="color: red"> ${errorDataMessage}</div>
+                        <button type="submit" class="btn btn-outline-secondary">
                             <fmt:message key="tattooOffer.offerTattoo"/>
                         </button>
                     </form>

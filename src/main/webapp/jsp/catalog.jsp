@@ -31,7 +31,7 @@
                 <div class="col-md-3">
                     <c:if test="${role.equals('user')}">
                         <form name="offerForm" method="post" action="controller">
-                            <button class="btn btn-outline-secondary"
+                            <button style="vertical-align: center" class="btn btn-outline-secondary"
                                     name="commandName"
                                     value="browse_tattoo_offer_page_command">
                                 <fmt:message key="catalog.offer"/>

@@ -8,10 +8,7 @@ import com.borikov.bullfinch.entity.Tattoo;
 import com.borikov.bullfinch.exception.ConnectionPoolException;
 import com.borikov.bullfinch.exception.DaoException;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -29,6 +26,9 @@ public class TattooDaoImpl implements TattooDao {
             "tattoo_description, tattoo_price,tattoo_rating, is_allowed, is_archived, " +
             "image_id, image_name FROM tattoo INNER JOIN image ON tattoo.image_id_fk = image.image_id " +
             "WHERE tattoo_id = ?";
+    private static final String ADD_TATTOO = "INSERT INTO tattoo (tattoo_name, tattoo_description, " +
+            "tattoo_rating, is_allowed, is_archived, image_id_fk) VALUES (?, ?, ?, ?, ?, ?)";
+    private static final String ADD_IMAGE = "INSERT INTO image (image_name) VALUES (?)";
     private static final String PERCENT = "%";
 
     @Override
@@ -81,6 +81,36 @@ public class TattooDaoImpl implements TattooDao {
             return tattooOptional;
         } catch (SQLException | ConnectionPoolException e) {
             throw new DaoException("Finding tattoos by id error", e);
+        }
+    }
+
+    @Override
+    public boolean add(Tattoo tattoo) throws DaoException {
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement statementImage =
+                     connection.prepareStatement(ADD_IMAGE, Statement.RETURN_GENERATED_KEYS);
+             PreparedStatement statementTattoo =
+                     connection.prepareStatement(ADD_TATTOO, Statement.RETURN_GENERATED_KEYS)) {
+            statementImage.setString(1, tattoo.getImage().getName());
+            statementImage.executeUpdate();
+            ResultSet generatedKeysImage = statementImage.getGeneratedKeys();
+            if (generatedKeysImage.next()) {
+                tattoo.getImage().setImageId(generatedKeysImage.getLong(1));
+            }
+            statementTattoo.setString(1, tattoo.getName());
+            statementTattoo.setString(2, tattoo.getDescription());
+            statementTattoo.setInt(3, 5);
+            statementTattoo.setInt(4, 1);
+            statementTattoo.setInt(5, 0);
+            statementTattoo.setLong(6, tattoo.getImage().getImageId());
+            boolean result = statementTattoo.executeUpdate() > 0;
+            ResultSet generatedKeysTattoo = statementTattoo.getGeneratedKeys();
+            if (generatedKeysTattoo.next()) {
+                tattoo.setTattooId(generatedKeysTattoo.getLong(1));
+            }
+            return result;
+        } catch (SQLException | ConnectionPoolException e) {
+            throw new DaoException("Add tattoo error", e);
         }
     }
 

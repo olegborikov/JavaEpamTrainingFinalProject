@@ -12,4 +12,6 @@ public interface TattooService {
     List<Tattoo> findTattoosByName(String name) throws ServiceException;
 
     Optional<Tattoo> findTattooById(String tattooId) throws ServiceException;
+
+    boolean addTattoo(String tattooName, String description, String imageName) throws ServiceException;
 }

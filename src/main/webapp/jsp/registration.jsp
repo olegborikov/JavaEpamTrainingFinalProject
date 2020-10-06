@@ -39,7 +39,8 @@
                                                key="registration.emailValidate"/>')"
                                        onchange="this.setCustomValidity('')"
                                        pattern="^[\w.+-]{3,30}@[\w.-]{2,15}\.[\p{Lower}]{2,4}$"
-                                       placeholder=<fmt:message key="registration.email"/>>
+                                       title='<fmt:message key="registration.emailValidate"/>'
+                                       placeholder='<fmt:message key="registration.email"/>'>
                             </div>
                             <div class="form-group">
                                 <label><fmt:message key="registration.login"/></label>
@@ -50,7 +51,8 @@
                                                key="registration.loginValidate"/>')"
                                        onchange="this.setCustomValidity('')"
                                        pattern="^[\w.]{3,20}$"
-                                       placeholder=<fmt:message key="registration.login"/>>
+                                       title='<fmt:message key="registration.loginValidate"/>'
+                                       placeholder='<fmt:message key="registration.login"/>'>
                             </div>
                             <div class="row">
                                 <div class="col-sm-6">
@@ -61,8 +63,9 @@
                                            oninvalid="this.setCustomValidity('<fmt:message
                                                    key="registration.firstNameValidate"/>')"
                                            onchange="this.setCustomValidity('')"
-                                           pattern="^\p{L}{2,25}$"
-                                           placeholder=<fmt:message key="registration.firstName"/>>
+                                           pattern="^[\p{L}]{2,25}$"
+                                           title='<fmt:message key="registration.firstNameValidate"/>'
+                                           placeholder='<fmt:message key="registration.firstName"/>'>
                                 </div>
                                 <div class="form-group col-sm-6">
                                     <label><fmt:message key="registration.secondName"/></label>
@@ -72,8 +75,9 @@
                                            oninvalid="this.setCustomValidity('<fmt:message
                                                    key="registration.secondNameValidate"/>')"
                                            onchange="this.setCustomValidity('')"
-                                           pattern="^\p{L}{2,25}$"
-                                           placeholder=<fmt:message key="registration.secondName"/>>
+                                           pattern="^[\p{L}]{2,25}$"
+                                           title='<fmt:message key="registration.secondNameValidate"/>'
+                                           placeholder='<fmt:message key="registration.secondName"/>'>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -84,8 +88,9 @@
                                        oninvalid="this.setCustomValidity('<fmt:message
                                                key="registration.phoneNumberValidate"/>')"
                                        onchange="this.setCustomValidity('')"
-                                       pattern="\+?375(24|25|29|33|44)\d{7}|80(24|25|29|33|44)\d{7}$"
-                                       placeholder=<fmt:message key="registration.phoneNumber"/>>
+                                       pattern="\+?375(24|25|29|33|44)[\d]{7}|80(24|25|29|33|44)[\d]{7}$"
+                                       title='<fmt:message key="registration.phoneNumberValidate"/>'
+                                       placeholder='<fmt:message key="registration.phoneNumber"/>'>
                             </div>
                             <div class="form-group">
                                 <label><fmt:message key="registration.password"/></label>
@@ -96,7 +101,8 @@
                                        oninvalid="this.setCustomValidity('<fmt:message
                                                key="registration.passwordValidate"/>')"
                                        onchange="this.setCustomValidity('')"
-                                       placeholder=<fmt:message key="registration.password"/>>
+                                       title='<fmt:message key="registration.passwordValidate"/>'
+                                       placeholder='<fmt:message key="registration.password"/>'>
                             </div>
                             <div class="form-group">
                                 <label><fmt:message key="registration.passwordConfirm"/></label>
@@ -108,8 +114,9 @@
                                        oninvalid="this.setCustomValidity('<fmt:message
                                                key="registration.passwordValidate"/>')"
                                        onchange="this.setCustomValidity('')"
-                                       placeholder=<fmt:message
-                                        key="registration.passwordConfirm"/>>
+                                       title='<fmt:message key="registration.passwordValidate"/>'
+                                       placeholder='<fmt:message
+                                        key="registration.passwordConfirm"/>'>
                             </div>
                             <div style="color: red"> ${errorDataMessage}</div>
                             <button type="submit" class="btn btn-outline-secondary"

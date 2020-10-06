@@ -11,6 +11,7 @@ public class PagePath {
     public static final String TATTOO = "/jsp/tattoo.jsp";
     public static final String TATTOO_OFFER = "/jsp/tattoo_offer.jsp";
     public static final String USERS = "/jsp/users.jsp";
+    public static final String TATTOO_OFFER_CONFIRM = "/jsp/tattoo_offer_confirm.jsp";
 
     private PagePath() {
     }

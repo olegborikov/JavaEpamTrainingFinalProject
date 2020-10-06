@@ -39,7 +39,8 @@
                                            key="login.loginValidate"/>')"
                                    onchange="this.setCustomValidity('')"
                                    pattern="^[\w.]{3,20}$"
-                                   placeholder=<fmt:message key="login.login"/>>
+                                   title='<fmt:message key="login.loginValidate"/>'
+                                   placeholder='<fmt:message key="login.login"/>'>
                         </div>
                         <div class="form-group">
                             <label><fmt:message key="login.password"/></label>
@@ -49,7 +50,8 @@
                                    oninvalid="this.setCustomValidity('<fmt:message
                                            key="login.passwordValidate"/>')"
                                    onchange="this.setCustomValidity('')"
-                                   placeholder=<fmt:message key="login.password"/>>
+                                   title='<fmt:message key="login.passwordValidate"/>'
+                                   placeholder='<fmt:message key="login.password"/>'>
                         </div>
                         <c:if test="${incorrectDataMessage}">
                             <div style="color: red"><fmt:message key="login.errorMessage"/></div>

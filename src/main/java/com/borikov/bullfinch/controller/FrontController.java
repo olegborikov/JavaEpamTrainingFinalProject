@@ -38,6 +38,7 @@ public class FrontController extends HttpServlet {
         session.setAttribute(RequestParameter.CURRENT_PAGE, page);
         session.setAttribute(RequestParameter.CURRENT_ATTRIBUTE_MAP,
                 getAttributeMapFromRequest(request));
+        //response.setHeader("Cache-Control", "no-store, must-revalidate");
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(page);
         dispatcher.forward(request, response);
     }

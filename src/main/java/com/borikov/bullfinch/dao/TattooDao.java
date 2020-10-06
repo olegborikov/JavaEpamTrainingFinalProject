@@ -12,4 +12,6 @@ public interface TattooDao {
     List<Tattoo> findByName(String name) throws DaoException;
 
     Optional<Tattoo> findById(long id) throws DaoException;
+
+    boolean add(Tattoo tattoo) throws DaoException;
 }

@@ -16,6 +16,7 @@ public enum CommandType {
     BROWSE_TATTOO_PAGE_COMMAND(new BrowseTattooPageCommand()),
     BROWSE_TATTOO_OFFER_PAGE_COMMAND(new BrowseTattooOfferPageCommand()),
     PAGINATION_CATALOG_COMMAND(new PaginationCatalogCommand()),
+    ADD_TATTOO_COMMAND(new AddTattooCommand()),
     BROWSE_USERS_PAGE_COMMAND(new BrowseUsersPageCommand());
 
     private final Command command;

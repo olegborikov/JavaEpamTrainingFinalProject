@@ -128,7 +128,7 @@ public class UserDaoImpl implements UserDao {
             }
             return result;
         } catch (SQLException | ConnectionPoolException e) {
-            throw new DaoException("Finding user by login error", e);
+            throw new DaoException("Add user error", e);
         }
     }
 
