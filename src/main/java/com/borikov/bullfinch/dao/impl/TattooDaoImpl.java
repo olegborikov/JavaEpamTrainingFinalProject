@@ -1,5 +1,6 @@
 package com.borikov.bullfinch.dao.impl;
 
+import com.borikov.bullfinch.builder.TattooBuilder;
 import com.borikov.bullfinch.dao.ColumnName;
 import com.borikov.bullfinch.dao.TattooDao;
 import com.borikov.bullfinch.dao.pool.ConnectionPool;
@@ -15,23 +16,21 @@ import java.util.Optional;
 
 public class TattooDaoImpl implements TattooDao {
     private static final ConnectionPool connectionPool = ConnectionPool.INSTANCE;
-    private static final String FIND_ALL_TATTOOS = "SELECT tattoo_id, tattoo_name, " +
-            "tattoo_description, tattoo_price, tattoo_rating, is_allowed, is_archived, " +
-            "image_id, image_name FROM tattoo INNER JOIN image ON tattoo.image_id_fk = image.image_id"; // TODO: 07.10.2020 left only id, name, image
-    private static final String FIND_TATTOOS_BY_ALLOWED = "SELECT tattoo_id, tattoo_name, " +
-            "tattoo_description, tattoo_price, tattoo_rating, is_allowed, is_archived, " +
+    private static final String FIND_ALL = "SELECT tattoo_id, tattoo_name, " +
+            "is_allowed, is_archived, image_id, image_name " +
+            "FROM tattoo INNER JOIN image ON tattoo.image_id_fk = image.image_id";
+    private static final String FIND_BY_ALLOWED_AND_ARCHIVED = "SELECT tattoo_id, tattoo_name, " +
+            "image_id, image_name FROM tattoo INNER JOIN image " +
+            "ON tattoo.image_id_fk = image.image_id WHERE is_allowed = ? AND is_archived = ?";
+    private static final String FIND_BY_NAME_AND_ALLOWED_AND_ARCHIVED = "SELECT tattoo_id, tattoo_name, " +
             "image_id, image_name FROM tattoo INNER JOIN image ON tattoo.image_id_fk = image.image_id " +
-            "WHERE is_allowed=1"; // TODO: 07.10.2020 left only id, name, image
-    private static final String FIND_TATTOOS_BY_NAME = "SELECT tattoo_id, tattoo_name, " +
+            "WHERE tattoo_name LIKE ? AND is_allowed = ? AND is_archived = ?";
+    private static final String FIND_BY_ID_AND_ALLOWED_AND_ARCHIVED = "SELECT tattoo_id, tattoo_name, " +
             "tattoo_description, tattoo_price,tattoo_rating, is_allowed, is_archived, " +
             "image_id, image_name FROM tattoo INNER JOIN image ON tattoo.image_id_fk = image.image_id " +
-            "WHERE tattoo_name LIKE ?";
-    private static final String FIND_TATTOOS_BY_ID = "SELECT tattoo_id, tattoo_name, " +
-            "tattoo_description, tattoo_price,tattoo_rating, is_allowed, is_archived, " +
-            "image_id, image_name FROM tattoo INNER JOIN image ON tattoo.image_id_fk = image.image_id " +
-            "WHERE tattoo_id = ?";
-    private static final String ADD_TATTOO = "INSERT INTO tattoo (tattoo_name, tattoo_description, " +
-            "tattoo_rating, is_allowed, is_archived, image_id_fk) VALUES (?, ?, ?, ?, ?, ?)";
+            "WHERE tattoo_id = ? AND is_allowed = ? AND is_archived = ?";
+    private static final String OFFER_TATTOO = "INSERT INTO tattoo (tattoo_name, tattoo_description, " +
+            "tattoo_rating, is_allowed, is_archived, image_id_fk) VALUES (?, ?, 5, 0, 0, ?)";
     private static final String ADD_IMAGE = "INSERT INTO image (image_name) VALUES (?)";
     private static final String PERCENT = "%";
 
@@ -39,28 +38,43 @@ public class TattooDaoImpl implements TattooDao {
     public List<Tattoo> findAll() throws DaoException {
         try (Connection connection = connectionPool.getConnection();
              PreparedStatement statement =
-                     connection.prepareStatement(FIND_ALL_TATTOOS)) {
+                     connection.prepareStatement(FIND_ALL)) {
             ResultSet resultSet = statement.executeQuery();
             List<Tattoo> tattoos = new ArrayList<>();
             while (resultSet.next()) {
-                Tattoo tattoo = createTattooFromResultSet(resultSet);
+                TattooBuilder tattooBuilder = new TattooBuilder();
+                tattooBuilder.setTattooId(resultSet.getLong(ColumnName.TATTOO_ID));
+                tattooBuilder.setName(resultSet.getString(ColumnName.TATTOO_NAME));
+                tattooBuilder.setAllowed(resultSet.getInt(ColumnName.IS_ALLOWED) != 0);
+                tattooBuilder.setArchived(resultSet.getInt(ColumnName.IS_ARCHIVED) != 0);
+                tattooBuilder.setImage(new Image(resultSet.getLong(ColumnName.IMAGE_ID),
+                        resultSet.getString(ColumnName.IMAGE_NAME)));
+                Tattoo tattoo = tattooBuilder.getTattoo();
                 tattoos.add(tattoo);
             }
             return tattoos;
         } catch (SQLException | ConnectionPoolException e) {
-            throw new DaoException("Finding tattoos error", e);
+            throw new DaoException("Finding all tattoos error", e);
         }
     }
 
     @Override
-    public List<Tattoo> findByAllowed() throws DaoException {
+    public List<Tattoo> findByAllowedAndArchived(
+            boolean isAllowed, boolean isArchived) throws DaoException {
         try (Connection connection = connectionPool.getConnection();
              PreparedStatement statement =
-                     connection.prepareStatement(FIND_TATTOOS_BY_ALLOWED)) {
+                     connection.prepareStatement(FIND_BY_ALLOWED_AND_ARCHIVED)) {
+            statement.setInt(1, isAllowed ? 1 : 0);
+            statement.setInt(2, isArchived ? 1 : 0);
             ResultSet resultSet = statement.executeQuery();
             List<Tattoo> tattoos = new ArrayList<>();
             while (resultSet.next()) {
-                Tattoo tattoo = createTattooFromResultSet(resultSet);
+                TattooBuilder tattooBuilder = new TattooBuilder();
+                tattooBuilder.setTattooId(resultSet.getLong(ColumnName.TATTOO_ID));
+                tattooBuilder.setName(resultSet.getString(ColumnName.TATTOO_NAME));
+                tattooBuilder.setImage(new Image(resultSet.getLong(ColumnName.IMAGE_ID),
+                        resultSet.getString(ColumnName.IMAGE_NAME)));
+                Tattoo tattoo = tattooBuilder.getTattoo();
                 tattoos.add(tattoo);
             }
             return tattoos;
@@ -70,15 +84,23 @@ public class TattooDaoImpl implements TattooDao {
     }
 
     @Override
-    public List<Tattoo> findByName(String name) throws DaoException {
+    public List<Tattoo> findByNameAndAllowedAndArchived(
+            String name, boolean isAllowed, boolean isArchived) throws DaoException {
         try (Connection connection = connectionPool.getConnection();
              PreparedStatement statement =
-                     connection.prepareStatement(FIND_TATTOOS_BY_NAME)) {
+                     connection.prepareStatement(FIND_BY_NAME_AND_ALLOWED_AND_ARCHIVED)) {
             statement.setString(1, PERCENT + name + PERCENT);
+            statement.setInt(2, isAllowed ? 1 : 0);
+            statement.setInt(3, isArchived ? 1 : 0);
             ResultSet resultSet = statement.executeQuery();
             List<Tattoo> tattoos = new ArrayList<>();
             while (resultSet.next()) {
-                Tattoo tattoo = createTattooFromResultSet(resultSet);
+                TattooBuilder tattooBuilder = new TattooBuilder();
+                tattooBuilder.setTattooId(resultSet.getLong(ColumnName.TATTOO_ID));
+                tattooBuilder.setName(resultSet.getString(ColumnName.TATTOO_NAME));
+                tattooBuilder.setImage(new Image(resultSet.getLong(ColumnName.IMAGE_ID),
+                        resultSet.getString(ColumnName.IMAGE_NAME)));
+                Tattoo tattoo = tattooBuilder.getTattoo();
                 tattoos.add(tattoo);
             }
             return tattoos;
@@ -88,15 +110,29 @@ public class TattooDaoImpl implements TattooDao {
     }
 
     @Override
-    public Optional<Tattoo> findById(long id) throws DaoException {
+    public Optional<Tattoo> findByIdAndAllowedAndArchived(
+            long id, boolean isAllowed, boolean isArchived) throws DaoException {
         try (Connection connection = connectionPool.getConnection();
              PreparedStatement statement =
-                     connection.prepareStatement(FIND_TATTOOS_BY_ID)) {
+                     connection.prepareStatement(FIND_BY_ID_AND_ALLOWED_AND_ARCHIVED)) {
             statement.setLong(1, id);
+            statement.setInt(2, isAllowed ? 1 : 0);
+            statement.setInt(3, isArchived ? 1 : 0);
             ResultSet resultSet = statement.executeQuery();
             Optional<Tattoo> tattooOptional = Optional.empty();
             if (resultSet.next()) {
-                Tattoo tattoo = createTattooFromResultSet(resultSet);
+                TattooBuilder tattooBuilder = new TattooBuilder();
+                tattooBuilder.setTattooId(resultSet.getLong(ColumnName.TATTOO_ID));
+                tattooBuilder.setName(resultSet.getString(ColumnName.TATTOO_NAME));
+                tattooBuilder.setDescription(resultSet.getString(ColumnName.TATTOO_DESCRIPTION));
+                tattooBuilder.setPrice(resultSet.getDouble(ColumnName.TATTOO_PRICE));
+                tattooBuilder.setRating(resultSet.getByte(ColumnName.TATTOO_RATING));
+                tattooBuilder.setName(resultSet.getString(ColumnName.TATTOO_NAME));
+                tattooBuilder.setAllowed(resultSet.getInt(ColumnName.IS_ALLOWED) != 0);
+                tattooBuilder.setArchived(resultSet.getInt(ColumnName.IS_ARCHIVED) != 0);
+                tattooBuilder.setImage(new Image(resultSet.getLong(ColumnName.IMAGE_ID),
+                        resultSet.getString(ColumnName.IMAGE_NAME)));
+                Tattoo tattoo = tattooBuilder.getTattoo();
                 tattooOptional = Optional.of(tattoo);
             }
             return tattooOptional;
@@ -106,12 +142,12 @@ public class TattooDaoImpl implements TattooDao {
     }
 
     @Override
-    public boolean add(Tattoo tattoo) throws DaoException {
+    public boolean offer(Tattoo tattoo) throws DaoException {
         try (Connection connection = connectionPool.getConnection();
              PreparedStatement statementImage =
                      connection.prepareStatement(ADD_IMAGE, Statement.RETURN_GENERATED_KEYS);
              PreparedStatement statementTattoo =
-                     connection.prepareStatement(ADD_TATTOO, Statement.RETURN_GENERATED_KEYS)) {
+                     connection.prepareStatement(OFFER_TATTOO, Statement.RETURN_GENERATED_KEYS)) {
             statementImage.setString(1, tattoo.getImage().getName());
             statementImage.executeUpdate();
             ResultSet generatedKeysImage = statementImage.getGeneratedKeys();
@@ -120,10 +156,7 @@ public class TattooDaoImpl implements TattooDao {
             }
             statementTattoo.setString(1, tattoo.getName());
             statementTattoo.setString(2, tattoo.getDescription());
-            statementTattoo.setInt(3, 5);
-            statementTattoo.setInt(4, 0);
-            statementTattoo.setInt(5, 0);
-            statementTattoo.setLong(6, tattoo.getImage().getImageId());
+            statementTattoo.setLong(3, tattoo.getImage().getImageId());
             boolean result = statementTattoo.executeUpdate() > 0;
             ResultSet generatedKeysTattoo = statementTattoo.getGeneratedKeys();
             if (generatedKeysTattoo.next()) {
@@ -133,24 +166,5 @@ public class TattooDaoImpl implements TattooDao {
         } catch (SQLException | ConnectionPoolException e) {
             throw new DaoException("Add tattoo error", e);
         }
-    }
-
-    private Tattoo createTattooFromResultSet(ResultSet resultSet) throws SQLException {
-        long tattooId = resultSet.getLong(ColumnName.TATTOO_ID);
-        String name = resultSet.getString(ColumnName.TATTOO_NAME);
-        String description = resultSet.getString(ColumnName.TATTOO_DESCRIPTION);
-        double price = resultSet.getDouble(ColumnName.TATTOO_PRICE);
-        byte rating = resultSet.getByte(ColumnName.TATTOO_RATING);
-        boolean isAllowed = resultSet.getInt(ColumnName.IS_ALLOWED) != 0;
-        boolean isArchived = resultSet.getInt(ColumnName.IS_ARCHIVED) != 0;
-        Image image = createImageFromResultSet(resultSet);
-        return new Tattoo(tattooId, name, description, price, // TODO: 07.10.2020 to builder
-                rating, isAllowed, isArchived, image);
-    }
-
-    private Image createImageFromResultSet(ResultSet resultSet) throws SQLException {
-        long imageId = resultSet.getLong(ColumnName.IMAGE_ID);
-        String name = resultSet.getString(ColumnName.IMAGE_NAME);
-        return new Image(imageId, name);
     }
 }

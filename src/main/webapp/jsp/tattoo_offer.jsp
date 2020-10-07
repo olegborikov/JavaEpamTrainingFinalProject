@@ -30,7 +30,7 @@
             <div class="row">
                 <div class="col-lg-8 mb-5">
                     <form action="/upload" enctype="multipart/form-data" method="post" autocomplete="off">
-                        <input type="hidden" name="commandName" value="add_tattoo_command">
+                        <input type="hidden" name="commandName" value="offer_tattoo_command">
                         <div class="row form-group">
                             <div class="col-md-6 mb-3 mb-md-0">
                                 <label class="text-white">

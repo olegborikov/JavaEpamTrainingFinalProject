@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Map;
 
 public class PaginationCatalogCommand implements Command {
-    private static final int FIRST_PAGE_NUMBER = 1;
     private static final int AMOUNT_OF_TATTOOS_ON_PAGE = 3;
 
     @Override
@@ -25,7 +24,6 @@ public class PaginationCatalogCommand implements Command {
                 Math.min(AMOUNT_OF_TATTOOS_ON_PAGE * pageNumber, allTattoos.size()));
         request.setAttribute(RequestParameter.ALL_TATTOOS, allTattoos);
         request.setAttribute(RequestParameter.TATTOOS, tattoos);
-        request.setAttribute(RequestParameter.PAGE_NUMBER, FIRST_PAGE_NUMBER);
         request.setAttribute(RequestParameter.PAGE_NUMBER, pageNumber);
         request.setAttribute(RequestParameter.TATTOO_NAME, tattooName);
         return PagePath.CATALOG;

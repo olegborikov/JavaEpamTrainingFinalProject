@@ -9,11 +9,14 @@ import java.util.Optional;
 public interface TattooDao {
     List<Tattoo> findAll() throws DaoException;
 
-    List<Tattoo> findByAllowed() throws DaoException;
+    List<Tattoo> findByAllowedAndArchived(
+            boolean isAllowed, boolean isArchived) throws DaoException;
 
-    List<Tattoo> findByName(String name) throws DaoException;
+    List<Tattoo> findByNameAndAllowedAndArchived(
+            String name, boolean isAllowed, boolean isArchived) throws DaoException;
 
-    Optional<Tattoo> findById(long id) throws DaoException;
+    Optional<Tattoo> findByIdAndAllowedAndArchived(
+            long id, boolean isAllowed, boolean isArchived) throws DaoException;
 
-    boolean add(Tattoo tattoo) throws DaoException;
+    boolean offer(Tattoo tattoo) throws DaoException;
 }

@@ -1,29 +1,69 @@
 package com.borikov.bullfinch.builder;
 
+import com.borikov.bullfinch.entity.User;
 import com.borikov.bullfinch.entity.UserRating;
 import com.borikov.bullfinch.entity.UserRole;
 import com.borikov.bullfinch.entity.Wallet;
 
-public interface UserBuilder {
-    void setUserId(Long userId);
+public class UserBuilder {
+    private Long userId;
+    private String email;
+    private String login;
+    private String firstName;
+    private String secondName;
+    private String phoneNumber;
+    private boolean isBlocked;
+    private boolean isActivated;
+    private UserRole userRole;
+    private UserRating userRating;
+    private Wallet wallet;
 
-    void setEmail(String email);
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
 
-    void setLogin(String login);
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-    void setFirstName(String firstName);
+    public void setLogin(String login) {
+        this.login = login;
+    }
 
-    void setSecondName(String secondName);
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
 
-    void setPhoneNumber(String phoneNumber);
+    public void setSecondName(String secondName) {
+        this.secondName = secondName;
+    }
 
-    void setBlocked(boolean blocked);
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
 
-    void setActivated(boolean activated);
+    public void setBlocked(boolean blocked) {
+        isBlocked = blocked;
+    }
 
-    void setUserRole(UserRole userRole);
+    public void setActivated(boolean activated) {
+        isActivated = activated;
+    }
 
-    void setUserRating(UserRating userRating);
+    public void setUserRole(UserRole userRole) {
+        this.userRole = userRole;
+    }
 
-    void setWallet(Wallet wallet);
+    public void setUserRating(UserRating userRating) {
+        this.userRating = userRating;
+    }
+
+    public void setWallet(Wallet wallet) {
+        this.wallet = wallet;
+    }
+
+    public User getUser() {
+        return new User(userId, email, login, firstName, secondName, phoneNumber,
+                isBlocked, isActivated, userRole, userRating, wallet);
+    }
 }

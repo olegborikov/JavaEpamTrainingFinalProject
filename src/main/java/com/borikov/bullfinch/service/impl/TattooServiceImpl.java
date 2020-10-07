@@ -9,6 +9,7 @@ import com.borikov.bullfinch.exception.ServiceException;
 import com.borikov.bullfinch.service.TattooService;
 import com.borikov.bullfinch.validator.TattooValidator;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,9 +27,10 @@ public class TattooServiceImpl implements TattooService {
     }
 
     @Override
-    public List<Tattoo> findTattoosByAllowed() throws ServiceException {
+    public List<Tattoo> findTattoosByAllowedAndArchived(
+            boolean isAllowed, boolean isArchived) throws ServiceException {
         try {
-            List<Tattoo> tattoos = tattooDao.findByAllowed();
+            List<Tattoo> tattoos = tattooDao.findByAllowedAndArchived(isAllowed, isArchived);
             return tattoos;
         } catch (DaoException e) {
             throw new ServiceException("Error while finding tattoos", e);
@@ -36,9 +38,14 @@ public class TattooServiceImpl implements TattooService {
     }
 
     @Override
-    public List<Tattoo> findTattoosByName(String name) throws ServiceException {
+    public List<Tattoo> findTattoosByNameAndAllowedAndArchived(
+            String name, boolean isAllowed, boolean isArchived) throws ServiceException {
+        List<Tattoo> tattoos = new ArrayList<>();
+        TattooValidator tattooValidator = new TattooValidator();
         try {
-            List<Tattoo> tattoos = tattooDao.findByName(name);
+            if (tattooValidator.isNameCorrect(name)) {
+                tattoos = tattooDao.findByNameAndAllowedAndArchived(name, isAllowed, isArchived);
+            }
             return tattoos;
         } catch (DaoException e) {
             throw new ServiceException("Error while finding tattoos by name", e);
@@ -46,10 +53,15 @@ public class TattooServiceImpl implements TattooService {
     }
 
     @Override
-    public Optional<Tattoo> findTattooById(String tattooId) throws ServiceException {
+    public Optional<Tattoo> findTattoosByIdAndAllowedAndArchived(
+            String id, boolean isAllowed, boolean isArchived) throws ServiceException {
+        Optional<Tattoo> tattoo = Optional.empty();
+        TattooValidator tattooValidator = new TattooValidator();
         try {
-            long id = Long.parseLong(tattooId);
-            Optional<Tattoo> tattoo = tattooDao.findById(id);
+            if (tattooValidator.isIdCorrect(id)) {
+                long tattooId = Long.parseLong(id);
+                tattoo = tattooDao.findByIdAndAllowedAndArchived(tattooId, isAllowed, isArchived);
+            }
             return tattoo;
         } catch (DaoException e) {
             throw new ServiceException("Error while finding tattoos by name", e);
@@ -57,7 +69,7 @@ public class TattooServiceImpl implements TattooService {
     }
 
     @Override
-    public boolean addTattoo(String tattooName, String description, String imageName)
+    public boolean offerTattoo(String tattooName, String description, String imageName)
             throws ServiceException {
         try {
             TattooValidator tattooValidator = new TattooValidator();
@@ -65,11 +77,11 @@ public class TattooServiceImpl implements TattooService {
             if (tattooValidator.isNameCorrect(tattooName)
                     && tattooValidator.isDescriptionCorrect(description)) {
                 Tattoo tattoo = new Tattoo(tattooName, description, new Image(null, imageName));
-                result = tattooDao.add(tattoo);
+                result = tattooDao.offer(tattoo);
             }
             return result;
         } catch (DaoException e) {
-            throw new ServiceException("Error while checking user for existing", e);
+            throw new ServiceException("Error while adding tattoo", e);
         }
     }
 }

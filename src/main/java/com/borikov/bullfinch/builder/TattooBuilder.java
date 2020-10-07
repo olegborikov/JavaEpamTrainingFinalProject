@@ -1,21 +1,53 @@
 package com.borikov.bullfinch.builder;
 
 import com.borikov.bullfinch.entity.Image;
+import com.borikov.bullfinch.entity.Tattoo;
 
-public interface TattooBuilder {
-    void setTattooId(Long tattooId);
+public class TattooBuilder {
+    private Long tattooId;
+    private String name;
+    private String description;
+    private double price;
+    private byte rating;
+    private boolean isAllowed;
+    private boolean isArchived;
+    private Image image;
 
-    void setName(String name);
+    public void setTattooId(Long tattooId) {
+        this.tattooId = tattooId;
+    }
 
-    void setDescription(String description);
+    public void setName(String name) {
+        this.name = name;
+    }
 
-    void setPrice(double price);
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-    void setRating(byte rating);
+    public void setPrice(double price) {
+        this.price = price;
+    }
 
-    void setAllowed(boolean allowed);
+    public void setRating(byte rating) {
+        this.rating = rating;
+    }
 
-    void setArchived(boolean archived);
+    public void setAllowed(boolean allowed) {
+        isAllowed = allowed;
+    }
 
-    void setImage(Image image);
+    public void setArchived(boolean archived) {
+        isArchived = archived;
+    }
+
+    public void setImage(Image image) {
+        this.image = image;
+    }
+
+    public Tattoo getTattoo() {
+        return new Tattoo(tattooId, name, description, price,
+                rating, isAllowed, isArchived, image);
+    }
 }
+

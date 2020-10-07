@@ -17,13 +17,16 @@ import java.util.Optional;
 public class BrowseTattooPageCommand implements Command {
     private static final Logger LOGGER = LogManager.getLogger();
     private static final TattooService tattooService = new TattooServiceImpl();
+    private static final boolean IS_ALLOWED_DEFAULT = true;
+    private static final boolean IS_ARCHIVED_DEFAULT = false;
 
     @Override
     public String execute(HttpServletRequest request) {
         String page;
         String tattooId = request.getParameter(RequestParameter.TATTOO_ID);
         try {
-            Optional<Tattoo> tattoo = tattooService.findTattooById(tattooId);
+            Optional<Tattoo> tattoo = tattooService.findTattoosByIdAndAllowedAndArchived(
+                    tattooId, IS_ALLOWED_DEFAULT, IS_ARCHIVED_DEFAULT);
             if (tattoo.isPresent()) {
                 request.setAttribute(RequestParameter.TATTOO, tattoo.get());
                 page = PagePath.TATTOO;

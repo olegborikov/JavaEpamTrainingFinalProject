@@ -13,7 +13,7 @@ import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class AddTattooCommand implements Command {
+public class OfferTattooCommand implements Command {
     private static final PhotoFileManager photoFileManager = new PhotoFileManager();
     private static final TattooService tattooService = new TattooServiceImpl();
     private static final Logger LOGGER = LogManager.getLogger();
@@ -25,7 +25,7 @@ public class AddTattooCommand implements Command {
         String description = request.getParameter(RequestParameter.DESCRIPTION);
         String photoName = (String) request.getAttribute(RequestParameter.PHOTO_NAME);
         try {
-            if (tattooService.addTattoo(tattooName, description, photoName)) {
+            if (tattooService.offerTattoo(tattooName, description, photoName)) {
                 request.setAttribute(RequestParameter.TATTOO_OFFER_CONFIRM_MESSAGE, true);
                 page = PagePath.TATTOO_OFFER_CONFIRM;
             } else {

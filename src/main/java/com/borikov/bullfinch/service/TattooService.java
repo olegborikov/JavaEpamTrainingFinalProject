@@ -9,11 +9,14 @@ import java.util.Optional;
 public interface TattooService {
     List<Tattoo> findAllTattoos() throws ServiceException;
 
-    List<Tattoo> findTattoosByAllowed() throws ServiceException;
+    List<Tattoo> findTattoosByAllowedAndArchived(
+            boolean isAllowed, boolean isArchived) throws ServiceException;
 
-    List<Tattoo> findTattoosByName(String name) throws ServiceException;
+    List<Tattoo> findTattoosByNameAndAllowedAndArchived(
+            String name, boolean isAllowed, boolean isArchived) throws ServiceException;
 
-    Optional<Tattoo> findTattooById(String tattooId) throws ServiceException;
+    Optional<Tattoo> findTattoosByIdAndAllowedAndArchived(
+            String id, boolean isAllowed, boolean isArchived) throws ServiceException;
 
-    boolean addTattoo(String tattooName, String description, String imageName) throws ServiceException;
+    boolean offerTattoo(String tattooName, String description, String imageName) throws ServiceException;
 }
