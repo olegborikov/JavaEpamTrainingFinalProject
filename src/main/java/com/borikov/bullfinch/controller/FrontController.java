@@ -36,8 +36,7 @@ public class FrontController extends HttpServlet {
         String page = command.execute(request);
         HttpSession session = request.getSession();
         session.setAttribute(RequestParameter.CURRENT_PAGE, page);
-        session.setAttribute(RequestParameter.CURRENT_ATTRIBUTE_MAP,
-                getAttributeMapFromRequest(request));
+        RequestAttributeHandler.getInstance().setAttributes(request);
         //response.setHeader("Cache-Control", "no-store, must-revalidate");
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(page);
         dispatcher.forward(request, response);
@@ -47,15 +46,5 @@ public class FrontController extends HttpServlet {
     public void destroy() {
         super.destroy();
         ConnectionPool.INSTANCE.destroyPool();
-    }
-
-    private Map<String, Object> getAttributeMapFromRequest(HttpServletRequest request) {
-        Map<String, Object> requestAttributes = new HashMap<>();
-        Enumeration<String> parameterNames = request.getAttributeNames();
-        while (parameterNames.hasMoreElements()) {
-            String paramName = parameterNames.nextElement();
-            requestAttributes.put(paramName, request.getAttribute(paramName));
-        }
-        return requestAttributes;
     }
 }
