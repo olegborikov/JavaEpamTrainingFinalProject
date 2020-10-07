@@ -16,8 +16,12 @@ import java.util.Optional;
 public class TattooDaoImpl implements TattooDao {
     private static final ConnectionPool connectionPool = ConnectionPool.INSTANCE;
     private static final String FIND_ALL_TATTOOS = "SELECT tattoo_id, tattoo_name, " +
-            "tattoo_description, tattoo_price,tattoo_rating, is_allowed, is_archived, " +
-            "image_id, image_name FROM tattoo INNER JOIN image ON tattoo.image_id_fk = image.image_id";
+            "tattoo_description, tattoo_price, tattoo_rating, is_allowed, is_archived, " +
+            "image_id, image_name FROM tattoo INNER JOIN image ON tattoo.image_id_fk = image.image_id"; // TODO: 07.10.2020 left only id, name, image
+    private static final String FIND_TATTOOS_BY_ALLOWED = "SELECT tattoo_id, tattoo_name, " +
+            "tattoo_description, tattoo_price, tattoo_rating, is_allowed, is_archived, " +
+            "image_id, image_name FROM tattoo INNER JOIN image ON tattoo.image_id_fk = image.image_id " +
+            "WHERE is_allowed=1"; // TODO: 07.10.2020 left only id, name, image
     private static final String FIND_TATTOOS_BY_NAME = "SELECT tattoo_id, tattoo_name, " +
             "tattoo_description, tattoo_price,tattoo_rating, is_allowed, is_archived, " +
             "image_id, image_name FROM tattoo INNER JOIN image ON tattoo.image_id_fk = image.image_id " +
@@ -45,6 +49,23 @@ public class TattooDaoImpl implements TattooDao {
             return tattoos;
         } catch (SQLException | ConnectionPoolException e) {
             throw new DaoException("Finding tattoos error", e);
+        }
+    }
+
+    @Override
+    public List<Tattoo> findByAllowed() throws DaoException {
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement statement =
+                     connection.prepareStatement(FIND_TATTOOS_BY_ALLOWED)) {
+            ResultSet resultSet = statement.executeQuery();
+            List<Tattoo> tattoos = new ArrayList<>();
+            while (resultSet.next()) {
+                Tattoo tattoo = createTattooFromResultSet(resultSet);
+                tattoos.add(tattoo);
+            }
+            return tattoos;
+        } catch (SQLException | ConnectionPoolException e) {
+            throw new DaoException("Finding tattoos by allowed error", e);
         }
     }
 
@@ -100,7 +121,7 @@ public class TattooDaoImpl implements TattooDao {
             statementTattoo.setString(1, tattoo.getName());
             statementTattoo.setString(2, tattoo.getDescription());
             statementTattoo.setInt(3, 5);
-            statementTattoo.setInt(4, 1);
+            statementTattoo.setInt(4, 0);
             statementTattoo.setInt(5, 0);
             statementTattoo.setLong(6, tattoo.getImage().getImageId());
             boolean result = statementTattoo.executeUpdate() > 0;
@@ -123,7 +144,7 @@ public class TattooDaoImpl implements TattooDao {
         boolean isAllowed = resultSet.getInt(ColumnName.IS_ALLOWED) != 0;
         boolean isArchived = resultSet.getInt(ColumnName.IS_ARCHIVED) != 0;
         Image image = createImageFromResultSet(resultSet);
-        return new Tattoo(tattooId, name, description, price,
+        return new Tattoo(tattooId, name, description, price, // TODO: 07.10.2020 to builder
                 rating, isAllowed, isArchived, image);
     }
 

@@ -24,7 +24,7 @@ public class BrowseCatalogPageCommand implements Command {
     public String execute(HttpServletRequest request) {
         String page;
         try {
-            List<Tattoo> allTattoos = tattooService.findAllTattoos();
+            List<Tattoo> allTattoos = tattooService.findTattoosByAllowed();
             List<Tattoo> tattoos = allTattoos.subList(0, Math.min(AMOUNT_OF_TATTOOS_ON_PAGE,
                     allTattoos.size()));
             request.setAttribute(RequestParameter.ALL_TATTOOS, allTattoos);
