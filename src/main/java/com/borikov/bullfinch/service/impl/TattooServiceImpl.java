@@ -27,6 +27,26 @@ public class TattooServiceImpl implements TattooService {
     }
 
     @Override
+    public List<Tattoo> findTattoosByAllowed(boolean isAllowed) throws ServiceException {
+        try {
+            List<Tattoo> tattoos = tattooDao.findByAllowed(isAllowed);
+            return tattoos;
+        } catch (DaoException e) {
+            throw new ServiceException("Error while finding tattoos", e);
+        }
+    }
+
+    @Override
+    public List<Tattoo> findTattoosByArchived(boolean isArchived) throws ServiceException {
+        try {
+            List<Tattoo> tattoos = tattooDao.findByArchived(isArchived);
+            return tattoos;
+        } catch (DaoException e) {
+            throw new ServiceException("Error while finding tattoos", e);
+        }
+    }
+
+    @Override
     public List<Tattoo> findTattoosByAllowedAndArchived(
             boolean isAllowed, boolean isArchived) throws ServiceException {
         try {

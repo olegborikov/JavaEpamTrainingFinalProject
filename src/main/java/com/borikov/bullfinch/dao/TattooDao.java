@@ -9,6 +9,10 @@ import java.util.Optional;
 public interface TattooDao {
     List<Tattoo> findAll() throws DaoException;
 
+    List<Tattoo> findByAllowed(boolean isAllowed) throws DaoException;
+
+    List<Tattoo> findByArchived(boolean isArchived) throws DaoException;
+
     List<Tattoo> findByAllowedAndArchived(
             boolean isAllowed, boolean isArchived) throws DaoException;
 

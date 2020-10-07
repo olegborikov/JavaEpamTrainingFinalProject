@@ -17,8 +17,14 @@ import java.util.Optional;
 public class TattooDaoImpl implements TattooDao {
     private static final ConnectionPool connectionPool = ConnectionPool.INSTANCE;
     private static final String FIND_ALL = "SELECT tattoo_id, tattoo_name, " +
-            "is_allowed, is_archived, image_id, image_name " +
-            "FROM tattoo INNER JOIN image ON tattoo.image_id_fk = image.image_id";
+            "image_id, image_name FROM tattoo INNER JOIN image " +
+            "ON tattoo.image_id_fk = image.image_id";
+    private static final String FIND_BY_ALLOWED = "SELECT tattoo_id, tattoo_name, " +
+            "image_id, image_name FROM tattoo INNER JOIN image " +
+            "ON tattoo.image_id_fk = image.image_id WHERE is_allowed = ?";
+    private static final String FIND_BY_ARCHIVED = "SELECT tattoo_id, tattoo_name, " +
+            "image_id, image_name FROM tattoo INNER JOIN image " +
+            "ON tattoo.image_id_fk = image.image_id WHERE is_archived = ?";
     private static final String FIND_BY_ALLOWED_AND_ARCHIVED = "SELECT tattoo_id, tattoo_name, " +
             "image_id, image_name FROM tattoo INNER JOIN image " +
             "ON tattoo.image_id_fk = image.image_id WHERE is_allowed = ? AND is_archived = ?";
@@ -45,8 +51,52 @@ public class TattooDaoImpl implements TattooDao {
                 TattooBuilder tattooBuilder = new TattooBuilder();
                 tattooBuilder.setTattooId(resultSet.getLong(ColumnName.TATTOO_ID));
                 tattooBuilder.setName(resultSet.getString(ColumnName.TATTOO_NAME));
-                tattooBuilder.setAllowed(resultSet.getInt(ColumnName.IS_ALLOWED) != 0);
-                tattooBuilder.setArchived(resultSet.getInt(ColumnName.IS_ARCHIVED) != 0);
+                tattooBuilder.setImage(new Image(resultSet.getLong(ColumnName.IMAGE_ID),
+                        resultSet.getString(ColumnName.IMAGE_NAME)));
+                Tattoo tattoo = tattooBuilder.getTattoo();
+                tattoos.add(tattoo);
+            }
+            return tattoos;
+        } catch (SQLException | ConnectionPoolException e) {
+            throw new DaoException("Finding all tattoos error", e);
+        }
+    }
+
+    @Override
+    public List<Tattoo> findByAllowed(boolean isAllowed) throws DaoException {
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement statement =
+                     connection.prepareStatement(FIND_BY_ALLOWED)) {
+            statement.setInt(1, isAllowed ? 1 : 0);
+            ResultSet resultSet = statement.executeQuery();
+            List<Tattoo> tattoos = new ArrayList<>();
+            while (resultSet.next()) {
+                TattooBuilder tattooBuilder = new TattooBuilder();
+                tattooBuilder.setTattooId(resultSet.getLong(ColumnName.TATTOO_ID));
+                tattooBuilder.setName(resultSet.getString(ColumnName.TATTOO_NAME));
+                tattooBuilder.setImage(new Image(resultSet.getLong(ColumnName.IMAGE_ID),
+                        resultSet.getString(ColumnName.IMAGE_NAME)));
+                Tattoo tattoo = tattooBuilder.getTattoo();
+                tattoos.add(tattoo);
+            }
+            return tattoos;
+        } catch (SQLException | ConnectionPoolException e) {
+            throw new DaoException("Finding all tattoos error", e);
+        }
+    }
+
+    @Override
+    public List<Tattoo> findByArchived(boolean isArchived) throws DaoException {
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement statement =
+                     connection.prepareStatement(FIND_BY_ARCHIVED)) {
+            statement.setInt(1, isArchived ? 1 : 0);
+            ResultSet resultSet = statement.executeQuery();
+            List<Tattoo> tattoos = new ArrayList<>();
+            while (resultSet.next()) {
+                TattooBuilder tattooBuilder = new TattooBuilder();// TODO: 07.10.2020 to method
+                tattooBuilder.setTattooId(resultSet.getLong(ColumnName.TATTOO_ID));
+                tattooBuilder.setName(resultSet.getString(ColumnName.TATTOO_NAME));
                 tattooBuilder.setImage(new Image(resultSet.getLong(ColumnName.IMAGE_ID),
                         resultSet.getString(ColumnName.IMAGE_NAME)));
                 Tattoo tattoo = tattooBuilder.getTattoo();

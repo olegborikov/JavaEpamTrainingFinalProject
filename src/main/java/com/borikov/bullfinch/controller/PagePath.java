@@ -10,7 +10,8 @@ public class PagePath {
     public static final String CATALOG = "/jsp/catalog.jsp";
     public static final String TATTOO = "/jsp/tattoo.jsp";
     public static final String TATTOO_OFFER = "/jsp/tattoo_offer.jsp";
-    public static final String USERS = "/jsp/users.jsp";
+    public static final String USERS_ADMIN = "/jsp/users_admin.jsp";
+    public static final String TATTOOS_ADMIN = "/jsp/tattoos_admin.jsp";
     public static final String TATTOO_OFFER_CONFIRM = "/jsp/tattoo_offer_confirm.jsp";
 
     private PagePath() {

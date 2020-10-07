@@ -9,6 +9,10 @@ import java.util.Optional;
 public interface TattooService {
     List<Tattoo> findAllTattoos() throws ServiceException;
 
+    List<Tattoo> findTattoosByAllowed(boolean isAllowed) throws ServiceException;
+
+    List<Tattoo> findTattoosByArchived(boolean isArchived) throws ServiceException;
+
     List<Tattoo> findTattoosByAllowedAndArchived(
             boolean isAllowed, boolean isArchived) throws ServiceException;
 
