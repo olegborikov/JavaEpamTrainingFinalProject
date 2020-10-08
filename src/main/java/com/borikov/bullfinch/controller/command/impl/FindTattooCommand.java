@@ -31,7 +31,7 @@ public class FindTattooCommand implements Command {
                     tattooName, IS_ALLOWED_DEFAULT, IS_ARCHIVED_DEFAULT);
             List<Tattoo> tattoos = allTattoos.subList(0, Math.min(AMOUNT_OF_TATTOOS_ON_PAGE,
                     allTattoos.size()));
-            request.setAttribute(RequestParameter.ALL_TATTOOS, allTattoos);
+            request.setAttribute(RequestParameter.PAGE_AMOUNT, allTattoos.size() / AMOUNT_OF_TATTOOS_ON_PAGE);
             request.setAttribute(RequestParameter.TATTOOS, tattoos);
             request.setAttribute(RequestParameter.TATTOO_NAME, tattooName);
             request.setAttribute(RequestParameter.PAGE_NUMBER, FIRST_PAGE_NUMBER);

@@ -39,8 +39,10 @@ public class TattooDaoImpl implements TattooDao {
             "tattoo_description, tattoo_price,tattoo_rating, is_allowed, is_archived, " +
             "image_id, image_name FROM tattoo INNER JOIN image ON tattoo.image_id_fk = image.image_id " +
             "WHERE tattoo_id = ?";
-    private static final String OFFER_TATTOO = "INSERT INTO tattoo (tattoo_name, tattoo_description, " +
+    private static final String OFFER = "INSERT INTO tattoo (tattoo_name, tattoo_description, " +
             "tattoo_rating, is_allowed, is_archived, image_id_fk) VALUES (?, ?, 5, 0, 0, ?)";
+    private static final String ALLOW = "UPDATE tattoo SET is_allowed = 1 WHERE tattoo_id = ?";
+    private static final String DELETE = "DELETE FROM tattoo WHERE tattoo_id = ?";
     private static final String ADD_IMAGE = "INSERT INTO image (image_name) VALUES (?)";
     private static final String PERCENT = "%";
 
@@ -226,7 +228,7 @@ public class TattooDaoImpl implements TattooDao {
              PreparedStatement statementImage =
                      connection.prepareStatement(ADD_IMAGE, Statement.RETURN_GENERATED_KEYS);
              PreparedStatement statementTattoo =
-                     connection.prepareStatement(OFFER_TATTOO, Statement.RETURN_GENERATED_KEYS)) {
+                     connection.prepareStatement(OFFER, Statement.RETURN_GENERATED_KEYS)) {
             statementImage.setString(1, tattoo.getImage().getName());
             statementImage.executeUpdate();
             ResultSet generatedKeysImage = statementImage.getGeneratedKeys();
@@ -243,7 +245,31 @@ public class TattooDaoImpl implements TattooDao {
             }
             return result;
         } catch (SQLException | ConnectionPoolException e) {
-            throw new DaoException("Add tattoo error", e);
+            throw new DaoException("Offer tattoo error", e);
+        }
+    }
+
+    @Override
+    public boolean allow(long id) throws DaoException {
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement statement =
+                     connection.prepareStatement(ALLOW)) {
+            statement.setLong(1, id);
+            return statement.executeUpdate() > 0;
+        } catch (SQLException | ConnectionPoolException e) {
+            throw new DaoException("Offer tattoo error", e);
+        }
+    }
+
+    @Override
+    public boolean delete(long id) throws DaoException {
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement statement =
+                     connection.prepareStatement(DELETE)) {
+            statement.setLong(1, id);
+            return statement.executeUpdate() > 0;
+        } catch (SQLException | ConnectionPoolException e) {
+            throw new DaoException("Offer tattoo error", e);
         }
     }
 }

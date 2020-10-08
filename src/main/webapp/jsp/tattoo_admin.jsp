@@ -44,27 +44,54 @@
                                 <fmt:message key="tattooAdmin.none"/>
                             </c:when>
                             <c:otherwise>
-                                ${tattoo.price}  <fmt:message key="tattooAdmin.rubles"/>
+                                ${tattoo.price} <fmt:message key="tattooAdmin.rubles"/>
                             </c:otherwise>
                         </c:choose>
                     </p>
                     <p><fmt:message key="tattooAdmin.rating"/>: ${tattoo.rating}</p>
-                    <p><fmt:message key="tattooAdmin.allowed"/>:
+                    <p>
+                        <fmt:message key="tattooAdmin.allowed"/>:
                         <c:choose>
                             <c:when test="${tattoo.allowed}">
                                 <fmt:message key="tattooAdmin.yes"/>
                             </c:when>
                             <c:otherwise>
                                 <fmt:message key="tattooAdmin.no"/>
+                                <form name="allowDeleteForm" method="post" action="controller">
+                                    <input type="hidden" name="tattooId" value="${tattoo.tattooId}">
+                                    <button type="submit" class="btn btn-outline-secondary" name="commandName"
+                                            value="allow_tattoo_command">
+                                        <fmt:message key="tattooAdmin.allow"/>
+                                    </button>
+                                    <button type="submit" class="btn btn-outline-secondary" name="commandName"
+                                            value="delete_tattoo_command">
+                                        <fmt:message key="tattooAdmin.delete"/>
+                                    </button>
+                               </form>
                             </c:otherwise>
-                        </c:choose></p>
+                        </c:choose>
+                    </p>
                     <p><fmt:message key="tattooAdmin.archived"/>:
                         <c:choose>
                             <c:when test="${tattoo.archived}">
                                 <fmt:message key="tattooAdmin.yes"/>
+                                <form name="archiveForm" method="post" action="controller">
+                                    <input type="hidden" name="tattooId" value="${tattoo.tattooId}">
+                                    <button type="submit" class="btn btn-outline-secondary" name="commandName"
+                                            value="">
+                                        <fmt:message key="tattooAdmin.unArchive"/>
+                                    </button>
+                                </form>
                             </c:when>
                             <c:otherwise>
                                 <fmt:message key="tattooAdmin.no"/>
+                                <form name="unArchiveForm" method="post" action="controller">
+                                    <input type="hidden" name="tattooId" value="${tattoo.tattooId}">
+                                    <button type="submit" class="btn btn-outline-secondary" name="commandName"
+                                            value="allow">
+                                        <fmt:message key="tattooAdmin.archive"/>
+                                    </button>
+                                </form>
                             </c:otherwise>
                         </c:choose>
                     </p>

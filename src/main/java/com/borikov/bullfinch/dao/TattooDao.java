@@ -25,4 +25,8 @@ public interface TattooDao {
     Optional<Tattoo> findById(long id) throws DaoException;
 
     boolean offer(Tattoo tattoo) throws DaoException;
+
+    boolean allow(long id) throws DaoException;
+
+    boolean delete(long id) throws DaoException;
 }

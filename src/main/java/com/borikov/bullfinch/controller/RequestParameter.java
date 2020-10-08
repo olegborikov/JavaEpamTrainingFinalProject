@@ -22,9 +22,9 @@ public class RequestParameter {
     public static final String TATTOO_ID = "tattooId";
     public static final String TATTOO = "tattoo";
     public static final String CURRENT_PAGE = "currentPage";
-    public static final String CURRENT_ATTRIBUTE_MAP = "currentAttributeMap";
     public static final String USERS = "users";
     public static final String PAGE_NUMBER = "pageNumber";
+    public static final String PAGE_AMOUNT = "pageAmount";
     public static final String PHOTO_NAME = "photoName";
     public static final String NAME = "name";
     public static final String DESCRIPTION = "description";

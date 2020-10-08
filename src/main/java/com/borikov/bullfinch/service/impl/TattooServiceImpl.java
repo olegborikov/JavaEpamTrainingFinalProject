@@ -119,4 +119,34 @@ public class TattooServiceImpl implements TattooService {
             throw new ServiceException("Error while adding tattoo", e);
         }
     }
+
+    @Override
+    public boolean allowTattoo(String id) throws ServiceException {
+        boolean result = false;
+        TattooValidator tattooValidator = new TattooValidator();
+        try {
+            if (tattooValidator.isIdCorrect(id)) {
+                long tattooId = Long.parseLong(id);
+                result = tattooDao.allow(tattooId);
+            }
+            return result;
+        } catch (DaoException e) {
+            throw new ServiceException("Error while finding tattoos by name", e);
+        }
+    }
+
+    @Override
+    public boolean deleteTattoo(String id) throws ServiceException {
+        boolean result = false;
+        TattooValidator tattooValidator = new TattooValidator();
+        try {
+            if (tattooValidator.isIdCorrect(id)) {
+                long tattooId = Long.parseLong(id);
+                result = tattooDao.delete(tattooId);
+            }
+            return result;
+        } catch (DaoException e) {
+            throw new ServiceException("Error while finding tattoos by name", e);
+        }
+    }
 }

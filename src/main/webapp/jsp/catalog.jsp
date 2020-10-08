@@ -108,7 +108,7 @@
                         <input type="button" class="btn btn-outline-secondary" disabled
                                value=${pageNumber}>
                         <c:choose>
-                            <c:when test="${pageNumber<allTattoos.size()/3}">
+                            <c:when test="${pageNumber<=pageAmount}">
                                 <button type="submit" class="btn btn-outline-secondary"
                                         name="pageNumber" value=${pageNumber+1}>
                                     <fmt:message key="catalog.paginationNext"/>
