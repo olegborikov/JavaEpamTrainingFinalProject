@@ -26,6 +26,27 @@
 <section style="text-align: left; padding-top: 120px" class="masthead">
     <div class="intro-body">
         <div class="container-fluid">
+            <div class="row col-12">
+                <div class="col-md-3">
+                </div>
+                <div class="col-md-5">
+                    <br/>
+                </div>
+                <div class="col-12 col-md-3">
+                    <form name="offerForm" method="post" action="controller">
+                        <div style="text-align: right">
+                        <button style="vertical-align: center" class="btn btn-outline-secondary"
+                                name="commandName"
+                                value="browse_edit_tattoo_page_command">
+                            <fmt:message key="tattooAdmin.editTattoo"/>
+                        </button>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-1">
+                </div>
+            </div>
+            <br/>
             <div class="row">
                 <div class="col-md-2"></div>
                 <div class="col-md-5">

@@ -89,6 +89,10 @@
                                             <fmt:message key="navbar.all"/>
                                         </button>
                                         <button class="dropdown-item" name="commandName"
+                                                value="browse_catalog_tattoos_admin_page_command">
+                                            <fmt:message key="navbar.catalog"/>
+                                        </button>
+                                        <button class="dropdown-item" name="commandName"
                                                 value="browse_offered_tattoos_admin_page_command">
                                             <fmt:message key="navbar.offered"/>
                                         </button>

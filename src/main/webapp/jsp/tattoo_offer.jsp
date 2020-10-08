@@ -50,7 +50,7 @@
                             <div class="col-md-12">
                                 Upload File: <input type="file" name="content" accept="image/jpeg" required>
                                 <c:if test="${errorImageMessage}">
-                                    <div style="color: red"><fmt:message key="emailOfferConfirm.errorImageMessage"/></div>
+                                    <div style="color: red"><fmt:message key="tattooOffer.errorImageMessage"/></div>
                                 </c:if>
                             </div>
                         </div>
