@@ -23,6 +23,8 @@ public enum CommandType {
     BROWSE_TATTOO_ADMIN_PAGE_COMMAND(new BrowseTattooAdminPageCommand()),
     ALLOW_TATTOO_COMMAND(new AllowTattooCommand()),
     DELETE_TATTOO_COMMAND(new DeleteTattooCommand()),
+    ARCHIVE_TATTOO_COMMAND(new ArchiveTattooCommand()),
+    UNARCHIVE_TATTOO_COMMAND(new UnarchiveTattooCommand()),
     BROWSE_USERS_PAGE_COMMAND(new BrowseUsersPageCommand());
 
     private final Command command;

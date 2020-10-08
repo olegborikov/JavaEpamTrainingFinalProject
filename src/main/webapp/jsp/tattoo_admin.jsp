@@ -78,8 +78,8 @@
                                 <form name="archiveForm" method="post" action="controller">
                                     <input type="hidden" name="tattooId" value="${tattoo.tattooId}">
                                     <button type="submit" class="btn btn-outline-secondary" name="commandName"
-                                            value="">
-                                        <fmt:message key="tattooAdmin.unArchive"/>
+                                            value="unarchive_tattoo_command">
+                                        <fmt:message key="tattooAdmin.unarchive"/>
                                     </button>
                                 </form>
                             </c:when>
@@ -88,7 +88,7 @@
                                 <form name="unArchiveForm" method="post" action="controller">
                                     <input type="hidden" name="tattooId" value="${tattoo.tattooId}">
                                     <button type="submit" class="btn btn-outline-secondary" name="commandName"
-                                            value="allow">
+                                            value="archive_tattoo_command">
                                         <fmt:message key="tattooAdmin.archive"/>
                                     </button>
                                 </form>

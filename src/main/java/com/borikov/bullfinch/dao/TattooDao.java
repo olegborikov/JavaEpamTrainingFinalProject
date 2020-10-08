@@ -29,4 +29,8 @@ public interface TattooDao {
     boolean allow(long id) throws DaoException;
 
     boolean delete(long id) throws DaoException;
+
+    boolean archive(long id) throws DaoException;
+
+    boolean unarchive(long id) throws DaoException;
 }

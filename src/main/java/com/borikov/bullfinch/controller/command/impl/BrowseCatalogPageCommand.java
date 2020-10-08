@@ -29,7 +29,8 @@ public class BrowseCatalogPageCommand implements Command {
             List<Tattoo> allTattoos = tattooService.findTattoosByAllowedAndArchived(IS_ALLOWED_DEFAULT, IS_ARCHIVED_DEFAULT);
             List<Tattoo> tattoos = allTattoos.subList(0, Math.min(AMOUNT_OF_TATTOOS_ON_PAGE,
                     allTattoos.size()));
-            request.setAttribute(RequestParameter.PAGE_AMOUNT, allTattoos.size() / AMOUNT_OF_TATTOOS_ON_PAGE);
+            request.setAttribute(RequestParameter.PAGE_AMOUNT,
+                    Math.ceil((double)allTattoos.size() / AMOUNT_OF_TATTOOS_ON_PAGE));
             request.setAttribute(RequestParameter.TATTOOS, tattoos);
             request.setAttribute(RequestParameter.PAGE_NUMBER, FIRST_PAGE_NUMBER);
             page = PagePath.CATALOG;

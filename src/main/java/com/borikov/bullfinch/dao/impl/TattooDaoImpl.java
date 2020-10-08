@@ -43,6 +43,8 @@ public class TattooDaoImpl implements TattooDao {
             "tattoo_rating, is_allowed, is_archived, image_id_fk) VALUES (?, ?, 5, 0, 0, ?)";
     private static final String ALLOW = "UPDATE tattoo SET is_allowed = 1 WHERE tattoo_id = ?";
     private static final String DELETE = "DELETE FROM tattoo WHERE tattoo_id = ?";
+    private static final String ARCHIVE = "UPDATE tattoo SET is_archived = 1 WHERE tattoo_id = ?";
+    private static final String UNARCHIVE = "UPDATE tattoo SET is_archived = 0 WHERE tattoo_id = ?";
     private static final String ADD_IMAGE = "INSERT INTO image (image_name) VALUES (?)";
     private static final String PERCENT = "%";
 
@@ -266,6 +268,30 @@ public class TattooDaoImpl implements TattooDao {
         try (Connection connection = connectionPool.getConnection();
              PreparedStatement statement =
                      connection.prepareStatement(DELETE)) {
+            statement.setLong(1, id);
+            return statement.executeUpdate() > 0;
+        } catch (SQLException | ConnectionPoolException e) {
+            throw new DaoException("Offer tattoo error", e);
+        }
+    }
+
+    @Override
+    public boolean archive(long id) throws DaoException {
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement statement =
+                     connection.prepareStatement(ARCHIVE)) {
+            statement.setLong(1, id);
+            return statement.executeUpdate() > 0;
+        } catch (SQLException | ConnectionPoolException e) {
+            throw new DaoException("Offer tattoo error", e);
+        }
+    }
+
+    @Override
+    public boolean unarchive(long id) throws DaoException {
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement statement =
+                     connection.prepareStatement(UNARCHIVE)) {
             statement.setLong(1, id);
             return statement.executeUpdate() > 0;
         } catch (SQLException | ConnectionPoolException e) {

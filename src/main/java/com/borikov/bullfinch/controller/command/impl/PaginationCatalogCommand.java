@@ -45,7 +45,8 @@ public class PaginationCatalogCommand implements Command {
             }
             List<Tattoo> tattoos = allTattoos.subList(AMOUNT_OF_TATTOOS_ON_PAGE * (pageNumber - 1),
                     Math.min(AMOUNT_OF_TATTOOS_ON_PAGE * pageNumber, allTattoos.size()));
-            request.setAttribute(RequestParameter.PAGE_AMOUNT, allTattoos.size() / AMOUNT_OF_TATTOOS_ON_PAGE);
+            request.setAttribute(RequestParameter.PAGE_AMOUNT,
+                    Math.ceil((double)allTattoos.size() / AMOUNT_OF_TATTOOS_ON_PAGE));
             request.setAttribute(RequestParameter.TATTOOS, tattoos);
             request.setAttribute(RequestParameter.PAGE_NUMBER, pageNumber);
             request.setAttribute(RequestParameter.TATTOO_NAME, tattooName);

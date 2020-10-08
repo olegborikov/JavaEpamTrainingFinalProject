@@ -61,11 +61,8 @@ public class TattooServiceImpl implements TattooService {
     public List<Tattoo> findTattoosByNameAndAllowedAndArchived(
             String name, boolean isAllowed, boolean isArchived) throws ServiceException {
         List<Tattoo> tattoos = new ArrayList<>();
-        TattooValidator tattooValidator = new TattooValidator();
         try {
-            if (tattooValidator.isNameCorrect(name)) {
-                tattoos = tattooDao.findByNameAndAllowedAndArchived(name, isAllowed, isArchived);
-            }
+            tattoos = tattooDao.findByNameAndAllowedAndArchived(name, isAllowed, isArchived);
             return tattoos;
         } catch (DaoException e) {
             throw new ServiceException("Error while finding tattoos by name", e);
@@ -143,6 +140,36 @@ public class TattooServiceImpl implements TattooService {
             if (tattooValidator.isIdCorrect(id)) {
                 long tattooId = Long.parseLong(id);
                 result = tattooDao.delete(tattooId);
+            }
+            return result;
+        } catch (DaoException e) {
+            throw new ServiceException("Error while finding tattoos by name", e);
+        }
+    }
+
+    @Override
+    public boolean archiveTattoo(String id) throws ServiceException {
+        boolean result = false;
+        TattooValidator tattooValidator = new TattooValidator();
+        try {
+            if (tattooValidator.isIdCorrect(id)) {
+                long tattooId = Long.parseLong(id);
+                result = tattooDao.archive(tattooId);
+            }
+            return result;
+        } catch (DaoException e) {
+            throw new ServiceException("Error while finding tattoos by name", e);
+        }
+    }
+
+    @Override
+    public boolean unarchiveTattoo(String id) throws ServiceException {
+        boolean result = false;
+        TattooValidator tattooValidator = new TattooValidator();
+        try {
+            if (tattooValidator.isIdCorrect(id)) {
+                long tattooId = Long.parseLong(id);
+                result = tattooDao.unarchive(tattooId);
             }
             return result;
         } catch (DaoException e) {
