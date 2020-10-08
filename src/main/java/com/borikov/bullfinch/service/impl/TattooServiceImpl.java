@@ -73,7 +73,7 @@ public class TattooServiceImpl implements TattooService {
     }
 
     @Override
-    public Optional<Tattoo> findTattoosByIdAndAllowedAndArchived(
+    public Optional<Tattoo> findTattooByIdAndAllowedAndArchived(
             String id, boolean isAllowed, boolean isArchived) throws ServiceException {
         Optional<Tattoo> tattoo = Optional.empty();
         TattooValidator tattooValidator = new TattooValidator();
@@ -81,6 +81,21 @@ public class TattooServiceImpl implements TattooService {
             if (tattooValidator.isIdCorrect(id)) {
                 long tattooId = Long.parseLong(id);
                 tattoo = tattooDao.findByIdAndAllowedAndArchived(tattooId, isAllowed, isArchived);
+            }
+            return tattoo;
+        } catch (DaoException e) {
+            throw new ServiceException("Error while finding tattoos by name", e);
+        }
+    }
+
+    @Override
+    public Optional<Tattoo> findTattooById(String id) throws ServiceException {
+        Optional<Tattoo> tattoo = Optional.empty();
+        TattooValidator tattooValidator = new TattooValidator();
+        try {
+            if (tattooValidator.isIdCorrect(id)) {
+                long tattooId = Long.parseLong(id);
+                tattoo = tattooDao.findById(tattooId);
             }
             return tattoo;
         } catch (DaoException e) {

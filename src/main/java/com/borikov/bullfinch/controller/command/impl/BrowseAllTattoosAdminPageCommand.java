@@ -14,16 +14,15 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
-public class BrowseArchivedTattoosPageCommand implements Command {
+public class BrowseAllTattoosAdminPageCommand implements Command {
     private static final Logger LOGGER = LogManager.getLogger();
     private static final TattooService tattooService = new TattooServiceImpl();
-    private static final boolean IS_ARCHIVED_DEFAULT = true;
 
     @Override
     public String execute(HttpServletRequest request) {
         String page;
         try {
-            List<Tattoo> tattoos = tattooService.findTattoosByArchived(IS_ARCHIVED_DEFAULT);
+            List<Tattoo> tattoos = tattooService.findAllTattoos();
             request.setAttribute(RequestParameter.TATTOOS, tattoos);
             page = PagePath.TATTOOS_ADMIN;
         } catch (ServiceException e) {

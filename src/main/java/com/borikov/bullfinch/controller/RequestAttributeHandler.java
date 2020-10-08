@@ -7,18 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class RequestAttributeHandler {
-    private static RequestAttributeHandler instance;
     private Map<String, Object> attributes = new HashMap<>();
-
-    private RequestAttributeHandler() {
-    }
-
-    public static RequestAttributeHandler getInstance() {
-        if (instance == null) {
-            instance = new RequestAttributeHandler();
-        }
-        return instance;
-    }
 
     public Map<String, Object> getAttributes() {
         return Collections.unmodifiableMap(attributes);

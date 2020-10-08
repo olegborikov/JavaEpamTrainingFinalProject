@@ -6,7 +6,7 @@
 <fmt:setBundle basename="i18n.application_message"/>
 <html>
 <head>
-    <title><fmt:message key="tattoos.title"/></title>
+    <title><fmt:message key="tattoosAdmin.title"/></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <link rel="stylesheet" type="text/css"
           href="${pageContext.request.contextPath}/assets/css/bootstrap.min.css">
@@ -57,7 +57,7 @@
                     <c:if test="${empty tattoos}">
                         <div class="masthead content-section text-center">
                             <div class="container">
-                                <h3><fmt:message key="tattoos.empty"/></h3>
+                                <h3><fmt:message key="tattoosAdmin.empty"/></h3>
                             </div>
                         </div>
                     </c:if>
@@ -68,10 +68,10 @@
                                     <h2 class="mb-3">${tattoo.name}</h2>
                                     <form name="tattooInfoForm" method="post" action="controller">
                                         <input type="hidden" name="commandName"
-                                               value="browse_tattoo_page_command">
+                                               value="browse_tattoo_admin_page_command">
                                         <button class="btn btn-outline-white py-2 px-4"
                                                 name="tattooId" value="${tattoo.tattooId}">
-                                            <fmt:message key="tattoos.info"/></button>
+                                            <fmt:message key="tattoosAdmin.info"/></button>
                                     </form>
                                 </div>
                                 <img src="${pageContext.request.contextPath}/assets/image/${tattoo.image.name}.jpg"

@@ -12,20 +12,25 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
+import java.util.Optional;
 
-public class BrowseOfferedTattoosPageCommand implements Command {
+public class BrowseTattooAdminPageCommand implements Command {
     private static final Logger LOGGER = LogManager.getLogger();
     private static final TattooService tattooService = new TattooServiceImpl();
-    private static final boolean IS_ALLOWED_DEFAULT = false;
 
     @Override
     public String execute(HttpServletRequest request) {
         String page;
+        String tattooId = request.getParameter(RequestParameter.TATTOO_ID);
         try {
-            List<Tattoo> tattoos = tattooService.findTattoosByAllowed(IS_ALLOWED_DEFAULT);
-            request.setAttribute(RequestParameter.TATTOOS, tattoos);
-            page = PagePath.TATTOOS_ADMIN;
+            Optional<Tattoo> tattoo = tattooService.findTattooById(tattooId);
+            if (tattoo.isPresent()) {
+                request.setAttribute(RequestParameter.TATTOO, tattoo.get());
+                page = PagePath.TATTOO_ADMIN;
+            } else {
+                // TODO: 25.09.2020 add smth
+                page = PagePath.ERROR;
+            }
         } catch (ServiceException e) {
             LOGGER.log(Level.ERROR, "Error while finding tattoos", e);
             request.setAttribute(RequestParameter.ERROR_MESSAGE, e);

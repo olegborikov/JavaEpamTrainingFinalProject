@@ -85,15 +85,15 @@
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                         <button class="dropdown-item" name="commandName"
-                                                value="browse_all_tattoos_page_command">
+                                                value="browse_all_tattoos_admin_page_command">
                                             <fmt:message key="navbar.all"/>
                                         </button>
                                         <button class="dropdown-item" name="commandName"
-                                                value="browse_offered_tattoos_page_command">
+                                                value="browse_offered_tattoos_admin_page_command">
                                             <fmt:message key="navbar.offered"/>
                                         </button>
                                         <button class="dropdown-item" name="commandName"
-                                                value="browse_archived_tattoos_page_command">
+                                                value="browse_archived_tattoos_admin_page_command">
                                             <fmt:message key="navbar.archived"/>
                                         </button>
                                     </div>

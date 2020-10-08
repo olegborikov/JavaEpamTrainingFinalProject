@@ -19,8 +19,10 @@ public interface TattooService {
     List<Tattoo> findTattoosByNameAndAllowedAndArchived(
             String name, boolean isAllowed, boolean isArchived) throws ServiceException;
 
-    Optional<Tattoo> findTattoosByIdAndAllowedAndArchived(
+    Optional<Tattoo> findTattooByIdAndAllowedAndArchived(
             String id, boolean isAllowed, boolean isArchived) throws ServiceException;
+
+    Optional<Tattoo> findTattooById(String id) throws ServiceException;
 
     boolean offerTattoo(String tattooName, String description, String imageName) throws ServiceException;
 }

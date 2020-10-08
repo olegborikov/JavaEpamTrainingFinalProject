@@ -7,6 +7,7 @@ import com.borikov.bullfinch.controller.command.Command;
 import com.borikov.bullfinch.entity.Tattoo;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Map;
 
@@ -17,7 +18,10 @@ public class PaginationCatalogCommand implements Command {
     public String execute(HttpServletRequest request) {
         String pageNumberString = request.getParameter(RequestParameter.PAGE_NUMBER);
         int pageNumber = Integer.parseInt(pageNumberString);
-        Map<String, Object> attributes = RequestAttributeHandler.getInstance().getAttributes();
+        HttpSession session = request.getSession();
+        RequestAttributeHandler requestAttributeHandler =
+                (RequestAttributeHandler) session.getAttribute(RequestParameter.REQUEST_ATTRIBUTE_HANDLER);
+        Map<String, Object> attributes = requestAttributeHandler.getAttributes();
         List<Tattoo> allTattoos = (List<Tattoo>) attributes.get(RequestParameter.ALL_TATTOOS);
         String tattooName = (String) attributes.get(RequestParameter.TATTOO_NAME);
         List<Tattoo> tattoos = allTattoos.subList(AMOUNT_OF_TATTOOS_ON_PAGE * (pageNumber - 1),
