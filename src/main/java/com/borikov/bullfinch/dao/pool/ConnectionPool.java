@@ -48,7 +48,7 @@ public enum ConnectionPool {
             givenConnections.offer(connection);
             return connection;
         } catch (InterruptedException e) {
-            throw new ConnectionPoolException("Throw was interrupted", e);
+            throw new ConnectionPoolException("Thread was interrupted", e);
         }
     }
 
@@ -68,7 +68,7 @@ public enum ConnectionPool {
             } catch (SQLException e) {
                 logger.log(Level.ERROR, "Connection was not deleted", e);
             } catch (InterruptedException e) {
-                logger.log(Level.ERROR, "Throw was interrupted", e);
+                logger.log(Level.ERROR, "Thread was interrupted", e);
             }
         }
         deregisterDrivers();
@@ -79,7 +79,7 @@ public enum ConnectionPool {
             try {
                 DriverManager.deregisterDriver(driver);
             } catch (SQLException e) {
-                logger.log(Level.ERROR, "Driver was not deregister", e);
+                logger.log(Level.ERROR, "Driver was not deregistered", e);
             }
         });
     }

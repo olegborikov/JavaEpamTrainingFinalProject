@@ -28,7 +28,7 @@ public class EmailSenderUtil {
                     email, EMAIL_HEAD, EMAIL_BODY + login, properties));
             thread.start();
         } catch (IOException e) {
-            LOGGER.log(Level.ERROR, "Error with mail properties file", e);
+            LOGGER.log(Level.ERROR, "Error while reading properties file", e);
         }
     }
 }

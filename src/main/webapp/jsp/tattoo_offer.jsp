@@ -67,9 +67,9 @@
                             <div class="col-md-12">
                                 <fmt:message key="tattooOffer.fileUpload"/>
                                 <input type="file" name="content" accept="image/jpeg" required>
-                                <c:if test="${errorImageMessage}">
+                                <c:if test="${incorrectImageMessage}">
                                     <div style="color: red"><fmt:message
-                                            key="tattooOffer.errorImageMessage"/></div>
+                                            key="tattooOffer.incorrectImageMessage"/></div>
                                 </c:if>
                             </div>
                         </div>
@@ -88,7 +88,10 @@
                                           placeholder='<fmt:message key="tattooOffer.description"/>'></textarea>
                             </div>
                         </div>
-                        <div style="color: red"> ${errorDataMessage}</div>
+                        <c:if test="${incorrectDataMessage}">
+                            <div style="color: red"><fmt:message
+                                    key="tattooOffer.incorrectDataMessage"/></div>
+                        </c:if>
                         <button type="submit" class="btn btn-outline-secondary">
                             <fmt:message key="tattooOffer.offerTattoo"/>
                         </button>

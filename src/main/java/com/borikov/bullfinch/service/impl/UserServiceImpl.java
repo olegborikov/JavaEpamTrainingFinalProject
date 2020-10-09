@@ -70,7 +70,7 @@ public class UserServiceImpl implements UserService {
             }
             return result;
         } catch (DaoException e) {
-            throw new ServiceException("Error while checking user for existing", e);
+            throw new ServiceException("Error while adding user", e);
         }
     }
 
@@ -84,7 +84,7 @@ public class UserServiceImpl implements UserService {
             }
             return result;
         } catch (DaoException e) {
-            throw new ServiceException("Error while confirm email", e);
+            throw new ServiceException("Error while confirming email", e);
         }
     }
 
@@ -94,7 +94,7 @@ public class UserServiceImpl implements UserService {
             List<User> users = userDao.findAll();
             return users;
         } catch (DaoException e) {
-            throw new ServiceException("Error while confirm email", e);
+            throw new ServiceException("Error while finding users", e);
         }
     }
 }

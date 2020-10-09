@@ -22,15 +22,13 @@ public class ConfirmEmailCommand implements Command {
         String login = request.getParameter(RequestParameter.LOGIN);
         try {
             if (userService.confirmUserEmail(login)) {
-                request.setAttribute(RequestParameter.CONFIRM_EMAIL_MESSAGE,
-                        "Your email confirmed");
+                request.setAttribute(RequestParameter.USER_EMAIL_CONFIRM_POSITIVE_MESSAGE, true);
             } else {
-                request.setAttribute(RequestParameter.CONFIRM_EMAIL_MESSAGE,
-                        "Your email wasn't confirmed");
+                request.setAttribute(RequestParameter.USER_EMAIL_CONFIRM_ERROR_MESSAGE, true);
             }
-            page = PagePath.EMAIL_CONFIRM;
+            page = PagePath.MESSAGE;
         } catch (ServiceException e) {
-            LOGGER.log(Level.ERROR, "Error while confirm email", e);
+            LOGGER.log(Level.ERROR, "Error while confirming email", e);
             request.setAttribute(RequestParameter.ERROR_MESSAGE, e);
             page = PagePath.ERROR;
         }

@@ -28,14 +28,14 @@ public class OfferTattooCommand implements Command {
         try {
             if (tattooService.offerTattoo(tattooName, description, price, photoName)) {
                 request.setAttribute(RequestParameter.TATTOO_OFFER_CONFIRM_MESSAGE, true);
-                page = PagePath.TATTOO_OFFER_CONFIRM;
+                page = PagePath.MESSAGE;
             } else {
-                request.setAttribute(RequestParameter.ERROR_DATA_MESSAGE, "Incorrect data");
+                request.setAttribute(RequestParameter.INCORRECT_DATA_MESSAGE, true);
                 page = PagePath.TATTOO_OFFER;
                 photoFileManager.delete(photoName);
             }
         } catch (ServiceException e) {
-            LOGGER.log(Level.ERROR, "Error while offer tattoo", e);
+            LOGGER.log(Level.ERROR, "Error while offering tattoo", e);
             request.setAttribute(RequestParameter.ERROR_MESSAGE, e);
             page = PagePath.ERROR;
             photoFileManager.delete(photoName);

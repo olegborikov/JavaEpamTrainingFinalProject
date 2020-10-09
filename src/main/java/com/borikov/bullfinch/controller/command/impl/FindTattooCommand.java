@@ -38,7 +38,7 @@ public class FindTattooCommand implements Command {
             request.setAttribute(RequestParameter.PAGE_NUMBER, FIRST_PAGE_NUMBER);
             page = PagePath.CATALOG;
         } catch (ServiceException e) {
-            LOGGER.log(Level.ERROR, "Error while finding tattoos by name", e);
+            LOGGER.log(Level.ERROR, "Error while finding tattoos", e);
             request.setAttribute(RequestParameter.ERROR_MESSAGE, e);
             page = PagePath.ERROR;
         }

@@ -18,7 +18,7 @@ public class User {
     }
 
     public User(Long userId, String login,
-                boolean isActivated, UserRole userRole) {
+                boolean isActivated, UserRole userRole) {// TODO: 09.10.2020 use builder
         this.userId = userId;
         this.login = login;
         this.isActivated = isActivated;

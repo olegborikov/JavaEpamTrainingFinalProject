@@ -54,7 +54,7 @@
                                    placeholder='<fmt:message key="login.password"/>'>
                         </div>
                         <c:if test="${incorrectDataMessage}">
-                            <div style="color: red"><fmt:message key="login.errorMessage"/></div>
+                            <div style="color: red"><fmt:message key="login.incorrectDataMessage"/></div>
                         </c:if>
                         <button type="submit" class="btn btn-outline-secondary" name="commandName"
                                 value="login_command">

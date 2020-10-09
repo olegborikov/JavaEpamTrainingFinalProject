@@ -47,7 +47,7 @@ public class UserDaoImpl implements UserDao {
             }
             return passwordOptional;
         } catch (SQLException | ConnectionPoolException e) {
-            throw new DaoException("Finding user by login error", e);
+            throw new DaoException("Existing user by login error", e);
         }
     }
 
@@ -64,7 +64,7 @@ public class UserDaoImpl implements UserDao {
             }
             return result;
         } catch (SQLException | ConnectionPoolException e) {
-            throw new DaoException("Finding user by login error", e);
+            throw new DaoException("Existing user by email error", e);
         }
     }
 
@@ -95,7 +95,7 @@ public class UserDaoImpl implements UserDao {
             boolean result = statement.executeUpdate() > 0;
             return result;
         } catch (SQLException | ConnectionPoolException e) {
-            throw new DaoException("Finding user by login error", e);
+            throw new DaoException("Confirm email error", e);
         }
     }
 

@@ -88,7 +88,6 @@
                                           placeholder='<fmt:message key="tattooEdit.description"/>'>${tattoo.description}</textarea>
                             </div>
                         </div>
-                        <div style="color: red"> ${errorDataMessage}</div>
                         <button type="submit" class="btn btn-outline-secondary">
                             <fmt:message key="tattooEdit.edit"/>
                         </button>

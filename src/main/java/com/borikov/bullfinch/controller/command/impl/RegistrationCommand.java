@@ -29,13 +29,10 @@ public class RegistrationCommand implements Command {
         try {
             if (userService.addUser(email, login,
                     firstName, secondName, phoneNumber, password, confirmedPassword)) {
-                request.setAttribute(RequestParameter.CONFIRM_EMAIL_MESSAGE,
-                        "You need to confirm your mail by following the " +
-                                "link in massage, that was send to your email");
-                page = PagePath.EMAIL_CONFIRM;
+                request.setAttribute(RequestParameter.USER_EMAIL_CONFIRM_MESSAGE,true);
+                page = PagePath.MESSAGE;
             } else {
-                request.setAttribute(RequestParameter.ERROR_DATA_MESSAGE,
-                        "Incorrect data");
+                request.setAttribute(RequestParameter.INCORRECT_DATA_MESSAGE, true);
                 page = PagePath.REGISTRATION;
             }
         } catch (ServiceException e) {

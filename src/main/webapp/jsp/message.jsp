@@ -27,8 +27,48 @@
 <section class="masthead">
     <div class="intro-body">
         <div class="container">
-            <c:if test="${tattooEditMessage}">
-                <h2><fmt:message key="message.tattooEditMessage"/></h2>
+            <c:if test="${tattooEditConfirmMessage}">
+                <h2><fmt:message key="message.tattooEditConfirmMessage"/></h2>
+            </c:if>
+
+            <c:if test="${tattooFindErrorMessage}">
+                <h2><fmt:message key="message.tattooFindErrorMessage"/></h2>
+            </c:if>
+
+            <c:if test="${tattooAllowErrorMessage}">
+                <h2><fmt:message key="message.tattooAllowErrorMessage"/></h2>
+            </c:if>
+
+            <c:if test="${tattooArchiveErrorMessage}">
+                <h2><fmt:message key="message.tattooArchiveErrorMessage"/></h2>
+            </c:if>
+
+            <c:if test="${tattooUnarchiveErrorMessage}">
+                <fmt:message key="message.tattooUnarchiveErrorMessage"/>
+            </c:if>
+
+            <c:if test="${userEmailConfirmMessage}">
+                <h2><fmt:message key="message.userEmailConfirmMessage"/></h2>
+            </c:if>
+
+            <c:if test="${userEmailConfirmPositiveMessage}">
+                <h2><fmt:message key="message.userEmailConfirmPositiveMessage"/></h2>
+            </c:if>
+
+            <c:if test="${userEmailConfirmErrorMessage}">
+                <h2><fmt:message key="message.userEmailConfirmErrorMessage"/></h2>
+            </c:if>
+
+            <c:if test="${tattooDeleteConfirmMessage}">
+                <h2><fmt:message key="message.tattooDeleteConfirmMessage"/></h2>
+            </c:if>
+
+            <c:if test="${tattooDeleteErrorMessage}">
+                <h2><fmt:message key="message.tattooDeleteErrorMessage"/></h2>
+            </c:if>
+
+            <c:if test="${tattooOfferConfirmMessage}">
+                <h2><fmt:message key="message.tattooOfferConfirmMessage"/></h2>
             </c:if>
         </div>
     </div>

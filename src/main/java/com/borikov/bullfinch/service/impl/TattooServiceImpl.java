@@ -81,7 +81,7 @@ public class TattooServiceImpl implements TattooService {
             }
             return tattoo;
         } catch (DaoException e) {
-            throw new ServiceException("Error while finding tattoos by name", e);
+            throw new ServiceException("Error while finding tattoos by id", e);
         }
     }
 
@@ -96,7 +96,7 @@ public class TattooServiceImpl implements TattooService {
             }
             return tattoo;
         } catch (DaoException e) {
-            throw new ServiceException("Error while finding tattoos by name", e);
+            throw new ServiceException("Error while finding tattoos by id", e);
         }
     }
 
@@ -115,7 +115,7 @@ public class TattooServiceImpl implements TattooService {
             }
             return result;
         } catch (DaoException e) {
-            throw new ServiceException("Error while offer tattoo", e);
+            throw new ServiceException("Error while offering tattoo", e);
         }
     }
 
@@ -130,7 +130,7 @@ public class TattooServiceImpl implements TattooService {
             }
             return result;
         } catch (DaoException e) {
-            throw new ServiceException("Error while allow tattoo", e);
+            throw new ServiceException("Error while allowing tattoo", e);
         }
     }
 
@@ -145,7 +145,7 @@ public class TattooServiceImpl implements TattooService {
             }
             return result;
         } catch (DaoException e) {
-            throw new ServiceException("Error while delete tattoo", e);
+            throw new ServiceException("Error while deleting tattoo", e);
         }
     }
 
@@ -160,7 +160,7 @@ public class TattooServiceImpl implements TattooService {
             }
             return result;
         } catch (DaoException e) {
-            throw new ServiceException("Error while archive tattoo", e);
+            throw new ServiceException("Error while archiving tattoo", e);
         }
     }
 
@@ -175,7 +175,7 @@ public class TattooServiceImpl implements TattooService {
             }
             return result;
         } catch (DaoException e) {
-            throw new ServiceException("Error while unarchive tattoo", e);
+            throw new ServiceException("Error while unarchiving tattoo", e);
         }
     }
 
@@ -195,7 +195,7 @@ public class TattooServiceImpl implements TattooService {
             }
             return result;
         } catch (DaoException e) {
-            throw new ServiceException("Error while edit tattoo", e);
+            throw new ServiceException("Error while editing tattoo", e);
         }
     }
 }

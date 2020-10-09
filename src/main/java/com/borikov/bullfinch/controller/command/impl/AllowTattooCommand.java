@@ -29,15 +29,15 @@ public class AllowTattooCommand implements Command {
                     request.setAttribute(RequestParameter.TATTOO, tattoo.get());
                     page = PagePath.TATTOO_ADMIN;
                 } else {
-                    // TODO: 25.09.2020 add smth
-                    page = PagePath.ERROR;
+                    request.setAttribute(RequestParameter.TATTOO_FIND_ERROR_MESSAGE, true);
+                    page = PagePath.MESSAGE;
                 }
             } else {
-                // TODO: 25.09.2020 add smth
-                page = PagePath.ERROR;
+                request.setAttribute(RequestParameter.TATTOO_ALLOW_ERROR_MESSAGE, true);
+                page = PagePath.MESSAGE;
             }
         } catch (ServiceException e) {
-            LOGGER.log(Level.ERROR, "Error while allow tattoo", e);
+            LOGGER.log(Level.ERROR, "Error while allowing tattoo", e);
             request.setAttribute(RequestParameter.ERROR_MESSAGE, e);
             page = PagePath.ERROR;
         }

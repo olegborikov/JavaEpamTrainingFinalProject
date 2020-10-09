@@ -39,10 +39,8 @@ public class LoginCommand implements Command {
                         session.setAttribute(RequestParameter.ROLE, user.getUserRole().getName());
                         session.setAttribute(RequestParameter.LOGIN, user.getLogin());
                     } else {
-                        page = PagePath.EMAIL_CONFIRM;
-                        request.setAttribute(RequestParameter.CONFIRM_EMAIL_MESSAGE,
-                                "You need to confirm your mail by following the " +
-                                        "link in massage, that was send to your email");
+                        request.setAttribute(RequestParameter.USER_EMAIL_CONFIRM_MESSAGE, true);
+                        page = PagePath.MESSAGE;
                     }
                 }
             } else {

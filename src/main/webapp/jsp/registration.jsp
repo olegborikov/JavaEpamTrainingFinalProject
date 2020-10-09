@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <fmt:setLocale value="${currentLocale}"/>
@@ -118,7 +119,10 @@
                                        placeholder='<fmt:message
                                         key="registration.passwordConfirm"/>'>
                             </div>
-                            <div style="color: red"> ${errorDataMessage}</div>
+                            <c:if test="${incorrectDataMessage}">
+                                <div style="color: red"><fmt:message
+                                        key="registration.incorrectDataMessage"/></div>
+                            </c:if>
                             <button type="submit" class="btn btn-outline-secondary"
                                     name="commandName" value="registration_command">
                                 <fmt:message key="registration.signUp"/>

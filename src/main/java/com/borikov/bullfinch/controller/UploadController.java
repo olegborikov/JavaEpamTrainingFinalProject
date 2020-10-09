@@ -40,7 +40,7 @@ public class UploadController extends HttpServlet {
             request.setAttribute(RequestParameter.PHOTO_NAME, photoName.get());
             dispatcherPath = DISPATCHER_PATH_CONTROLLER;
         } else {
-            request.setAttribute(RequestParameter.ERROR_IMAGE_MESSAGE, true);
+            request.setAttribute(RequestParameter.INCORRECT_IMAGE_MESSAGE, true);
         }
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(dispatcherPath);
         dispatcher.forward(request, response);

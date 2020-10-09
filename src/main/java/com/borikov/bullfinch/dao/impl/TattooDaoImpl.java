@@ -91,7 +91,7 @@ public class TattooDaoImpl implements TattooDao {
             }
             return tattoos;
         } catch (SQLException | ConnectionPoolException e) {
-            throw new DaoException("Finding all tattoos error", e);
+            throw new DaoException("Finding tattoos error", e);
         }
     }
 
@@ -114,7 +114,7 @@ public class TattooDaoImpl implements TattooDao {
             }
             return tattoos;
         } catch (SQLException | ConnectionPoolException e) {
-            throw new DaoException("Finding all tattoos error", e);
+            throw new DaoException("Finding tattoos error", e);
         }
     }
 
@@ -139,7 +139,7 @@ public class TattooDaoImpl implements TattooDao {
             }
             return tattoos;
         } catch (SQLException | ConnectionPoolException e) {
-            throw new DaoException("Finding tattoos by allowed error", e);
+            throw new DaoException("Finding tattoos error", e);
         }
     }
 
@@ -262,7 +262,7 @@ public class TattooDaoImpl implements TattooDao {
             statement.setLong(1, id);
             return statement.executeUpdate() > 0;
         } catch (SQLException | ConnectionPoolException e) {
-            throw new DaoException("Offer tattoo error", e);
+            throw new DaoException("Allow tattoo error", e);
         }
     }
 
@@ -274,7 +274,7 @@ public class TattooDaoImpl implements TattooDao {
             statement.setLong(1, id);
             return statement.executeUpdate() > 0;
         } catch (SQLException | ConnectionPoolException e) {
-            throw new DaoException("Offer tattoo error", e);
+            throw new DaoException("Delete tattoo error", e);
         }
     }
 
@@ -286,7 +286,7 @@ public class TattooDaoImpl implements TattooDao {
             statement.setLong(1, id);
             return statement.executeUpdate() > 0;
         } catch (SQLException | ConnectionPoolException e) {
-            throw new DaoException("Offer tattoo error", e);
+            throw new DaoException("Archive tattoo error", e);
         }
     }
 
@@ -298,7 +298,7 @@ public class TattooDaoImpl implements TattooDao {
             statement.setLong(1, id);
             return statement.executeUpdate() > 0;
         } catch (SQLException | ConnectionPoolException e) {
-            throw new DaoException("Offer tattoo error", e);
+            throw new DaoException("Unarchive tattoo error", e);
         }
     }
 
@@ -313,7 +313,7 @@ public class TattooDaoImpl implements TattooDao {
             statement.setLong(4, tattoo.getTattooId());
             return statement.executeUpdate() > 0;
         } catch (SQLException | ConnectionPoolException e) {
-            throw new DaoException("Offer tattoo error", e);
+            throw new DaoException("Update tattoo error", e);
         }
     }
 }

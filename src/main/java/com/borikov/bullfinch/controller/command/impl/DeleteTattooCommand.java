@@ -25,13 +25,13 @@ public class DeleteTattooCommand implements Command {
         try {
             if (tattooService.deleteTattoo(tattooId)) {
                 // TODO: 09.10.2020   photoFileManager.delete(photoName);
-               page=PagePath.HOME;// TODO: 08.10.2020 make delete confirm page
+                request.setAttribute(RequestParameter.TATTOO_DELETE_CONFIRM_MESSAGE, true);
             } else {
-                // TODO: 25.09.2020 add smth
-                page = PagePath.ERROR;
+                request.setAttribute(RequestParameter.TATTOO_DELETE_ERROR_MESSAGE, true);
             }
+            page = PagePath.MESSAGE;
         } catch (ServiceException e) {
-            LOGGER.log(Level.ERROR, "Error while allow tattoo", e);
+            LOGGER.log(Level.ERROR, "Error while deleting tattoo", e);
             request.setAttribute(RequestParameter.ERROR_MESSAGE, e);
             page = PagePath.ERROR;
         }

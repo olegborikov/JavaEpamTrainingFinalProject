@@ -12,6 +12,8 @@ import java.util.Optional;
 
 public class PasswordEncryptor {
     private static final String ENCRYPTION_ALGORITHM = "SHA-1";
+    private static final int SIGNUM_DEFAULT = 1;
+    private static final int HEXADECIMAL_RADIX = 16;
     private static final Logger LOGGER = LogManager.getLogger();
 
     private PasswordEncryptor() {
@@ -23,10 +25,10 @@ public class PasswordEncryptor {
             MessageDigest messageDigest = MessageDigest.getInstance(ENCRYPTION_ALGORITHM);
             messageDigest.update(password.getBytes(StandardCharsets.UTF_8));
             byte[] passwordEncodedBytes = messageDigest.digest();
-            BigInteger passwordBigInt = new BigInteger(1, passwordEncodedBytes);
-            encryptedPassword = Optional.of(passwordBigInt.toString(16));
+            BigInteger passwordBigInt = new BigInteger(SIGNUM_DEFAULT, passwordEncodedBytes);
+            encryptedPassword = Optional.of(passwordBigInt.toString(HEXADECIMAL_RADIX));
         } catch (NoSuchAlgorithmException e) {
-            LOGGER.log(Level.ERROR, "Error while encrypt password");
+            LOGGER.log(Level.ERROR, "Error while encrypting password");
         }
         return encryptedPassword;
     }

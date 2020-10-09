@@ -31,11 +31,11 @@ public class BrowseTattooPageCommand implements Command {
                 request.setAttribute(RequestParameter.TATTOO, tattoo.get());
                 page = PagePath.TATTOO;
             } else {
-                // TODO: 25.09.2020 add smth
-                page = PagePath.ERROR;
+                request.setAttribute(RequestParameter.TATTOO_FIND_ERROR_MESSAGE, true);
+                page = PagePath.MESSAGE;
             }
         } catch (ServiceException e) {
-            LOGGER.log(Level.ERROR, "Error while finding tattoos by id", e);
+            LOGGER.log(Level.ERROR, "Error while finding tattoo", e);
             request.setAttribute(RequestParameter.ERROR_MESSAGE, e);
             page = PagePath.ERROR;
         }
