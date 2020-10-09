@@ -33,4 +33,6 @@ public interface TattooService {
     boolean archiveTattoo(String id) throws ServiceException;
 
     boolean unarchiveTattoo(String id) throws ServiceException;
+
+    boolean editTattoo(String id, String name, String description, String price) throws ServiceException;
 }

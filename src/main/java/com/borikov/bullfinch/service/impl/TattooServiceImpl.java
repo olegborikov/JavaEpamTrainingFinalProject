@@ -115,7 +115,7 @@ public class TattooServiceImpl implements TattooService {
             }
             return result;
         } catch (DaoException e) {
-            throw new ServiceException("Error while adding tattoo", e);
+            throw new ServiceException("Error while offer tattoo", e);
         }
     }
 
@@ -130,7 +130,7 @@ public class TattooServiceImpl implements TattooService {
             }
             return result;
         } catch (DaoException e) {
-            throw new ServiceException("Error while finding tattoos by name", e);
+            throw new ServiceException("Error while allow tattoo", e);
         }
     }
 
@@ -145,7 +145,7 @@ public class TattooServiceImpl implements TattooService {
             }
             return result;
         } catch (DaoException e) {
-            throw new ServiceException("Error while finding tattoos by name", e);
+            throw new ServiceException("Error while delete tattoo", e);
         }
     }
 
@@ -160,7 +160,7 @@ public class TattooServiceImpl implements TattooService {
             }
             return result;
         } catch (DaoException e) {
-            throw new ServiceException("Error while finding tattoos by name", e);
+            throw new ServiceException("Error while archive tattoo", e);
         }
     }
 
@@ -175,7 +175,27 @@ public class TattooServiceImpl implements TattooService {
             }
             return result;
         } catch (DaoException e) {
-            throw new ServiceException("Error while finding tattoos by name", e);
+            throw new ServiceException("Error while unarchive tattoo", e);
+        }
+    }
+
+    @Override
+    public boolean editTattoo(String id, String name, String description, String price) throws ServiceException {
+        try {
+            TattooValidator tattooValidator = new TattooValidator();
+            boolean result = false;
+            if (tattooValidator.isIdCorrect(id)
+                    && tattooValidator.isNameCorrect(name)
+                    && tattooValidator.isDescriptionCorrect(description)
+                    && tattooValidator.isPriceCorrect(price)) {
+                long tattooId = Long.parseLong(id);
+                double tattooPrice = Double.parseDouble(price);
+                Tattoo tattoo = new Tattoo(tattooId, name, description, tattooPrice);
+                result = tattooDao.update(tattoo);
+            }
+            return result;
+        } catch (DaoException e) {
+            throw new ServiceException("Error while edit tattoo", e);
         }
     }
 }

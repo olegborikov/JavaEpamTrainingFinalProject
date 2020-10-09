@@ -45,6 +45,8 @@ public class TattooDaoImpl implements TattooDao {
     private static final String DELETE = "DELETE FROM tattoo WHERE tattoo_id = ?";
     private static final String ARCHIVE = "UPDATE tattoo SET is_archived = 1 WHERE tattoo_id = ?";
     private static final String UNARCHIVE = "UPDATE tattoo SET is_archived = 0 WHERE tattoo_id = ?";
+    private static final String UPDATE = "UPDATE tattoo SET tattoo_name = ?, tattoo_description = ?, " +
+            "tattoo_price = ? WHERE tattoo_id = ?";
     private static final String ADD_IMAGE = "INSERT INTO image (image_name) VALUES (?)";
     private static final String PERCENT = "%";
 
@@ -294,6 +296,21 @@ public class TattooDaoImpl implements TattooDao {
              PreparedStatement statement =
                      connection.prepareStatement(UNARCHIVE)) {
             statement.setLong(1, id);
+            return statement.executeUpdate() > 0;
+        } catch (SQLException | ConnectionPoolException e) {
+            throw new DaoException("Offer tattoo error", e);
+        }
+    }
+
+    @Override
+    public boolean update(Tattoo tattoo) throws DaoException {
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement statement =
+                     connection.prepareStatement(UPDATE)) {
+            statement.setString(1, tattoo.getName());
+            statement.setString(2, tattoo.getDescription());
+            statement.setDouble(3, tattoo.getPrice());
+            statement.setLong(4, tattoo.getTattooId());
             return statement.executeUpdate() > 0;
         } catch (SQLException | ConnectionPoolException e) {
             throw new DaoException("Offer tattoo error", e);

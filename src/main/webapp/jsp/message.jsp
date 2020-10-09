@@ -23,6 +23,16 @@
             src="${pageContext.request.contextPath}/assets/js/project.js"></script>
 </head>
 <body>
-
+<jsp:include page="navbar.jsp"/>
+<section class="masthead">
+    <div class="intro-body">
+        <div class="container">
+            <c:if test="${tattooEditMessage}">
+                <h2><fmt:message key="message.tattooEditMessage"/></h2>
+            </c:if>
+        </div>
+    </div>
+</section>
+<jsp:include page="footer.jsp"/>
 </body>
 </html>

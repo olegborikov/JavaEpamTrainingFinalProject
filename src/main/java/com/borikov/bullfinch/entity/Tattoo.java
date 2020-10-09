@@ -10,6 +10,13 @@ public class Tattoo {
     private boolean isArchived;
     private Image image;
 
+    public Tattoo(Long tattooId, String name, String description, double price) {
+        this.tattooId = tattooId;
+        this.name = name;
+        this.description = description;
+        this.price = price;
+    }
+
     public Tattoo(String name, String description, double price, Image image) {
         this.name = name;
         this.description = description;

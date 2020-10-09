@@ -24,7 +24,7 @@ public class OfferTattooCommand implements Command {
         String tattooName = request.getParameter(RequestParameter.NAME);
         String description = request.getParameter(RequestParameter.DESCRIPTION);
         String photoName = (String) request.getAttribute(RequestParameter.PHOTO_NAME);
-        String price = (String) request.getParameter(RequestParameter.PRICE);
+        String price = request.getParameter(RequestParameter.PRICE);
         try {
             if (tattooService.offerTattoo(tattooName, description, price, photoName)) {
                 request.setAttribute(RequestParameter.TATTOO_OFFER_CONFIRM_MESSAGE, true);

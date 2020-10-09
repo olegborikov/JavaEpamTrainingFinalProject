@@ -25,7 +25,7 @@
 <body id="page-top">
 <jsp:include page="navbar.jsp"/>
 <section style="text-align: left;padding-top: 50px" class="masthead">
-      <div class="intro-body">
+    <div class="intro-body">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-2"></div>
@@ -37,7 +37,8 @@
                 <div class="col-md-4">
                     <br/>
                     <form action="controller" method="post" autocomplete="off">
-                        <input type="hidden" name="commandName" value="offer_tattoo_command">
+                        <input type="hidden" name="commandName" value="edit_tattoo_command">
+                        <input type="hidden" name="tattooId" value="${tattoo.tattooId}">
                         <div class="row form-group">
                             <div class="col-6">
                                 <label class="text-white">

@@ -33,4 +33,6 @@ public interface TattooDao {
     boolean archive(long id) throws DaoException;
 
     boolean unarchive(long id) throws DaoException;
+
+    boolean update(Tattoo tattoo) throws DaoException;
 }

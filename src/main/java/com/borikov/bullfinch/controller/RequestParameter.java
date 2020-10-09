@@ -32,6 +32,7 @@ public class RequestParameter {
     public static final String TATTOO_OFFER_CONFIRM_MESSAGE = "tattooOfferConfirmMessage";
     public static final String ERROR_IMAGE_MESSAGE = "errorImageMessage";
     public static final String REQUEST_ATTRIBUTE_HANDLER = "requestAttributeHandler";
+    public static final String TATTOO_EDIT_MESSAGE = "tattooEditMessage";
 
     private RequestParameter() {
     }
