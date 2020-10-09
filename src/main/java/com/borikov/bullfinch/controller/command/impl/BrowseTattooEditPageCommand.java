@@ -3,19 +3,19 @@ package com.borikov.bullfinch.controller.command.impl;
 import com.borikov.bullfinch.controller.PagePath;
 import com.borikov.bullfinch.controller.RequestParameter;
 import com.borikov.bullfinch.controller.command.Command;
+import com.borikov.bullfinch.entity.Tattoo;
 import com.borikov.bullfinch.exception.ServiceException;
 import com.borikov.bullfinch.service.TattooService;
 import com.borikov.bullfinch.service.impl.TattooServiceImpl;
-import com.borikov.bullfinch.util.PhotoFileManager;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Optional;
 
-public class DeleteTattooCommand implements Command {
+public class BrowseTattooEditPageCommand implements Command {
     private static final TattooService tattooService = new TattooServiceImpl();
-    private static final PhotoFileManager photoFileManager = new PhotoFileManager();
     private static final Logger LOGGER = LogManager.getLogger();
 
     @Override
@@ -23,9 +23,10 @@ public class DeleteTattooCommand implements Command {
         String page;
         String tattooId = request.getParameter(RequestParameter.TATTOO_ID);
         try {
-            if (tattooService.deleteTattoo(tattooId)) {
-                // TODO: 09.10.2020   photoFileManager.delete(photoName);
-               page=PagePath.HOME;// TODO: 08.10.2020 make delete confirm page
+            Optional<Tattoo> tattoo = tattooService.findTattooById(tattooId);
+            if (tattoo.isPresent()) {
+                request.setAttribute(RequestParameter.TATTOO, tattoo.get());
+                page = PagePath.TATTOO_EDIT;
             } else {
                 // TODO: 25.09.2020 add smth
                 page = PagePath.ERROR;

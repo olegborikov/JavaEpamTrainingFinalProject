@@ -13,13 +13,13 @@ public interface TattooDao {
 
     List<Tattoo> findByArchived(boolean isArchived) throws DaoException;
 
-    List<Tattoo> findByAllowedAndArchived(
+    List<Tattoo> findByAllowedAndArchived(// TODO: 08.10.2020 refactor name
             boolean isAllowed, boolean isArchived) throws DaoException;
 
-    List<Tattoo> findByNameAndAllowedAndArchived(
+    List<Tattoo> findByNameAndAllowedAndArchived(// TODO: 08.10.2020 refactor name
             String name, boolean isAllowed, boolean isArchived) throws DaoException;
 
-    Optional<Tattoo> findByIdAndAllowedAndArchived(
+    Optional<Tattoo> findByIdAndAllowedAndArchived(// TODO: 08.10.2020 refactor name
             long id, boolean isAllowed, boolean isArchived) throws DaoException;
 
     Optional<Tattoo> findById(long id) throws DaoException;

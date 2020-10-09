@@ -34,10 +34,11 @@
                 </div>
                 <div class="col-12 col-md-3">
                     <form name="offerForm" method="post" action="controller">
+                        <input type="hidden" name="tattooId" value="${tattoo.tattooId}">
                         <div style="text-align: right">
                         <button style="vertical-align: center" class="btn btn-outline-secondary"
                                 name="commandName"
-                                value="browse_edit_tattoo_page_command">
+                                value="browse_tattoo_edit_page_command">
                             <fmt:message key="tattooAdmin.editTattoo"/>
                         </button>
                         </div>
@@ -93,28 +94,30 @@
                         </c:choose>
                     </p>
                     <p><fmt:message key="tattooAdmin.archived"/>:
-                        <c:choose>
-                            <c:when test="${tattoo.archived}">
-                                <fmt:message key="tattooAdmin.yes"/>
-                                <form name="archiveForm" method="post" action="controller">
-                                    <input type="hidden" name="tattooId" value="${tattoo.tattooId}">
-                                    <button type="submit" class="btn btn-outline-secondary" name="commandName"
-                                            value="unarchive_tattoo_command">
-                                        <fmt:message key="tattooAdmin.unarchive"/>
-                                    </button>
-                                </form>
-                            </c:when>
-                            <c:otherwise>
-                                <fmt:message key="tattooAdmin.no"/>
-                                <form name="unArchiveForm" method="post" action="controller">
-                                    <input type="hidden" name="tattooId" value="${tattoo.tattooId}">
-                                    <button type="submit" class="btn btn-outline-secondary" name="commandName"
-                                            value="archive_tattoo_command">
-                                        <fmt:message key="tattooAdmin.archive"/>
-                                    </button>
-                                </form>
-                            </c:otherwise>
-                        </c:choose>
+                        <c:if test="${tattoo.allowed}">
+                            <c:choose>
+                                <c:when test="${tattoo.archived}">
+                                    <fmt:message key="tattooAdmin.yes"/>
+                                    <form name="archiveForm" method="post" action="controller">
+                                        <input type="hidden" name="tattooId" value="${tattoo.tattooId}">
+                                        <button type="submit" class="btn btn-outline-secondary" name="commandName"
+                                                value="unarchive_tattoo_command">
+                                            <fmt:message key="tattooAdmin.unarchive"/>
+                                        </button>
+                                    </form>
+                                </c:when>
+                                <c:otherwise>
+                                    <fmt:message key="tattooAdmin.no"/>
+                                    <form name="unArchiveForm" method="post" action="controller">
+                                        <input type="hidden" name="tattooId" value="${tattoo.tattooId}">
+                                        <button type="submit" class="btn btn-outline-secondary" name="commandName"
+                                                value="archive_tattoo_command">
+                                            <fmt:message key="tattooAdmin.archive"/>
+                                        </button>
+                                    </form>
+                                </c:otherwise>
+                            </c:choose>
+                        </c:if>
                     </p>
                 </div>
                 <div class="col-md-1">
