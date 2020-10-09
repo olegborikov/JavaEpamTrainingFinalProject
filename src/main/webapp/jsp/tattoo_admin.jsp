@@ -58,9 +58,9 @@
                 <div class="col-md-4">
                     <br/>
                     <h3 class="text-white"><fmt:message key="tattooAdmin.information"/></h3>
-                    <p><fmt:message key="tattooAdmin.name"/>: ${tattoo.name}</p>
-                    <p><fmt:message key="tattooAdmin.description"/>: ${tattoo.description}</p>
-                    <p><fmt:message key="tattooAdmin.price"/>:
+                    <p><fmt:message key="tattooAdmin.name"/> ${tattoo.name}</p>
+                    <p><fmt:message key="tattooAdmin.description"/> ${tattoo.description}</p>
+                    <p><fmt:message key="tattooAdmin.price"/>
                         <c:choose>
                             <c:when test="${empty tattoo.price}">
                                 <fmt:message key="tattooAdmin.none"/>
@@ -70,9 +70,9 @@
                             </c:otherwise>
                         </c:choose>
                     </p>
-                    <p><fmt:message key="tattooAdmin.rating"/>: ${tattoo.rating}</p>
+                    <p><fmt:message key="tattooAdmin.rating"/> ${tattoo.rating}</p>
                     <p>
-                        <fmt:message key="tattooAdmin.allowed"/>:
+                        <fmt:message key="tattooAdmin.allowed"/>
                         <c:choose>
                             <c:when test="${tattoo.allowed}">
                                 <fmt:message key="tattooAdmin.yes"/>
@@ -93,31 +93,33 @@
                             </c:otherwise>
                         </c:choose>
                     </p>
-                    <p><fmt:message key="tattooAdmin.archived"/>:
-                        <c:if test="${tattoo.allowed}">
+                    <p><fmt:message key="tattooAdmin.archived"/>
                             <c:choose>
                                 <c:when test="${tattoo.archived}">
                                     <fmt:message key="tattooAdmin.yes"/>
-                                    <form name="archiveForm" method="post" action="controller">
-                                        <input type="hidden" name="tattooId" value="${tattoo.tattooId}">
-                                        <button type="submit" class="btn btn-outline-secondary" name="commandName"
-                                                value="unarchive_tattoo_command">
-                                            <fmt:message key="tattooAdmin.unarchive"/>
-                                        </button>
-                                    </form>
+                                    <c:if test="${tattoo.allowed}">
+                                        <form name="archiveForm" method="post" action="controller">
+                                            <input type="hidden" name="tattooId" value="${tattoo.tattooId}">
+                                            <button type="submit" class="btn btn-outline-secondary" name="commandName"
+                                                    value="unarchive_tattoo_command">
+                                                <fmt:message key="tattooAdmin.unarchive"/>
+                                            </button>
+                                        </form>
+                                    </c:if>
                                 </c:when>
                                 <c:otherwise>
                                     <fmt:message key="tattooAdmin.no"/>
-                                    <form name="unArchiveForm" method="post" action="controller">
-                                        <input type="hidden" name="tattooId" value="${tattoo.tattooId}">
-                                        <button type="submit" class="btn btn-outline-secondary" name="commandName"
-                                                value="archive_tattoo_command">
-                                            <fmt:message key="tattooAdmin.archive"/>
-                                        </button>
-                                    </form>
+                                    <c:if test="${tattoo.allowed}">
+                                        <form name="unArchiveForm" method="post" action="controller">
+                                            <input type="hidden" name="tattooId" value="${tattoo.tattooId}">
+                                            <button type="submit" class="btn btn-outline-secondary" name="commandName"
+                                                    value="archive_tattoo_command">
+                                                <fmt:message key="tattooAdmin.archive"/>
+                                            </button>
+                                        </form>
+                                    </c:if>
                                 </c:otherwise>
                             </c:choose>
-                        </c:if>
                     </p>
                 </div>
                 <div class="col-md-1">

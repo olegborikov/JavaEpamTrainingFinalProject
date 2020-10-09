@@ -36,10 +36,10 @@
                 <div class="col-md-4">
                     <br/>
                     <h3 class="text-white"><fmt:message key="tattoo.information"/></h3>
-                    <p><fmt:message key="tattoo.name"/>: ${tattoo.name}</p>
-                    <p><fmt:message key="tattoo.description"/>: ${tattoo.description}</p>
-                    <p><fmt:message key="tattoo.price"/>: ${tattoo.price} <fmt:message key="tattoo.rubles"/></p>
-                    <p><fmt:message key="tattoo.rating"/>: ${tattoo.rating}</p>
+                    <p><fmt:message key="tattoo.name"/> ${tattoo.name}</p>
+                    <p><fmt:message key="tattoo.description"/> ${tattoo.description}</p>
+                    <p><fmt:message key="tattoo.price"/> ${tattoo.price} <fmt:message key="tattoo.rubles"/></p>
+                    <p><fmt:message key="tattoo.rating"/> ${tattoo.rating}</p>
                 </div>
                 <div class="col-md-1">
                 </div>

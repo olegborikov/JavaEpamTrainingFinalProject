@@ -29,28 +29,47 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 mb-5">
-                    <form action="/upload" enctype="multipart/form-data" method="post" autocomplete="off">
+                    <form action="/upload" enctype="multipart/form-data" method="post"
+                          autocomplete="off">
                         <input type="hidden" name="commandName" value="offer_tattoo_command">
                         <div class="row form-group">
                             <div class="col-md-6 mb-3 mb-md-0">
                                 <label class="text-white">
                                     <fmt:message key="tattooOffer.name"/>
                                 </label>
-                                <input style="background-color: black" name="name" required maxlength="25"
+                                <input style="background-color: black" name="name" required
+                                       maxlength="25"
                                        type="text" class="form-control text-white"
                                        oninvalid="this.setCustomValidity('<fmt:message
                                                key="tattooOffer.nameValidate"/>')"
                                        onchange="this.setCustomValidity('')"
-                                       pattern="^[\p{L}]{2,25}"
+                                       pattern="^[\p{L}]{2,25}$"
                                        title='<fmt:message key="tattooOffer.nameValidate"/>'
                                        placeholder='<fmt:message key="tattooOffer.name"/>'>
                             </div>
                         </div>
                         <div class="row form-group">
+                            <div class="col-md-6 mb-3 mb-md-0">
+                                <label class="text-white">
+                                    <fmt:message key="tattooOffer.price"/>
+                                </label>
+                                <input style="background-color: black" name="price" required
+                                       maxlength="10"
+                                       type="text" class="form-control text-white"
+                                       oninvalid="this.setCustomValidity('<fmt:message
+                                               key="tattooOffer.priceValidate"/>')"
+                                       onchange="this.setCustomValidity('')"
+                                       title='<fmt:message key="tattooOffer.priceValidate"/>'
+                                       placeholder='<fmt:message key="tattooOffer.price"/>'>
+                            </div>
+                        </div>
+                        <div class="row form-group">
                             <div class="col-md-12">
-                                Upload File: <input type="file" name="content" accept="image/jpeg" required>
+                                <fmt:message key="tattooOffer.fileUpload"/>
+                                <input type="file" name="content" accept="image/jpeg" required>
                                 <c:if test="${errorImageMessage}">
-                                    <div style="color: red"><fmt:message key="tattooOffer.errorImageMessage"/></div>
+                                    <div style="color: red"><fmt:message
+                                            key="tattooOffer.errorImageMessage"/></div>
                                 </c:if>
                             </div>
                         </div>

@@ -40,7 +40,7 @@ public class TattooDaoImpl implements TattooDao {
             "image_id, image_name FROM tattoo INNER JOIN image ON tattoo.image_id_fk = image.image_id " +
             "WHERE tattoo_id = ?";
     private static final String OFFER = "INSERT INTO tattoo (tattoo_name, tattoo_description, " +
-            "tattoo_rating, is_allowed, is_archived, image_id_fk) VALUES (?, ?, 5, 0, 0, ?)";
+            "tattoo_price, tattoo_rating, is_allowed, is_archived, image_id_fk) VALUES (?, ?, ?, 5, 0, 0, ?)";
     private static final String ALLOW = "UPDATE tattoo SET is_allowed = 1 WHERE tattoo_id = ?";
     private static final String DELETE = "DELETE FROM tattoo WHERE tattoo_id = ?";
     private static final String ARCHIVE = "UPDATE tattoo SET is_archived = 1 WHERE tattoo_id = ?";
@@ -239,7 +239,8 @@ public class TattooDaoImpl implements TattooDao {
             }
             statementTattoo.setString(1, tattoo.getName());
             statementTattoo.setString(2, tattoo.getDescription());
-            statementTattoo.setLong(3, tattoo.getImage().getImageId());
+            statementTattoo.setDouble(3, tattoo.getPrice());
+            statementTattoo.setLong(4, tattoo.getImage().getImageId());
             boolean result = statementTattoo.executeUpdate() > 0;
             ResultSet generatedKeysTattoo = statementTattoo.getGeneratedKeys();
             if (generatedKeysTattoo.next()) {

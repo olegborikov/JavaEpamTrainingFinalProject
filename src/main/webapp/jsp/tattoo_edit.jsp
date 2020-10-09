@@ -60,7 +60,7 @@
                                 <label class="text-white">
                                     <fmt:message key="tattooEdit.price"/>
                                 </label>
-                                <input style="background-color: black" name="name" required
+                                <input style="background-color: black" name="price" required
                                        maxlength="25"
                                        type="text" class="form-control text-white"
                                        oninvalid="this.setCustomValidity('<fmt:message

@@ -20,6 +20,7 @@ public class RequestParameter {
     public static final String CURRENT_LOCALE = "currentLocale";
     public static final String NEW_LOCALE = "newLocale";
     public static final String TATTOO_ID = "tattooId";
+    public static final String PRICE = "price";
     public static final String TATTOO = "tattoo";
     public static final String CURRENT_PAGE = "currentPage";
     public static final String USERS = "users";
