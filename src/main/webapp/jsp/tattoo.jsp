@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <fmt:setLocale value="${currentLocale}"/>
 <fmt:setBundle basename="i18n.application_message"/>
@@ -39,6 +40,16 @@
                     <p><fmt:message key="tattoo.description"/> ${tattoo.description}</p>
                     <p><fmt:message key="tattoo.price"/> ${tattoo.price} <fmt:message key="tattoo.rubles"/></p>
                     <p><fmt:message key="tattoo.rating"/> ${tattoo.rating}</p>
+                    <c:if test="${role.equals('user')}">
+                        <form name="orderForm" method="post" action="controller">
+                            <input type="hidden" name="tattooId" value="${tattoo.tattooId}">
+                            <button type="submit" class="btn btn-outline-secondary"
+                                    name="commandName"
+                                    value="browse_tattoo_order_page_command">
+                                <fmt:message key="tattoo.orderTattoo"/>
+                            </button>
+                        </form>
+                    </c:if>
                 </div>
                 <div class="col-md-1">
                 </div>
