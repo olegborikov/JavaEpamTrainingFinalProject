@@ -74,6 +74,10 @@
             <c:if test="${userFindErrorMessage}">
                 <h2><fmt:message key="message.userFindErrorMessage"/></h2>
             </c:if>
+
+            <c:if test="${tattooOrderConfirmMessage}">
+                <h2><fmt:message key="message.tattooOrderConfirmMessage"/></h2>
+            </c:if>
         </div>
     </div>
 </section>

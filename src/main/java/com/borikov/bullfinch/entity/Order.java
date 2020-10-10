@@ -1,14 +1,16 @@
 package com.borikov.bullfinch.entity;
 
+import java.util.Date;
+
 public class Order {
     private Long orderId;
     private double price;
-    private long date;// TODO: 16.09.2020 which type?
+    private Date date;
     private String description;
     private User user;
     private Tattoo tattoo;
 
-    public Order(Long orderId, double price, long date,
+    public Order(Long orderId, double price, Date date,
                  String description, User user, Tattoo tattoo) {
         this.orderId = orderId;
         this.price = price;
@@ -34,11 +36,11 @@ public class Order {
         this.price = price;
     }
 
-    public long getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(long date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
@@ -78,10 +80,10 @@ public class Order {
         if (Double.compare(order.price, price) != 0) {
             return false;
         }
-        if (date != order.date) {
+        if (orderId != null ? !orderId.equals(order.orderId) : order.orderId != null) {
             return false;
         }
-        if (orderId != null ? !orderId.equals(order.orderId) : order.orderId != null) {
+        if (date != null ? !date.equals(order.date) : order.date != null) {
             return false;
         }
         if (description != null ? !description.equals(order.description)
@@ -101,7 +103,7 @@ public class Order {
         result = orderId != null ? orderId.hashCode() : 0;
         temp = Double.doubleToLongBits(price);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
-        result = 31 * result + (int) (date ^ (date >>> 32));
+        result = 31 * result + (date != null ? date.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + (user != null ? user.hashCode() : 0);
         result = 31 * result + (tattoo != null ? tattoo.hashCode() : 0);

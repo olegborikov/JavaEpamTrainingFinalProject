@@ -3,13 +3,11 @@ package com.borikov.bullfinch.entity;
 public class Discount {
     private Long discountId;
     private byte discountPercent;
-    private long endDate;// TODO: 16.09.2020 which type?
     private User user;
 
-    public Discount(Long discountId, byte discountPercent, long endDate, User user) {
+    public Discount(Long discountId, byte discountPercent, User user) {
         this.discountId = discountId;
         this.discountPercent = discountPercent;
-        this.endDate = endDate;
         this.user = user;
     }
 
@@ -29,13 +27,6 @@ public class Discount {
         this.discountPercent = discountPercent;
     }
 
-    public long getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(long endDate) {
-        this.endDate = endDate;
-    }
 
     public User getUser() {
         return user;
@@ -57,9 +48,6 @@ public class Discount {
         if (discountPercent != discount.discountPercent) {
             return false;
         }
-        if (endDate != discount.endDate) {
-            return false;
-        }
         if (discountId != null ? !discountId.equals(discount.discountId)
                 : discount.discountId != null) {
             return false;
@@ -71,7 +59,6 @@ public class Discount {
     public int hashCode() {
         int result = discountId != null ? discountId.hashCode() : 0;
         result = 31 * result + (int) discountPercent;
-        result = 31 * result + (int) (endDate ^ (endDate >>> 32));
         result = 31 * result + (user != null ? user.hashCode() : 0);
         return result;
     }
@@ -81,7 +68,6 @@ public class Discount {
         final StringBuilder sb = new StringBuilder("Discount{");
         sb.append("discountId=").append(discountId);
         sb.append(", discountPercent=").append(discountPercent);
-        sb.append(", endDate=").append(endDate);
         sb.append(", user=").append(user);
         sb.append('}');
         return sb.toString();

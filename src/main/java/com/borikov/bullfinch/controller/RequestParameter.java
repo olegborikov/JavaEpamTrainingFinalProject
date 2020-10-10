@@ -45,6 +45,7 @@ public class RequestParameter {
     public static final String TATTOO_OFFER_CONFIRM_MESSAGE = "tattooOfferConfirmMessage";
     public static final String TATTOO_ADD_CONFIRM_MESSAGE = "tattooAddConfirmMessage";
     public static final String USER_FIND_ERROR_MESSAGE = "userFindErrorMessage";
+    public static final String TATTOO_ORDER_CONFIRM_MESSAGE = "tattooOrderConfirmMessage";
 
     private RequestParameter() {
     }
