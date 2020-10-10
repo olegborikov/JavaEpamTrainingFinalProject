@@ -129,6 +129,24 @@ public class TattooServiceImpl implements TattooService {
     }
 
     @Override
+    public boolean addTattoo(String tattooName, String description, String price, String imageName) throws ServiceException {
+        try {
+            TattooValidator tattooValidator = new TattooValidator();
+            boolean result = false;
+            if (tattooValidator.isNameCorrect(tattooName)
+                    && tattooValidator.isDescriptionCorrect(description)
+                    && tattooValidator.isPriceCorrect(price)) {
+                double tattooPrice = Double.parseDouble(price);
+                Tattoo tattoo = new Tattoo(tattooName, description, tattooPrice, new Image(null, imageName));
+                result = tattooDao.add(tattoo);
+            }
+            return result;
+        } catch (DaoException e) {
+            throw new ServiceException("Error while adding tattoo", e);
+        }
+    }
+
+    @Override
     public boolean allowTattoo(String id) throws ServiceException {
         boolean result = false;
         TattooValidator tattooValidator = new TattooValidator();

@@ -13,6 +13,7 @@ public class RequestParameter {
     public static final String ERROR_MESSAGE = "errorMessage";
     public static final String TATTOOS = "tattoos";
     public static final String ALL_TATTOOS = "allTattoos";
+    public static final String ADD_TATTOO = "addTattoo";
     public static final String TATTOO_NAME = "tattooName";
     public static final String CURRENT_LOCALE = "currentLocale";
     public static final String NEW_LOCALE = "newLocale";
@@ -30,7 +31,6 @@ public class RequestParameter {
 
     public static final String INCORRECT_IMAGE_MESSAGE = "incorrectImageMessage";
     public static final String INCORRECT_DATA_MESSAGE = "incorrectDataMessage";
-    public static final String TATTOO_EDIT_CONFIRM_MESSAGE = "tattooEditConfirmMessage";
     public static final String TATTOO_FIND_ERROR_MESSAGE = "tattooFindErrorMessage";
     public static final String TATTOO_ALLOW_ERROR_MESSAGE = "tattooAllowErrorMessage";
     public static final String TATTOO_ARCHIVE_ERROR_MESSAGE = "tattooArchiveErrorMessage";
@@ -41,6 +41,7 @@ public class RequestParameter {
     public static final String TATTOO_DELETE_CONFIRM_MESSAGE = "tattooDeleteConfirmMessage";
     public static final String TATTOO_DELETE_ERROR_MESSAGE = "tattooDeleteErrorMessage";
     public static final String TATTOO_OFFER_CONFIRM_MESSAGE = "tattooOfferConfirmMessage";
+    public static final String TATTOO_ADD_CONFIRM_MESSAGE = "tattooAddConfirmMessage";
 
     private RequestParameter() {
     }

@@ -33,7 +33,7 @@
                         <form name="offerForm" method="post" action="controller">
                             <button style="vertical-align: center" class="btn btn-outline-secondary"
                                     name="commandName"
-                                    value="">
+                                    value="browse_tattoo_add_page_command">
                                 <fmt:message key="tattoosAdmin.addTattoo"/>
                             </button>
                         </form>

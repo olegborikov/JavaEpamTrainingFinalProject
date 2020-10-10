@@ -28,6 +28,8 @@ public interface TattooService {
 
     boolean offerTattoo(String tattooName, String description, String price, String imageName) throws ServiceException;
 
+    boolean addTattoo(String tattooName, String description, String price, String imageName) throws ServiceException;
+
     boolean allowTattoo(String id) throws ServiceException;
 
     boolean deleteTattoo(String id) throws ServiceException;

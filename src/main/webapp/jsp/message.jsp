@@ -27,11 +27,7 @@
 <section class="masthead">
     <div class="intro-body">
         <div class="container">
-            <c:if test="${tattooEditConfirmMessage}">
-                <h2><fmt:message key="message.tattooEditConfirmMessage"/></h2>
-            </c:if>
-
-            <c:if test="${tattooFindErrorMessage}">
+               <c:if test="${tattooFindErrorMessage}">
                 <h2><fmt:message key="message.tattooFindErrorMessage"/></h2>
             </c:if>
 
@@ -69,6 +65,10 @@
 
             <c:if test="${tattooOfferConfirmMessage}">
                 <h2><fmt:message key="message.tattooOfferConfirmMessage"/></h2>
+            </c:if>
+
+            <c:if test="${tattooAddConfirmMessage}">
+                <h2><fmt:message key="message.tattooAddConfirmMessage"/></h2>
             </c:if>
         </div>
     </div>

@@ -44,6 +44,8 @@ public class TattooDaoImpl implements TattooDao {
             "WHERE tattoo_id = ?";
     private static final String OFFER = "INSERT INTO tattoo (tattoo_name, tattoo_description, " +
             "tattoo_price, tattoo_rating, is_allowed, is_archived, image_id_fk) VALUES (?, ?, ?, 5, 0, 0, ?)";
+    private static final String ADD = "INSERT INTO tattoo (tattoo_name, tattoo_description, " +
+            "tattoo_price, tattoo_rating, is_allowed, is_archived, image_id_fk) VALUES (?, ?, ?, 5, 1, 0, ?)";
     private static final String ALLOW = "UPDATE tattoo SET is_allowed = 1 WHERE tattoo_id = ?";
     private static final String DELETE = "DELETE FROM tattoo WHERE tattoo_id = ?";
     private static final String ARCHIVE = "UPDATE tattoo SET is_archived = 1 WHERE tattoo_id = ?";
@@ -277,6 +279,34 @@ public class TattooDaoImpl implements TattooDao {
             return result;
         } catch (SQLException | ConnectionPoolException e) {
             throw new DaoException("Offer tattoo error", e);
+        }
+    }
+
+    @Override
+    public boolean add(Tattoo tattoo) throws DaoException {
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement statementImage =
+                     connection.prepareStatement(ADD_IMAGE, Statement.RETURN_GENERATED_KEYS);
+             PreparedStatement statementTattoo =
+                     connection.prepareStatement(ADD, Statement.RETURN_GENERATED_KEYS)) {
+            statementImage.setString(1, tattoo.getImage().getName());
+            statementImage.executeUpdate();
+            ResultSet generatedKeysImage = statementImage.getGeneratedKeys();
+            if (generatedKeysImage.next()) {
+                tattoo.getImage().setImageId(generatedKeysImage.getLong(1));
+            }
+            statementTattoo.setString(1, tattoo.getName());
+            statementTattoo.setString(2, tattoo.getDescription());
+            statementTattoo.setDouble(3, tattoo.getPrice());
+            statementTattoo.setLong(4, tattoo.getImage().getImageId());
+            boolean result = statementTattoo.executeUpdate() > 0;
+            ResultSet generatedKeysTattoo = statementTattoo.getGeneratedKeys();
+            if (generatedKeysTattoo.next()) {
+                tattoo.setTattooId(generatedKeysTattoo.getLong(1));
+            }
+            return result;
+        } catch (SQLException | ConnectionPoolException e) {
+            throw new DaoException("Add tattoo error", e);
         }
     }
 

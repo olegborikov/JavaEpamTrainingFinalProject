@@ -28,6 +28,8 @@ public interface TattooDao {
 
     boolean offer(Tattoo tattoo) throws DaoException;
 
+    boolean add(Tattoo tattoo) throws DaoException;
+
     boolean allow(long id) throws DaoException;
 
     boolean delete(long id) throws DaoException;
