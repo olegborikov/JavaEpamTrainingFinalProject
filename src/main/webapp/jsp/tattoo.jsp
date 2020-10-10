@@ -4,7 +4,6 @@
 <fmt:setLocale value="${currentLocale}"/>
 <fmt:setBundle basename="i18n.application_message"/>
 <html>
-
 <head>
     <title><fmt:message key="tattoo.title"/></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
@@ -30,7 +29,7 @@
                 <div class="col-md-2"></div>
                 <div class="col-md-5">
                     <img style="max-width: 80%;max-height: 80%"
-                         src="${pageContext.request.contextPath}/assets/image/${tattoo.image.name}.jpg"
+                         src="/images/${tattoo.image.name}.jpg"
                          alt="Responsive image" class="img-fluid">
                 </div>
                 <div class="col-md-4">

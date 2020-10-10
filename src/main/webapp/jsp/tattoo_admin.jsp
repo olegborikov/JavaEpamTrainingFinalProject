@@ -52,7 +52,7 @@
                 <div class="col-md-2"></div>
                 <div class="col-md-5">
                     <img style="max-width: 80%;max-height: 80%"
-                         src="${pageContext.request.contextPath}/assets/image/${tattoo.image.name}.jpg"
+                         src="/images/${tattoo.image.name}.jpg"
                          alt="Responsive image" class="img-fluid">
                 </div>
                 <div class="col-md-4">

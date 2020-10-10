@@ -83,7 +83,7 @@
                                             <fmt:message key="catalog.info"/></button>
                                     </form>
                                 </div>
-                                <img src="${pageContext.request.contextPath}/assets/image/${tattoo.image.name}.jpg"
+                                <img src="/images/${tattoo.image.name}.jpg"
                                      alt="Image" class="img-fluid">
                             </div>
                         </div>

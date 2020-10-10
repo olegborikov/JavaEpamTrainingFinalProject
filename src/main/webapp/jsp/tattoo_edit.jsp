@@ -4,7 +4,6 @@
 
 <fmt:setLocale value="${currentLocale}"/>
 <fmt:setBundle basename="i18n.application_message"/>
-
 <html>
 <head>
     <title><fmt:message key="tattooEdit.title"/></title>
@@ -22,16 +21,16 @@
     <script type="text/javascript"
             src="${pageContext.request.contextPath}/assets/js/project.js"></script>
 </head>
-<body id="page-top">
+<body>
 <jsp:include page="navbar.jsp"/>
-<section style="text-align: left;padding-top: 50px" class="masthead">
+<section style="text-align: left;padding-top: 120px" class="masthead">
     <div class="intro-body">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-2"></div>
                 <div class="col-md-5">
                     <img style="max-width: 80%;max-height: 80%"
-                         src="${pageContext.request.contextPath}/assets/image/${tattoo.image.name}.jpg"
+                         src="/images/${tattoo.image.name}.jpg"
                          alt="Responsive image" class="img-fluid">
                 </div>
                 <div class="col-md-4">
