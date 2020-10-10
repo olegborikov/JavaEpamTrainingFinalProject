@@ -19,6 +19,9 @@ public class TattooDaoImpl implements TattooDao {
     private static final String FIND_ALL = "SELECT tattoo_id, tattoo_name, " +
             "image_id, image_name FROM tattoo INNER JOIN image " +
             "ON tattoo.image_id_fk = image.image_id";
+    private static final String FIND_BY_NAME = "SELECT tattoo_id, tattoo_name, " +
+            "image_id, image_name FROM tattoo INNER JOIN image ON tattoo.image_id_fk = image.image_id " +
+            "WHERE tattoo_name LIKE ?";
     private static final String FIND_BY_ALLOWED = "SELECT tattoo_id, tattoo_name, " +
             "image_id, image_name FROM tattoo INNER JOIN image " +
             "ON tattoo.image_id_fk = image.image_id WHERE is_allowed = ?";
@@ -69,6 +72,29 @@ public class TattooDaoImpl implements TattooDao {
             return tattoos;
         } catch (SQLException | ConnectionPoolException e) {
             throw new DaoException("Finding all tattoos error", e);
+        }
+    }
+
+    @Override
+    public List<Tattoo> findByName(String name) throws DaoException {
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement statement =
+                     connection.prepareStatement(FIND_BY_NAME)) {
+            statement.setString(1, PERCENT + name + PERCENT);
+            ResultSet resultSet = statement.executeQuery();
+            List<Tattoo> tattoos = new ArrayList<>();
+            while (resultSet.next()) {
+                TattooBuilder tattooBuilder = new TattooBuilder();
+                tattooBuilder.setTattooId(resultSet.getLong(ColumnName.TATTOO_ID));
+                tattooBuilder.setName(resultSet.getString(ColumnName.TATTOO_NAME));
+                tattooBuilder.setImage(new Image(resultSet.getLong(ColumnName.IMAGE_ID),
+                        resultSet.getString(ColumnName.IMAGE_NAME)));
+                Tattoo tattoo = tattooBuilder.getTattoo();
+                tattoos.add(tattoo);
+            }
+            return tattoos;
+        } catch (SQLException | ConnectionPoolException e) {
+            throw new DaoException("Finding tattoos by name error", e);
         }
     }
 

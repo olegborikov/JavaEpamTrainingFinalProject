@@ -14,7 +14,7 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
-public class FindTattooCommand implements Command {
+public class FindTattoosCommand implements Command {
     private static final Logger LOGGER = LogManager.getLogger();
     private static final TattooService tattooService = new TattooServiceImpl();
     private static final int FIRST_PAGE_NUMBER = 1;

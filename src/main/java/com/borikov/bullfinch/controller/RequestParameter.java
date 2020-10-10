@@ -12,6 +12,7 @@ public class RequestParameter {
     public static final String COMMAND_NAME = "commandName";
     public static final String ERROR_MESSAGE = "errorMessage";
     public static final String TATTOOS = "tattoos";
+    public static final String ALL_TATTOOS = "allTattoos";
     public static final String TATTOO_NAME = "tattooName";
     public static final String CURRENT_LOCALE = "currentLocale";
     public static final String NEW_LOCALE = "newLocale";

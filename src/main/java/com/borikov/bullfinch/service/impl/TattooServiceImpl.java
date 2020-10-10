@@ -27,6 +27,16 @@ public class TattooServiceImpl implements TattooService {
     }
 
     @Override
+    public List<Tattoo> findTattoosByName(String name) throws ServiceException {
+        try {
+            List<Tattoo> tattoos = tattooDao.findByName(name);
+            return tattoos;
+        } catch (DaoException e) {
+            throw new ServiceException("Error while finding tattoos by name", e);
+        }
+    }
+
+    @Override
     public List<Tattoo> findTattoosByAllowed(boolean isAllowed) throws ServiceException {
         try {
             List<Tattoo> tattoos = tattooDao.findByAllowed(isAllowed);
@@ -60,9 +70,8 @@ public class TattooServiceImpl implements TattooService {
     @Override
     public List<Tattoo> findTattoosByNameAndAllowedAndArchived(
             String name, boolean isAllowed, boolean isArchived) throws ServiceException {
-        List<Tattoo> tattoos = new ArrayList<>();
         try {
-            tattoos = tattooDao.findByNameAndAllowedAndArchived(name, isAllowed, isArchived);
+            List<Tattoo> tattoos = tattooDao.findByNameAndAllowedAndArchived(name, isAllowed, isArchived);
             return tattoos;
         } catch (DaoException e) {
             throw new ServiceException("Error while finding tattoos by name", e);

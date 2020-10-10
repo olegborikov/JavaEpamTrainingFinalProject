@@ -29,26 +29,37 @@
         <div class="container-fluid">
             <div class="row col-12">
                 <div class="col-md-3">
+                    <c:if test="${allTattoos}">
+                        <form name="offerForm" method="post" action="controller">
+                            <button style="vertical-align: center" class="btn btn-outline-secondary"
+                                    name="commandName"
+                                    value="">
+                                <fmt:message key="tattoosAdmin.addTattoo"/>
+                            </button>
+                        </form>
+                    </c:if>
                 </div>
                 <div class="col-md-6">
                     <br/>
                 </div>
                 <div class="col-12 col-md-3">
-                   <%-- <form name="findTattooForm" method="post" action="controller"
-                          autocomplete="off">
-                        <div class="input-group">
-                            <input style="background-color: black" maxlength="25"
-                                   type="text" class="form-control text-white"
-                                   name="tattooName" value="${tattooName}"
-                                   placeholder=<fmt:message key="catalog.search"/>>
-                            <div class="input-group-btn">
-                                <button type="submit" class="btn btn-outline-secondary"
-                                        name="commandName" value="find_tattoo_command">
-                                    <fmt:message key="catalog.search"/>
-                                </button>
+                    <c:if test="${allTattoos}">
+                        <form name="findTattooForm" method="post" action="controller"
+                              autocomplete="off">
+                            <div class="input-group">
+                                <input style="background-color: black" maxlength="25"
+                                       type="text" class="form-control text-white"
+                                       name="tattooName" value="${tattooName}"
+                                       placeholder=<fmt:message key="tattoosAdmin.search"/>>
+                                <div class="input-group-btn">
+                                    <button type="submit" class="btn btn-outline-secondary"
+                                            name="commandName" value="find_tattoos_admin_command">
+                                        <fmt:message key="tattoosAdmin.search"/>
+                                    </button>
+                                </div>
                             </div>
-                        </div>
-                    </form>--%>
+                        </form>
+                    </c:if>
                 </div>
             </div>
             <br/>

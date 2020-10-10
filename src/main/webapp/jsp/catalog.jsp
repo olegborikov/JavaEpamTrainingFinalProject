@@ -34,7 +34,7 @@
                             <button style="vertical-align: center" class="btn btn-outline-secondary"
                                     name="commandName"
                                     value="browse_tattoo_offer_page_command">
-                                <fmt:message key="catalog.offer"/>
+                                <fmt:message key="catalog.offerTattoo"/>
                             </button>
                         </form>
                     </c:if>
@@ -52,7 +52,7 @@
                                    placeholder=<fmt:message key="catalog.search"/>>
                             <div class="input-group-btn">
                                 <button type="submit" class="btn btn-outline-secondary"
-                                        name="commandName" value="find_tattoo_command">
+                                        name="commandName" value="find_tattoos_command">
                                     <fmt:message key="catalog.search"/>
                                 </button>
                             </div>
