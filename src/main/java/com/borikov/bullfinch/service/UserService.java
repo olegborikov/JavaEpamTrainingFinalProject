@@ -16,4 +16,6 @@ public interface UserService {
     boolean confirmUserEmail(String login) throws ServiceException;
 
     List<User> findAllUsers() throws ServiceException;
+
+    Optional<User> findUserByLogin(String name) throws ServiceException;
 }

@@ -62,6 +62,7 @@
                     </c:if>
                     <c:if test="${role.equals('user')}">
                         <form name="loginNameFrom" method="post" action="controller">
+                            <input type="hidden" name="login" value="${login}">
                             <li class="nav-item nav-link js-scroll-trigger" role="presentation">
                                 <button style="color:white"
                                         class="btn navbar-brand js-scroll-trigger"

@@ -13,16 +13,7 @@ public class User {
     private UserRating userRating;
     private Wallet wallet;
 
-    public User(String login) {
-        this.login = login;
-    }
-
-    public User(Long userId, String login,
-                boolean isActivated, UserRole userRole) {// TODO: 09.10.2020 use builder
-        this.userId = userId;
-        this.login = login;
-        this.isActivated = isActivated;
-        this.userRole = userRole;
+    public User() {
     }
 
     public User(Long userId, String email, String login,

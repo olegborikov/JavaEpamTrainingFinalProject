@@ -10,18 +10,7 @@ public class Tattoo {
     private boolean isArchived;
     private Image image;
 
-    public Tattoo(Long tattooId, String name, String description, double price) {// TODO: 09.10.2020 use builder
-        this.tattooId = tattooId;
-        this.name = name;
-        this.description = description;
-        this.price = price;
-    }
-
-    public Tattoo(String name, String description, double price, Image image) {
-        this.name = name;
-        this.description = description;
-        this.price = price;
-        this.image = image;
+    public Tattoo() {
     }
 
     public Tattoo(Long tattooId, String name, String description,

@@ -1,5 +1,6 @@
 package com.borikov.bullfinch.service.impl;
 
+import com.borikov.bullfinch.builder.TattooBuilder;
 import com.borikov.bullfinch.dao.TattooDao;
 import com.borikov.bullfinch.dao.impl.TattooDaoImpl;
 import com.borikov.bullfinch.entity.Image;
@@ -9,7 +10,6 @@ import com.borikov.bullfinch.exception.ServiceException;
 import com.borikov.bullfinch.service.TattooService;
 import com.borikov.bullfinch.validator.TattooValidator;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -119,7 +119,12 @@ public class TattooServiceImpl implements TattooService {
                     && tattooValidator.isDescriptionCorrect(description)
                     && tattooValidator.isPriceCorrect(price)) {
                 double tattooPrice = Double.parseDouble(price);
-                Tattoo tattoo = new Tattoo(tattooName, description, tattooPrice, new Image(null, imageName));
+                TattooBuilder tattooBuilder = new TattooBuilder();
+                tattooBuilder.setName(tattooName);
+                tattooBuilder.setDescription(description);
+                tattooBuilder.setPrice(tattooPrice);
+                tattooBuilder.setImage(new Image(null, imageName));
+                Tattoo tattoo = tattooBuilder.getTattoo();
                 result = tattooDao.offer(tattoo);
             }
             return result;
@@ -137,7 +142,12 @@ public class TattooServiceImpl implements TattooService {
                     && tattooValidator.isDescriptionCorrect(description)
                     && tattooValidator.isPriceCorrect(price)) {
                 double tattooPrice = Double.parseDouble(price);
-                Tattoo tattoo = new Tattoo(tattooName, description, tattooPrice, new Image(null, imageName));
+                TattooBuilder tattooBuilder = new TattooBuilder();
+                tattooBuilder.setName(tattooName);
+                tattooBuilder.setDescription(description);
+                tattooBuilder.setPrice(tattooPrice);
+                tattooBuilder.setImage(new Image(null, imageName));
+                Tattoo tattoo = tattooBuilder.getTattoo();
                 result = tattooDao.add(tattoo);
             }
             return result;
@@ -217,7 +227,12 @@ public class TattooServiceImpl implements TattooService {
                     && tattooValidator.isPriceCorrect(price)) {
                 long tattooId = Long.parseLong(id);
                 double tattooPrice = Double.parseDouble(price);
-                Tattoo tattoo = new Tattoo(tattooId, name, description, tattooPrice);
+                TattooBuilder tattooBuilder = new TattooBuilder();
+                tattooBuilder.setTattooId(tattooId);
+                tattooBuilder.setName(name);
+                tattooBuilder.setDescription(description);
+                tattooBuilder.setPrice(tattooPrice);
+                Tattoo tattoo = tattooBuilder.getTattoo();
                 result = tattooDao.update(tattoo);
             }
             return result;

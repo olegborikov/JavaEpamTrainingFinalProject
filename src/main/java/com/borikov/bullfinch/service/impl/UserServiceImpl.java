@@ -1,16 +1,16 @@
 package com.borikov.bullfinch.service.impl;
 
+import com.borikov.bullfinch.builder.UserBuilder;
+import com.borikov.bullfinch.dao.ColumnName;
 import com.borikov.bullfinch.dao.UserDao;
 import com.borikov.bullfinch.dao.impl.UserDaoImpl;
-import com.borikov.bullfinch.entity.User;
-import com.borikov.bullfinch.entity.UserRating;
-import com.borikov.bullfinch.entity.UserRole;
-import com.borikov.bullfinch.entity.Wallet;
+import com.borikov.bullfinch.entity.*;
 import com.borikov.bullfinch.exception.DaoException;
 import com.borikov.bullfinch.exception.ServiceException;
 import com.borikov.bullfinch.service.UserService;
 import com.borikov.bullfinch.util.EmailSenderUtil;
 import com.borikov.bullfinch.util.PasswordEncryptor;
+import com.borikov.bullfinch.validator.TattooValidator;
 import com.borikov.bullfinch.validator.UserValidator;
 
 import java.util.List;
@@ -57,13 +57,20 @@ public class UserServiceImpl implements UserService {
                     && userValidator.isPasswordCorrect(password)
                     && password.equals(confirmedPassword)) {
                 Optional<String> encryptedPassword = PasswordEncryptor.encrypt(password);
-                Optional<String> existingUserPassword = userDao.checkExistingByLogin(login);// TODO: 20.09.2020 is it correct to get password of random user in registration
+                Optional<String> existingUserPassword = userDao.checkExistingByLogin(login);
                 boolean existingUserEmail = userDao.checkExistingByEmail(email);
                 if (existingUserPassword.isEmpty() && !existingUserEmail
                         && encryptedPassword.isPresent()) {
-                    User user = new User(null, email, login,
-                            firstName, secondName, phoneNumber, false, false,
-                            UserRole.USER, UserRating.BEGINNER, new Wallet(null, 0));// TODO: 17.09.2020 refactor creating of wallet
+                    UserBuilder userBuilder = new UserBuilder();
+                    userBuilder.setEmail(email);
+                    userBuilder.setLogin(login);
+                    userBuilder.setFirstName(firstName);
+                    userBuilder.setSecondName(secondName);
+                    userBuilder.setPhoneNumber(phoneNumber);
+                    userBuilder.setUserRole(UserRole.USER);
+                    userBuilder.setUserRating(UserRating.BEGINNER);
+                    userBuilder.setWallet(new Wallet(null, 0));
+                    User user = userBuilder.getUser();
                     result = userDao.add(user, encryptedPassword.get());
                     EmailSenderUtil.sendMessage(user.getEmail(), user.getLogin());
                 }
@@ -95,6 +102,20 @@ public class UserServiceImpl implements UserService {
             return users;
         } catch (DaoException e) {
             throw new ServiceException("Error while finding users", e);
+        }
+    }
+
+    @Override
+    public Optional<User> findUserByLogin(String login) throws ServiceException {
+        Optional<User> user = Optional.empty();
+        UserValidator userValidator = new UserValidator();
+        try {
+            if (userValidator.isLoginCorrect(login)) {
+                user = userDao.findByLogin(login);
+            }
+            return user;
+        } catch (DaoException e) {
+            throw new ServiceException("Error while finding tattoos by id", e);
         }
     }
 }
