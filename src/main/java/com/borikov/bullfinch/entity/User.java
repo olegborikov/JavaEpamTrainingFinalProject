@@ -10,7 +10,6 @@ public class User {
     private boolean isBlocked;
     private boolean isActivated;
     private UserRole userRole;
-    private UserRating userRating;
     private Wallet wallet;
 
     public User() {
@@ -19,8 +18,7 @@ public class User {
     public User(Long userId, String email, String login,
                 String firstName, String secondName,
                 String phoneNumber, boolean isBlocked,
-                boolean isActivated, UserRole userRole,
-                UserRating userRating, Wallet wallet) {
+                boolean isActivated, UserRole userRole, Wallet wallet) {
         this.userId = userId;
         this.email = email;
         this.login = login;
@@ -30,7 +28,6 @@ public class User {
         this.isBlocked = isBlocked;
         this.isActivated = isActivated;
         this.userRole = userRole;
-        this.userRating = userRating;
         this.wallet = wallet;
     }
 
@@ -106,14 +103,6 @@ public class User {
         this.userRole = userRole;
     }
 
-    public UserRating getUserRating() {
-        return userRating;
-    }
-
-    public void setUserRating(UserRating userRating) {
-        this.userRating = userRating;
-    }
-
     public Wallet getWallet() {
         return wallet;
     }
@@ -161,9 +150,6 @@ public class User {
         if (userRole != user.userRole) {
             return false;
         }
-        if (userRating != user.userRating) {
-            return false;
-        }
         return wallet != null ? wallet.equals(user.wallet) : user.wallet == null;
     }
 
@@ -178,7 +164,6 @@ public class User {
         result = 31 * result + (isBlocked ? 1 : 0);
         result = 31 * result + (isActivated ? 1 : 0);
         result = 31 * result + (userRole != null ? userRole.hashCode() : 0);
-        result = 31 * result + (userRating != null ? userRating.hashCode() : 0);
         result = 31 * result + (wallet != null ? wallet.hashCode() : 0);
         return result;
     }
@@ -195,7 +180,6 @@ public class User {
         sb.append(", isBlocked=").append(isBlocked);
         sb.append(", isActivated=").append(isActivated);
         sb.append(", userRole=").append(userRole);
-        sb.append(", userRating=").append(userRating);
         sb.append(", wallet=").append(wallet);
         sb.append('}');
         return sb.toString();

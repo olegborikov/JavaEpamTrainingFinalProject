@@ -5,7 +5,6 @@ import com.borikov.bullfinch.dao.ColumnName;
 import com.borikov.bullfinch.dao.UserDao;
 import com.borikov.bullfinch.dao.pool.ConnectionPool;
 import com.borikov.bullfinch.entity.User;
-import com.borikov.bullfinch.entity.UserRating;
 import com.borikov.bullfinch.entity.UserRole;
 import com.borikov.bullfinch.entity.Wallet;
 import com.borikov.bullfinch.exception.ConnectionPoolException;
@@ -24,10 +23,9 @@ public class UserDaoImpl implements UserDao {
             "FROM user_account WHERE email LIKE ?";
     private static final String FIND_BY_LOGIN = "SELECT user_account_id, email, login, " +
             "first_name, second_name, phone_number, is_blocked, is_activated, " +
-            "wallet_id, balance, role_name, rating_name FROM user_account " +
+            "wallet_id, balance, role_name FROM user_account " +
             "INNER JOIN role ON user_account.role_id_fk = role.role_id " +
             "INNER JOIN wallet ON user_account.wallet_id_fk = wallet.wallet_id " +
-            "INNER JOIN rating ON user_account.rating_id_fk = rating.rating_id " +
             "WHERE login LIKE ?";
     private static final String ADD = "INSERT INTO user_account (email, login, password," +
             " first_name, second_name, phone_number, is_blocked, " +
@@ -97,7 +95,6 @@ public class UserDaoImpl implements UserDao {
                 userBuilder.setWallet(new Wallet(resultSet.getLong(ColumnName.WALLET_ID),
                         resultSet.getDouble(ColumnName.BALANCE)));
                 String ratingName = resultSet.getString(ColumnName.RATING_NAME);
-                userBuilder.setUserRating(UserRating.valueOf(ratingName.toUpperCase()));
                 User user = userBuilder.getUser();
                 userOptional = Optional.of(user);
             }
@@ -141,7 +138,6 @@ public class UserDaoImpl implements UserDao {
             statementUser.setString(6, user.getPhoneNumber());
             statementUser.setLong(7, user.getUserRole().getUserRoleId());
             statementUser.setLong(8, user.getWallet().getWalletId());
-            statementUser.setLong(9, user.getUserRating().getUserRatingId());
             boolean result = statementUser.executeUpdate() > 0;
             ResultSet generatedKeysUser = statementUser.getGeneratedKeys();
             if (generatedKeysUser.next()) {

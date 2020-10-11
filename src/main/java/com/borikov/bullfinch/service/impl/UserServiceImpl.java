@@ -68,7 +68,6 @@ public class UserServiceImpl implements UserService {
                     userBuilder.setSecondName(secondName);
                     userBuilder.setPhoneNumber(phoneNumber);
                     userBuilder.setUserRole(UserRole.USER);
-                    userBuilder.setUserRating(UserRating.BEGINNER);
                     userBuilder.setWallet(new Wallet(null, 0));
                     User user = userBuilder.getUser();
                     result = userDao.add(user, encryptedPassword.get());

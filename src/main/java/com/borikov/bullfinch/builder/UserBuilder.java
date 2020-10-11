@@ -1,7 +1,6 @@
 package com.borikov.bullfinch.builder;
 
 import com.borikov.bullfinch.entity.User;
-import com.borikov.bullfinch.entity.UserRating;
 import com.borikov.bullfinch.entity.UserRole;
 import com.borikov.bullfinch.entity.Wallet;
 
@@ -15,7 +14,6 @@ public class UserBuilder {
     private boolean isBlocked;
     private boolean isActivated;
     private UserRole userRole;
-    private UserRating userRating;
     private Wallet wallet;
 
     public void setUserId(Long userId) {
@@ -54,16 +52,12 @@ public class UserBuilder {
         this.userRole = userRole;
     }
 
-    public void setUserRating(UserRating userRating) {
-        this.userRating = userRating;
-    }
-
     public void setWallet(Wallet wallet) {
         this.wallet = wallet;
     }
 
     public User getUser() {
-        return new User(userId, email, login, firstName, secondName, phoneNumber,
-                isBlocked, isActivated, userRole, userRating, wallet);
+        return new User(userId, email, login, firstName, secondName,
+                phoneNumber, isBlocked, isActivated, userRole, wallet);
     }
 }
