@@ -31,7 +31,6 @@ public class OrderTattooCommand implements Command {
         String page;
         String tattooId = request.getParameter(RequestParameter.TATTOO_ID);
         String date = request.getParameter(RequestParameter.DATE);
-        System.out.println(date);
         String description = request.getParameter(RequestParameter.DESCRIPTION);
         String price = request.getParameter(RequestParameter.PRICE);
         HttpSession httpSession = request.getSession();

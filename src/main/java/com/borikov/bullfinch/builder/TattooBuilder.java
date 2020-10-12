@@ -2,6 +2,7 @@ package com.borikov.bullfinch.builder;
 
 import com.borikov.bullfinch.entity.Image;
 import com.borikov.bullfinch.entity.Tattoo;
+import com.borikov.bullfinch.entity.User;
 
 public class TattooBuilder {
     private Long tattooId;
@@ -12,6 +13,7 @@ public class TattooBuilder {
     private boolean isAllowed;
     private boolean isArchived;
     private Image image;
+    private User user;
 
     public void setTattooId(Long tattooId) {
         this.tattooId = tattooId;
@@ -45,9 +47,13 @@ public class TattooBuilder {
         this.image = image;
     }
 
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     public Tattoo getTattoo() {
         return new Tattoo(tattooId, name, description, price,
-                rating, isAllowed, isArchived, image);
+                rating, isAllowed, isArchived, image, user);
     }
 }
 

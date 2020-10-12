@@ -6,7 +6,7 @@
 <fmt:setBundle basename="i18n.application_message"/>
 
 <div>
-    <nav class="navbar navbar-light navbar-expand-md navbar navbar-expand-lg fixed-top"
+    <nav style="background-color: black; padding-bottom: 5px; border-bottom-color: white" class="navbar navbar-light navbar-expand-md navbar navbar-expand-lg fixed-top"
          id="mainNav">
         <div class="container">
             <form name="homeButtonFrom" method="post" action="controller">

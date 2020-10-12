@@ -26,9 +26,9 @@ public interface TattooService {
 
     Optional<Tattoo> findTattooById(String id) throws ServiceException;
 
-    boolean offerTattoo(String tattooName, String description, String price, String imageName) throws ServiceException;
+    boolean offerTattoo(String tattooName, String description, String price, String imageName, String proposedLogin) throws ServiceException;
 
-    boolean addTattoo(String tattooName, String description, String price, String imageName) throws ServiceException;
+    boolean addTattoo(String tattooName, String description, String price, String imageName, String proposedLogin) throws ServiceException;
 
     boolean allowTattoo(String id) throws ServiceException;
 

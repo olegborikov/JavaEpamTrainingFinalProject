@@ -12,6 +12,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 public class AddTattooCommand implements Command {
     private static final PhotoFileManager photoFileManager = new PhotoFileManager();
@@ -25,8 +26,10 @@ public class AddTattooCommand implements Command {
         String description = request.getParameter(RequestParameter.DESCRIPTION);
         String photoName = (String) request.getAttribute(RequestParameter.PHOTO_NAME);
         String price = request.getParameter(RequestParameter.PRICE);
+        HttpSession httpSession = request.getSession();
+        String proposedLogin = (String) httpSession.getAttribute(RequestParameter.LOGIN);
         try {
-            if (tattooService.addTattoo(tattooName, description, price, photoName)) {
+            if (tattooService.addTattoo(tattooName, description, price, photoName,proposedLogin)) {
                 request.setAttribute(RequestParameter.TATTOO_ADD_CONFIRM_MESSAGE, true);
                 page = PagePath.MESSAGE;
             } else {

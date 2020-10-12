@@ -1,6 +1,7 @@
 package com.borikov.bullfinch.dao.impl;
 
 import com.borikov.bullfinch.builder.TattooBuilder;
+import com.borikov.bullfinch.builder.UserBuilder;
 import com.borikov.bullfinch.dao.ColumnName;
 import com.borikov.bullfinch.dao.TattooDao;
 import com.borikov.bullfinch.dao.pool.ConnectionPool;
@@ -40,12 +41,18 @@ public class TattooDaoImpl implements TattooDao {
             "WHERE tattoo_id = ? AND is_allowed = ? AND is_archived = ?";
     private static final String FIND_BY_ID = "SELECT tattoo_id, tattoo_name, " +
             "tattoo_description, tattoo_price,tattoo_rating, is_allowed, is_archived, " +
-            "image_id, image_name FROM tattoo INNER JOIN image ON tattoo.image_id_fk = image.image_id " +
+            "image_id, image_name, login FROM tattoo " +
+            "INNER JOIN image ON tattoo.image_id_fk = image.image_id " +
+            "INNER JOIN user_account ON tattoo.user_account_id_fk = user_account.user_account_id " +
             "WHERE tattoo_id = ?";
     private static final String OFFER = "INSERT INTO tattoo (tattoo_name, tattoo_description, " +
-            "tattoo_price, tattoo_rating, is_allowed, is_archived, image_id_fk) VALUES (?, ?, ?, 5, 0, 0, ?)";
+            "tattoo_price, tattoo_rating, is_allowed, is_archived, " +
+            "image_id_fk, user_account_id_fk) VALUES (?, ?, ?, 5, 0, 0, ?, " +
+            "(SELECT user_account_id FROM user_account WHERE BINARY login LIKE ?))";
     private static final String ADD = "INSERT INTO tattoo (tattoo_name, tattoo_description, " +
-            "tattoo_price, tattoo_rating, is_allowed, is_archived, image_id_fk) VALUES (?, ?, ?, 5, 1, 0, ?)";
+            "tattoo_price, tattoo_rating, is_allowed, is_archived, " +
+            "image_id_fk, user_account_id_fk) VALUES (?, ?, ?, 5, 1, 0, ?," +
+            "(SELECT user_account_id FROM user_account WHERE BINARY login LIKE ?))";
     private static final String ALLOW = "UPDATE tattoo SET is_allowed = 1 WHERE tattoo_id = ?";
     private static final String DELETE = "DELETE FROM tattoo WHERE tattoo_id = ?";
     private static final String ARCHIVE = "UPDATE tattoo SET is_archived = 1 WHERE tattoo_id = ?";
@@ -245,6 +252,9 @@ public class TattooDaoImpl implements TattooDao {
                 tattooBuilder.setArchived(resultSet.getInt(ColumnName.IS_ARCHIVED) != 0);
                 tattooBuilder.setImage(new Image(resultSet.getLong(ColumnName.IMAGE_ID),
                         resultSet.getString(ColumnName.IMAGE_NAME)));
+                UserBuilder userBuilder = new UserBuilder();
+                userBuilder.setLogin(resultSet.getString(ColumnName.LOGIN));
+                tattooBuilder.setUser(userBuilder.getUser());
                 Tattoo tattoo = tattooBuilder.getTattoo();
                 tattooOptional = Optional.of(tattoo);
             }
@@ -271,6 +281,7 @@ public class TattooDaoImpl implements TattooDao {
             statementTattoo.setString(2, tattoo.getDescription());
             statementTattoo.setDouble(3, tattoo.getPrice());
             statementTattoo.setLong(4, tattoo.getImage().getImageId());
+            statementTattoo.setString(5, tattoo.getUser().getLogin());
             boolean result = statementTattoo.executeUpdate() > 0;
             ResultSet generatedKeysTattoo = statementTattoo.getGeneratedKeys();
             if (generatedKeysTattoo.next()) {
@@ -299,6 +310,7 @@ public class TattooDaoImpl implements TattooDao {
             statementTattoo.setString(2, tattoo.getDescription());
             statementTattoo.setDouble(3, tattoo.getPrice());
             statementTattoo.setLong(4, tattoo.getImage().getImageId());
+            statementTattoo.setString(5, tattoo.getUser().getLogin());
             boolean result = statementTattoo.executeUpdate() > 0;
             ResultSet generatedKeysTattoo = statementTattoo.getGeneratedKeys();
             if (generatedKeysTattoo.next()) {

@@ -34,10 +34,25 @@
                     <p><fmt:message key="profile.name"/> ${user.firstName} </p>
                     <p><fmt:message key="profile.surname"/> ${user.secondName} </p>
                     <p><fmt:message key="profile.phoneNumber"/> ${user.phoneNumber} </p>
-                    <p><fmt:message key="profile.walletBalance"/> ${user.wallet.balance} </p>
-                    <p><fmt:message key="profile.userRating"/> ${user.userRating.name} </p>
+                    <p><fmt:message key="profile.walletBalance"/> ${user.wallet.balance}</p>
+                    <form name="allowDeleteForm" method="post" action="controller">
+                        <input type="hidden" name="tattooId" value="${user.userId}">
+                        <button type="submit" class="btn btn-outline-secondary" name="commandName"
+                                value="enrich_wallet_command">
+                            <fmt:message key="profile.enrich"/>
+                        </button>
+                    </form>
                 </div>
                 <div class="col-md-4">
+                    <form name="editProfileForm" method="post" action="controller">
+                        <input type="hidden" name="tattooId" value="${user.userId}">
+                        <div style="text-align: left">
+                            <button  class="btn btn-outline-secondary"
+                                     name="commandName" value="">
+                                <fmt:message key="profile.editProfile"/>
+                            </button>
+                        </div>
+                    </form>
                 </div>
                 <div class="col-md-1">
                 </div>

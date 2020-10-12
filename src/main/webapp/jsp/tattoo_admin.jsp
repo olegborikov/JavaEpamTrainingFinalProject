@@ -33,7 +33,7 @@
                     <br/>
                 </div>
                 <div class="col-12 col-md-3">
-                    <form name="offerForm" method="post" action="controller">
+                    <form name="editTattooForm" method="post" action="controller">
                         <input type="hidden" name="tattooId" value="${tattoo.tattooId}">
                         <div style="text-align: right">
                             <button style="vertical-align: center" class="btn btn-outline-secondary"
@@ -70,6 +70,7 @@
                             </c:otherwise>
                         </c:choose>
                     </p>
+                    <p><fmt:message key="tattooAdmin.offeredBy"/> ${tattoo.user.login}</p>
                     <p><fmt:message key="tattooAdmin.rating"/> ${tattoo.rating}</p>
                     <p>
                         <fmt:message key="tattooAdmin.allowed"/>

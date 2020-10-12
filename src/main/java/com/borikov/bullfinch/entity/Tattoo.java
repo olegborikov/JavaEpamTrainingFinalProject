@@ -9,13 +9,13 @@ public class Tattoo {
     private boolean isAllowed;
     private boolean isArchived;
     private Image image;
+    private User user;
 
     public Tattoo() {
     }
 
-    public Tattoo(Long tattooId, String name, String description,
-                  double price, byte rating, boolean isAllowed,
-                  boolean isArchived, Image image) {
+    public Tattoo(Long tattooId, String name, String description, double price,
+                  byte rating, boolean isAllowed, boolean isArchived, Image image, User user) {
         this.tattooId = tattooId;
         this.name = name;
         this.description = description;
@@ -24,6 +24,7 @@ public class Tattoo {
         this.isAllowed = isAllowed;
         this.isArchived = isArchived;
         this.image = image;
+        this.user = user;
     }
 
     public Long getTattooId() {
@@ -90,6 +91,14 @@ public class Tattoo {
         this.image = image;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -121,8 +130,10 @@ public class Tattoo {
                 : tattoo.description != null) {
             return false;
         }
-        return image != null ? image.equals(tattoo.image)
-                : tattoo.image == null;
+        if (image != null ? !image.equals(tattoo.image) : tattoo.image != null) {
+            return false;
+        }
+        return user != null ? user.equals(tattoo.user) : tattoo.user == null;
     }
 
     @Override
@@ -138,6 +149,7 @@ public class Tattoo {
         result = 31 * result + (isAllowed ? 1 : 0);
         result = 31 * result + (isArchived ? 1 : 0);
         result = 31 * result + (image != null ? image.hashCode() : 0);
+        result = 31 * result + (user != null ? user.hashCode() : 0);
         return result;
     }
 
@@ -152,6 +164,7 @@ public class Tattoo {
         sb.append(", isAllowed=").append(isAllowed);
         sb.append(", isArchived=").append(isArchived);
         sb.append(", image=").append(image);
+        sb.append(", user=").append(user);
         sb.append('}');
         return sb.toString();
     }

@@ -13,6 +13,8 @@ public interface UserDao {
 
     Optional<User> findByLogin(String login) throws DaoException;
 
+    Optional<User> findByLoginFull(String login) throws DaoException;
+
     boolean confirmEmail(String login) throws DaoException;
 
     boolean add(User user, String password) throws DaoException;

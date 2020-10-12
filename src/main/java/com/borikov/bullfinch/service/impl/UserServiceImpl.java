@@ -1,16 +1,16 @@
 package com.borikov.bullfinch.service.impl;
 
 import com.borikov.bullfinch.builder.UserBuilder;
-import com.borikov.bullfinch.dao.ColumnName;
 import com.borikov.bullfinch.dao.UserDao;
 import com.borikov.bullfinch.dao.impl.UserDaoImpl;
-import com.borikov.bullfinch.entity.*;
+import com.borikov.bullfinch.entity.User;
+import com.borikov.bullfinch.entity.UserRole;
+import com.borikov.bullfinch.entity.Wallet;
 import com.borikov.bullfinch.exception.DaoException;
 import com.borikov.bullfinch.exception.ServiceException;
 import com.borikov.bullfinch.service.UserService;
 import com.borikov.bullfinch.util.EmailSenderUtil;
 import com.borikov.bullfinch.util.PasswordEncryptor;
-import com.borikov.bullfinch.validator.TattooValidator;
 import com.borikov.bullfinch.validator.UserValidator;
 
 import java.util.List;
@@ -84,7 +84,7 @@ public class UserServiceImpl implements UserService {
     public boolean confirmUserEmail(String login) throws ServiceException {
         boolean result = false;
         try {
-            Optional<User> existingUser = userDao.findByLogin(login);
+            Optional<User> existingUser = userDao.findByLoginFull(login);
             if (existingUser.isPresent()) {
                 result = userDao.confirmEmail(login);
             }
@@ -110,7 +110,7 @@ public class UserServiceImpl implements UserService {
         UserValidator userValidator = new UserValidator();
         try {
             if (userValidator.isLoginCorrect(login)) {
-                user = userDao.findByLogin(login);
+                user = userDao.findByLoginFull(login);
             }
             return user;
         } catch (DaoException e) {

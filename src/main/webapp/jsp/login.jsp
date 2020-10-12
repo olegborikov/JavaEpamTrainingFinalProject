@@ -60,10 +60,6 @@
                                 value="login_command">
                             <fmt:message key="login.signIn"/>
                         </button>
-                        <button type="submit" class="btn btn-outline-secondary" name="commandName"
-                                value="browse_registration_page_command">
-                            <fmt:message key="login.registration"/>
-                        </button>
                     </form>
                 </div>
             </div>

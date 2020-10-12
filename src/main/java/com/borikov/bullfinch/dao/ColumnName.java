@@ -13,9 +13,6 @@ public class ColumnName {
     public static final String DATE = "date";
     public static final String ORDER_DESCRIPTION = "order_description";
 
-    public static final String RATING_ID = "rating_id";
-    public static final String RATING_NAME = "rating_name";
-
     public static final String ROLE_ID = "role_id";
     public static final String ROLE_NAME = "role_name";
 

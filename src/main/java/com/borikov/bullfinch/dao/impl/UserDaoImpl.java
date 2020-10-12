@@ -21,16 +21,20 @@ public class UserDaoImpl implements UserDao {
             "FROM user_account WHERE BINARY login LIKE ?";
     private static final String CHECK_EXISTING_BY_EMAIL = "SELECT user_account_id " +
             "FROM user_account WHERE email LIKE ?";
-    private static final String FIND_BY_LOGIN = "SELECT user_account_id, email, login, " +
+    private static final String FIND_BY_LOGIN_FULL = "SELECT user_account_id, email, login, " +
             "first_name, second_name, phone_number, is_blocked, is_activated, " +
             "wallet_id, balance, role_name FROM user_account " +
             "INNER JOIN role ON user_account.role_id_fk = role.role_id " +
             "INNER JOIN wallet ON user_account.wallet_id_fk = wallet.wallet_id " +
             "WHERE login LIKE ?";
+    private static final String FIND_BY_LOGIN = "SELECT login, " +
+            "is_blocked, is_activated, role_name FROM user_account " +
+            "INNER JOIN role ON user_account.role_id_fk = role.role_id " +
+            "WHERE login LIKE ?";
     private static final String ADD = "INSERT INTO user_account (email, login, password," +
             " first_name, second_name, phone_number, is_blocked, " +
-            "is_activated, role_id_fk, wallet_id_fk, rating_id_fk) " +
-            "VALUES (?, ?, ?, ?, ?, ?, 0, 0, ?, ?, ?)";
+            "is_activated, role_id_fk, wallet_id_fk) " +
+            "VALUES (?, ?, ?, ?, ?, ?, 0, 0, ?, ?)";
     private static final String CONFIRM_EMAIL = "UPDATE user_account " +
             "SET is_activated = 1 WHERE login LIKE ?";
     private static final String ADD_WALLET = "INSERT INTO wallet (balance)" +
@@ -73,10 +77,10 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public Optional<User> findByLogin(String login) throws DaoException {
+    public Optional<User> findByLoginFull(String login) throws DaoException {
         try (Connection connection = connectionPool.getConnection();
              PreparedStatement statement =
-                     connection.prepareStatement(FIND_BY_LOGIN)) {
+                     connection.prepareStatement(FIND_BY_LOGIN_FULL)) {
             statement.setString(1, login);
             ResultSet resultSet = statement.executeQuery();
             Optional<User> userOptional = Optional.empty();
@@ -94,7 +98,30 @@ public class UserDaoImpl implements UserDao {
                 userBuilder.setUserRole(UserRole.valueOf(roleName.toUpperCase()));
                 userBuilder.setWallet(new Wallet(resultSet.getLong(ColumnName.WALLET_ID),
                         resultSet.getDouble(ColumnName.BALANCE)));
-                String ratingName = resultSet.getString(ColumnName.RATING_NAME);
+                User user = userBuilder.getUser();
+                userOptional = Optional.of(user);
+            }
+            return userOptional;
+        } catch (SQLException | ConnectionPoolException e) {
+            throw new DaoException("Finding user by login error", e);
+        }
+    }
+
+    @Override
+    public Optional<User> findByLogin(String login) throws DaoException {
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement statement =
+                     connection.prepareStatement(FIND_BY_LOGIN)) {
+            statement.setString(1, login);
+            ResultSet resultSet = statement.executeQuery();
+            Optional<User> userOptional = Optional.empty();
+            if (resultSet.next()) {
+                UserBuilder userBuilder = new UserBuilder();
+                userBuilder.setLogin(resultSet.getString(ColumnName.LOGIN));
+                userBuilder.setBlocked(resultSet.getInt(ColumnName.IS_BLOCKED) != 0);
+                userBuilder.setActivated(resultSet.getInt(ColumnName.IS_ACTIVATED) != 0);
+                String roleName = resultSet.getString(ColumnName.ROLE_NAME);
+                userBuilder.setUserRole(UserRole.valueOf(roleName.toUpperCase()));
                 User user = userBuilder.getUser();
                 userOptional = Optional.of(user);
             }

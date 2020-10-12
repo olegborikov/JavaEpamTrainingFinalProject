@@ -10,8 +10,8 @@ VALUES ('admin');
 INSERT INTO bullfinch.wallet (balance)
 VALUES (0);
 
-INSERT INTO bullfinch.user_account (login, password, role_id_fk)
-VALUES ('admin', 'a753c776ff3ed4fefa2af948af87448910153281', 3);
+INSERT INTO bullfinch.user_account (login, password, is_blocked, is_activated, role_id_fk)
+VALUES ('admin', 'a753c776ff3ed4fefa2af948af87448910153281', 0, 1, 3);
 INSERT INTO bullfinch.user_account (email, login, password, first_name, second_name, phone_number,
                                     is_blocked, is_activated, role_id_fk, wallet_id_fk)
 VALUES ('ob375259542181@gmail.com', 'oleg', 'e43713ad9e2fc4c55c1e2b373d3f548bd1ffed6e', 'Oleg',

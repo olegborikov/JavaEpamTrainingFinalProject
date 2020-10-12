@@ -127,11 +127,6 @@
                                     name="commandName" value="registration_command">
                                 <fmt:message key="registration.signUp"/>
                             </button>
-                            <button type="submit" class="btn btn-outline-secondary"
-                                    name="commandName"
-                                    value="browse_login_page_command">
-                                <fmt:message key="registration.logIn"/>
-                            </button>
                         </form>
                     </div>
                 </div>

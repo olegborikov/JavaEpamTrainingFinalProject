@@ -1,6 +1,7 @@
 package com.borikov.bullfinch.service.impl;
 
 import com.borikov.bullfinch.builder.TattooBuilder;
+import com.borikov.bullfinch.builder.UserBuilder;
 import com.borikov.bullfinch.dao.TattooDao;
 import com.borikov.bullfinch.dao.impl.TattooDaoImpl;
 import com.borikov.bullfinch.entity.Image;
@@ -110,7 +111,7 @@ public class TattooServiceImpl implements TattooService {
     }
 
     @Override
-    public boolean offerTattoo(String tattooName, String description, String price, String imageName)
+    public boolean offerTattoo(String tattooName, String description, String price, String imageName, String proposedLogin)
             throws ServiceException {
         try {
             TattooValidator tattooValidator = new TattooValidator();
@@ -124,6 +125,9 @@ public class TattooServiceImpl implements TattooService {
                 tattooBuilder.setDescription(description);
                 tattooBuilder.setPrice(tattooPrice);
                 tattooBuilder.setImage(new Image(null, imageName));
+                UserBuilder userBuilder = new UserBuilder();
+                userBuilder.setLogin(proposedLogin);
+                tattooBuilder.setUser(userBuilder.getUser());
                 Tattoo tattoo = tattooBuilder.getTattoo();
                 result = tattooDao.offer(tattoo);
             }
@@ -134,7 +138,7 @@ public class TattooServiceImpl implements TattooService {
     }
 
     @Override
-    public boolean addTattoo(String tattooName, String description, String price, String imageName) throws ServiceException {
+    public boolean addTattoo(String tattooName, String description, String price, String imageName, String proposedLogin) throws ServiceException {
         try {
             TattooValidator tattooValidator = new TattooValidator();
             boolean result = false;
@@ -147,6 +151,9 @@ public class TattooServiceImpl implements TattooService {
                 tattooBuilder.setDescription(description);
                 tattooBuilder.setPrice(tattooPrice);
                 tattooBuilder.setImage(new Image(null, imageName));
+                UserBuilder userBuilder = new UserBuilder();
+                userBuilder.setLogin(proposedLogin);
+                tattooBuilder.setUser(userBuilder.getUser());
                 Tattoo tattoo = tattooBuilder.getTattoo();
                 result = tattooDao.add(tattoo);
             }
