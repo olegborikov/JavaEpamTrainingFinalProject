@@ -1,4 +1,4 @@
-package com.borikov.bullfinch.controller.command.impl;
+package com.borikov.bullfinch.controller.command.impl.page;
 
 import com.borikov.bullfinch.controller.PagePath;
 import com.borikov.bullfinch.controller.RequestParameter;
@@ -12,9 +12,11 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Optional;
+import java.util.List;
 
-public class BrowseTattooOrderPageCommand implements Command {
+public class BrowseCatalogPageCommand implements Command {
+    private static final int FIRST_PAGE_NUMBER = 1;
+    private static final int AMOUNT_OF_TATTOOS_ON_PAGE = 3;
     private static final Logger LOGGER = LogManager.getLogger();
     private static final TattooService tattooService = new TattooServiceImpl();
     private static final boolean IS_ALLOWED_DEFAULT = true;
@@ -23,19 +25,17 @@ public class BrowseTattooOrderPageCommand implements Command {
     @Override
     public String execute(HttpServletRequest request) {
         String page;
-        String tattooId = request.getParameter(RequestParameter.TATTOO_ID);
         try {
-            Optional<Tattoo> tattoo = tattooService.findTattooByIdAndAllowedAndArchived(
-                    tattooId, IS_ALLOWED_DEFAULT, IS_ARCHIVED_DEFAULT);
-            if (tattoo.isPresent()) {
-                request.setAttribute(RequestParameter.TATTOO, tattoo.get());
-                page = PagePath.TATTOO_ORDER;
-            } else {
-                request.setAttribute(RequestParameter.TATTOO_FIND_ERROR_MESSAGE, true);
-                page = PagePath.MESSAGE;
-            }
+            List<Tattoo> allTattoos = tattooService.findTattoosByAllowedAndArchived(IS_ALLOWED_DEFAULT, IS_ARCHIVED_DEFAULT);
+            List<Tattoo> tattoos = allTattoos.subList(0, Math.min(AMOUNT_OF_TATTOOS_ON_PAGE,
+                    allTattoos.size()));
+            request.setAttribute(RequestParameter.PAGE_AMOUNT,
+                    Math.ceil((double)allTattoos.size() / AMOUNT_OF_TATTOOS_ON_PAGE));
+            request.setAttribute(RequestParameter.TATTOOS, tattoos);
+            request.setAttribute(RequestParameter.PAGE_NUMBER, FIRST_PAGE_NUMBER);
+            page = PagePath.CATALOG;
         } catch (ServiceException e) {
-            LOGGER.log(Level.ERROR, "Error while finding tattoo", e);
+            LOGGER.log(Level.ERROR, "Error while finding tattoos", e);
             request.setAttribute(RequestParameter.ERROR_MESSAGE, e);
             page = PagePath.ERROR;
         }

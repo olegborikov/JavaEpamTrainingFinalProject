@@ -1,6 +1,7 @@
 package com.borikov.bullfinch.controller.command;
 
 import com.borikov.bullfinch.controller.command.impl.*;
+import com.borikov.bullfinch.controller.command.impl.page.*;
 
 public enum CommandType {
     LOGIN_COMMAND(new LoginCommand()),

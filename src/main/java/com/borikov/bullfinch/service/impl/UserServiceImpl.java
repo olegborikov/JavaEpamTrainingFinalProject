@@ -32,7 +32,7 @@ public class UserServiceImpl implements UserService {
                     Optional<String> encryptedPassword = PasswordEncryptor.encrypt(password);
                     if (encryptedPassword.isPresent()
                             && userPassword.equals(encryptedPassword.get())) {
-                        userOptional = userDao.findByLogin(login);
+                        userOptional = userDao.authorize(login);
                     }
                 }
             }
@@ -84,7 +84,7 @@ public class UserServiceImpl implements UserService {
     public boolean confirmUserEmail(String login) throws ServiceException {
         boolean result = false;
         try {
-            Optional<User> existingUser = userDao.findByLoginFull(login);
+            Optional<User> existingUser = userDao.findByLogin(login);
             if (existingUser.isPresent()) {
                 result = userDao.confirmEmail(login);
             }
@@ -110,7 +110,7 @@ public class UserServiceImpl implements UserService {
         UserValidator userValidator = new UserValidator();
         try {
             if (userValidator.isLoginCorrect(login)) {
-                user = userDao.findByLoginFull(login);
+                user = userDao.findByLogin(login);
             }
             return user;
         } catch (DaoException e) {

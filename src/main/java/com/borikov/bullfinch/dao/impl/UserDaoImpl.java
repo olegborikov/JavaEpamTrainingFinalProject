@@ -21,13 +21,13 @@ public class UserDaoImpl implements UserDao {
             "FROM user_account WHERE BINARY login LIKE ?";
     private static final String CHECK_EXISTING_BY_EMAIL = "SELECT user_account_id " +
             "FROM user_account WHERE email LIKE ?";
-    private static final String FIND_BY_LOGIN_FULL = "SELECT user_account_id, email, login, " +
+    private static final String FIND_BY_LOGIN = "SELECT user_account_id, email, login, " +
             "first_name, second_name, phone_number, is_blocked, is_activated, " +
             "wallet_id, balance, role_name FROM user_account " +
             "INNER JOIN role ON user_account.role_id_fk = role.role_id " +
             "INNER JOIN wallet ON user_account.wallet_id_fk = wallet.wallet_id " +
             "WHERE login LIKE ?";
-    private static final String FIND_BY_LOGIN = "SELECT login, " +
+    private static final String AUTHORIZE = "SELECT login, " +
             "is_blocked, is_activated, role_name FROM user_account " +
             "INNER JOIN role ON user_account.role_id_fk = role.role_id " +
             "WHERE login LIKE ?";
@@ -77,10 +77,10 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public Optional<User> findByLoginFull(String login) throws DaoException {
+    public Optional<User> findByLogin(String login) throws DaoException {
         try (Connection connection = connectionPool.getConnection();
              PreparedStatement statement =
-                     connection.prepareStatement(FIND_BY_LOGIN_FULL)) {
+                     connection.prepareStatement(FIND_BY_LOGIN)) {
             statement.setString(1, login);
             ResultSet resultSet = statement.executeQuery();
             Optional<User> userOptional = Optional.empty();
@@ -108,10 +108,10 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public Optional<User> findByLogin(String login) throws DaoException {
+    public Optional<User> authorize(String login) throws DaoException {
         try (Connection connection = connectionPool.getConnection();
              PreparedStatement statement =
-                     connection.prepareStatement(FIND_BY_LOGIN)) {
+                     connection.prepareStatement(AUTHORIZE)) {
             statement.setString(1, login);
             ResultSet resultSet = statement.executeQuery();
             Optional<User> userOptional = Optional.empty();

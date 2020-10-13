@@ -9,6 +9,9 @@ import com.borikov.bullfinch.entity.Image;
 import com.borikov.bullfinch.entity.Tattoo;
 import com.borikov.bullfinch.exception.ConnectionPoolException;
 import com.borikov.bullfinch.exception.DaoException;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -54,13 +57,15 @@ public class TattooDaoImpl implements TattooDao {
             "image_id_fk, user_account_id_fk) VALUES (?, ?, ?, 5, 1, 0, ?," +
             "(SELECT user_account_id FROM user_account WHERE BINARY login LIKE ?))";
     private static final String ALLOW = "UPDATE tattoo SET is_allowed = 1 WHERE tattoo_id = ?";
-    private static final String DELETE = "DELETE FROM tattoo WHERE tattoo_id = ?";
+    private static final String DELETE = "DELETE tattoo, image FROM tattoo, image " +
+            "WHERE tattoo.image_id_fk = image.image_id AND tattoo_id = ?";
     private static final String ARCHIVE = "UPDATE tattoo SET is_archived = 1 WHERE tattoo_id = ?";
     private static final String UNARCHIVE = "UPDATE tattoo SET is_archived = 0 WHERE tattoo_id = ?";
     private static final String UPDATE = "UPDATE tattoo SET tattoo_name = ?, tattoo_description = ?, " +
             "tattoo_price = ? WHERE tattoo_id = ?";
     private static final String ADD_IMAGE = "INSERT INTO image (image_name) VALUES (?)";
     private static final String PERCENT = "%";
+    private static final Logger LOGGER = LogManager.getLogger();
 
     @Override
     public List<Tattoo> findAll() throws DaoException {
@@ -266,60 +271,94 @@ public class TattooDaoImpl implements TattooDao {
 
     @Override
     public boolean offer(Tattoo tattoo) throws DaoException {
-        try (Connection connection = connectionPool.getConnection();
-             PreparedStatement statementImage =
-                     connection.prepareStatement(ADD_IMAGE, Statement.RETURN_GENERATED_KEYS);
-             PreparedStatement statementTattoo =
-                     connection.prepareStatement(OFFER, Statement.RETURN_GENERATED_KEYS)) {
-            statementImage.setString(1, tattoo.getImage().getName());
-            statementImage.executeUpdate();
-            ResultSet generatedKeysImage = statementImage.getGeneratedKeys();
-            if (generatedKeysImage.next()) {
-                tattoo.getImage().setImageId(generatedKeysImage.getLong(1));
+        Connection connection = null;
+        boolean result = false;
+        try {
+            connection = connectionPool.getConnection();
+            connection.setAutoCommit(false);
+            try (PreparedStatement statementImage =
+                         connection.prepareStatement(ADD_IMAGE, Statement.RETURN_GENERATED_KEYS);
+                 PreparedStatement statementTattoo = connection.prepareStatement(OFFER)) {
+                statementImage.setString(1, tattoo.getImage().getName());
+                statementImage.executeUpdate();
+                ResultSet generatedKeysImage = statementImage.getGeneratedKeys();
+                if (generatedKeysImage.next()) {
+                    tattoo.getImage().setImageId(generatedKeysImage.getLong(1));
+                }
+                statementTattoo.setString(1, tattoo.getName());
+                statementTattoo.setString(2, tattoo.getDescription());
+                statementTattoo.setDouble(3, tattoo.getPrice());
+                statementTattoo.setLong(4, tattoo.getImage().getImageId());
+                statementTattoo.setString(5, tattoo.getUser().getLogin());
+                result = statementTattoo.executeUpdate() > 0;
+                connection.commit();
             }
-            statementTattoo.setString(1, tattoo.getName());
-            statementTattoo.setString(2, tattoo.getDescription());
-            statementTattoo.setDouble(3, tattoo.getPrice());
-            statementTattoo.setLong(4, tattoo.getImage().getImageId());
-            statementTattoo.setString(5, tattoo.getUser().getLogin());
-            boolean result = statementTattoo.executeUpdate() > 0;
-            ResultSet generatedKeysTattoo = statementTattoo.getGeneratedKeys();
-            if (generatedKeysTattoo.next()) {
-                tattoo.setTattooId(generatedKeysTattoo.getLong(1));
+        } catch (ConnectionPoolException | SQLException e) {
+            try {
+                if (connection != null) {
+                    connection.rollback();
+                }
+            } catch (SQLException ex) {
+                LOGGER.log(Level.ERROR, "Error while rollback transaction");
             }
-            return result;
-        } catch (SQLException | ConnectionPoolException e) {
             throw new DaoException("Offer tattoo error", e);
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.setAutoCommit(true);
+                    connection.close();
+                } catch (SQLException e) {
+                    LOGGER.log(Level.ERROR, "Error while close connection");
+                }
+            }
         }
+        return result;
     }
 
     @Override
     public boolean add(Tattoo tattoo) throws DaoException {
-        try (Connection connection = connectionPool.getConnection();
-             PreparedStatement statementImage =
-                     connection.prepareStatement(ADD_IMAGE, Statement.RETURN_GENERATED_KEYS);
-             PreparedStatement statementTattoo =
-                     connection.prepareStatement(ADD, Statement.RETURN_GENERATED_KEYS)) {
-            statementImage.setString(1, tattoo.getImage().getName());
-            statementImage.executeUpdate();
-            ResultSet generatedKeysImage = statementImage.getGeneratedKeys();
-            if (generatedKeysImage.next()) {
-                tattoo.getImage().setImageId(generatedKeysImage.getLong(1));
+        Connection connection = null;
+        boolean result = false;
+        try {
+            connection = connectionPool.getConnection();
+            connection.setAutoCommit(false);
+            try (PreparedStatement statementImage =
+                         connection.prepareStatement(ADD_IMAGE, Statement.RETURN_GENERATED_KEYS);
+                 PreparedStatement statementTattoo = connection.prepareStatement(ADD)) {
+                statementImage.setString(1, tattoo.getImage().getName());
+                statementImage.executeUpdate();
+                ResultSet generatedKeysImage = statementImage.getGeneratedKeys();
+                if (generatedKeysImage.next()) {
+                    tattoo.getImage().setImageId(generatedKeysImage.getLong(1));
+                }
+                statementTattoo.setString(1, tattoo.getName());
+                statementTattoo.setString(2, tattoo.getDescription());
+                statementTattoo.setDouble(3, tattoo.getPrice());
+                statementTattoo.setLong(4, tattoo.getImage().getImageId());
+                statementTattoo.setString(5, tattoo.getUser().getLogin());
+                result = statementTattoo.executeUpdate() > 0;
+                connection.commit();
             }
-            statementTattoo.setString(1, tattoo.getName());
-            statementTattoo.setString(2, tattoo.getDescription());
-            statementTattoo.setDouble(3, tattoo.getPrice());
-            statementTattoo.setLong(4, tattoo.getImage().getImageId());
-            statementTattoo.setString(5, tattoo.getUser().getLogin());
-            boolean result = statementTattoo.executeUpdate() > 0;
-            ResultSet generatedKeysTattoo = statementTattoo.getGeneratedKeys();
-            if (generatedKeysTattoo.next()) {
-                tattoo.setTattooId(generatedKeysTattoo.getLong(1));
+        } catch (ConnectionPoolException | SQLException e) {
+            try {
+                if (connection != null) {
+                    connection.rollback();
+                }
+            } catch (SQLException ex) {
+                LOGGER.log(Level.ERROR, "Error while rollback transaction");
             }
-            return result;
-        } catch (SQLException | ConnectionPoolException e) {
             throw new DaoException("Add tattoo error", e);
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.setAutoCommit(true);
+                    connection.close();
+                } catch (SQLException e) {
+                    LOGGER.log(Level.ERROR, "Error while close connection");
+                }
+            }
         }
+        return result;
     }
 
     @Override

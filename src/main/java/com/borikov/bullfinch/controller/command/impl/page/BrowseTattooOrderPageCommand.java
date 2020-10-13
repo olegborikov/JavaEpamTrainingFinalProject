@@ -1,4 +1,4 @@
-package com.borikov.bullfinch.controller.command.impl;
+package com.borikov.bullfinch.controller.command.impl.page;
 
 import com.borikov.bullfinch.controller.PagePath;
 import com.borikov.bullfinch.controller.RequestParameter;
@@ -14,19 +14,22 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
 
-public class BrowseTattooAdminPageCommand implements Command {
+public class BrowseTattooOrderPageCommand implements Command {
     private static final Logger LOGGER = LogManager.getLogger();
     private static final TattooService tattooService = new TattooServiceImpl();
+    private static final boolean IS_ALLOWED_DEFAULT = true;
+    private static final boolean IS_ARCHIVED_DEFAULT = false;
 
     @Override
     public String execute(HttpServletRequest request) {
         String page;
         String tattooId = request.getParameter(RequestParameter.TATTOO_ID);
         try {
-            Optional<Tattoo> tattoo = tattooService.findTattooById(tattooId);
+            Optional<Tattoo> tattoo = tattooService.findTattooByIdAndAllowedAndArchived(
+                    tattooId, IS_ALLOWED_DEFAULT, IS_ARCHIVED_DEFAULT);
             if (tattoo.isPresent()) {
                 request.setAttribute(RequestParameter.TATTOO, tattoo.get());
-                page = PagePath.TATTOO_ADMIN;
+                page = PagePath.TATTOO_ORDER;
             } else {
                 request.setAttribute(RequestParameter.TATTOO_FIND_ERROR_MESSAGE, true);
                 page = PagePath.MESSAGE;

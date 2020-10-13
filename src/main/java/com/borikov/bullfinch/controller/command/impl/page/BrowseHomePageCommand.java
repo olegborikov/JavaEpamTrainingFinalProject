@@ -1,4 +1,4 @@
-package com.borikov.bullfinch.controller.command.impl;
+package com.borikov.bullfinch.controller.command.impl.page;
 
 import com.borikov.bullfinch.controller.PagePath;
 import com.borikov.bullfinch.controller.RequestParameter;

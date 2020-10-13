@@ -27,6 +27,7 @@ public class RequestParameter {
     public static final String PAGE_AMOUNT = "pageAmount";
     public static final String PHOTO_NAME = "photoName";
     public static final String NAME = "name";
+    public static final String IMAGE_NAME = "imageName";
     public static final String DATE = "date";
     public static final String DESCRIPTION = "description";
     public static final String REQUEST_ATTRIBUTE_HANDLER = "requestAttributeHandler";

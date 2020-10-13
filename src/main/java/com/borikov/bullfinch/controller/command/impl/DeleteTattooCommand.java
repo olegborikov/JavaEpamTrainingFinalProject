@@ -22,9 +22,10 @@ public class DeleteTattooCommand implements Command {
     public String execute(HttpServletRequest request) {
         String page;
         String tattooId = request.getParameter(RequestParameter.TATTOO_ID);
+        String imageName = request.getParameter(RequestParameter.IMAGE_NAME);
         try {
             if (tattooService.deleteTattoo(tattooId)) {
-                // TODO: 09.10.2020   photoFileManager.delete(photoName);
+                photoFileManager.delete(imageName);
                 request.setAttribute(RequestParameter.TATTOO_DELETE_CONFIRM_MESSAGE, true);
             } else {
                 request.setAttribute(RequestParameter.TATTOO_DELETE_ERROR_MESSAGE, true);

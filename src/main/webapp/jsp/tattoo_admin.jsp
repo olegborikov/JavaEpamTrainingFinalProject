@@ -86,6 +86,7 @@
                                 value="allow_tattoo_command">
                             <fmt:message key="tattooAdmin.allow"/>
                         </button>
+                    <input type="hidden" name="imageName" value="${tattoo.image.name}">
                         <button type="submit" class="btn btn-outline-secondary" name="commandName"
                                 value="delete_tattoo_command">
                             <fmt:message key="tattooAdmin.delete"/>

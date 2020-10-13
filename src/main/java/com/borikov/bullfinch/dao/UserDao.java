@@ -11,9 +11,9 @@ public interface UserDao {
 
     boolean checkExistingByEmail(String email) throws DaoException;
 
-    Optional<User> findByLogin(String login) throws DaoException;
+    Optional<User> authorize(String login) throws DaoException;
 
-    Optional<User> findByLoginFull(String login) throws DaoException;
+    Optional<User> findByLogin(String login) throws DaoException;
 
     boolean confirmEmail(String login) throws DaoException;
 
