@@ -13,14 +13,16 @@ import java.nio.file.Files;
 public class ImageController extends HttpServlet {
     private static final int BEGIN_INDEX = 1;
     private static final String UPLOAD_DIRECTORY = "C:\\uploads";
+    private static final String CONTENT_DISPOSITION_VALUE = "inline; filename=\"%s\"";
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {// TODO: 10.10.2020 refactor
+            throws ServletException, IOException {
         String filename = request.getPathInfo().substring(BEGIN_INDEX);
         File file = new File(UPLOAD_DIRECTORY, filename);
-        response.setHeader("Content-Type", getServletContext().getMimeType(filename));
-        response.setHeader("Content-Length", String.valueOf(file.length()));
-        response.setHeader("Content-Disposition", "inline; filename=\"" + filename + "\"");
+        response.setHeader(RequestParameter.CONTENT_TYPE, getServletContext().getMimeType(filename));
+        response.setHeader(RequestParameter.CONTENT_LENGTH, String.valueOf(file.length()));
+        response.setHeader(RequestParameter.CONTENT_DISPOSITION,
+                String.format(CONTENT_DISPOSITION_VALUE, filename));
         Files.copy(file.toPath(), response.getOutputStream());
     }
 }
