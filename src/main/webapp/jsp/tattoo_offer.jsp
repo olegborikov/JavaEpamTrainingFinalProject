@@ -21,7 +21,11 @@
     <script type="text/javascript"
             src="${pageContext.request.contextPath}/assets/js/project.js"></script>
 </head>
-
+<%--<script>
+    document.addEventListener('keydown', (event) => {
+        if (event.keyCode === 116) event.preventDefault();
+    })
+</script>--%>
 <body id="page-top">
 <jsp:include page="navbar.jsp"/>
 <section style="text-align: left;padding-top: 120px" class="masthead">
@@ -99,7 +103,8 @@
                                 </button>
                             </c:when>
                             <c:otherwise>
-                                <input type="hidden" name="commandName" value="offer_tattoo_command">
+                                <input type="hidden" name="commandName"
+                                       value="offer_tattoo_command">
                                 <button type="submit" class="btn btn-outline-secondary">
                                     <fmt:message key="tattooOffer.offerTattoo"/>
                                 </button>
