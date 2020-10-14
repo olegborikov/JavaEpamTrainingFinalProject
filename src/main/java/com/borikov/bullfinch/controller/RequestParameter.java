@@ -34,6 +34,8 @@ public class RequestParameter {
     public static final String IMAGE_NAME = "imageName";
     public static final String DATE = "date";
     public static final String DESCRIPTION = "description";
+    public static final String ENRICH_AMOUNT = "enrichAmount";
+    public static final String WALLET_ID = "walletId";
     public static final String REQUEST_ATTRIBUTE_HANDLER = "requestAttributeHandler";
 
     public static final String INCORRECT_IMAGE_MESSAGE = "incorrectImageMessage";
@@ -51,6 +53,8 @@ public class RequestParameter {
     public static final String TATTOO_ADD_CONFIRM_MESSAGE = "tattooAddConfirmMessage";
     public static final String USER_FIND_ERROR_MESSAGE = "userFindErrorMessage";
     public static final String TATTOO_ORDER_CONFIRM_MESSAGE = "tattooOrderConfirmMessage";
+    public static final String BALANCE_ENRICH_CONFIRM_MESSAGE = "balanceEnrichConfirmMessage";
+    public static final String BALANCE_ENRICH_ERROR_MESSAGE = "balanceEnrichErrorMessage";
 
     private RequestParameter() {
     }

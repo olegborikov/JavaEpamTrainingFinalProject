@@ -36,7 +36,7 @@
                     <p><fmt:message key="profile.phoneNumber"/> ${user.phoneNumber} </p>
                     <p><fmt:message key="profile.walletBalance"/> ${user.wallet.balance}</p>
                     <form name="allowDeleteForm" method="post" action="controller">
-                        <input type="hidden" name="tattooId" value="${user.userId}">
+                        <input type="hidden" name="walletId" value="${user.wallet.walletId}">
                         <button type="submit" class="btn btn-outline-secondary" name="commandName"
                                 value="browse_balance_enrich_page_command">
                             <fmt:message key="profile.enrich"/>
@@ -45,7 +45,7 @@
                 </div>
                 <div class="col-md-4">
                     <form name="editProfileForm" method="post" action="controller">
-                        <input type="hidden" name="tattooId" value="${user.userId}">
+                        <input type="hidden" name="userId" value="${user.userId}">
                         <div style="text-align: left">
                             <button  class="btn btn-outline-secondary"
                                      name="commandName" value="">

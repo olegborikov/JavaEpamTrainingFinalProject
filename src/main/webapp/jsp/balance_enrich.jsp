@@ -126,18 +126,18 @@
                                                     <div class="form-group">
                                                         <label><fmt:message key="balanceEnrich.amount"/></label>
                                                         <input class="form-control" required
-                                                               type="text" maxlength="7"
+                                                               type="text" maxlength="7" name="enrichAmount"
                                                                placeholder='<fmt:message key="balanceEnrich.enterAmount"/>'
                                                                oninvalid="this.setCustomValidity('<fmt:message
                                                                        key="balanceEnrich.amountValidate"/>')"
                                                                onchange="this.setCustomValidity('')"
-                                                               pattern=""
                                                                title='<fmt:message key="balanceEnrich.amountValidate"/>'>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="card-footer">
+                                            <input type="hidden" name="walletId" value="${walletId}">
                                             <button class="btn btn-sm btn-success float-right"
                                                     name="commandName" value="enrich_balance_command">
                                                 <fmt:message key="balanceEnrich.confirm"/>

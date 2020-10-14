@@ -78,6 +78,14 @@
             <c:if test="${tattooOrderConfirmMessage}">
                 <h2><fmt:message key="message.tattooOrderConfirmMessage"/></h2>
             </c:if>
+
+            <c:if test="${balanceEnrichConfirmMessage}">
+                <h2><fmt:message key="message.balanceEnrichConfirmMessage"/></h2>
+            </c:if>
+
+            <c:if test="${balanceEnrichErrorMessage}">
+                <h2><fmt:message key="message.balanceEnrichErrorMessage"/></h2>
+            </c:if>
         </div>
     </div>
 </section>
