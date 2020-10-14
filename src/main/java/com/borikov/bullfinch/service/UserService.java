@@ -1,6 +1,7 @@
 package com.borikov.bullfinch.service;
 
 import com.borikov.bullfinch.entity.User;
+import com.borikov.bullfinch.exception.DaoException;
 import com.borikov.bullfinch.exception.ServiceException;
 
 import java.util.List;
@@ -18,4 +19,8 @@ public interface UserService {
     List<User> findAllUsers() throws ServiceException;
 
     Optional<User> findUserByLogin(String name) throws ServiceException;
+
+    boolean blockUser(String login) throws ServiceException;
+
+    boolean unblockUser(String login) throws ServiceException;
 }

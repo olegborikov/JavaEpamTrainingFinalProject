@@ -6,7 +6,7 @@
 <fmt:setBundle basename="i18n.application_message"/>
 <html>
 <head>
-    <title></title>
+    <title><fmt:message key="usersAdmin.title"/></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <link rel="stylesheet" type="text/css"
           href="${pageContext.request.contextPath}/assets/css/bootstrap.min.css">
@@ -33,10 +33,15 @@
                         <div class="row form-group">
                             <c:forEach var="user" items="${users}">
                                 <div class="col-md-12">
-                                    <input style="background-color: black; text-align: left"
-                                           type="submit"
-                                           class="form-control text-white" value=" ${user.login}">
-                                    <br/>
+                                    <form method="post" action="controller">
+                                        <input type="hidden" name="commandName"
+                                               value="browse_profile_admin_page_command">
+                                        <input style="background-color: black; text-align: left"
+                                               type="submit"
+                                               class="form-control text-white" name="login"
+                                               value="${user.login}">
+                                        <br/>
+                                    </form>
                                 </div>
                             </c:forEach>
                         </div>

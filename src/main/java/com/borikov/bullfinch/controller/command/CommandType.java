@@ -30,6 +30,7 @@ public enum CommandType {
     BROWSE_CATALOG_TATTOOS_ADMIN_PAGE_COMMAND(new BrowseCatalogTattoosAdminPageCommand()),
     BROWSE_OFFERED_TATTOOS_ADMIN_PAGE_COMMAND(new BrowseOfferedTattoosAdminPageCommand()),
     BROWSE_ARCHIVED_TATTOOS_ADMIN_PAGE_COMMAND(new BrowseArchivedTattoosAdminPageCommand()),
+    BROWSE_PROFILE_ADMIN_PAGE_COMMAND(new BrowseProfileAdminPageCommand()),
     FIND_TATTOOS_ADMIN_COMMAND(new FindTattoosAdminCommand()),
     BROWSE_TATTOO_ADMIN_PAGE_COMMAND(new BrowseTattooAdminPageCommand()),
     ALLOW_TATTOO_COMMAND(new AllowTattooCommand()),
@@ -40,6 +41,8 @@ public enum CommandType {
     EDIT_TATTOO_COMMAND(new EditTattooCommand()),
     BROWSE_TATTOO_ADD_PAGE_COMMAND(new BrowseTattooAddPageCommand()),
     ADD_TATTOO_COMMAND(new AddTattooCommand()),
+    BLOCK_USER_COMMAND(new BlockUserCommand()),
+    UNBLOCK_USER_COMMAND(new UnblockUserCommand()),
     BROWSE_USERS_PAGE_COMMAND(new BrowseUsersPageCommand());
 
     private final Command command;

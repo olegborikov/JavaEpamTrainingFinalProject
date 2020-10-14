@@ -86,6 +86,14 @@
             <c:if test="${balanceEnrichErrorMessage}">
                 <h2><fmt:message key="message.balanceEnrichErrorMessage"/></h2>
             </c:if>
+
+            <c:if test="${userBlockErrorMessage}">
+                <h2><fmt:message key="message.userBlockErrorMessage"/></h2>
+            </c:if>
+
+            <c:if test="${userUnblockErrorMessage}">
+                <h2><fmt:message key="message.userUnblockErrorMessage"/></h2>
+            </c:if>
         </div>
     </div>
 </section>

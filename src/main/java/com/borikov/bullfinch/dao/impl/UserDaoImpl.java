@@ -39,7 +39,10 @@ public class UserDaoImpl implements UserDao {
             "SET is_activated = 1 WHERE login LIKE ?";
     private static final String ADD_WALLET = "INSERT INTO wallet (balance)" +
             "VALUES (?)";
-    private static final String FIND_ALL = "SELECT login FROM user_account";
+    private static final String FIND_ALL = "SELECT login, email, first_name, second_name " +
+            "FROM user_account WHERE BINARY login NOT LIKE 'admin'";
+    private static final String BLOCK = "UPDATE user_account SET is_blocked = 1 WHERE BINARY login LIKE ?";
+    private static final String UNBLOCK = "UPDATE user_account SET is_blocked = 0 WHERE BINARY login LIKE ?";
 
     @Override
     public Optional<String> checkExistingByLogin(String login) throws DaoException {
@@ -177,11 +180,6 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public boolean remove(User user) throws DaoException {
-        return false;
-    }
-
-    @Override
     public boolean update(User user) throws DaoException {
         return false;
     }
@@ -196,12 +194,39 @@ public class UserDaoImpl implements UserDao {
             while (resultSet.next()) {
                 UserBuilder userBuilder = new UserBuilder();
                 userBuilder.setLogin(resultSet.getString(ColumnName.LOGIN));
+                userBuilder.setEmail(resultSet.getString(ColumnName.EMAIL));
+                userBuilder.setFirstName(resultSet.getString(ColumnName.FIRST_NAME));
+                userBuilder.setSecondName(resultSet.getString(ColumnName.SECOND_NAME));
                 User user = userBuilder.getUser();
                 users.add(user);
             }
             return users;
         } catch (SQLException | ConnectionPoolException e) {
             throw new DaoException("Finding all users error", e);
+        }
+    }
+
+    @Override
+    public boolean block(String login) throws DaoException {
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement statement =
+                     connection.prepareStatement(BLOCK)) {
+            statement.setString(1, login);
+            return statement.executeUpdate() > 0;
+        } catch (SQLException | ConnectionPoolException e) {
+            throw new DaoException("Block user error", e);
+        }
+    }
+
+    @Override
+    public boolean unblock(String login) throws DaoException {
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement statement =
+                     connection.prepareStatement(UNBLOCK)) {
+            statement.setString(1, login);
+            return statement.executeUpdate() > 0;
+        } catch (SQLException | ConnectionPoolException e) {
+            throw new DaoException("Block user error", e);
         }
     }
 }

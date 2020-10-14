@@ -117,4 +117,32 @@ public class UserServiceImpl implements UserService {
             throw new ServiceException("Error while finding tattoos by id", e);
         }
     }
+
+    @Override
+    public boolean blockUser(String login) throws ServiceException {
+        boolean result = false;
+        UserValidator userValidator = new UserValidator();
+        try {
+            if (userValidator.isLoginCorrect(login)) {
+                result = userDao.block(login);
+            }
+            return result;
+        } catch (DaoException e) {
+            throw new ServiceException("Error while blocking user", e);
+        }
+    }
+
+    @Override
+    public boolean unblockUser(String login) throws ServiceException {
+        boolean result = false;
+        UserValidator userValidator = new UserValidator();
+        try {
+            if (userValidator.isLoginCorrect(login)) {
+                result = userDao.unblock(login);
+            }
+            return result;
+        } catch (DaoException e) {
+            throw new ServiceException("Error while unblocking user", e);
+        }
+    }
 }

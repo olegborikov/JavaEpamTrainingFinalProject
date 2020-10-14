@@ -19,9 +19,11 @@ public interface UserDao {
 
     boolean add(User user, String password) throws DaoException;
 
-    boolean remove(User user) throws DaoException;
-
     boolean update(User user) throws DaoException;
 
     List<User> findAll() throws DaoException;
+
+    boolean block(String login) throws DaoException;
+
+    boolean unblock(String login) throws DaoException;
 }
