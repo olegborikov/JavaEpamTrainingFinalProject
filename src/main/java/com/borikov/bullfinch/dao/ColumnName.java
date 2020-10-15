@@ -8,10 +8,10 @@ public class ColumnName {
     public static final String IMAGE_ID = "image_id";
     public static final String IMAGE_NAME = "image_name";
 
-    public static final String ORDER_ID = "order_id";
-    public static final String ORDER_PRICE = "order_price";
+    public static final String TATTOO_ORDER_ID = "tattoo_order_id";
+    public static final String TATTOO_ORDER_PRICE = "tattoo_order_price";
     public static final String DATE = "date";
-    public static final String ORDER_DESCRIPTION = "order_description";
+    public static final String TATTOO_ORDER_DESCRIPTION = "tattoo_order_description";
 
     public static final String ROLE_ID = "role_id";
     public static final String ROLE_NAME = "role_name";

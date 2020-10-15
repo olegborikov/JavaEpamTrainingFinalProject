@@ -29,7 +29,7 @@
             <div class="row">
                 <div class="col-md-4"></div>
                 <div class="col-md-8">
-                    <div class="padding text-black-50">
+                    <div style="color: black" class="padding ">
                         <div class="row">
                             <div class="col-sm-6">
                                 <form name="balanceEnrichForm" method="post" action="controller" autocomplete="off">
@@ -46,8 +46,8 @@
                                                     <div class="form-group">
                                                         <label><fmt:message
                                                                 key="balanceEnrich.cardNumber"/></label>
-                                                        <div class="input-group">
-                                                            <input class="form-control" type="text" maxlength="19"
+                                                        <div class="input-group" >
+                                                            <input style="color: black" class="form-control" type="text" maxlength="19"
                                                                    placeholder="0000 0000 0000 0000" required
                                                                    oninvalid="this.setCustomValidity('<fmt:message
                                                                            key="balanceEnrich.cardNumberValidate"/>')"
@@ -63,7 +63,7 @@
                                                     <div class="form-group">
                                                         <label><fmt:message
                                                                 key="balanceEnrich.name"/></label>
-                                                        <input class="form-control" required
+                                                        <input style="color: black" class="form-control" required
                                                                type="text" maxlength="20"
                                                                placeholder='<fmt:message key="balanceEnrich.enterName"/>'
                                                                oninvalid="this.setCustomValidity('<fmt:message
@@ -78,7 +78,7 @@
                                                 <div class="form-group col-sm-6">
                                                     <label><fmt:message
                                                             key="balanceEnrich.month"/></label>
-                                                    <select class="form-control">
+                                                    <select class="form-control" style="color: black">
                                                         <option>1</option>
                                                         <option>2</option>
                                                         <option>3</option>
@@ -96,7 +96,7 @@
                                                 <div class="form-group col-sm-6">
                                                     <label><fmt:message
                                                             key="balanceEnrich.year"/></label>
-                                                    <select class="form-control">
+                                                    <select class="form-control" style="color: black">
                                                         <option>2016</option>
                                                         <option>2017</option>
                                                         <option>2018</option>
@@ -112,7 +112,7 @@
                                                     <div class="form-group">
                                                         <label><fmt:message
                                                                 key="balanceEnrich.cvc"/></label>
-                                                        <input class="form-control"
+                                                        <input style="color: black" class="form-control"
                                                                type="text" required
                                                                placeholder="123" maxlength="3"
                                                                oninvalid="this.setCustomValidity('<fmt:message
@@ -125,7 +125,7 @@
                                                 <div class="col-sm-6">
                                                     <div class="form-group">
                                                         <label><fmt:message key="balanceEnrich.amount"/></label>
-                                                        <input class="form-control" required
+                                                        <input style="color: black" class="form-control" required
                                                                type="text" maxlength="7" name="enrichAmount"
                                                                placeholder='<fmt:message key="balanceEnrich.enterAmount"/>'
                                                                oninvalid="this.setCustomValidity('<fmt:message

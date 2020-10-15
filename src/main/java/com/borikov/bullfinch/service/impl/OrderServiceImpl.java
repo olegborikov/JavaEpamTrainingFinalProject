@@ -17,6 +17,8 @@ import com.borikov.bullfinch.validator.UserValidator;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 public class OrderServiceImpl implements OrderService {
     private final OrderDao orderDao = new OrderDaoImpl();
@@ -53,6 +55,20 @@ public class OrderServiceImpl implements OrderService {
             return result;
         } catch (DaoException | ParseException e) {
             throw new ServiceException("Error while adding order", e);
+        }
+    }
+
+    @Override
+    public List<Order> getOrdersByUserLogin(String userLogin) throws ServiceException {
+        List<Order> orders = new ArrayList<>();
+        UserValidator userValidator = new UserValidator();
+        try {
+            if (userValidator.isLoginCorrect(userLogin)) {
+               orders = orderDao.findByUserLogin(userLogin);
+            }
+            return orders;
+        } catch (DaoException e) {
+            throw new ServiceException("Error while finding orders by user login", e);
         }
     }
 }

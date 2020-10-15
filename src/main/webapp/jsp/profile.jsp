@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <fmt:setLocale value="${currentLocale}"/>
 <fmt:setBundle basename="i18n.application_message"/>
@@ -20,14 +21,32 @@
     <script type="text/javascript"
             src="${pageContext.request.contextPath}/assets/js/project.js"></script>
 </head>
+<style>
+    .list-group {
+        max-height: 300px;
+        margin-bottom: 10px;
+        overflow: scroll;
+        -webkit-overflow-scrolling: touch;
+    }
+</style>
 <body>
 <jsp:include page="navbar.jsp"/>
-<section style="text-align: left" class="masthead">
+<section style="text-align: left;" class="masthead">
     <div class="intro-body">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-2"></div>
                 <div class="col-md-5">
+                    <form name="editProfileForm" method="post" action="controller">
+                        <input type="hidden" name="userId" value="${user.userId}">
+                        <div style="text-align: left">
+                            <button class="btn btn-outline-secondary"
+                                    name="commandName" value="">
+                                <fmt:message key="profile.editProfile"/>
+                            </button>
+                        </div>
+                    </form>
+                    <br/>
                     <h3 class="text-white"><fmt:message key="profile.information"/></h3>
                     <p><fmt:message key="profile.login"/> ${user.login}</p>
                     <p><fmt:message key="profile.email"/> ${user.email}</p>
@@ -44,15 +63,25 @@
                     </form>
                 </div>
                 <div class="col-md-4">
-                    <form name="editProfileForm" method="post" action="controller">
-                        <input type="hidden" name="userId" value="${user.userId}">
-                        <div style="text-align: left">
-                            <button class="btn btn-outline-secondary"
-                                    name="commandName" value="">
-                                <fmt:message key="profile.editProfile"/>
-                            </button>
+                    <div class="panel panel-primary" id="result_panel">
+                        <div class="panel-heading"><h3 class="panel-title">
+                            <fmt:message key="profile.orders"/></h3>
                         </div>
-                    </form>
+                        <div class="panel-body">
+                            <ul class="list-group">
+                                <c:if test="${empty orders}">
+                                    <li style="color: black" class="list-group-item">
+                                        <strong><fmt:message key="profile.empty"/></strong>
+                                    </li>
+                                </c:if>
+                                <c:forEach var="order" items="${orders}">
+                                    <bu style="color: black" class="list-group-item">
+                                        <button class="btn"><strong>${order.tattoo.name}, ${order.price}, ${order.date}</strong></button>
+                                    </bu>
+                                </c:forEach>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-md-1">
                 </div>
