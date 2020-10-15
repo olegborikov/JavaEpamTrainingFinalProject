@@ -3,6 +3,7 @@ package com.borikov.bullfinch.dao;
 import com.borikov.bullfinch.entity.Tattoo;
 import com.borikov.bullfinch.exception.DaoException;
 
+import java.sql.Connection;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,13 +27,13 @@ public interface TattooDao {
 
     Optional<Tattoo> findById(long id) throws DaoException;
 
-    boolean offer(Tattoo tattoo) throws DaoException;
+    boolean offer(Tattoo tattoo, Connection connection) throws DaoException;
 
-    boolean add(Tattoo tattoo) throws DaoException;
+    boolean add(Tattoo tattoo, Connection connection) throws DaoException;
 
     boolean allow(long id) throws DaoException;
 
-    boolean delete(long id) throws DaoException;
+    boolean remove(long id, Connection connection) throws DaoException;
 
     boolean archive(long id) throws DaoException;
 

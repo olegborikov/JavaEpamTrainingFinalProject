@@ -36,6 +36,7 @@ public class RequestParameter {
     public static final String DESCRIPTION = "description";
     public static final String ENRICH_AMOUNT = "enrichAmount";
     public static final String WALLET_ID = "walletId";
+    public static final String IMAGE_ID = "imageId";
     public static final String REQUEST_ATTRIBUTE_HANDLER = "requestAttributeHandler";
 
     public static final String INCORRECT_IMAGE_MESSAGE = "incorrectImageMessage";
@@ -57,6 +58,7 @@ public class RequestParameter {
     public static final String BALANCE_ENRICH_ERROR_MESSAGE = "balanceEnrichErrorMessage";
     public static final String USER_BLOCK_ERROR_MESSAGE = "userBlockErrorMessage";
     public static final String USER_UNBLOCK_ERROR_MESSAGE = "userUnblockErrorMessage";
+    public static final String USER_BLOCKED_MESSAGE = "userBlockedMessage";
 
     private RequestParameter() {
     }

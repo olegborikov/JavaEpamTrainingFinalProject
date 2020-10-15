@@ -3,11 +3,13 @@ package com.borikov.bullfinch.service.impl;
 import com.borikov.bullfinch.builder.TattooBuilder;
 import com.borikov.bullfinch.builder.UserBuilder;
 import com.borikov.bullfinch.dao.TattooDao;
+import com.borikov.bullfinch.dao.TransactionManager;
 import com.borikov.bullfinch.dao.impl.TattooDaoImpl;
 import com.borikov.bullfinch.entity.Image;
 import com.borikov.bullfinch.entity.Tattoo;
 import com.borikov.bullfinch.exception.DaoException;
 import com.borikov.bullfinch.exception.ServiceException;
+import com.borikov.bullfinch.exception.TransactionException;
 import com.borikov.bullfinch.service.TattooService;
 import com.borikov.bullfinch.validator.TattooValidator;
 
@@ -16,6 +18,7 @@ import java.util.Optional;
 
 public class TattooServiceImpl implements TattooService {
     private final TattooDao tattooDao = new TattooDaoImpl();
+    private final TransactionManager transactionManager = new TransactionManager();
 
     @Override
     public List<Tattoo> findAllTattoos() throws ServiceException {
@@ -129,16 +132,17 @@ public class TattooServiceImpl implements TattooService {
                 userBuilder.setLogin(proposedLogin);
                 tattooBuilder.setUser(userBuilder.getUser());
                 Tattoo tattoo = tattooBuilder.getTattoo();
-                result = tattooDao.offer(tattoo);
+                result = transactionManager.offerTattooTransaction(tattoo);
             }
             return result;
-        } catch (DaoException e) {
+        } catch (TransactionException e) {
             throw new ServiceException("Error while offering tattoo", e);
         }
     }
 
     @Override
-    public boolean addTattoo(String tattooName, String description, String price, String imageName, String proposedLogin) throws ServiceException {
+    public boolean addTattoo(String tattooName, String description, String price, String imageName, String proposedLogin)
+            throws ServiceException {
         try {
             TattooValidator tattooValidator = new TattooValidator();
             boolean result = false;
@@ -155,10 +159,10 @@ public class TattooServiceImpl implements TattooService {
                 userBuilder.setLogin(proposedLogin);
                 tattooBuilder.setUser(userBuilder.getUser());
                 Tattoo tattoo = tattooBuilder.getTattoo();
-                result = tattooDao.add(tattoo);
+                result = transactionManager.addTattooTransaction(tattoo);
             }
             return result;
-        } catch (DaoException e) {
+        } catch (TransactionException e) {
             throw new ServiceException("Error while adding tattoo", e);
         }
     }
@@ -179,16 +183,18 @@ public class TattooServiceImpl implements TattooService {
     }
 
     @Override
-    public boolean deleteTattoo(String id) throws ServiceException {
+    public boolean removeTattoo(String tattooId, String imageId) throws ServiceException {
         boolean result = false;
         TattooValidator tattooValidator = new TattooValidator();
         try {
-            if (tattooValidator.isIdCorrect(id)) {
-                long tattooId = Long.parseLong(id);
-                result = tattooDao.delete(tattooId);
+            if (tattooValidator.isIdCorrect(tattooId)
+                    && tattooValidator.isIdCorrect(imageId)) {
+                long tattooIdParsed = Long.parseLong(tattooId);
+                long imageIdParsed = Long.parseLong(imageId);
+                result = transactionManager.removeTattooTransaction(tattooIdParsed, imageIdParsed);
             }
             return result;
-        } catch (DaoException e) {
+        } catch (TransactionException e) {
             throw new ServiceException("Error while deleting tattoo", e);
         }
     }

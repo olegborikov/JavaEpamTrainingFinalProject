@@ -148,7 +148,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public boolean add(User user, String password) throws DaoException {// TODO: 16.09.2020 refactor
+    public boolean add(User user, String password) throws DaoException {// TODO: 16.09.2020 refactor, transaction
         try (Connection connection = connectionPool.getConnection();
              PreparedStatement statementWallet =
                      connection.prepareStatement(ADD_WALLET, Statement.RETURN_GENERATED_KEYS);
@@ -226,7 +226,7 @@ public class UserDaoImpl implements UserDao {
             statement.setString(1, login);
             return statement.executeUpdate() > 0;
         } catch (SQLException | ConnectionPoolException e) {
-            throw new DaoException("Block user error", e);
+            throw new DaoException("Unblock user error", e);
         }
     }
 }

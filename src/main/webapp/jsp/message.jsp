@@ -94,6 +94,10 @@
             <c:if test="${userUnblockErrorMessage}">
                 <h2><fmt:message key="message.userUnblockErrorMessage"/></h2>
             </c:if>
+
+            <c:if test="${userBlockedMessage}">
+                <h2><fmt:message key="message.userBlockedMessage"/></h2>
+            </c:if>
         </div>
     </div>
 </section>

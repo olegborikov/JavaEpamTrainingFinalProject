@@ -35,13 +35,18 @@ public class LoginCommand implements Command {
                     session.setAttribute(RequestParameter.LOGIN, user.getLogin());
                     page = PagePath.HOME;
                 } else {
-                    if (user.isActivated()) {
-                        page = PagePath.HOME;
-                        session.setAttribute(RequestParameter.ROLE, user.getUserRole().getName());
-                        session.setAttribute(RequestParameter.LOGIN, user.getLogin());
-                    } else {
-                        request.setAttribute(RequestParameter.USER_EMAIL_CONFIRM_MESSAGE, true);
+                    if (user.isBlocked()) {
+                        request.setAttribute(RequestParameter.USER_BLOCKED_MESSAGE, true);
                         page = PagePath.MESSAGE;
+                    } else {
+                        if (user.isActivated()) {
+                            page = PagePath.HOME;
+                            session.setAttribute(RequestParameter.ROLE, user.getUserRole().getName());
+                            session.setAttribute(RequestParameter.LOGIN, user.getLogin());
+                        } else {
+                            request.setAttribute(RequestParameter.USER_EMAIL_CONFIRM_MESSAGE, true);
+                            page = PagePath.MESSAGE;
+                        }
                     }
                 }
             } else {

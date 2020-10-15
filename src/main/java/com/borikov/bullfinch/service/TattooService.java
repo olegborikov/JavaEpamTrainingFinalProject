@@ -32,7 +32,7 @@ public interface TattooService {
 
     boolean allowTattoo(String id) throws ServiceException;
 
-    boolean deleteTattoo(String id) throws ServiceException;
+    boolean removeTattoo(String tattooId, String imageId) throws ServiceException;
 
     boolean archiveTattoo(String id) throws ServiceException;
 
