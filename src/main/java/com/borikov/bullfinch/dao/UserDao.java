@@ -3,6 +3,7 @@ package com.borikov.bullfinch.dao;
 import com.borikov.bullfinch.entity.User;
 import com.borikov.bullfinch.exception.DaoException;
 
+import java.sql.Connection;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,7 +18,7 @@ public interface UserDao {
 
     boolean confirmEmail(String login) throws DaoException;
 
-    boolean add(User user, String password) throws DaoException;
+    boolean add(User user, String password, Connection connection) throws DaoException;
 
     boolean update(User user) throws DaoException;
 

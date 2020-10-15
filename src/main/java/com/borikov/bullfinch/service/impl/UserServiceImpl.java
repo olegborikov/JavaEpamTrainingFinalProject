@@ -1,6 +1,7 @@
 package com.borikov.bullfinch.service.impl;
 
 import com.borikov.bullfinch.builder.UserBuilder;
+import com.borikov.bullfinch.dao.TransactionManager;
 import com.borikov.bullfinch.dao.UserDao;
 import com.borikov.bullfinch.dao.impl.UserDaoImpl;
 import com.borikov.bullfinch.entity.User;
@@ -8,6 +9,7 @@ import com.borikov.bullfinch.entity.UserRole;
 import com.borikov.bullfinch.entity.Wallet;
 import com.borikov.bullfinch.exception.DaoException;
 import com.borikov.bullfinch.exception.ServiceException;
+import com.borikov.bullfinch.exception.TransactionException;
 import com.borikov.bullfinch.service.UserService;
 import com.borikov.bullfinch.util.EmailSenderUtil;
 import com.borikov.bullfinch.util.PasswordEncryptor;
@@ -17,6 +19,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class UserServiceImpl implements UserService {
+    private final TransactionManager transactionManager = new TransactionManager();
     private final UserDao userDao = new UserDaoImpl();
 
     @Override
@@ -70,12 +73,12 @@ public class UserServiceImpl implements UserService {
                     userBuilder.setUserRole(UserRole.USER);
                     userBuilder.setWallet(new Wallet(null, 0));
                     User user = userBuilder.getUser();
-                    result = userDao.add(user, encryptedPassword.get());
+                    result = transactionManager.addUserTransaction(user, encryptedPassword.get());
                     EmailSenderUtil.sendMessage(user.getEmail(), user.getLogin());
                 }
             }
             return result;
-        } catch (DaoException e) {
+        } catch (DaoException | TransactionException e) {
             throw new ServiceException("Error while adding user", e);
         }
     }

@@ -37,8 +37,6 @@ public class UserDaoImpl implements UserDao {
             "VALUES (?, ?, ?, ?, ?, ?, 0, 0, ?, ?)";
     private static final String CONFIRM_EMAIL = "UPDATE user_account " +
             "SET is_activated = 1 WHERE login LIKE ?";
-    private static final String ADD_WALLET = "INSERT INTO wallet (balance)" +
-            "VALUES (?)";
     private static final String FIND_ALL = "SELECT login, email, first_name, second_name " +
             "FROM user_account WHERE BINARY login NOT LIKE 'admin'";
     private static final String BLOCK = "UPDATE user_account SET is_blocked = 1 WHERE BINARY login LIKE ?";
@@ -148,33 +146,24 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public boolean add(User user, String password) throws DaoException {// TODO: 16.09.2020 refactor, transaction
-        try (Connection connection = connectionPool.getConnection();
-             PreparedStatement statementWallet =
-                     connection.prepareStatement(ADD_WALLET, Statement.RETURN_GENERATED_KEYS);
-             PreparedStatement statementUser =
+    public boolean add(User user, String password, Connection connection) throws DaoException {// TODO: 16.09.2020 refactor
+        try (PreparedStatement statement =
                      connection.prepareStatement(ADD, Statement.RETURN_GENERATED_KEYS)) {
-            statementWallet.setDouble(1, user.getWallet().getBalance());
-            statementWallet.executeUpdate();
-            ResultSet generatedKeysWallet = statementWallet.getGeneratedKeys();
-            if (generatedKeysWallet.next()) {
-                user.getWallet().setWalletId(generatedKeysWallet.getLong(1));
-            }
-            statementUser.setString(1, user.getEmail());
-            statementUser.setString(2, user.getLogin());
-            statementUser.setString(3, password);
-            statementUser.setString(4, user.getFirstName());
-            statementUser.setString(5, user.getSecondName());
-            statementUser.setString(6, user.getPhoneNumber());
-            statementUser.setLong(7, user.getUserRole().getUserRoleId());
-            statementUser.setLong(8, user.getWallet().getWalletId());
-            boolean result = statementUser.executeUpdate() > 0;
-            ResultSet generatedKeysUser = statementUser.getGeneratedKeys();
+            statement.setString(1, user.getEmail());
+            statement.setString(2, user.getLogin());
+            statement.setString(3, password);
+            statement.setString(4, user.getFirstName());
+            statement.setString(5, user.getSecondName());
+            statement.setString(6, user.getPhoneNumber());
+            statement.setLong(7, user.getUserRole().getUserRoleId());
+            statement.setLong(8, user.getWallet().getWalletId());
+            boolean result = statement.executeUpdate() > 0;
+            ResultSet generatedKeysUser = statement.getGeneratedKeys();
             if (generatedKeysUser.next()) {
                 user.setUserId(generatedKeysUser.getLong(1));
             }
             return result;
-        } catch (SQLException | ConnectionPoolException e) {
+        } catch (SQLException e) {
             throw new DaoException("Add user error", e);
         }
     }
