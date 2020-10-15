@@ -2,14 +2,54 @@ package com.borikov.bullfinch.entity;
 
 import java.util.Date;
 
+/**
+ * The {@code Order} class represents tattoo_order entity
+ *
+ * @author Oleg Borikov
+ * @version 1.0
+ * @since 2020-10-16
+ */
 public class Order {
+    /**
+     * The value is used for order id storage.
+     */
     private Long orderId;
+
+    /**
+     * The value is used for price storage.
+     */
     private double price;
+
+    /**
+     * The value is used for date storage.
+     */
     private Date date;
+
+    /**
+     * The value is used for description storage.
+     */
     private String description;
+
+    /**
+     * The value is used for user storage.
+     */
     private User user;
+
+    /**
+     * The value is used for tattoo storage.
+     */
     private Tattoo tattoo;
 
+    /**
+     * Instantiates a new Order.
+     *
+     * @param orderId     the order id
+     * @param price       the price
+     * @param date        the date
+     * @param description the description
+     * @param user        the user
+     * @param tattoo      the tattoo
+     */
     public Order(Long orderId, double price, Date date,
                  String description, User user, Tattoo tattoo) {
         this.orderId = orderId;
@@ -20,50 +60,110 @@ public class Order {
         this.tattoo = tattoo;
     }
 
+    /**
+     * Gets order id.
+     *
+     * @return the order id
+     */
     public Long getOrderId() {
         return orderId;
     }
 
+    /**
+     * Sets order id.
+     *
+     * @param orderId the order id
+     */
     public void setOrderId(Long orderId) {
         this.orderId = orderId;
     }
 
+    /**
+     * Gets price.
+     *
+     * @return the price
+     */
     public double getPrice() {
         return price;
     }
 
+    /**
+     * Sets price.
+     *
+     * @param price the price
+     */
     public void setPrice(double price) {
         this.price = price;
     }
 
+    /**
+     * Gets date.
+     *
+     * @return the date
+     */
     public Date getDate() {
         return date;
     }
 
+    /**
+     * Sets date.
+     *
+     * @param date the date
+     */
     public void setDate(Date date) {
         this.date = date;
     }
 
+    /**
+     * Gets description.
+     *
+     * @return the description
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     * Sets description.
+     *
+     * @param description the description
+     */
     public void setDescription(String description) {
         this.description = description;
     }
 
+    /**
+     * Gets user.
+     *
+     * @return the user
+     */
     public User getUser() {
         return user;
     }
 
+    /**
+     * Sets user.
+     *
+     * @param user the user
+     */
     public void setUser(User user) {
         this.user = user;
     }
 
+    /**
+     * Gets tattoo.
+     *
+     * @return the tattoo
+     */
     public Tattoo getTattoo() {
         return tattoo;
     }
 
+    /**
+     * Sets tattoo.
+     *
+     * @param tattoo the tattoo
+     */
     public void setTattoo(Tattoo tattoo) {
         this.tattoo = tattoo;
     }

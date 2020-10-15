@@ -1,26 +1,66 @@
 package com.borikov.bullfinch.entity;
 
+/**
+ * The {@code Image} class represents image entity
+ *
+ * @author Oleg Borikov
+ * @version 1.0
+ * @since 2020-10-16
+ */
 public class Image {
+    /**
+     * The value is used for image id storage.
+     */
     private Long imageId;
+
+    /**
+     * The value is used for name storage.
+     */
     private String name;
 
+    /**
+     * Instantiates a new Image.
+     *
+     * @param imageId the image id
+     * @param name    the name
+     */
     public Image(Long imageId, String name) {
         this.imageId = imageId;
         this.name = name;
     }
 
+    /**
+     * Gets image id.
+     *
+     * @return the image id
+     */
     public Long getImageId() {
         return imageId;
     }
 
+    /**
+     * Sets image id.
+     *
+     * @param imageId the image id
+     */
     public void setImageId(Long imageId) {
         this.imageId = imageId;
     }
 
+    /**
+     * Gets name.
+     *
+     * @return the name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Sets name.
+     *
+     * @param name the name
+     */
     public void setName(String name) {
         this.name = name;
     }

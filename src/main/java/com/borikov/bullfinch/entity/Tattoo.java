@@ -1,19 +1,77 @@
 package com.borikov.bullfinch.entity;
 
+/**
+ * The {@code Tattoo} class represents tattoo entity
+ *
+ * @author Oleg Borikov
+ * @version 1.0
+ * @since 2020-10-16
+ */
 public class Tattoo {
+    /**
+     * The value is used for tattoo id storage.
+     */
     private Long tattooId;
+
+    /**
+     * The value is used for name storage.
+     */
     private String name;
+
+    /**
+     * The value is used for description storage.
+     */
     private String description;
+
+    /**
+     * The value is used for price storage.
+     */
     private double price;
+
+    /**
+     * The value is used for rating storage.
+     */
     private byte rating;
+
+    /**
+     * The value is used for allow flag storage.
+     */
     private boolean isAllowed;
+
+    /**
+     * The value is used for archived flag storage.
+     */
     private boolean isArchived;
+
+    /**
+     * The value is used for image storage.
+     */
     private Image image;
+
+    /**
+     * The value is used for user storage.
+     */
     private User user;
 
+    /**
+     * Instantiates a new Tattoo.
+     */
     public Tattoo() {
     }
 
+    /**
+     * Instantiates a new Tattoo.
+     *
+     * @param tattooId    the tattoo id
+     * @param name        the name
+     * @param description the description
+     * @param price       the price
+     * @param rating      the rating
+     * @param isAllowed   the is allowed
+     * @param isArchived  the is archived
+     * @param image       the image
+     * @param user        the user
+     */
     public Tattoo(Long tattooId, String name, String description, double price,
                   byte rating, boolean isAllowed, boolean isArchived, Image image, User user) {
         this.tattooId = tattooId;
@@ -27,74 +85,164 @@ public class Tattoo {
         this.user = user;
     }
 
+    /**
+     * Gets tattoo id.
+     *
+     * @return the tattoo id
+     */
     public Long getTattooId() {
         return tattooId;
     }
 
+    /**
+     * Sets tattoo id.
+     *
+     * @param tattooId the tattoo id
+     */
     public void setTattooId(Long tattooId) {
         this.tattooId = tattooId;
     }
 
+    /**
+     * Gets name.
+     *
+     * @return the name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Sets name.
+     *
+     * @param name the name
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * Gets description.
+     *
+     * @return the description
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     * Sets description.
+     *
+     * @param description the description
+     */
     public void setDescription(String description) {
         this.description = description;
     }
 
+    /**
+     * Gets price.
+     *
+     * @return the price
+     */
     public double getPrice() {
         return price;
     }
 
+    /**
+     * Sets price.
+     *
+     * @param price the price
+     */
     public void setPrice(double price) {
         this.price = price;
     }
 
+    /**
+     * Gets rating.
+     *
+     * @return the rating
+     */
     public byte getRating() {
         return rating;
     }
 
+    /**
+     * Sets rating.
+     *
+     * @param rating the rating
+     */
     public void setRating(byte rating) {
         this.rating = rating;
     }
 
+    /**
+     * Is allowed boolean.
+     *
+     * @return the boolean
+     */
     public boolean isAllowed() {
         return isAllowed;
     }
 
+    /**
+     * Sets allowed.
+     *
+     * @param allowed the allowed
+     */
     public void setAllowed(boolean allowed) {
         isAllowed = allowed;
     }
 
+    /**
+     * Is archived boolean.
+     *
+     * @return the boolean
+     */
     public boolean isArchived() {
         return isArchived;
     }
 
+    /**
+     * Sets archived.
+     *
+     * @param archived the archived
+     */
     public void setArchived(boolean archived) {
         isArchived = archived;
     }
 
+    /**
+     * Gets image.
+     *
+     * @return the image
+     */
     public Image getImage() {
         return image;
     }
 
+    /**
+     * Sets image.
+     *
+     * @param image the image
+     */
     public void setImage(Image image) {
         this.image = image;
     }
 
+    /**
+     * Gets user.
+     *
+     * @return the user
+     */
     public User getUser() {
         return user;
     }
 
+    /**
+     * Sets user.
+     *
+     * @param user the user
+     */
     public void setUser(User user) {
         this.user = user;
     }

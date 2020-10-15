@@ -1,26 +1,66 @@
 package com.borikov.bullfinch.entity;
 
+/**
+ * The {@code Wallet} class represents wallet entity
+ *
+ * @author Oleg Borikov
+ * @version 1.0
+ * @since 2020-10-16
+ */
 public class Wallet {
+    /**
+     * The value is used for wallet id storage.
+     */
     private Long walletId;
+
+    /**
+     * The value is used for balance storage.
+     */
     private double balance;
 
+    /**
+     * Instantiates a new Wallet.
+     *
+     * @param walletId the wallet id
+     * @param balance  the balance
+     */
     public Wallet(Long walletId, double balance) {
         this.walletId = walletId;
         this.balance = balance;
     }
 
+    /**
+     * Gets wallet id.
+     *
+     * @return the wallet id
+     */
     public Long getWalletId() {
         return walletId;
     }
 
+    /**
+     * Sets wallet id.
+     *
+     * @param walletId the wallet id
+     */
     public void setWalletId(Long walletId) {
         this.walletId = walletId;
     }
 
+    /**
+     * Gets balance.
+     *
+     * @return the balance
+     */
     public double getBalance() {
         return balance;
     }
 
+    /**
+     * Sets balance.
+     *
+     * @param balance the balance
+     */
     public void setBalance(double balance) {
         this.balance = balance;
     }

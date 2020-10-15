@@ -1,37 +1,92 @@
 package com.borikov.bullfinch.entity;
 
+/**
+ * The {@code Discount} class represents discount entity
+ *
+ * @author Oleg Borikov
+ * @version 1.0
+ * @since 2020-10-16
+ */
 public class Discount {
+    /**
+     * The value is used for discount id storage.
+     */
     private Long discountId;
+
+    /**
+     * The value is used for discount percent storage.
+     */
     private byte discountPercent;
+
+    /**
+     * The value is used for user storage.
+     */
     private User user;
 
+    /**
+     * Instantiates a new Discount.
+     *
+     * @param discountId      the discount id
+     * @param discountPercent the discount percent
+     * @param user            the user
+     */
     public Discount(Long discountId, byte discountPercent, User user) {
         this.discountId = discountId;
         this.discountPercent = discountPercent;
         this.user = user;
     }
 
+    /**
+     * Gets discount id.
+     *
+     * @return the discount id
+     */
     public Long getDiscountId() {
         return discountId;
     }
 
+    /**
+     * Sets discount id.
+     *
+     * @param discountId the discount id
+     */
     public void setDiscountId(Long discountId) {
         this.discountId = discountId;
     }
 
+    /**
+     * Gets discount percent.
+     *
+     * @return the discount percent
+     */
     public byte getDiscountPercent() {
         return discountPercent;
     }
 
+    /**
+     * Sets discount percent.
+     *
+     * @param discountPercent the discount percent
+     */
     public void setDiscountPercent(byte discountPercent) {
         this.discountPercent = discountPercent;
     }
 
 
+    /**
+     * Gets user.
+     *
+     * @return the user
+     */
     public User getUser() {
         return user;
     }
 
+    /**
+     * Sets user.
+     *
+     * @param user the user
+     */
     public void setUser(User user) {
         this.user = user;
     }
