@@ -18,6 +18,7 @@ public class PagePath {
     public static final String TATTOO_ORDER = "/jsp/tattoo_order.jsp";
     public static final String BALANCE_ENRICH = "/jsp/balance_enrich.jsp";
     public static final String PROFILE_ADMIN = "/jsp/profile_admin.jsp";
+    public static final String TATTOO_ADD = "/jsp/tattoo_add.jsp";
 
     private PagePath() {
     }

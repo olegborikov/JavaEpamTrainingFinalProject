@@ -6,7 +6,7 @@
 <fmt:setBundle basename="i18n.application_message"/>
 <html>
 <head>
-    <title><fmt:message key="tattooOffer.title"/></title>
+    <title><fmt:message key="tattooAdd.title"/></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <link rel="stylesheet" type="text/css"
           href="${pageContext.request.contextPath}/assets/css/bootstrap.min.css">
@@ -34,67 +34,66 @@
                         <div class="row form-group">
                             <div class="col-md-6 mb-3 mb-md-0">
                                 <label class="text-white">
-                                    <fmt:message key="tattooOffer.name"/>
+                                    <fmt:message key="tattooAdd.name"/>
                                 </label>
                                 <input style="background-color: black" name="name" required
                                        maxlength="25"
                                        type="text" class="form-control text-white"
                                        oninvalid="this.setCustomValidity('<fmt:message
-                                               key="tattooOffer.nameValidate"/>')"
+                                               key="tattooAdd.nameValidate"/>')"
                                        onchange="this.setCustomValidity('')"
                                        pattern="^[\p{L}]{2,25}$"
-                                       title='<fmt:message key="tattooOffer.nameValidate"/>'
-                                       placeholder='<fmt:message key="tattooOffer.name"/>'>
+                                       title='<fmt:message key="tattooAdd.nameValidate"/>'
+                                       placeholder='<fmt:message key="tattooAdd.name"/>'>
                             </div>
                         </div>
                         <div class="row form-group">
                             <div class="col-md-6 mb-3 mb-md-0">
                                 <label class="text-white">
-                                    <fmt:message key="tattooOffer.price"/>
+                                    <fmt:message key="tattooAdd.price"/>
                                 </label>
                                 <input style="background-color: black" name="price" required
                                        maxlength="10"
                                        type="text" class="form-control text-white"
                                        oninvalid="this.setCustomValidity('<fmt:message
-                                               key="tattooOffer.priceValidate"/>')"
+                                               key="tattooAdd.priceValidate"/>')"
                                        onchange="this.setCustomValidity('')"
-                                       title='<fmt:message key="tattooOffer.priceValidate"/>'
-                                       placeholder='<fmt:message key="tattooOffer.price"/>'>
+                                       title='<fmt:message key="tattooAdd.priceValidate"/>'
+                                       placeholder='<fmt:message key="tattooAdd.price"/>'>
                             </div>
                         </div>
                         <div class="row form-group">
                             <div class="col-md-12">
-                                <fmt:message key="tattooOffer.fileUpload"/>
+                                <fmt:message key="tattooAdd.fileUpload"/>
                                 <input type="file" name="content" accept="image/jpeg" required>
                                 <c:if test="${incorrectImageMessage}">
                                     <div style="color: red"><fmt:message
-                                            key="tattooOffer.incorrectImageMessage"/></div>
+                                            key="tattooAdd.incorrectImageMessage"/></div>
                                 </c:if>
                             </div>
                         </div>
                         <div class="row form-group">
                             <div class="col-md-12">
                                 <label class="text-white">
-                                    <fmt:message key="tattooOffer.description"/>
+                                    <fmt:message key="tattooAdd.description"/>
                                 </label>
                                 <textarea style="background-color: black"
                                           name="description" cols="30" rows="7" required
                                           class="form-control text-white" maxlength="1000"
                                           oninvalid="this.setCustomValidity('<fmt:message
-                                                  key="tattooOffer.descriptionValidate"/>')"
+                                                  key="tattooAdd.descriptionValidate"/>')"
                                           onchange="this.setCustomValidity('')"
-                                          title='<fmt:message key="tattooOffer.descriptionValidate"/>'
-                                          placeholder='<fmt:message key="tattooOffer.description"/>'></textarea>
+                                          title='<fmt:message key="tattooAdd.descriptionValidate"/>'
+                                          placeholder='<fmt:message key="tattooAdd.description"/>'></textarea>
                             </div>
                         </div>
                         <c:if test="${incorrectDataMessage}">
                             <div style="color: red"><fmt:message
-                                    key="tattooOffer.incorrectDataMessage"/></div>
+                                    key="tattooAdd.incorrectDataMessage"/></div>
                         </c:if>
-                        <input type="hidden" name="commandName"
-                               value="offer_tattoo_command">
+                        <input type="hidden" name="commandName" value="add_tattoo_command">
                         <button type="submit" class="btn btn-outline-secondary">
-                            <fmt:message key="tattooOffer.offerTattoo"/>
+                            <fmt:message key="tattooAdd.addTattoo"/>
                         </button>
                     </form>
                 </div>
