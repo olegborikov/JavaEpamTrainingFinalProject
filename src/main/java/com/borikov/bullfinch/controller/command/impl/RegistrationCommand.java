@@ -6,6 +6,7 @@ import com.borikov.bullfinch.controller.command.Command;
 import com.borikov.bullfinch.exception.ServiceException;
 import com.borikov.bullfinch.service.UserService;
 import com.borikov.bullfinch.service.impl.UserServiceImpl;
+import com.borikov.bullfinch.util.EmailSenderUtil;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -29,7 +30,8 @@ public class RegistrationCommand implements Command {
         try {
             if (userService.addUser(email, login,
                     firstName, secondName, phoneNumber, password, confirmedPassword)) {
-                request.setAttribute(RequestParameter.USER_EMAIL_CONFIRM_MESSAGE,true);
+                EmailSenderUtil.sendMessage(email, login, request.getRequestURL().toString());
+                request.setAttribute(RequestParameter.USER_EMAIL_CONFIRM_MESSAGE, true);
                 page = PagePath.MESSAGE;
             } else {
                 request.setAttribute(RequestParameter.INCORRECT_DATA_MESSAGE, true);

@@ -11,7 +11,7 @@ import com.borikov.bullfinch.exception.DaoException;
 import com.borikov.bullfinch.exception.ServiceException;
 import com.borikov.bullfinch.exception.TransactionException;
 import com.borikov.bullfinch.service.TattooService;
-import com.borikov.bullfinch.validator.TattooValidator;
+import com.borikov.bullfinch.validator.impl.TattooValidator;
 
 import java.util.List;
 import java.util.Optional;

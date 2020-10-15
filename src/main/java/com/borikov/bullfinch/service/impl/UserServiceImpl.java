@@ -11,9 +11,8 @@ import com.borikov.bullfinch.exception.DaoException;
 import com.borikov.bullfinch.exception.ServiceException;
 import com.borikov.bullfinch.exception.TransactionException;
 import com.borikov.bullfinch.service.UserService;
-import com.borikov.bullfinch.util.EmailSenderUtil;
 import com.borikov.bullfinch.util.PasswordEncryptor;
-import com.borikov.bullfinch.validator.UserValidator;
+import com.borikov.bullfinch.validator.impl.UserValidator;
 
 import java.util.List;
 import java.util.Optional;
@@ -56,7 +55,7 @@ public class UserServiceImpl implements UserService {
                     && userValidator.isLoginCorrect(login)
                     && userValidator.isFirstNameCorrect(firstName)
                     && userValidator.isSecondNameCorrect(secondName)
-                    && userValidator.isPhoneCorrect(phoneNumber)
+                    && userValidator.isPhoneNumberCorrect(phoneNumber)
                     && userValidator.isPasswordCorrect(password)
                     && password.equals(confirmedPassword)) {
                 Optional<String> encryptedPassword = PasswordEncryptor.encrypt(password);
@@ -74,7 +73,6 @@ public class UserServiceImpl implements UserService {
                     userBuilder.setWallet(new Wallet(null, 0));
                     User user = userBuilder.getUser();
                     result = transactionManager.addUserTransaction(user, encryptedPassword.get());
-                    EmailSenderUtil.sendMessage(user.getEmail(), user.getLogin());
                 }
             }
             return result;

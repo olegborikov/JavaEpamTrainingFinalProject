@@ -13,19 +13,19 @@ public class EmailSenderUtil {
     private static final String EMAIL_HEAD = "Bullfinch tattoo";
     private static final String EMAIL_BODY = "Follow link to confirm your " +
             "mail to register on site bullfinch: " +
-            "http://localhost:8080/controller?commandName=confirm_email_command&login=";
+            "%s?commandName=confirm_email_command&login=";
     private static final String FILE_NAME = "property/mail.properties";
 
     private EmailSenderUtil() {
     }
 
-    public static void sendMessage(String email, String login) {
+    public static void sendMessage(String email, String login, String url) {
         try {
             Properties properties = new Properties();
             InputStream inputStream = EmailSenderUtil.class.getClassLoader().getResourceAsStream(FILE_NAME);
             properties.load(inputStream);
             Thread thread = new Thread(new EmailSenderThread(
-                    email, EMAIL_HEAD, EMAIL_BODY + login, properties));
+                    email, EMAIL_HEAD, String.format(EMAIL_BODY, url) + login, properties));
             thread.start();
         } catch (IOException e) {
             LOGGER.log(Level.ERROR, "Error while reading properties file", e);

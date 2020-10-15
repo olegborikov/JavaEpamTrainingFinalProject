@@ -6,7 +6,7 @@ import com.borikov.bullfinch.entity.Wallet;
 import com.borikov.bullfinch.exception.DaoException;
 import com.borikov.bullfinch.exception.ServiceException;
 import com.borikov.bullfinch.service.WalletService;
-import com.borikov.bullfinch.validator.WalletValidator;
+import com.borikov.bullfinch.validator.impl.WalletValidator;
 
 import java.util.Optional;
 

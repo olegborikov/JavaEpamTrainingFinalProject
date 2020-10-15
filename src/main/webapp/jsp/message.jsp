@@ -21,6 +21,9 @@
             src="${pageContext.request.contextPath}/assets/js/bootstrap.min.js"></script>
     <script type="text/javascript"
             src="${pageContext.request.contextPath}/assets/js/project.js"></script>
+    <script>document.addEventListener('keydown', (event) => {
+        if(event.keyCode === 116) event.preventDefault();
+    })</script>
 </head>
 <body>
 <jsp:include page="navbar.jsp"/>

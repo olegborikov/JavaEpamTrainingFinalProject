@@ -1,11 +1,12 @@
-package com.borikov.bullfinch.validator;
+package com.borikov.bullfinch.validator.impl;
 
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.*;
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertTrue;
 
 public class UserValidatorTest {
     private UserValidator userValidator;
@@ -66,7 +67,8 @@ public class UserValidatorTest {
                 {"qwe_qwe.."},
                 {"..."},
                 {"__oleg__"},
-                {"o12"}
+                {"o12"},
+                {"oleg.borikov"}
         };
     }
 
@@ -101,7 +103,8 @@ public class UserValidatorTest {
         return new Object[][]{
                 {"123Qq5678"},
                 {"qweQ2eqwe"},
-                {"Admin123456"}
+                {"Admin123456"},
+                {"123456Oo"},
         };
     }
 
@@ -134,24 +137,24 @@ public class UserValidatorTest {
         assertFalse(result);
     }
 
-    @DataProvider(name = "isNameCorrectPositiveData")
-    public Object[][] createIsNameCorrectPositiveData() {
+    @DataProvider(name = "isFirstNameCorrectPositiveData")
+    public Object[][] createIsFirstNameCorrectPositiveData() {
         return new Object[][]{
-                {"Ян"},
+                {"Al"},
                 {"Саша"},
                 {"Oleg"},
-                {"Aleksanдр"}
+                {"Aleksaндр"}
         };
     }
 
-    @Test(dataProvider = "isNameCorrectPositiveData")
-    public void isNameCorrectPositiveTest(String name) {
-        boolean result = userValidator.isFirstNameCorrect(name);
+    @Test(dataProvider = "isFirstNameCorrectPositiveData")
+    public void isFirstNameCorrectPositiveTest(String firstName) {
+        boolean result = userValidator.isFirstNameCorrect(firstName);
         assertTrue(result);
     }
 
-    @DataProvider(name = "isNameCorrectNegativeData")
-    public Object[][] createIsNameCorrectNegativeData() {
+    @DataProvider(name = "isFirstNameCorrectNegativeData")
+    public Object[][] createIsFirstNameCorrectNegativeData() {
         return new Object[][]{
                 {"Oleg1"},
                 {"Олег?"},
@@ -166,30 +169,30 @@ public class UserValidatorTest {
         };
     }
 
-    @Test(dataProvider = "isNameCorrectNegativeData")
-    public void isNameCorrectNegativeTest(String name) {
-        boolean result = userValidator.isFirstNameCorrect(name);
+    @Test(dataProvider = "isFirstNameCorrectNegativeData")
+    public void isFirstNameCorrectNegativeTest(String firstName) {
+        boolean result = userValidator.isFirstNameCorrect(firstName);
         assertFalse(result);
     }
 
-    @DataProvider(name = "isSurnameCorrectPositiveData")
-    public Object[][] createIsSurnameCorrectPositiveData() {
+    @DataProvider(name = "isSecondNameCorrectPositiveData")
+    public Object[][] createIsSecondNameCorrectPositiveData() {
         return new Object[][]{
-                {"Ян"},
+                {"Al"},
                 {"Саша"},
                 {"Oleg"},
-                {"Aleksanдр"}
+                {"Aleksaндр"}
         };
     }
 
-    @Test(dataProvider = "isSurnameCorrectPositiveData")
-    public void isSurnameCorrectPositiveTest(String surname) {
-        boolean result = userValidator.isSecondNameCorrect(surname);
+    @Test(dataProvider = "isSecondNameCorrectPositiveData")
+    public void isSecondNameCorrectPositiveTest(String secondName) {
+        boolean result = userValidator.isSecondNameCorrect(secondName);
         assertTrue(result);
     }
 
-    @DataProvider(name = "isSurnameCorrectNegativeData")
-    public Object[][] createIsSurnameCorrectNegativeData() {
+    @DataProvider(name = "isSecondNameCorrectNegativeData")
+    public Object[][] createIsSecondNameCorrectNegativeData() {
         return new Object[][]{
                 {"Oleg1"},
                 {"Олег?"},
@@ -204,9 +207,43 @@ public class UserValidatorTest {
         };
     }
 
-    @Test(dataProvider = "isSurnameCorrectNegativeData")
-    public void isSurnameCorrectNegativeTest(String surname) {
-        boolean result = userValidator.isSecondNameCorrect(surname);
+    @Test(dataProvider = "isSecondNameCorrectNegativeData")
+    public void isSecondNameCorrectNegativeTest(String secondName) {
+        boolean result = userValidator.isSecondNameCorrect(secondName);
+        assertFalse(result);
+    }
+
+    @DataProvider(name = "isPhoneNumberCorrectPositiveData")
+    public Object[][] createIsPhoneNumberCorrectPositiveData() {
+        return new Object[][]{
+                {"+375251111111"},
+                {"80291111111"},
+                {"375241111111"},
+                {"+375331111111"},
+                {"80441111111"},
+        };
+    }
+
+    @Test(dataProvider = "isPhoneNumberCorrectPositiveData")
+    public void isPhoneNumberCorrectPositiveTest(String phoneNumber) {
+        boolean result = userValidator.isPhoneNumberCorrect(phoneNumber);
+        assertTrue(result);
+    }
+
+    @DataProvider(name = "isPhoneNumberCorrectNegativeData")
+    public Object[][] createIsPhoneNumberCorrectNegativeData() {
+        return new Object[][]{
+                {"37525111111"},
+                {"70291111111"},
+                {"375211111111"},
+                {"+3753311111111"},
+                {"800441111111"},
+        };
+    }
+
+    @Test(dataProvider = "isPhoneNumberCorrectNegativeData")
+    public void isPhoneNumberCorrectNegativeTest(String phoneNumber) {
+        boolean result = userValidator.isPhoneNumberCorrect(phoneNumber);
         assertFalse(result);
     }
 }

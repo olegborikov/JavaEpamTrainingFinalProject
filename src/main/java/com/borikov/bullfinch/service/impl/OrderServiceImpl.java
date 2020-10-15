@@ -11,9 +11,9 @@ import com.borikov.bullfinch.entity.User;
 import com.borikov.bullfinch.exception.DaoException;
 import com.borikov.bullfinch.exception.ServiceException;
 import com.borikov.bullfinch.service.OrderService;
-import com.borikov.bullfinch.validator.OrderValidator;
-import com.borikov.bullfinch.validator.TattooValidator;
-import com.borikov.bullfinch.validator.UserValidator;
+import com.borikov.bullfinch.validator.impl.OrderValidator;
+import com.borikov.bullfinch.validator.impl.TattooValidator;
+import com.borikov.bullfinch.validator.impl.UserValidator;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
