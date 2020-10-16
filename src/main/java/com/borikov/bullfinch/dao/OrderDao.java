@@ -12,4 +12,6 @@ public interface OrderDao {
     List<Order> findByUserLogin(String userLogin) throws DaoException;
 
     Optional<Order> findById(long id) throws DaoException;
+
+    boolean remove(long id) throws DaoException;
 }

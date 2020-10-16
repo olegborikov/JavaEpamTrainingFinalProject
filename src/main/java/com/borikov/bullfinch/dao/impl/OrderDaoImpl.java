@@ -32,6 +32,7 @@ public class OrderDaoImpl implements OrderDao {
             "INNER JOIN user_account ON tattoo_order.user_account_id_fk = " +
             "user_account.user_account_id INNER JOIN image on tattoo.image_id_fk = " +
             "image.image_id WHERE tattoo_order_id = ?";
+    private static final String REMOVE = "DELETE FROM tattoo_order WHERE tattoo_order_id = ?";
 
     @Override
     public boolean add(Order order) throws DaoException {
@@ -108,6 +109,18 @@ public class OrderDaoImpl implements OrderDao {
             return order;
         } catch (SQLException | ConnectionPoolException e) {
             throw new DaoException("Finding orders by user login error", e);
+        }
+    }
+
+    @Override
+    public boolean remove(long id) throws DaoException {
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement statement =
+                     connection.prepareStatement(REMOVE)) {
+            statement.setLong(1, id);
+            return statement.executeUpdate() > 0;
+        } catch (SQLException | ConnectionPoolException e) {
+            throw new DaoException("Adding order error", e);
         }
     }
 }

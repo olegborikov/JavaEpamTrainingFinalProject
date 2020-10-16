@@ -51,7 +51,7 @@
                                     <input type="hidden" name="orderId" value="${order.orderId}">
                                     <button type="submit" class="btn btn-outline-secondary"
                                             name="commandName"
-                                            value="">
+                                            value="cancel_order_command">
                                         <fmt:message key="order.cancel"/>
                                     </button>
                                 </form>

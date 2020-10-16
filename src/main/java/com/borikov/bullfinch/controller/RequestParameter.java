@@ -64,6 +64,8 @@ public class RequestParameter {
     public static final String USER_UNBLOCK_ERROR_MESSAGE = "userUnblockErrorMessage";
     public static final String USER_BLOCKED_MESSAGE = "userBlockedMessage";
     public static final String ORDER_FIND_ERROR_MESSAGE = "orderFindErrorMessage";
+    public static final String ORDER_CANCEL_CONFIRM_MESSAGE = "orderCancelConfirmMessage";
+    public static final String ORDER_CANCEL_ERROR_MESSAGE = "orderCancelErrorMessage";
 
     private RequestParameter() {
     }

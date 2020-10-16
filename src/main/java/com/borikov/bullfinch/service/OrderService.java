@@ -13,4 +13,6 @@ public interface OrderService {
     List<Order> getOrdersByUserLogin(String userLogin) throws ServiceException;
 
     Optional<Order> findOrderById(String id) throws ServiceException;
+
+    boolean cancelOrder(String id) throws ServiceException;
 }

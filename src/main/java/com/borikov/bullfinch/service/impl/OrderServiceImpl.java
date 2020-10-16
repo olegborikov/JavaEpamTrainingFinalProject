@@ -86,4 +86,19 @@ public class OrderServiceImpl implements OrderService {
             throw new ServiceException("Error while finding orders by user login", e);
         }
     }
+
+    @Override
+    public boolean cancelOrder(String id) throws ServiceException {
+        boolean result = false;
+        OrderValidator orderValidator = new OrderValidator();
+        try {
+            if (orderValidator.isIdCorrect(id)) {
+                long orderId = Long.parseLong(id);
+                result = orderDao.remove(orderId);
+            }
+            return result;
+        } catch (DaoException e) {
+            throw new ServiceException("Error while cancel order", e);
+        }
+    }
 }

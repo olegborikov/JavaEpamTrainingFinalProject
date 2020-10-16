@@ -27,6 +27,7 @@ public enum CommandType {
     BROWSE_PROFILE_EDIT_PAGE_COMMAND(new BrowseProfileEditPageCommand()),
     EDIT_USER_COMMAND(new EditUserCommand()),
     BROWSE_ORDER_PAGE_COMMAND(new BrowseOrderPageCommand()),
+    CANCEL_ORDER_COMMAND(new CancelOrderCommand()),
     LOGOUT_COMMAND(new LogoutCommand()),
 
     BROWSE_ALL_TATTOOS_ADMIN_PAGE_COMMAND(new BrowseAllTattoosAdminPageCommand()),
