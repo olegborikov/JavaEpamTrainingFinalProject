@@ -1,6 +1,6 @@
 package com.borikov.bullfinch.entity;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 /**
  * The {@code Order} class represents tattoo_order entity
@@ -23,7 +23,7 @@ public class Order {
     /**
      * The value is used for date storage.
      */
-    private Date date;
+    private LocalDate date;
 
     /**
      * The value is used for description storage.
@@ -50,7 +50,7 @@ public class Order {
      * @param user        the user
      * @param tattoo      the tattoo
      */
-    public Order(Long orderId, double price, Date date,
+    public Order(Long orderId, double price, LocalDate date,
                  String description, User user, Tattoo tattoo) {
         this.orderId = orderId;
         this.price = price;
@@ -101,7 +101,7 @@ public class Order {
      *
      * @return the date
      */
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
@@ -110,7 +110,7 @@ public class Order {
      *
      * @param date the date
      */
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 

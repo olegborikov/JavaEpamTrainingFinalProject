@@ -15,14 +15,13 @@ import com.borikov.bullfinch.validator.impl.OrderValidator;
 import com.borikov.bullfinch.validator.impl.TattooValidator;
 import com.borikov.bullfinch.validator.impl.UserValidator;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
 public class OrderServiceImpl implements OrderService {
     private final OrderDao orderDao = new OrderDaoImpl();
-    private final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
     @Override
     public boolean addOrder(String date, String description, String price,
@@ -38,7 +37,7 @@ public class OrderServiceImpl implements OrderService {
                     && tattooValidator.isIdCorrect(tattooId)
                     && userValidator.isLoginCorrect(userLogin)) {
                 OrderBuilder orderBuilder = new OrderBuilder();
-                orderBuilder.setDate(simpleDateFormat.parse(date));
+                orderBuilder.setDate(LocalDate.parse(date, DateTimeFormatter.ISO_LOCAL_DATE));
                 orderBuilder.setDescription(description);
                 orderBuilder.setPrice(Double.parseDouble(price));
                 TattooBuilder tattooBuilder = new TattooBuilder();
@@ -53,7 +52,7 @@ public class OrderServiceImpl implements OrderService {
                 result = orderDao.add(order);
             }
             return result;
-        } catch (DaoException | ParseException e) {
+        } catch (DaoException e) {
             throw new ServiceException("Error while adding order", e);
         }
     }
@@ -64,7 +63,7 @@ public class OrderServiceImpl implements OrderService {
         UserValidator userValidator = new UserValidator();
         try {
             if (userValidator.isLoginCorrect(userLogin)) {
-               orders = orderDao.findByUserLogin(userLogin);
+                orders = orderDao.findByUserLogin(userLogin);
             }
             return orders;
         } catch (DaoException e) {

@@ -31,7 +31,7 @@
 </style>
 <body>
 <jsp:include page="navbar.jsp"/>
-<section style="text-align: left;" class="masthead">
+<section style="text-align: left; padding-top: 120px" class="masthead">
     <div class="intro-body">
         <div class="container-fluid">
             <div class="row">

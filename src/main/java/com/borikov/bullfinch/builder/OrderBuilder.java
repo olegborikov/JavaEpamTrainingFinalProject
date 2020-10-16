@@ -4,12 +4,12 @@ import com.borikov.bullfinch.entity.Order;
 import com.borikov.bullfinch.entity.Tattoo;
 import com.borikov.bullfinch.entity.User;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class OrderBuilder {
     private Long orderId;
     private double price;
-    private Date date;
+    private LocalDate date;
     private String description;
     private User user;
     private Tattoo tattoo;
@@ -22,7 +22,7 @@ public class OrderBuilder {
         this.price = price;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 

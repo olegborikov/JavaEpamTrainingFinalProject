@@ -12,7 +12,6 @@ import com.borikov.bullfinch.exception.DaoException;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class OrderDaoImpl implements OrderDao {
@@ -31,7 +30,7 @@ public class OrderDaoImpl implements OrderDao {
              PreparedStatement statement =
                      connection.prepareStatement(ADD, Statement.RETURN_GENERATED_KEYS)) {
             statement.setDouble(1, order.getPrice());
-            statement.setLong(2, order.getDate().getTime());
+            statement.setLong(2, Date.valueOf(order.getDate()).getTime());
             statement.setString(3, order.getDescription());
             statement.setLong(4, order.getTattoo().getTattooId());
             statement.setString(5, order.getUser().getLogin());
@@ -53,13 +52,14 @@ public class OrderDaoImpl implements OrderDao {
             statement.setString(1, userLogin);
             ResultSet resultSet = statement.executeQuery();
             List<Order> orders = new ArrayList<>();
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 OrderBuilder orderBuilder = new OrderBuilder();
                 TattooBuilder tattooBuilder = new TattooBuilder();
                 tattooBuilder.setName(resultSet.getString(ColumnName.TATTOO_NAME));
                 Tattoo tattoo = tattooBuilder.getTattoo();
                 orderBuilder.setTattoo(tattoo);
-                orderBuilder.setDate(new Date(resultSet.getLong(ColumnName.DATE)));
+                Date date = new Date(resultSet.getLong(ColumnName.DATE));
+                orderBuilder.setDate(date.toLocalDate());
                 orderBuilder.setPrice(resultSet.getDouble(ColumnName.TATTOO_ORDER_PRICE));
                 Order order = orderBuilder.getOrder();
                 orders.add(order);
