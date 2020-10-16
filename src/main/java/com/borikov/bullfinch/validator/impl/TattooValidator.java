@@ -4,8 +4,8 @@ import com.borikov.bullfinch.validator.AbstractValidator;
 
 public class TattooValidator extends AbstractValidator {
     private static final String ID_REGEX = "^[1-9]\\d{0,9}$";
-    private static final String NAME_REGEX = "^.[^<>]{2,25}$";
-    private static final String DESCRIPTION_REGEX = "^.[^<>]{1,1000}$";
+    private static final String NAME_REGEX = "^[^<>]{2,25}$";
+    private static final String DESCRIPTION_REGEX = "^[^<>]{1,1000}$";
     private static final String PRICE_REGEX = "^[1-9]\\d{0,4}(\\.\\d{0,2})?$";
 
     public boolean isIdCorrect(String id) {

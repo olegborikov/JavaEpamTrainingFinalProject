@@ -3,6 +3,7 @@ package com.borikov.bullfinch.validator.impl;
 import com.borikov.bullfinch.validator.AbstractValidator;
 
 public class UserValidator extends AbstractValidator {
+    private static final String ID_REGEX = "^[1-9]\\d{0,9}$";
     private static final String EMAIL_REGEX =
             "^[\\w.+-]{3,30}@[\\w.-]{2,15}\\.[\\p{Lower}]{2,4}$";
     private static final String LOGIN_REGEX = "^[\\w.]{3,20}$";
@@ -12,6 +13,10 @@ public class UserValidator extends AbstractValidator {
             "^(?=.*\\p{Lower})(?=.*\\p{Upper})(?=.*\\d)\\p{Alnum}{8,20}$";
     private static final String PHONE_NUMBER_REGEX = "^\\+?375(24|25|29|33|44)" +
             "\\d{7}|80(24|25|29|33|44)\\d{7}$";
+
+    public boolean isIdCorrect(String id) {
+        return isStringCorrect(id, ID_REGEX);
+    }
 
     public boolean isEmailCorrect(String email) {
         return isStringCorrect(email, EMAIL_REGEX);

@@ -146,4 +146,32 @@ public class UserServiceImpl implements UserService {
             throw new ServiceException("Error while unblocking user", e);
         }
     }
+
+    @Override
+    public boolean editUser(String id, String email, String login, String firstName, String secondName, String phoneNumber) throws ServiceException {
+        UserValidator userValidator = new UserValidator();
+        boolean result = false;
+        try {
+            if (userValidator.isIdCorrect(id)
+                    && userValidator.isEmailCorrect(email)
+                    && userValidator.isLoginCorrect(login)
+                    && userValidator.isFirstNameCorrect(firstName)
+                    && userValidator.isSecondNameCorrect(secondName)
+                    && userValidator.isPhoneNumberCorrect(phoneNumber)) {
+                UserBuilder userBuilder = new UserBuilder();
+                long userId = Long.parseLong(id);
+                userBuilder.setUserId(userId);
+                userBuilder.setEmail(email);
+                userBuilder.setLogin(login);
+                userBuilder.setFirstName(firstName);
+                userBuilder.setSecondName(secondName);
+                userBuilder.setPhoneNumber(phoneNumber);
+                User user = userBuilder.getUser();
+                result = userDao.update(user);
+            }
+        } catch (DaoException e) {
+            throw new ServiceException("Error while editing user", e);
+        }
+        return result;
+    }
 }

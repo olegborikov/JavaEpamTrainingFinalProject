@@ -77,6 +77,7 @@ public class TattooValidatorTest {
     public Object[][] createIsNameCorrectNegativeData() {
         return new Object[][]{
                 {""},
+                {"<dads"},
                 {"hello< goodbye"},
                 {"qqqqqqqqqqqqqqqqqqqqqqqqqqqqq"},
                 {"<script>alert</script>"},

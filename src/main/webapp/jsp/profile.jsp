@@ -41,7 +41,7 @@
                         <input type="hidden" name="userId" value="${user.userId}">
                         <div style="text-align: left">
                             <button class="btn btn-outline-secondary"
-                                    name="commandName" value="">
+                                    name="commandName" value="browse_profile_edit_page_command">
                                 <fmt:message key="profile.editProfile"/>
                             </button>
                         </div>

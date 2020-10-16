@@ -5,6 +5,7 @@ public class RequestParameter {
     public static final String CONTENT_LENGTH = "Content-Type";
     public static final String CONTENT_DISPOSITION = "Content-Disposition";
 
+    public static final String USER_ID = "userId";
     public static final String USER = "user";
     public static final String ROLE = "role";
     public static final String LOGIN = "login";

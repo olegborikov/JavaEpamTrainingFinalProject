@@ -61,7 +61,6 @@
                                 <input style="background-color: black" name="price"
                                        readonly type="text" class="form-control text-white"
                                        title='<fmt:message key="tattooOrder.price"/>'
-                                       placeholder='<fmt:message key="tattooOrder.price"/>'
                                        value="${tattoo.price}">
                             </div>
                         </div>

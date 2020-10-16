@@ -35,6 +35,8 @@ public class UserDaoImpl implements UserDao {
             " first_name, second_name, phone_number, is_blocked, " +
             "is_activated, role_id_fk, wallet_id_fk) " +
             "VALUES (?, ?, ?, ?, ?, ?, 0, 0, ?, ?)";
+    private static final String UPDATE = "UPDATE user_account  SET email = ?, login = ?, " +
+            "first_name = ?, second_name = ?, phone_number = ? WHERE user_account_id = ?";
     private static final String CONFIRM_EMAIL = "UPDATE user_account " +
             "SET is_activated = 1 WHERE login LIKE ?";
     private static final String FIND_ALL = "SELECT login, email, first_name, second_name " +
@@ -170,7 +172,19 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public boolean update(User user) throws DaoException {
-        return false;
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement statement =
+                     connection.prepareStatement(UPDATE)) {
+            statement.setString(1, user.getEmail());
+            statement.setString(2, user.getLogin());
+            statement.setString(3, user.getFirstName());
+            statement.setString(4, user.getSecondName());
+            statement.setString(5, user.getPhoneNumber());
+            statement.setLong(6, user.getUserId());
+            return statement.executeUpdate() > 0;
+        } catch (SQLException | ConnectionPoolException e) {
+            throw new DaoException("Update user error", e);
+        }
     }
 
     @Override

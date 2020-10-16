@@ -23,4 +23,6 @@ public interface UserService {
     boolean blockUser(String login) throws ServiceException;
 
     boolean unblockUser(String login) throws ServiceException;
+
+    boolean editUser(String id, String email, String login, String firstName, String secondName, String phoneNumber) throws ServiceException;
 }

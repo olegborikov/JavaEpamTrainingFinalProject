@@ -21,6 +21,42 @@ public class UserValidatorTest {
         userValidator = null;
     }
 
+    @DataProvider(name = "isIdCorrectPositiveData")
+    public Object[][] createIsIdCorrectPositiveData() {
+        return new Object[][]{
+                {"10"},
+                {"1"},
+                {"3"},
+                {"123"},
+                {"1234567891"}
+        };
+    }
+
+    @Test(dataProvider = "isIdCorrectPositiveData")
+    public void isIdCorrectPositiveTest(String id) {
+        boolean actual = userValidator.isIdCorrect(id);
+        assertTrue(actual);
+    }
+
+    @DataProvider(name = "isIdCorrectNegativeData")
+    public Object[][] createIsIdCorrectNegativeData() {
+        return new Object[][]{
+                {"-123"},
+                {"-1"},
+                {"0"},
+                {"-3"},
+                {"12345678910"},
+                {"   "},
+                {null}
+        };
+    }
+
+    @Test(dataProvider = "isIdCorrectNegativeData")
+    public void isIdCorrectNegativeTest(String id) {
+        boolean actual = userValidator.isIdCorrect(id);
+        assertFalse(actual);
+    }
+
     @DataProvider(name = "isEmailCorrectPositiveData")
     public Object[][] createIsEmailCorrectPositiveData() {
         return new Object[][]{
