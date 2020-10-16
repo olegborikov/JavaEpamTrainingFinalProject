@@ -20,14 +20,14 @@ import java.util.Optional;
 public class OrderDaoImpl implements OrderDao {
     private static final ConnectionPool connectionPool = ConnectionPool.INSTANCE;
     private static final String ADD = "INSERT INTO tattoo_order (tattoo_order_price, date, " +
-            "tattoo_order_description, tattoo_id_fk, user_account_id_fk) VALUES (?, ?, ?, ?, " +
-            "(SELECT user_account_id FROM user_account WHERE BINARY login LIKE ?))";
+            "tattoo_order_description, is_confirmed, tattoo_id_fk, user_account_id_fk) " +
+            "VALUES (?, ?, ?, 0, ?, (SELECT user_account_id FROM user_account WHERE BINARY login LIKE ?))";
     private static final String FIND_BY_LOGIN = "SELECT tattoo_order_id, tattoo_name, date, tattoo_order_price " +
             "FROM tattoo_order INNER JOIN tattoo ON tattoo_order.tattoo_id_fk = tattoo.tattoo_id " +
             "INNER JOIN user_account ON tattoo_order.user_account_id_fk = " +
             "user_account.user_account_id WHERE login = ?";
     private static final String FIND_BY_ID = "SELECT tattoo_order_id, tattoo_order_price, date, " +
-            "tattoo_order_description, image_name, tattoo_name, login FROM tattoo_order " +
+            "tattoo_order_description, is_confirmed, image_name, tattoo_name, login FROM tattoo_order " +
             "INNER JOIN tattoo ON tattoo_order.tattoo_id_fk = tattoo.tattoo_id " +
             "INNER JOIN user_account ON tattoo_order.user_account_id_fk = " +
             "user_account.user_account_id INNER JOIN image on tattoo.image_id_fk = " +
@@ -94,6 +94,7 @@ public class OrderDaoImpl implements OrderDao {
                 Date date = new Date(resultSet.getLong(ColumnName.DATE));
                 orderBuilder.setDate(date.toLocalDate());
                 orderBuilder.setDescription(resultSet.getString(ColumnName.TATTOO_ORDER_DESCRIPTION));
+                orderBuilder.setConfirmed(resultSet.getInt(ColumnName.IS_CONFIRMED) != 0);
                 TattooBuilder tattooBuilder = new TattooBuilder();
                 tattooBuilder.setName(resultSet.getString(ColumnName.TATTOO_NAME));
                 tattooBuilder.setImage(new Image(null, resultSet.getString(ColumnName.IMAGE_NAME)));

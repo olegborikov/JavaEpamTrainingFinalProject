@@ -11,6 +11,7 @@ public class OrderBuilder {
     private double price;
     private LocalDate date;
     private String description;
+    private boolean isConfirmed;
     private User user;
     private Tattoo tattoo;
 
@@ -30,6 +31,10 @@ public class OrderBuilder {
         this.description = description;
     }
 
+    public void setConfirmed(boolean confirmed) {
+        isConfirmed = confirmed;
+    }
+
     public void setUser(User user) {
         this.user = user;
     }
@@ -39,6 +44,6 @@ public class OrderBuilder {
     }
 
     public Order getOrder() {
-        return new Order(orderId, price, date, description, user, tattoo);
+        return new Order(orderId, price, date, description, isConfirmed, user, tattoo);
     }
 }

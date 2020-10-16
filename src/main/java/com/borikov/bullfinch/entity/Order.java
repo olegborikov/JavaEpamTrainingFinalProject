@@ -31,6 +31,11 @@ public class Order {
     private String description;
 
     /**
+     * The value is used for confirmed flag storage.
+     */
+    private boolean isConfirmed;
+
+    /**
      * The value is used for user storage.
      */
     private User user;
@@ -47,15 +52,17 @@ public class Order {
      * @param price       the price
      * @param date        the date
      * @param description the description
+     * @param isConfirmed the is confirmed
      * @param user        the user
      * @param tattoo      the tattoo
      */
-    public Order(Long orderId, double price, LocalDate date,
-                 String description, User user, Tattoo tattoo) {
+    public Order(Long orderId, double price, LocalDate date, String description,
+                 boolean isConfirmed, User user, Tattoo tattoo) {
         this.orderId = orderId;
         this.price = price;
         this.date = date;
         this.description = description;
+        this.isConfirmed = isConfirmed;
         this.user = user;
         this.tattoo = tattoo;
     }
@@ -133,6 +140,24 @@ public class Order {
     }
 
     /**
+     * Is confirmed boolean.
+     *
+     * @return the boolean
+     */
+    public boolean isConfirmed() {
+        return isConfirmed;
+    }
+
+    /**
+     * Sets confirmed.
+     *
+     * @param confirmed the confirmed
+     */
+    public void setConfirmed(boolean confirmed) {
+        isConfirmed = confirmed;
+    }
+
+    /**
      * Gets user.
      *
      * @return the user
@@ -180,6 +205,9 @@ public class Order {
         if (Double.compare(order.price, price) != 0) {
             return false;
         }
+        if (isConfirmed != order.isConfirmed) {
+            return false;
+        }
         if (orderId != null ? !orderId.equals(order.orderId) : order.orderId != null) {
             return false;
         }
@@ -205,6 +233,7 @@ public class Order {
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         result = 31 * result + (date != null ? date.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + (isConfirmed ? 1 : 0);
         result = 31 * result + (user != null ? user.hashCode() : 0);
         result = 31 * result + (tattoo != null ? tattoo.hashCode() : 0);
         return result;
@@ -217,6 +246,7 @@ public class Order {
         sb.append(", price=").append(price);
         sb.append(", date=").append(date);
         sb.append(", description='").append(description).append('\'');
+        sb.append(", isConfirmed=").append(isConfirmed);
         sb.append(", user=").append(user);
         sb.append(", tattoo=").append(tattoo);
         sb.append('}');

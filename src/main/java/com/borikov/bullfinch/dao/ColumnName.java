@@ -12,6 +12,7 @@ public class ColumnName {
     public static final String TATTOO_ORDER_PRICE = "tattoo_order_price";
     public static final String DATE = "date";
     public static final String TATTOO_ORDER_DESCRIPTION = "tattoo_order_description";
+    public static final String IS_CONFIRMED = "is_confirmed";
 
     public static final String ROLE_ID = "role_id";
     public static final String ROLE_NAME = "role_name";
