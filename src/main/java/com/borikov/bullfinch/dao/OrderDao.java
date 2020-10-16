@@ -14,4 +14,6 @@ public interface OrderDao {
     Optional<Order> findById(long id) throws DaoException;
 
     boolean remove(long id) throws DaoException;
+
+    boolean submit(long id) throws DaoException;
 }

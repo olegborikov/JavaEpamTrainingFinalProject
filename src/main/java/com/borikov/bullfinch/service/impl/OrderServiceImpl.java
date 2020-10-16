@@ -101,4 +101,19 @@ public class OrderServiceImpl implements OrderService {
             throw new ServiceException("Error while cancel order", e);
         }
     }
+
+    @Override
+    public boolean submitOrder(String id) throws ServiceException {
+        boolean result = false;
+        OrderValidator orderValidator = new OrderValidator();
+        try {
+            if (orderValidator.isIdCorrect(id)) {
+                long orderId = Long.parseLong(id);
+                result = orderDao.submit(orderId);
+            }
+            return result;
+        } catch (DaoException e) {
+            throw new ServiceException("Error while cancel order", e);
+        }
+    }
 }

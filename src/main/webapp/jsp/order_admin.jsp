@@ -37,16 +37,16 @@
                 <div class="col-md-4">
                     <br/>
                     <h3 class="text-white"><fmt:message key="orderAdmin.information"/></h3>
-                    <p><fmt:message key="orderAdmin.tattooName"/> ${orderAdmin.tattoo.name}</p>
-                    <p><fmt:message key="orderAdmin.description"/> ${orderAdmin.description}</p>
-                    <p><fmt:message key="orderAdmin.price"/> ${orderAdmin.price} <fmt:message
+                    <p><fmt:message key="orderAdmin.tattooName"/> ${order.tattoo.name}</p>
+                    <p><fmt:message key="orderAdmin.description"/> ${order.description}</p>
+                    <p><fmt:message key="orderAdmin.price"/> ${order.price} <fmt:message
                             key="tattoo.rubles"/></p>
-                    <p><fmt:message key="orderAdmin.date"/> ${orderAdmin.date}</p>
-                    <p><fmt:message key="orderAdmin.orderedBy"/> ${orderAdmin.user.login}</p>
+                    <p><fmt:message key="orderAdmin.date"/> ${order.date}</p>
+                    <p><fmt:message key="orderAdmin.orderedBy"/> ${order.user.login}</p>
                     <p>
                         <fmt:message key="orderAdmin.isConfirmed"/>
                         <c:choose>
-                        <c:when test="${!orderAdmin.confirmed}">
+                        <c:when test="${!order.confirmed}">
                             <fmt:message key="orderAdmin.no"/>
                     <form name="deleteForm" method="post" action="controller">
                         <input type="hidden" name="orderId" value="${order.orderId}">

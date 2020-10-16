@@ -68,6 +68,7 @@ public class RequestParameter {
     public static final String ORDER_CANCEL_ERROR_MESSAGE = "orderCancelErrorMessage";
     public static final String ORDER_DENY_CONFIRM_MESSAGE = "orderDenyConfirmMessage";
     public static final String ORDER_DENY_ERROR_MESSAGE = "orderDenyErrorMessage";
+    public static final String ORDER_SUBMIT_ERROR_MESSAGE = "orderSubmitErrorMessage";
 
     private RequestParameter() {
     }

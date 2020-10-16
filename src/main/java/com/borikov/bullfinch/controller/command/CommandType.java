@@ -47,6 +47,7 @@ public enum CommandType {
     ADD_TATTOO_COMMAND(new AddTattooCommand()),
     BLOCK_USER_COMMAND(new BlockUserCommand()),
     UNBLOCK_USER_COMMAND(new UnblockUserCommand()),
+    SUBMIT_ORDER_COMMAND(new SubmitOrderCommand()),
     DENY_ORDER_COMMAND(new DenyOrderCommand()),
     BROWSE_ORDER_ADMIN_PAGE_COMMAND(new BrowseOrderAdminPageCommand()),
     BROWSE_USERS_PAGE_COMMAND(new BrowseUsersPageCommand());

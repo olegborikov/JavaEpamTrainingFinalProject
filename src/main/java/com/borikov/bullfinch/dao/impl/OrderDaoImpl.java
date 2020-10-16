@@ -33,6 +33,7 @@ public class OrderDaoImpl implements OrderDao {
             "user_account.user_account_id INNER JOIN image on tattoo.image_id_fk = " +
             "image.image_id WHERE tattoo_order_id = ?";
     private static final String REMOVE = "DELETE FROM tattoo_order WHERE tattoo_order_id = ?";
+    private static final String SUBMIT = "UPDATE tattoo_order SET is_confirmed = 1 WHERE tattoo_order_id = ?";
 
     @Override
     public boolean add(Order order) throws DaoException {
@@ -121,6 +122,18 @@ public class OrderDaoImpl implements OrderDao {
             return statement.executeUpdate() > 0;
         } catch (SQLException | ConnectionPoolException e) {
             throw new DaoException("Adding order error", e);
+        }
+    }
+
+    @Override
+    public boolean submit(long id) throws DaoException {
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement statement =
+                     connection.prepareStatement(SUBMIT)) {
+            statement.setLong(1, id);
+            return statement.executeUpdate() > 0;
+        } catch (SQLException | ConnectionPoolException e) {
+            throw new DaoException("Submiting order error", e);
         }
     }
 }

@@ -29,7 +29,7 @@
             <div class="row">
                 <div class="col-lg-2"></div>
                 <div class="col-lg-8 mb-5">
-                    <form action="#">
+                    <form action="controller" method="post">
                         <div class="row form-group">
                             <c:forEach var="user" items="${users}">
                                 <div class="col-md-12">
