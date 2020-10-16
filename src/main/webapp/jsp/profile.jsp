@@ -67,20 +67,28 @@
                         <div class="panel-heading"><h3 class="panel-title">
                             <fmt:message key="profile.orders"/></h3>
                         </div>
-                        <div class="panel-body">
-                            <ul class="list-group">
-                                <c:if test="${empty orders}">
-                                    <li style="color: black" class="list-group-item">
-                                        <strong><fmt:message key="profile.empty"/></strong>
-                                    </li>
-                                </c:if>
-                                <c:forEach var="order" items="${orders}">
-                                    <bu style="color: black" class="list-group-item">
-                                        <button class="btn"><strong>${order.tattoo.name}, ${order.price}, ${order.date}</strong></button>
-                                    </bu>
-                                </c:forEach>
-                            </ul>
-                        </div>
+                        <form method="post" action="controller">
+                            <div class="panel-body">
+                                <ul class="list-group">
+                                    <c:if test="${empty orders}">
+                                        <li style="color: black" class="list-group-item">
+                                            <strong><fmt:message key="profile.empty"/></strong>
+                                        </li>
+                                    </c:if>
+
+                                    <input type="hidden" name="commandName"
+                                           value="browse_order_page_command">
+                                    <c:forEach var="order" items="${orders}">
+                                        <li style="color: black" class="list-group-item">
+                                            <button class="btn" name="orderId"
+                                                    value="${order.orderId}">
+                                                <strong>${order.tattoo.name}, ${order.price}, ${order.date}</strong>
+                                            </button>
+                                        </li>
+                                    </c:forEach>
+                                </ul>
+                            </div>
+                        </form>
                     </div>
                 </div>
                 <div class="col-md-1">

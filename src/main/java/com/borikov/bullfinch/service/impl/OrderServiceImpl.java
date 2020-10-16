@@ -19,6 +19,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class OrderServiceImpl implements OrderService {
     private final OrderDao orderDao = new OrderDaoImpl();
@@ -66,6 +67,21 @@ public class OrderServiceImpl implements OrderService {
                 orders = orderDao.findByUserLogin(userLogin);
             }
             return orders;
+        } catch (DaoException e) {
+            throw new ServiceException("Error while finding orders by user login", e);
+        }
+    }
+
+    @Override
+    public Optional<Order> findOrderById(String id) throws ServiceException {
+        Optional<Order> order = Optional.empty();
+        OrderValidator orderValidator = new OrderValidator();
+        try {
+            if (orderValidator.isIdCorrect(id)) {
+                long orderId = Long.parseLong(id);
+                order = orderDao.findById(orderId);
+            }
+            return order;
         } catch (DaoException e) {
             throw new ServiceException("Error while finding orders by user login", e);
         }

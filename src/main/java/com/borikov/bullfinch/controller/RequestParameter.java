@@ -6,6 +6,7 @@ public class RequestParameter {
     public static final String CONTENT_DISPOSITION = "Content-Disposition";
 
     public static final String USER_ID = "userId";
+    public static final String ORDER_ID = "orderId";
     public static final String USER = "user";
     public static final String ROLE = "role";
     public static final String LOGIN = "login";
@@ -19,6 +20,7 @@ public class RequestParameter {
     public static final String ERROR_MESSAGE = "errorMessage";
     public static final String TATTOOS = "tattoos";
     public static final String ORDERS = "orders";
+    public static final String ORDER = "order";
     public static final String ALL_TATTOOS = "allTattoos";
     public static final String ADD_TATTOO = "addTattoo";
     public static final String TATTOO_NAME = "tattooName";
@@ -61,6 +63,7 @@ public class RequestParameter {
     public static final String USER_BLOCK_ERROR_MESSAGE = "userBlockErrorMessage";
     public static final String USER_UNBLOCK_ERROR_MESSAGE = "userUnblockErrorMessage";
     public static final String USER_BLOCKED_MESSAGE = "userBlockedMessage";
+    public static final String ORDER_FIND_ERROR_MESSAGE = "orderFindErrorMessage";
 
     private RequestParameter() {
     }

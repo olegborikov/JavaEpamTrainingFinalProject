@@ -22,7 +22,7 @@
     <script type="text/javascript"
             src="${pageContext.request.contextPath}/assets/js/project.js"></script>
     <script>document.addEventListener('keydown', (event) => {
-        if(event.keyCode === 116) event.preventDefault();
+        if (event.keyCode === 116) event.preventDefault();
     })</script>
 </head>
 <body>
@@ -30,7 +30,7 @@
 <section class="masthead">
     <div class="intro-body">
         <div class="container">
-               <c:if test="${tattooFindErrorMessage}">
+            <c:if test="${tattooFindErrorMessage}">
                 <h2><fmt:message key="message.tattooFindErrorMessage"/></h2>
             </c:if>
 
@@ -100,6 +100,10 @@
 
             <c:if test="${userBlockedMessage}">
                 <h2><fmt:message key="message.userBlockedMessage"/></h2>
+            </c:if>
+
+            <c:if test="${orderFindErrorMessage}">
+                <h2><fmt:message key="message.orderFindErrorMessage"/></h2>
             </c:if>
         </div>
     </div>
