@@ -14,5 +14,5 @@ public interface OrderService {
 
     Optional<Order> findOrderById(String id) throws ServiceException;
 
-    boolean cancelOrder(String id) throws ServiceException;
+    boolean removeOrder(String id) throws ServiceException;
 }

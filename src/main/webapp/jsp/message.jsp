@@ -113,6 +113,14 @@
             <c:if test="${orderCancelErrorMessage}">
                 <h2><fmt:message key="message.orderCancelErrorMessage"/></h2>
             </c:if>
+
+            <c:if test="${orderDenyConfirmMessage}">
+                <h2><fmt:message key="message.orderDenyConfirmMessage"/></h2>
+            </c:if>
+
+            <c:if test="${orderDenyErrorMessage}">
+                <h2><fmt:message key="message.orderDenyErrorMessage"/></h2>
+            </c:if>
         </div>
     </div>
 </section>

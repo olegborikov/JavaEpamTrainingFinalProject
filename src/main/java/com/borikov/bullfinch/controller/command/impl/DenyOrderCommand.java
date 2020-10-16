@@ -12,7 +12,7 @@ import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class CancelOrderCommand implements Command {
+public class DenyOrderCommand implements Command {
     private static final OrderService orderService = new OrderServiceImpl();
     private static final Logger LOGGER = LogManager.getLogger();
 
@@ -22,9 +22,9 @@ public class CancelOrderCommand implements Command {
         String orderId = request.getParameter(RequestParameter.ORDER_ID);
         try {
             if (orderService.removeOrder(orderId)) {
-                request.setAttribute(RequestParameter.ORDER_CANCEL_CONFIRM_MESSAGE, true);
+                request.setAttribute(RequestParameter.ORDER_DENY_CONFIRM_MESSAGE, true);
             } else {
-                request.setAttribute(RequestParameter.ORDER_CANCEL_ERROR_MESSAGE, true);
+                request.setAttribute(RequestParameter.ORDER_DENY_ERROR_MESSAGE, true);
             }
             page = PagePath.MESSAGE;
         } catch (ServiceException e) {

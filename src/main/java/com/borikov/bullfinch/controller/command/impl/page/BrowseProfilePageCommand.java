@@ -33,9 +33,9 @@ public class BrowseProfilePageCommand implements Command {
             Optional<User> user = userService.findUserByLogin(login);
             if (user.isPresent()) {
                 request.setAttribute(RequestParameter.USER, user.get());
-                page = PagePath.PROFILE;
                 List<Order> orders = orderService.getOrdersByUserLogin(login);
                 request.setAttribute(RequestParameter.ORDERS, orders);
+                page = PagePath.PROFILE;
             } else {
                 request.setAttribute(RequestParameter.USER_FIND_ERROR_MESSAGE, true);
                 page = PagePath.MESSAGE;

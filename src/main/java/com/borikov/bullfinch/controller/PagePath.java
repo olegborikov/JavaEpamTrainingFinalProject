@@ -21,6 +21,7 @@ public class PagePath {
     public static final String TATTOO_ADD = "/jsp/tattoo_add.jsp";
     public static final String PROFILE_EDIT = "/jsp/profile_edit.jsp";
     public static final String ORDER = "/jsp/order.jsp";
+    public static final String ORDER_ADMIN = "/jsp/order_admin.jsp";
 
     private PagePath() {
     }

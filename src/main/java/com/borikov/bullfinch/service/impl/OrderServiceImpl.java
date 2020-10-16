@@ -88,7 +88,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public boolean cancelOrder(String id) throws ServiceException {
+    public boolean removeOrder(String id) throws ServiceException {
         boolean result = false;
         OrderValidator orderValidator = new OrderValidator();
         try {
