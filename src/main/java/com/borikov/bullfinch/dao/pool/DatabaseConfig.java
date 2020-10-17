@@ -23,7 +23,8 @@ class DatabaseConfig {
     DatabaseConfig() {
         Properties properties = new Properties();
         try {
-            InputStream inputStream = getClass().getClassLoader().getResourceAsStream(FILE_NAME);
+            ClassLoader classLoader = getClass().getClassLoader();
+            InputStream inputStream = classLoader.getResourceAsStream(FILE_NAME);
             properties.load(inputStream);
         } catch (IOException e) {
             LOGGER.log(Level.FATAL, "Error with database properties file", e);

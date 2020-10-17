@@ -208,7 +208,8 @@ public class Order {
         if (isConfirmed != order.isConfirmed) {
             return false;
         }
-        if (orderId != null ? !orderId.equals(order.orderId) : order.orderId != null) {
+        if (orderId != null ? !orderId.equals(order.orderId)
+                : order.orderId != null) {
             return false;
         }
         if (date != null ? !date.equals(order.date) : order.date != null) {

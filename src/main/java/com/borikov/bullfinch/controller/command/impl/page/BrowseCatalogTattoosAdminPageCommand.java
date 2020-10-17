@@ -17,14 +17,12 @@ import java.util.List;
 public class BrowseCatalogTattoosAdminPageCommand implements Command {
     private static final Logger LOGGER = LogManager.getLogger();
     private static final TattooService tattooService = new TattooServiceImpl();
-    private static final boolean IS_ALLOWED_DEFAULT = true;
-    private static final boolean IS_ARCHIVED_DEFAULT = false;
 
     @Override
     public String execute(HttpServletRequest request) {
         String page;
         try {
-            List<Tattoo> tattoos = tattooService.findTattoosByAllowedAndArchived(IS_ALLOWED_DEFAULT, IS_ARCHIVED_DEFAULT);
+            List<Tattoo> tattoos = tattooService.findAllTattoosCatalog();
             request.setAttribute(RequestParameter.TATTOOS, tattoos);
             page = PagePath.TATTOOS_ADMIN;
         } catch (ServiceException e) {

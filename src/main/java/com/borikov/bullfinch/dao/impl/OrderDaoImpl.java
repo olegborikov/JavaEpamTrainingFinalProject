@@ -19,21 +19,26 @@ import java.util.Optional;
 
 public class OrderDaoImpl implements OrderDao {
     private static final ConnectionPool connectionPool = ConnectionPool.INSTANCE;
-    private static final String ADD = "INSERT INTO tattoo_order (tattoo_order_price, date, " +
-            "tattoo_order_description, is_confirmed, tattoo_id_fk, user_account_id_fk) " +
-            "VALUES (?, ?, ?, 0, ?, (SELECT user_account_id FROM user_account WHERE BINARY login LIKE ?))";
-    private static final String FIND_BY_LOGIN = "SELECT tattoo_order_id, tattoo_name, date, tattoo_order_price " +
-            "FROM tattoo_order INNER JOIN tattoo ON tattoo_order.tattoo_id_fk = tattoo.tattoo_id " +
+    private static final String ADD = "INSERT INTO tattoo_order (tattoo_order_price," +
+            " date, tattoo_order_description, is_confirmed, tattoo_id_fk, " +
+            "user_account_id_fk) VALUES (?, ?, ?, 0, ?, " +
+            "(SELECT user_account_id FROM user_account WHERE BINARY login LIKE ?))";
+    private static final String FIND_BY_LOGIN = "SELECT tattoo_order_id, " +
+            "tattoo_name, date, tattoo_order_price FROM tattoo_order INNER JOIN " +
+            "tattoo ON tattoo_order.tattoo_id_fk = tattoo.tattoo_id " +
             "INNER JOIN user_account ON tattoo_order.user_account_id_fk = " +
             "user_account.user_account_id WHERE login = ?";
-    private static final String FIND_BY_ID = "SELECT tattoo_order_id, tattoo_order_price, date, " +
-            "tattoo_order_description, is_confirmed, image_name, tattoo_name, login FROM tattoo_order " +
+    private static final String FIND_BY_ID = "SELECT tattoo_order_id, " +
+            "tattoo_order_price, date, tattoo_order_description, is_confirmed, " +
+            "image_name, tattoo_name, login FROM tattoo_order " +
             "INNER JOIN tattoo ON tattoo_order.tattoo_id_fk = tattoo.tattoo_id " +
             "INNER JOIN user_account ON tattoo_order.user_account_id_fk = " +
             "user_account.user_account_id INNER JOIN image on tattoo.image_id_fk = " +
             "image.image_id WHERE tattoo_order_id = ?";
-    private static final String REMOVE = "DELETE FROM tattoo_order WHERE tattoo_order_id = ?";
-    private static final String SUBMIT = "UPDATE tattoo_order SET is_confirmed = 1 WHERE tattoo_order_id = ?";
+    private static final String REMOVE = "DELETE FROM tattoo_order " +
+            "WHERE tattoo_order_id = ?";
+    private static final String SUBMIT = "UPDATE tattoo_order SET is_confirmed = 1 " +
+            "WHERE tattoo_order_id = ?";
 
     @Override
     public boolean add(Order order) throws DaoException {
@@ -57,28 +62,26 @@ public class OrderDaoImpl implements OrderDao {
     }
 
     @Override
-    public List<Order> findByUserLogin(String userLogin) throws DaoException {
+    public boolean remove(long id) throws DaoException {
         try (Connection connection = connectionPool.getConnection();
-             PreparedStatement statement = connection.prepareStatement(FIND_BY_LOGIN)) {
-            statement.setString(1, userLogin);
-            ResultSet resultSet = statement.executeQuery();
-            List<Order> orders = new ArrayList<>();
-            while (resultSet.next()) {
-                OrderBuilder orderBuilder = new OrderBuilder();
-                orderBuilder.setOrderId(resultSet.getLong(ColumnName.TATTOO_ORDER_ID));
-                TattooBuilder tattooBuilder = new TattooBuilder();
-                tattooBuilder.setName(resultSet.getString(ColumnName.TATTOO_NAME));
-                Tattoo tattoo = tattooBuilder.getTattoo();
-                orderBuilder.setTattoo(tattoo);
-                Date date = new Date(resultSet.getLong(ColumnName.DATE));
-                orderBuilder.setDate(date.toLocalDate());
-                orderBuilder.setPrice(resultSet.getDouble(ColumnName.TATTOO_ORDER_PRICE));
-                Order order = orderBuilder.getOrder();
-                orders.add(order);
-            }
-            return orders;
+             PreparedStatement statement =
+                     connection.prepareStatement(REMOVE)) {
+            statement.setLong(1, id);
+            return statement.executeUpdate() > 0;
         } catch (SQLException | ConnectionPoolException e) {
-            throw new DaoException("Finding orders by user login error", e);
+            throw new DaoException("Adding order error", e);
+        }
+    }
+
+    @Override
+    public boolean submit(long id) throws DaoException {
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement statement =
+                     connection.prepareStatement(SUBMIT)) {
+            statement.setLong(1, id);
+            return statement.executeUpdate() > 0;
+        } catch (SQLException | ConnectionPoolException e) {
+            throw new DaoException("Submiting order error", e);
         }
     }
 
@@ -114,26 +117,28 @@ public class OrderDaoImpl implements OrderDao {
     }
 
     @Override
-    public boolean remove(long id) throws DaoException {
+    public List<Order> findByUserLogin(String userLogin) throws DaoException {
         try (Connection connection = connectionPool.getConnection();
-             PreparedStatement statement =
-                     connection.prepareStatement(REMOVE)) {
-            statement.setLong(1, id);
-            return statement.executeUpdate() > 0;
+             PreparedStatement statement = connection.prepareStatement(FIND_BY_LOGIN)) {
+            statement.setString(1, userLogin);
+            ResultSet resultSet = statement.executeQuery();
+            List<Order> orders = new ArrayList<>();
+            while (resultSet.next()) {
+                OrderBuilder orderBuilder = new OrderBuilder();
+                orderBuilder.setOrderId(resultSet.getLong(ColumnName.TATTOO_ORDER_ID));
+                TattooBuilder tattooBuilder = new TattooBuilder();
+                tattooBuilder.setName(resultSet.getString(ColumnName.TATTOO_NAME));
+                Tattoo tattoo = tattooBuilder.getTattoo();
+                orderBuilder.setTattoo(tattoo);
+                Date date = new Date(resultSet.getLong(ColumnName.DATE));
+                orderBuilder.setDate(date.toLocalDate());
+                orderBuilder.setPrice(resultSet.getDouble(ColumnName.TATTOO_ORDER_PRICE));
+                Order order = orderBuilder.getOrder();
+                orders.add(order);
+            }
+            return orders;
         } catch (SQLException | ConnectionPoolException e) {
-            throw new DaoException("Adding order error", e);
-        }
-    }
-
-    @Override
-    public boolean submit(long id) throws DaoException {
-        try (Connection connection = connectionPool.getConnection();
-             PreparedStatement statement =
-                     connection.prepareStatement(SUBMIT)) {
-            statement.setLong(1, id);
-            return statement.executeUpdate() > 0;
-        } catch (SQLException | ConnectionPoolException e) {
-            throw new DaoException("Submiting order error", e);
+            throw new DaoException("Finding orders by user login error", e);
         }
     }
 }

@@ -34,15 +34,15 @@ public class UploadController extends HttpServlet {
 
     private void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String dispatcherPath = PagePath.TATTOO_OFFER;
+        String page = PagePath.TATTOO_OFFER;
         Optional<String> photoName = photoFileManager.add(request.getParts());
         if (photoName.isPresent()) {
             request.setAttribute(RequestParameter.PHOTO_NAME, photoName.get());
-            dispatcherPath = DISPATCHER_PATH_CONTROLLER;
+            page = DISPATCHER_PATH_CONTROLLER;
         } else {
             request.setAttribute(RequestParameter.INCORRECT_IMAGE_MESSAGE, true);
         }
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(dispatcherPath);
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(page);
         dispatcher.forward(request, response);
     }
 }

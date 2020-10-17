@@ -4,7 +4,6 @@ import com.borikov.bullfinch.controller.PagePath;
 import com.borikov.bullfinch.controller.RequestParameter;
 import com.borikov.bullfinch.controller.command.Command;
 import com.borikov.bullfinch.entity.Order;
-import com.borikov.bullfinch.entity.Tattoo;
 import com.borikov.bullfinch.entity.User;
 import com.borikov.bullfinch.exception.ServiceException;
 import com.borikov.bullfinch.service.OrderService;

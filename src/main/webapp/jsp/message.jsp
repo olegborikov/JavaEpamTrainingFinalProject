@@ -15,15 +15,6 @@
           href="${pageContext.request.contextPath}/assets/fonts/font-awesome.min.css">
     <link rel="stylesheet" type="text/css"
           href="${pageContext.request.contextPath}/assets/css/project.css">
-    <script type="text/javascript"
-            src="${pageContext.request.contextPath}/assets/js/jquery.min.js"></script>
-    <script type="text/javascript"
-            src="${pageContext.request.contextPath}/assets/js/bootstrap.min.js"></script>
-    <script type="text/javascript"
-            src="${pageContext.request.contextPath}/assets/js/project.js"></script>
-    <script>document.addEventListener('keydown', (event) => {
-        if (event.keyCode === 116) event.preventDefault();
-    })</script>
 </head>
 <body>
 <jsp:include page="navbar.jsp"/>
@@ -129,5 +120,11 @@
     </div>
 </section>
 <jsp:include page="footer.jsp"/>
+<script type="text/javascript"
+        src="${pageContext.request.contextPath}/assets/js/jquery.min.js"></script>
+<script type="text/javascript"
+        src="${pageContext.request.contextPath}/assets/js/bootstrap.min.js"></script>
+<script type="text/javascript"
+        src="${pageContext.request.contextPath}/assets/js/project.js"></script>
 </body>
 </html>

@@ -22,11 +22,14 @@ public class PasswordEncryptor {
     public static Optional<String> encrypt(String password) {
         Optional<String> encryptedPassword = Optional.empty();
         try {
-            MessageDigest messageDigest = MessageDigest.getInstance(ENCRYPTION_ALGORITHM);
+            MessageDigest messageDigest =
+                    MessageDigest.getInstance(ENCRYPTION_ALGORITHM);
             messageDigest.update(password.getBytes(StandardCharsets.UTF_8));
             byte[] passwordEncodedBytes = messageDigest.digest();
-            BigInteger passwordBigInt = new BigInteger(SIGNUM_DEFAULT, passwordEncodedBytes);
-            encryptedPassword = Optional.of(passwordBigInt.toString(HEXADECIMAL_RADIX));
+            BigInteger passwordBigInt = new BigInteger(SIGNUM_DEFAULT,
+                    passwordEncodedBytes);
+            encryptedPassword =
+                    Optional.of(passwordBigInt.toString(HEXADECIMAL_RADIX));
         } catch (NoSuchAlgorithmException e) {
             LOGGER.log(Level.ERROR, "Error while encrypting password");
         }

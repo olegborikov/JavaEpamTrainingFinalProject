@@ -1,6 +1,6 @@
 package com.borikov.bullfinch.exception;
 
-public class TransactionException extends Exception{
+public class TransactionException extends Exception {
     public TransactionException() {
     }
 

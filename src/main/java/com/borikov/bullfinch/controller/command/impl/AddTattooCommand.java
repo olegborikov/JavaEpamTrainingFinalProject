@@ -29,7 +29,7 @@ public class AddTattooCommand implements Command {
         HttpSession httpSession = request.getSession();
         String proposedLogin = (String) httpSession.getAttribute(RequestParameter.LOGIN);
         try {
-            if (tattooService.addTattoo(tattooName, description, price, photoName,proposedLogin)) {
+            if (tattooService.addTattoo(tattooName, description, price, photoName, proposedLogin)) {
                 request.setAttribute(RequestParameter.TATTOO_ADD_CONFIRM_MESSAGE, true);
                 page = PagePath.MESSAGE;
             } else {

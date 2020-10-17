@@ -21,8 +21,6 @@ public class PaginationCatalogCommand implements Command {
     private static final int AMOUNT_OF_TATTOOS_ON_PAGE = 3;
     private static final Logger LOGGER = LogManager.getLogger();
     private static final TattooService tattooService = new TattooServiceImpl();
-    private static final boolean IS_ALLOWED_DEFAULT = true;
-    private static final boolean IS_ARCHIVED_DEFAULT = false;
 
     @Override
     public String execute(HttpServletRequest request) {
@@ -37,16 +35,14 @@ public class PaginationCatalogCommand implements Command {
             String tattooName = (String) attributes.get(RequestParameter.TATTOO_NAME);
             List<Tattoo> allTattoos;
             if (tattooName == null) {
-                allTattoos = tattooService.findTattoosByAllowedAndArchived(
-                        IS_ALLOWED_DEFAULT, IS_ARCHIVED_DEFAULT);
+                allTattoos = tattooService.findAllTattoosCatalog();
             } else {
-                allTattoos = tattooService.findTattoosByNameAndAllowedAndArchived(
-                        tattooName, IS_ALLOWED_DEFAULT, IS_ARCHIVED_DEFAULT);
+                allTattoos = tattooService.findTattoosByNameCatalog(tattooName);
             }
             List<Tattoo> tattoos = allTattoos.subList(AMOUNT_OF_TATTOOS_ON_PAGE * (pageNumber - 1),
                     Math.min(AMOUNT_OF_TATTOOS_ON_PAGE * pageNumber, allTattoos.size()));
             request.setAttribute(RequestParameter.PAGE_AMOUNT,
-                    Math.ceil((double)allTattoos.size() / AMOUNT_OF_TATTOOS_ON_PAGE));
+                    Math.ceil((double) allTattoos.size() / AMOUNT_OF_TATTOOS_ON_PAGE));
             request.setAttribute(RequestParameter.TATTOOS, tattoos);
             request.setAttribute(RequestParameter.PAGE_NUMBER, pageNumber);
             request.setAttribute(RequestParameter.TATTOO_NAME, tattooName);

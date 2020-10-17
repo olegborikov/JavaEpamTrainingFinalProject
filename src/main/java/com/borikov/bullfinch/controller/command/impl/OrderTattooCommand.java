@@ -9,7 +9,6 @@ import com.borikov.bullfinch.service.OrderService;
 import com.borikov.bullfinch.service.TattooService;
 import com.borikov.bullfinch.service.impl.OrderServiceImpl;
 import com.borikov.bullfinch.service.impl.TattooServiceImpl;
-import com.borikov.bullfinch.util.PhotoFileManager;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -19,12 +18,9 @@ import javax.servlet.http.HttpSession;
 import java.util.Optional;
 
 public class OrderTattooCommand implements Command {
-    private static final PhotoFileManager photoFileManager = new PhotoFileManager();
     private static final OrderService orderService = new OrderServiceImpl();
     private static final TattooService tattooService = new TattooServiceImpl();
     private static final Logger LOGGER = LogManager.getLogger();
-    private static final boolean IS_ALLOWED_DEFAULT = true;
-    private static final boolean IS_ARCHIVED_DEFAULT = false;
 
     @Override
     public String execute(HttpServletRequest request) {
@@ -41,8 +37,7 @@ public class OrderTattooCommand implements Command {
                 page = PagePath.MESSAGE;
             } else {
                 request.setAttribute(RequestParameter.INCORRECT_DATA_MESSAGE, true);
-                Optional<Tattoo> tattoo = tattooService.findTattooByIdAndAllowedAndArchived(
-                        tattooId, IS_ALLOWED_DEFAULT, IS_ARCHIVED_DEFAULT);
+                Optional<Tattoo> tattoo = tattooService.findTattooByIdCatalog(tattooId);
                 if (tattoo.isPresent()) {
                     request.setAttribute(RequestParameter.TATTOO, tattoo.get());
                     page = PagePath.TATTOO_ORDER;

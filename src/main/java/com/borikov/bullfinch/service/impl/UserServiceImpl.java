@@ -22,29 +22,6 @@ public class UserServiceImpl implements UserService {
     private final UserDao userDao = new UserDaoImpl();
 
     @Override
-    public Optional<User> isUserExists(String login, String password) throws ServiceException {
-        try {
-            UserValidator userValidator = new UserValidator();
-            Optional<User> userOptional = Optional.empty();
-            if (userValidator.isLoginCorrect(login)
-                    && userValidator.isPasswordCorrect(password)) {
-                Optional<String> userPasswordOptional = userDao.checkExistingByLogin(login);
-                if (userPasswordOptional.isPresent()) {
-                    String userPassword = userPasswordOptional.get();
-                    Optional<String> encryptedPassword = PasswordEncryptor.encrypt(password);
-                    if (encryptedPassword.isPresent()
-                            && userPassword.equals(encryptedPassword.get())) {
-                        userOptional = userDao.authorize(login);
-                    }
-                }
-            }
-            return userOptional;
-        } catch (DaoException e) {
-            throw new ServiceException("Error while checking user for existing", e);
-        }
-    }
-
-    @Override
     public boolean addUser(String email, String login, String firstName,
                            String secondName, String phoneNumber, String password,
                            String confirmedPassword) throws ServiceException {
@@ -58,8 +35,10 @@ public class UserServiceImpl implements UserService {
                     && userValidator.isPhoneNumberCorrect(phoneNumber)
                     && userValidator.isPasswordCorrect(password)
                     && password.equals(confirmedPassword)) {
-                Optional<String> encryptedPassword = PasswordEncryptor.encrypt(password);
-                Optional<String> existingUserPassword = userDao.checkExistingByLogin(login);
+                Optional<String> encryptedPassword =
+                        PasswordEncryptor.encrypt(password);
+                Optional<String> existingUserPassword =
+                        userDao.checkExistingByLogin(login);
                 boolean existingUserEmail = userDao.checkExistingByEmail(email);
                 if (existingUserPassword.isEmpty() && !existingUserEmail
                         && encryptedPassword.isPresent()) {
@@ -72,13 +51,44 @@ public class UserServiceImpl implements UserService {
                     userBuilder.setUserRole(UserRole.USER);
                     userBuilder.setWallet(new Wallet(null, 0));
                     User user = userBuilder.getUser();
-                    result = transactionManager.addUserTransaction(user, encryptedPassword.get());
+                    result = transactionManager.addUserTransaction(
+                            user, encryptedPassword.get());
                 }
             }
             return result;
         } catch (DaoException | TransactionException e) {
             throw new ServiceException("Error while adding user", e);
         }
+    }
+
+    @Override
+    public boolean editUser(String id, String email, String login,
+                            String firstName, String secondName,
+                            String phoneNumber) throws ServiceException {
+        UserValidator userValidator = new UserValidator();
+        boolean result = false;
+        try {
+            if (userValidator.isIdCorrect(id)
+                    && userValidator.isEmailCorrect(email)
+                    && userValidator.isLoginCorrect(login)
+                    && userValidator.isFirstNameCorrect(firstName)
+                    && userValidator.isSecondNameCorrect(secondName)
+                    && userValidator.isPhoneNumberCorrect(phoneNumber)) {
+                UserBuilder userBuilder = new UserBuilder();
+                long userId = Long.parseLong(id);
+                userBuilder.setUserId(userId);
+                userBuilder.setEmail(email);
+                userBuilder.setLogin(login);
+                userBuilder.setFirstName(firstName);
+                userBuilder.setSecondName(secondName);
+                userBuilder.setPhoneNumber(phoneNumber);
+                User user = userBuilder.getUser();
+                result = userDao.update(user);
+            }
+        } catch (DaoException e) {
+            throw new ServiceException("Error while editing user", e);
+        }
+        return result;
     }
 
     @Override
@@ -92,30 +102,6 @@ public class UserServiceImpl implements UserService {
             return result;
         } catch (DaoException e) {
             throw new ServiceException("Error while confirming email", e);
-        }
-    }
-
-    @Override
-    public List<User> findAllUsers() throws ServiceException {
-        try {
-            List<User> users = userDao.findAll();
-            return users;
-        } catch (DaoException e) {
-            throw new ServiceException("Error while finding users", e);
-        }
-    }
-
-    @Override
-    public Optional<User> findUserByLogin(String login) throws ServiceException {
-        Optional<User> user = Optional.empty();
-        UserValidator userValidator = new UserValidator();
-        try {
-            if (userValidator.isLoginCorrect(login)) {
-                user = userDao.findByLogin(login);
-            }
-            return user;
-        } catch (DaoException e) {
-            throw new ServiceException("Error while finding tattoos by id", e);
         }
     }
 
@@ -148,30 +134,52 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean editUser(String id, String email, String login, String firstName, String secondName, String phoneNumber) throws ServiceException {
-        UserValidator userValidator = new UserValidator();
-        boolean result = false;
+    public Optional<User> isUserExists(String login, String password)
+            throws ServiceException {
         try {
-            if (userValidator.isIdCorrect(id)
-                    && userValidator.isEmailCorrect(email)
-                    && userValidator.isLoginCorrect(login)
-                    && userValidator.isFirstNameCorrect(firstName)
-                    && userValidator.isSecondNameCorrect(secondName)
-                    && userValidator.isPhoneNumberCorrect(phoneNumber)) {
-                UserBuilder userBuilder = new UserBuilder();
-                long userId = Long.parseLong(id);
-                userBuilder.setUserId(userId);
-                userBuilder.setEmail(email);
-                userBuilder.setLogin(login);
-                userBuilder.setFirstName(firstName);
-                userBuilder.setSecondName(secondName);
-                userBuilder.setPhoneNumber(phoneNumber);
-                User user = userBuilder.getUser();
-                result = userDao.update(user);
+            UserValidator userValidator = new UserValidator();
+            Optional<User> userOptional = Optional.empty();
+            if (userValidator.isLoginCorrect(login)
+                    && userValidator.isPasswordCorrect(password)) {
+                Optional<String> userPasswordOptional =
+                        userDao.checkExistingByLogin(login);
+                if (userPasswordOptional.isPresent()) {
+                    String userPassword = userPasswordOptional.get();
+                    Optional<String> encryptedPassword =
+                            PasswordEncryptor.encrypt(password);
+                    if (encryptedPassword.isPresent()
+                            && userPassword.equals(encryptedPassword.get())) {
+                        userOptional = userDao.authorize(login);
+                    }
+                }
             }
+            return userOptional;
         } catch (DaoException e) {
-            throw new ServiceException("Error while editing user", e);
+            throw new ServiceException("Error while checking user for existing", e);
         }
-        return result;
+    }
+
+    @Override
+    public List<User> findAllUsers() throws ServiceException {
+        try {
+            List<User> users = userDao.findAll();
+            return users;
+        } catch (DaoException e) {
+            throw new ServiceException("Error while finding users", e);
+        }
+    }
+
+    @Override
+    public Optional<User> findUserByLogin(String login) throws ServiceException {
+        Optional<User> user = Optional.empty();
+        UserValidator userValidator = new UserValidator();
+        try {
+            if (userValidator.isLoginCorrect(login)) {
+                user = userDao.findByLogin(login);
+            }
+            return user;
+        } catch (DaoException e) {
+            throw new ServiceException("Error while finding tattoos by id", e);
+        }
     }
 }

@@ -9,7 +9,7 @@ import java.util.Optional;
 public interface WalletDao {
     boolean add(Wallet wallet, Connection connection) throws DaoException;
 
-    Optional<Wallet> findById(long id) throws DaoException;
-
     boolean update(Wallet wallet) throws DaoException;
+
+    Optional<Wallet> findById(long id) throws DaoException;
 }

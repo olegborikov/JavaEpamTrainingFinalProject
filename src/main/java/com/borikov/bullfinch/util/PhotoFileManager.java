@@ -25,7 +25,8 @@ public class PhotoFileManager {
             try {
                 Files.createDirectories(path);
             } catch (IOException e) {
-                LOGGER.log(Level.ERROR, "Error while creating directory {}", UPLOAD_DIRECTORY, e);
+                LOGGER.log(Level.ERROR, "Error while creating directory {}",
+                        UPLOAD_DIRECTORY, e);
             }
         }
         Optional<String> photoName = Optional.empty();
@@ -35,11 +36,14 @@ public class PhotoFileManager {
                 if (fileName.endsWith(END_PHOTO_NAME)) {
                     try {
                         String newFileName = UUID.randomUUID().toString();
-                        part.write(UPLOAD_DIRECTORY + File.separator + newFileName + END_PHOTO_NAME);
-                        LOGGER.log(Level.INFO, "Upload successful. File: {}", fileName);
+                        part.write(UPLOAD_DIRECTORY + File.separator
+                                + newFileName + END_PHOTO_NAME);
+                        LOGGER.log(Level.INFO, "Upload successful. File: {}",
+                                fileName);
                         photoName = Optional.of(newFileName);
                     } catch (IOException e) {
-                        LOGGER.log(Level.ERROR, "Error while writing file {}", fileName, e);
+                        LOGGER.log(Level.ERROR, "Error while writing file {}",
+                                fileName, e);
                     }
                 } else {
                     LOGGER.log(Level.ERROR, "Upload failed. File: {}", fileName);
@@ -50,9 +54,11 @@ public class PhotoFileManager {
     }
 
     public void delete(String photoName) {
-        File file = new File(UPLOAD_DIRECTORY + File.separator + photoName + END_PHOTO_NAME);
+        File file = new File(UPLOAD_DIRECTORY + File.separator
+                + photoName + END_PHOTO_NAME);
         if (file.delete()) {
-            LOGGER.log(Level.INFO, "File {} was deleted", photoName + END_PHOTO_NAME);
+            LOGGER.log(Level.INFO, "File {} was deleted",
+                    photoName + END_PHOTO_NAME);
         }
     }
 }

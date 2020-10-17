@@ -16,11 +16,13 @@ public class WalletDaoImpl implements WalletDao {
             "VALUES (0)";
     private static final String FIND_BY_ID = "SELECT wallet_id, balance " +
             "FROM wallet WHERE wallet_id = ?";
-    private static final String UPDATE = "UPDATE wallet SET balance = ? WHERE wallet_id = ?";
+    private static final String UPDATE = "UPDATE wallet SET balance = ? " +
+            "WHERE wallet_id = ?";
 
     @Override
     public boolean add(Wallet wallet, Connection connection) throws DaoException {
-        try (PreparedStatement statement = connection.prepareStatement(ADD, Statement.RETURN_GENERATED_KEYS)) {
+        try (PreparedStatement statement = connection.prepareStatement(ADD,
+                Statement.RETURN_GENERATED_KEYS)) {
             boolean result = statement.executeUpdate() > 0;
             ResultSet generatedKeys = statement.getGeneratedKeys();
             if (generatedKeys.next()) {
@@ -29,6 +31,19 @@ public class WalletDaoImpl implements WalletDao {
             return result;
         } catch (SQLException e) {
             throw new DaoException("Adding image error", e);
+        }
+    }
+
+    @Override
+    public boolean update(Wallet wallet) throws DaoException {
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement statement =
+                     connection.prepareStatement(UPDATE)) {
+            statement.setDouble(1, wallet.getBalance());
+            statement.setLong(2, wallet.getWalletId());
+            return statement.executeUpdate() > 0;
+        } catch (SQLException | ConnectionPoolException e) {
+            throw new DaoException("Update wallet error", e);
         }
     }
 
@@ -46,19 +61,6 @@ public class WalletDaoImpl implements WalletDao {
                 walletOptional = Optional.of(wallet);
             }
             return walletOptional;
-        } catch (SQLException | ConnectionPoolException e) {
-            throw new DaoException("Update wallet error", e);
-        }
-    }
-
-    @Override
-    public boolean update(Wallet wallet) throws DaoException {
-        try (Connection connection = connectionPool.getConnection();
-             PreparedStatement statement =
-                     connection.prepareStatement(UPDATE)) {
-            statement.setDouble(1, wallet.getBalance());
-            statement.setLong(2, wallet.getWalletId());
-            return statement.executeUpdate() > 0;
         } catch (SQLException | ConnectionPoolException e) {
             throw new DaoException("Update wallet error", e);
         }

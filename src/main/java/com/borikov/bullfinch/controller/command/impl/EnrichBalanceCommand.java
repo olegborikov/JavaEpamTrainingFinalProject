@@ -24,11 +24,11 @@ public class EnrichBalanceCommand implements Command {
         try {
             if (walletService.enrichBalance(walletId, enrichAmount)) {
                 request.setAttribute(RequestParameter.BALANCE_ENRICH_CONFIRM_MESSAGE, true);
-            }else {
+            } else {
                 request.setAttribute(RequestParameter.BALANCE_ENRICH_ERROR_MESSAGE, true);
             }
             page = PagePath.MESSAGE;
-        }catch (ServiceException e){
+        } catch (ServiceException e) {
             LOGGER.log(Level.ERROR, "Error while enrich balance", e);
             request.setAttribute(RequestParameter.ERROR_MESSAGE, e);
             page = PagePath.ERROR;

@@ -72,7 +72,6 @@ public class Discount {
         this.discountPercent = discountPercent;
     }
 
-
     /**
      * Gets user.
      *

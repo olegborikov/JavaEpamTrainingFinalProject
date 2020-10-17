@@ -22,10 +22,11 @@ public class EmailSenderUtil {
     public static void sendMessage(String email, String login, String url) {
         try {
             Properties properties = new Properties();
-            InputStream inputStream = EmailSenderUtil.class.getClassLoader().getResourceAsStream(FILE_NAME);
+            ClassLoader classLoader = EmailSenderUtil.class.getClassLoader();
+            InputStream inputStream = classLoader.getResourceAsStream(FILE_NAME);
             properties.load(inputStream);
-            Thread thread = new Thread(new EmailSenderThread(
-                    email, EMAIL_HEAD, String.format(EMAIL_BODY, url) + login, properties));
+            Thread thread = new Thread(new EmailSenderThread(email, EMAIL_HEAD,
+                    String.format(EMAIL_BODY, url) + login, properties));
             thread.start();
         } catch (IOException e) {
             LOGGER.log(Level.ERROR, "Error while reading properties file", e);

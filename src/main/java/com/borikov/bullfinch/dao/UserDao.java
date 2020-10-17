@@ -8,23 +8,24 @@ import java.util.List;
 import java.util.Optional;
 
 public interface UserDao {
-    Optional<String> checkExistingByLogin(String login) throws DaoException;
-
-    boolean checkExistingByEmail(String email) throws DaoException;
-
-    Optional<User> authorize(String login) throws DaoException;
-
-    Optional<User> findByLogin(String login) throws DaoException;
-
-    boolean confirmEmail(String login) throws DaoException;
-
-    boolean add(User user, String password, Connection connection) throws DaoException;
+    boolean add(User user, String password, Connection connection)
+            throws DaoException;
 
     boolean update(User user) throws DaoException;
 
-    List<User> findAll() throws DaoException;
+    Optional<User> authorize(String login) throws DaoException;
+
+    boolean confirmEmail(String login) throws DaoException;
 
     boolean block(String login) throws DaoException;
 
     boolean unblock(String login) throws DaoException;
+
+    Optional<String> checkExistingByLogin(String login) throws DaoException;
+
+    boolean checkExistingByEmail(String email) throws DaoException;
+
+    List<User> findAll() throws DaoException;
+
+    Optional<User> findByLogin(String login) throws DaoException;
 }

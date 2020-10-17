@@ -45,3 +45,7 @@ function ansValidation(ev) {
         window.alert("Passwords do not match!")
     }
 }
+
+document.addEventListener('keydown', (event) => {
+    if (event.keyCode === 116) event.preventDefault();
+})

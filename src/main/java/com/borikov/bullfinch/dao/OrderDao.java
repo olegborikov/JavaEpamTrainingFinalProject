@@ -9,11 +9,11 @@ import java.util.Optional;
 public interface OrderDao {
     boolean add(Order order) throws DaoException;
 
-    List<Order> findByUserLogin(String userLogin) throws DaoException;
-
-    Optional<Order> findById(long id) throws DaoException;
-
     boolean remove(long id) throws DaoException;
 
     boolean submit(long id) throws DaoException;
+
+    Optional<Order> findById(long id) throws DaoException;
+
+    List<Order> findByUserLogin(String userLogin) throws DaoException;
 }

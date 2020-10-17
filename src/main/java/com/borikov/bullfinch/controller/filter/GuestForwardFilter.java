@@ -45,7 +45,7 @@ public class GuestForwardFilter implements Filter {
         String role = (String) httpSession.getAttribute(RequestParameter.ROLE);
         String commandName = request.getParameter(RequestParameter.COMMAND_NAME);
         String guestRole = UserRole.GUEST.getName();
-        if (guestRole.equals(role)){
+        if (guestRole.equals(role)) {
             Optional<Command> command = CommandProvider.defineCommand(commandName);
             if (command.isPresent() && !(commandsGuest.contains(command.get()))) {
                 httpResponse.sendRedirect(httpRequest.getContextPath() + PagePath.INDEX);

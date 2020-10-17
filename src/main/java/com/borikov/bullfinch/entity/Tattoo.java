@@ -72,8 +72,9 @@ public class Tattoo {
      * @param image       the image
      * @param user        the user
      */
-    public Tattoo(Long tattooId, String name, String description, double price,
-                  byte rating, boolean isAllowed, boolean isArchived, Image image, User user) {
+    public Tattoo(Long tattooId, String name, String description,
+                  double price, byte rating, boolean isAllowed,
+                  boolean isArchived, Image image, User user) {
         this.tattooId = tattooId;
         this.name = name;
         this.description = description;
@@ -268,7 +269,8 @@ public class Tattoo {
         if (isArchived != tattoo.isArchived) {
             return false;
         }
-        if (tattooId != null ? !tattooId.equals(tattoo.tattooId) : tattoo.tattooId != null) {
+        if (tattooId != null ? !tattooId.equals(tattoo.tattooId)
+                : tattoo.tattooId != null) {
             return false;
         }
         if (name != null ? !name.equals(tattoo.name) : tattoo.name != null) {

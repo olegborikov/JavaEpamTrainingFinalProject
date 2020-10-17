@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.*;
+import java.util.Optional;
 
 @WebServlet(urlPatterns = "/controller")
 public class FrontController extends HttpServlet {
@@ -38,8 +38,8 @@ public class FrontController extends HttpServlet {
         session.setAttribute(RequestParameter.CURRENT_PAGE, page);
         RequestAttributeHandler requestAttributeHandler = new RequestAttributeHandler();
         requestAttributeHandler.setAttributes(request);
-        session.setAttribute(RequestParameter.REQUEST_ATTRIBUTE_HANDLER, requestAttributeHandler);
-        //response.setHeader("Cache-Control", "no-store, must-revalidate");
+        session.setAttribute(RequestParameter.REQUEST_ATTRIBUTE_HANDLER,
+                requestAttributeHandler);
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(page);
         dispatcher.forward(request, response);
     }

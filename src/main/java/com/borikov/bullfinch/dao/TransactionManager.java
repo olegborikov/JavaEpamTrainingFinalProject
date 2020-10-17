@@ -57,7 +57,8 @@ public class TransactionManager {
         }
     }
 
-    public boolean offerTattooTransaction(Tattoo tattoo) throws TransactionException {
+    public boolean offerTattooTransaction(Tattoo tattoo)
+            throws TransactionException {
         Connection connection = null;
         try {
             connection = ConnectionPool.INSTANCE.getConnection();
@@ -89,7 +90,8 @@ public class TransactionManager {
         }
     }
 
-    public boolean removeTattooTransaction(long tattooId, long imageId) throws TransactionException {
+    public boolean removeTattooTransaction(long tattooId, long imageId)
+            throws TransactionException {
         Connection connection = null;
         try {
             connection = ConnectionPool.INSTANCE.getConnection();
@@ -121,7 +123,8 @@ public class TransactionManager {
         }
     }
 
-    public boolean addUserTransaction(User user, String password) throws TransactionException {
+    public boolean addUserTransaction(User user, String password)
+            throws TransactionException {
         Connection connection = null;
         try {
             connection = ConnectionPool.INSTANCE.getConnection();

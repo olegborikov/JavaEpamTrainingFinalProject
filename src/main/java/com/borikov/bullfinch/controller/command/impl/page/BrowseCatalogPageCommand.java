@@ -19,18 +19,16 @@ public class BrowseCatalogPageCommand implements Command {
     private static final int AMOUNT_OF_TATTOOS_ON_PAGE = 3;
     private static final Logger LOGGER = LogManager.getLogger();
     private static final TattooService tattooService = new TattooServiceImpl();
-    private static final boolean IS_ALLOWED_DEFAULT = true;
-    private static final boolean IS_ARCHIVED_DEFAULT = false;
 
     @Override
     public String execute(HttpServletRequest request) {
         String page;
         try {
-            List<Tattoo> allTattoos = tattooService.findTattoosByAllowedAndArchived(IS_ALLOWED_DEFAULT, IS_ARCHIVED_DEFAULT);
+            List<Tattoo> allTattoos = tattooService.findAllTattoosCatalog();
             List<Tattoo> tattoos = allTattoos.subList(0, Math.min(AMOUNT_OF_TATTOOS_ON_PAGE,
                     allTattoos.size()));
             request.setAttribute(RequestParameter.PAGE_AMOUNT,
-                    Math.ceil((double)allTattoos.size() / AMOUNT_OF_TATTOOS_ON_PAGE));
+                    Math.ceil((double) allTattoos.size() / AMOUNT_OF_TATTOOS_ON_PAGE));
             request.setAttribute(RequestParameter.TATTOOS, tattoos);
             request.setAttribute(RequestParameter.PAGE_NUMBER, FIRST_PAGE_NUMBER);
             page = PagePath.CATALOG;
