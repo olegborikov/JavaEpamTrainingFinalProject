@@ -26,5 +26,7 @@ public interface UserService {
 
     List<User> findAllUsers() throws ServiceException;
 
-    Optional<User> findUserByLogin(String name) throws ServiceException;
+    Optional<User> findUserByLogin(String login) throws ServiceException;
+
+    List<User> findUsersByLogin(String login) throws ServiceException;
 }

@@ -41,23 +41,23 @@ public class TattooDaoImpl implements TattooDao {
             "ON tattoo.image_id_fk = image.image_id " +
             "WHERE tattoo_name LIKE ? AND is_allowed = 1 AND is_archived = 0";
     private static final String FIND_BY_ID_CATALOG = "SELECT tattoo_id, tattoo_name, " +
-            "tattoo_description, tattoo_price,tattoo_rating, is_allowed, " +
+            "tattoo_description, tattoo_price, is_allowed, " +
             "is_archived, image_id, image_name FROM tattoo INNER JOIN image ON " +
             "tattoo.image_id_fk = image.image_id " +
             "WHERE tattoo_id = ? AND is_allowed = 1 AND is_archived = 0";
     private static final String FIND_BY_ID = "SELECT tattoo_id, tattoo_name, " +
-            "tattoo_description, tattoo_price,tattoo_rating, is_allowed, " +
+            "tattoo_description, tattoo_price, is_allowed, " +
             "is_archived, image_id, image_name, login FROM tattoo " +
             "INNER JOIN image ON tattoo.image_id_fk = image.image_id " +
             "INNER JOIN user_account ON tattoo.user_account_id_fk = " +
             "user_account.user_account_id WHERE tattoo_id = ?";
     private static final String OFFER = "INSERT INTO tattoo (tattoo_name, tattoo_description, " +
-            "tattoo_price, tattoo_rating, is_allowed, is_archived, " +
-            "image_id_fk, user_account_id_fk) VALUES (?, ?, ?, 5, 0, 0, ?, " +
+            "tattoo_price, is_allowed, is_archived, " +
+            "image_id_fk, user_account_id_fk) VALUES (?, ?, ?, 0, 0, ?, " +
             "(SELECT user_account_id FROM user_account WHERE BINARY login LIKE ?))";
     private static final String ADD = "INSERT INTO tattoo (tattoo_name, tattoo_description, " +
-            "tattoo_price, tattoo_rating, is_allowed, is_archived, " +
-            "image_id_fk, user_account_id_fk) VALUES (?, ?, ?, 5, 1, 0, ?," +
+            "tattoo_price, is_allowed, is_archived, " +
+            "image_id_fk, user_account_id_fk) VALUES (?, ?, ?, 1, 0, ?," +
             "(SELECT user_account_id FROM user_account WHERE BINARY login LIKE ?))";
     private static final String ALLOW = "UPDATE tattoo SET is_allowed = 1 " +
             "WHERE tattoo_id = ?";
@@ -196,7 +196,6 @@ public class TattooDaoImpl implements TattooDao {
                 tattooBuilder.setName(resultSet.getString(ColumnName.TATTOO_NAME));
                 tattooBuilder.setDescription(resultSet.getString(ColumnName.TATTOO_DESCRIPTION));
                 tattooBuilder.setPrice(resultSet.getDouble(ColumnName.TATTOO_PRICE));
-                tattooBuilder.setRating(resultSet.getByte(ColumnName.TATTOO_RATING));
                 tattooBuilder.setAllowed(resultSet.getInt(ColumnName.IS_ALLOWED) != 0);
                 tattooBuilder.setArchived(resultSet.getInt(ColumnName.IS_ARCHIVED) != 0);
                 tattooBuilder.setImage(new Image(resultSet.getLong(ColumnName.IMAGE_ID),
@@ -318,7 +317,6 @@ public class TattooDaoImpl implements TattooDao {
                 tattooBuilder.setName(resultSet.getString(ColumnName.TATTOO_NAME));
                 tattooBuilder.setDescription(resultSet.getString(ColumnName.TATTOO_DESCRIPTION));
                 tattooBuilder.setPrice(resultSet.getDouble(ColumnName.TATTOO_PRICE));
-                tattooBuilder.setRating(resultSet.getByte(ColumnName.TATTOO_RATING));
                 tattooBuilder.setImage(new Image(resultSet.getLong(ColumnName.IMAGE_ID),
                         resultSet.getString(ColumnName.IMAGE_NAME)));
                 Tattoo tattoo = tattooBuilder.getTattoo();

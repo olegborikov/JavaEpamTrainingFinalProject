@@ -65,7 +65,6 @@
                         </c:choose>
                     </p>
                     <p><fmt:message key="tattooAdmin.offeredBy"/> ${tattoo.user.login}</p>
-                    <p><fmt:message key="tattooAdmin.rating"/> ${tattoo.rating}</p>
                     <p>
                         <fmt:message key="tattooAdmin.allowed"/>
                         <c:choose>

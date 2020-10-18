@@ -11,7 +11,6 @@ public class RequestParameter {
     public static final String ROLE = "role";
     public static final String LOGIN = "login";
     public static final String PASSWORD = "password";
-    public static final String CONFIRMED_PASSWORD = "confirmedPassword";
     public static final String EMAIL = "email";
     public static final String FIRST_NAME = "firstName";
     public static final String SECOND_NAME = "secondName";
@@ -41,6 +40,7 @@ public class RequestParameter {
     public static final String ENRICH_AMOUNT = "enrichAmount";
     public static final String WALLET_ID = "walletId";
     public static final String IMAGE_ID = "imageId";
+    public static final String SEARCH_LOGIN = "searchLogin";
     public static final String REQUEST_ATTRIBUTE_HANDLER = "requestAttributeHandler";
 
     public static final String INCORRECT_IMAGE_MESSAGE = "incorrectImageMessage";

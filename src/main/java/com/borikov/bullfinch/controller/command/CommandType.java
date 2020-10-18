@@ -49,6 +49,7 @@ public enum CommandType {
     UNBLOCK_USER_COMMAND(new UnblockUserCommand()),
     SUBMIT_ORDER_COMMAND(new SubmitOrderCommand()),
     DENY_ORDER_COMMAND(new DenyOrderCommand()),
+    FIND_USERS_COMMAND(new FindUsersCommand()),
     BROWSE_ORDER_ADMIN_PAGE_COMMAND(new BrowseOrderAdminPageCommand()),
     BROWSE_USERS_PAGE_COMMAND(new BrowseUsersPageCommand());
 

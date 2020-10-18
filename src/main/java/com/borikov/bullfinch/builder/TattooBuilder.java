@@ -9,7 +9,6 @@ public class TattooBuilder {
     private String name;
     private String description;
     private double price;
-    private byte rating;
     private boolean isAllowed;
     private boolean isArchived;
     private Image image;
@@ -31,10 +30,6 @@ public class TattooBuilder {
         this.price = price;
     }
 
-    public void setRating(byte rating) {
-        this.rating = rating;
-    }
-
     public void setAllowed(boolean allowed) {
         isAllowed = allowed;
     }
@@ -53,7 +48,7 @@ public class TattooBuilder {
 
     public Tattoo getTattoo() {
         return new Tattoo(tattooId, name, description, price,
-                rating, isAllowed, isArchived, image, user);
+                isAllowed, isArchived, image, user);
     }
 }
 

@@ -28,4 +28,6 @@ public interface UserDao {
     List<User> findAll() throws DaoException;
 
     Optional<User> findByLogin(String login) throws DaoException;
+
+    List<User> findByLoginSubstring(String login) throws DaoException;
 }

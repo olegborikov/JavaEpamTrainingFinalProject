@@ -21,7 +21,6 @@ public class ColumnName {
     public static final String TATTOO_NAME = "tattoo_name";
     public static final String TATTOO_DESCRIPTION = "tattoo_description";
     public static final String TATTOO_PRICE = "tattoo_price";
-    public static final String TATTOO_RATING = "tattoo_rating";
     public static final String IS_ALLOWED = "is_allowed";
     public static final String IS_ARCHIVED = "is_archived";
 

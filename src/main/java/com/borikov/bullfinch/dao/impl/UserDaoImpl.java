@@ -46,6 +46,10 @@ public class UserDaoImpl implements UserDao {
             "WHERE BINARY login LIKE ?";
     private static final String UNBLOCK = "UPDATE user_account SET is_blocked = 0 " +
             "WHERE BINARY login LIKE ?";
+    private static final String FIND_BY_LOGIN_SUBSTRING = "SELECT login, email, " +
+            "first_name, second_name FROM user_account WHERE BINARY " +
+            "login NOT LIKE 'admin' AND BINARY login LIKE ?";
+    private static final String PERCENT = "%";
 
     @Override
     public boolean add(User user, String password, Connection connection)
@@ -234,6 +238,29 @@ public class UserDaoImpl implements UserDao {
             return userOptional;
         } catch (SQLException | ConnectionPoolException e) {
             throw new DaoException("Finding user by login error", e);
+        }
+    }
+
+    @Override
+    public List<User> findByLoginSubstring(String login) throws DaoException {
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement statement =
+                     connection.prepareStatement(FIND_BY_LOGIN_SUBSTRING)) {
+            statement.setString(1, PERCENT + login + PERCENT);
+            ResultSet resultSet = statement.executeQuery();
+            List<User> users = new ArrayList<>();
+            while (resultSet.next()) {
+                UserBuilder userBuilder = new UserBuilder();
+                userBuilder.setLogin(resultSet.getString(ColumnName.LOGIN));
+                userBuilder.setEmail(resultSet.getString(ColumnName.EMAIL));
+                userBuilder.setFirstName(resultSet.getString(ColumnName.FIRST_NAME));
+                userBuilder.setSecondName(resultSet.getString(ColumnName.SECOND_NAME));
+                User user = userBuilder.getUser();
+                users.add(user);
+            }
+            return users;
+        } catch (SQLException | ConnectionPoolException e) {
+            throw new DaoException("Finding users bu login error", e);
         }
     }
 }

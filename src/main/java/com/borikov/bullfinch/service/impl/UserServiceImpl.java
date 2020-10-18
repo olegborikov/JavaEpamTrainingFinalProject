@@ -14,6 +14,7 @@ import com.borikov.bullfinch.service.UserService;
 import com.borikov.bullfinch.util.PasswordEncryptor;
 import com.borikov.bullfinch.validator.impl.UserValidator;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -179,7 +180,16 @@ public class UserServiceImpl implements UserService {
             }
             return user;
         } catch (DaoException e) {
-            throw new ServiceException("Error while finding tattoos by id", e);
+            throw new ServiceException("Error while finding user by login", e);
+        }
+    }
+
+    @Override
+    public List<User> findUsersByLogin(String login) throws ServiceException {
+        try {
+            return userDao.findByLoginSubstring(login);
+        } catch (DaoException e) {
+            throw new ServiceException("Error while finding users by login", e);
         }
     }
 }

@@ -29,11 +29,6 @@ public class Tattoo {
     private double price;
 
     /**
-     * The value is used for rating storage.
-     */
-    private byte rating;
-
-    /**
      * The value is used for allow flag storage.
      */
     private boolean isAllowed;
@@ -66,20 +61,18 @@ public class Tattoo {
      * @param name        the name
      * @param description the description
      * @param price       the price
-     * @param rating      the rating
      * @param isAllowed   the is allowed
      * @param isArchived  the is archived
      * @param image       the image
      * @param user        the user
      */
     public Tattoo(Long tattooId, String name, String description,
-                  double price, byte rating, boolean isAllowed,
-                  boolean isArchived, Image image, User user) {
+                  double price, boolean isAllowed, boolean isArchived,
+                  Image image, User user) {
         this.tattooId = tattooId;
         this.name = name;
         this.description = description;
         this.price = price;
-        this.rating = rating;
         this.isAllowed = isAllowed;
         this.isArchived = isArchived;
         this.image = image;
@@ -156,24 +149,6 @@ public class Tattoo {
      */
     public void setPrice(double price) {
         this.price = price;
-    }
-
-    /**
-     * Gets rating.
-     *
-     * @return the rating
-     */
-    public byte getRating() {
-        return rating;
-    }
-
-    /**
-     * Sets rating.
-     *
-     * @param rating the rating
-     */
-    public void setRating(byte rating) {
-        this.rating = rating;
     }
 
     /**
@@ -260,9 +235,6 @@ public class Tattoo {
         if (Double.compare(tattoo.price, price) != 0) {
             return false;
         }
-        if (rating != tattoo.rating) {
-            return false;
-        }
         if (isAllowed != tattoo.isAllowed) {
             return false;
         }
@@ -295,7 +267,6 @@ public class Tattoo {
         result = 31 * result + (description != null ? description.hashCode() : 0);
         temp = Double.doubleToLongBits(price);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
-        result = 31 * result + (int) rating;
         result = 31 * result + (isAllowed ? 1 : 0);
         result = 31 * result + (isArchived ? 1 : 0);
         result = 31 * result + (image != null ? image.hashCode() : 0);
@@ -310,7 +281,6 @@ public class Tattoo {
         sb.append(", name='").append(name).append('\'');
         sb.append(", description='").append(description).append('\'');
         sb.append(", price=").append(price);
-        sb.append(", rating=").append(rating);
         sb.append(", isAllowed=").append(isAllowed);
         sb.append(", isArchived=").append(isArchived);
         sb.append(", image=").append(image);
