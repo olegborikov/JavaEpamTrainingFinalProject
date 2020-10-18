@@ -14,7 +14,6 @@ import com.borikov.bullfinch.service.UserService;
 import com.borikov.bullfinch.util.PasswordEncryptor;
 import com.borikov.bullfinch.validator.impl.UserValidator;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 

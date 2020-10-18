@@ -18,6 +18,14 @@ public class WalletDaoImpl implements WalletDao {
             "FROM wallet WHERE wallet_id = ?";
     private static final String UPDATE = "UPDATE wallet SET balance = ? " +
             "WHERE wallet_id = ?";
+    private static final String FIND_BY_USER_LOGIN = "SELECT wallet_id, balance " +
+            "FROM wallet INNER JOIN user_account ON wallet.wallet_id = " +
+            "user_account.wallet_id_fk WHERE BINARY login LIKE ?";
+    private static final String FIND_BY_ORDER_ID = "SELECT wallet_id, balance " +
+            "FROM wallet INNER JOIN user_account ON wallet.wallet_id = " +
+            "user_account.wallet_id_fk INNER JOIN tattoo_order ON " +
+            "user_account.user_account_id = tattoo_order.user_account_id_fk " +
+            "WHERE tattoo_order_id = ?";
 
     @Override
     public boolean add(Wallet wallet, Connection connection) throws DaoException {
@@ -53,6 +61,44 @@ public class WalletDaoImpl implements WalletDao {
         try (Connection connection = connectionPool.getConnection();
              PreparedStatement statement =
                      connection.prepareStatement(FIND_BY_ID)) {
+            statement.setLong(1, id);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                Wallet wallet = new Wallet(resultSet.getLong(ColumnName.WALLET_ID),
+                        resultSet.getDouble(ColumnName.BALANCE));
+                walletOptional = Optional.of(wallet);
+            }
+            return walletOptional;
+        } catch (SQLException | ConnectionPoolException e) {
+            throw new DaoException("Update wallet error", e);
+        }
+    }
+
+    @Override
+    public Optional<Wallet> findByUserLogin(String login) throws DaoException {
+        Optional<Wallet> walletOptional = Optional.empty();
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement statement =
+                     connection.prepareStatement(FIND_BY_USER_LOGIN)) {
+            statement.setString(1, login);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                Wallet wallet = new Wallet(resultSet.getLong(ColumnName.WALLET_ID),
+                        resultSet.getDouble(ColumnName.BALANCE));
+                walletOptional = Optional.of(wallet);
+            }
+            return walletOptional;
+        } catch (SQLException | ConnectionPoolException e) {
+            throw new DaoException("Update wallet error", e);
+        }
+    }
+
+    @Override
+    public Optional<Wallet> findByOrderId(long id) throws DaoException {
+        Optional<Wallet> walletOptional = Optional.empty();
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement statement =
+                     connection.prepareStatement(FIND_BY_ORDER_ID)) {
             statement.setLong(1, id);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {

@@ -116,6 +116,10 @@
             <c:if test="${orderSubmitErrorMessage}">
                 <h2><fmt:message key="message.orderSubmitErrorMessage"/></h2>
             </c:if>
+
+            <c:if test="${tattooOrderBalanceErrorMessage}">
+                <h2><fmt:message key="message.tattooOrderBalanceErrorMessage"/></h2>
+            </c:if>
         </div>
     </div>
 </section>

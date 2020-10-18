@@ -1,12 +1,11 @@
 package com.borikov.bullfinch.dao;
 
-import com.borikov.bullfinch.dao.impl.ImageDaoImpl;
-import com.borikov.bullfinch.dao.impl.TattooDaoImpl;
-import com.borikov.bullfinch.dao.impl.UserDaoImpl;
-import com.borikov.bullfinch.dao.impl.WalletDaoImpl;
+import com.borikov.bullfinch.dao.impl.*;
 import com.borikov.bullfinch.dao.pool.ConnectionPool;
+import com.borikov.bullfinch.entity.Order;
 import com.borikov.bullfinch.entity.Tattoo;
 import com.borikov.bullfinch.entity.User;
+import com.borikov.bullfinch.entity.Wallet;
 import com.borikov.bullfinch.exception.ConnectionPoolException;
 import com.borikov.bullfinch.exception.DaoException;
 import com.borikov.bullfinch.exception.TransactionException;
@@ -16,14 +15,15 @@ import org.apache.logging.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.Optional;
 
 public class TransactionManager {
     private static final Logger LOGGER = LogManager.getLogger();
     private final ImageDao imageDao = new ImageDaoImpl();
     private final TattooDao tattooDao = new TattooDaoImpl();
     private final WalletDao walletDao = new WalletDaoImpl();
-    private final UserDaoImpl userDao = new UserDaoImpl();
-
+    private final UserDao userDao = new UserDaoImpl();
+    private final OrderDao orderDao = new OrderDaoImpl();
 
     public boolean addTattooTransaction(Tattoo tattoo) throws TransactionException {
         Connection connection = null;
@@ -37,23 +37,10 @@ public class TransactionManager {
             connection.commit();
             return result;
         } catch (ConnectionPoolException | SQLException | DaoException e) {
-            try {
-                if (connection != null) {
-                    connection.rollback();
-                }
-            } catch (SQLException ex) {
-                LOGGER.log(Level.ERROR, "Error while rollback transaction");
-            }
+            rollbackConnection(connection);
             throw new TransactionException("Error adding tattoo transaction", e);
         } finally {
-            if (connection != null) {
-                try {
-                    connection.setAutoCommit(true);
-                    connection.close();
-                } catch (SQLException e) {
-                    LOGGER.log(Level.ERROR, "Error while close connection");
-                }
-            }
+            closeConnection(connection);
         }
     }
 
@@ -70,23 +57,10 @@ public class TransactionManager {
             connection.commit();
             return result;
         } catch (ConnectionPoolException | SQLException | DaoException e) {
-            try {
-                if (connection != null) {
-                    connection.rollback();
-                }
-            } catch (SQLException ex) {
-                LOGGER.log(Level.ERROR, "Error while rollback transaction");
-            }
+            rollbackConnection(connection);
             throw new TransactionException("Error offering tattoo transaction", e);
         } finally {
-            if (connection != null) {
-                try {
-                    connection.setAutoCommit(true);
-                    connection.close();
-                } catch (SQLException e) {
-                    LOGGER.log(Level.ERROR, "Error while close connection");
-                }
-            }
+            closeConnection(connection);
         }
     }
 
@@ -103,23 +77,10 @@ public class TransactionManager {
             connection.commit();
             return result;
         } catch (ConnectionPoolException | SQLException | DaoException e) {
-            try {
-                if (connection != null) {
-                    connection.rollback();
-                }
-            } catch (SQLException ex) {
-                LOGGER.log(Level.ERROR, "Error while rollback transaction");
-            }
+            rollbackConnection(connection);
             throw new TransactionException("Error deleting tattoo transaction", e);
         } finally {
-            if (connection != null) {
-                try {
-                    connection.setAutoCommit(true);
-                    connection.close();
-                } catch (SQLException e) {
-                    LOGGER.log(Level.ERROR, "Error while close connection");
-                }
-            }
+            closeConnection(connection);
         }
     }
 
@@ -136,22 +97,58 @@ public class TransactionManager {
             connection.commit();
             return result;
         } catch (ConnectionPoolException | SQLException | DaoException e) {
-            try {
-                if (connection != null) {
-                    connection.rollback();
-                }
-            } catch (SQLException ex) {
-                LOGGER.log(Level.ERROR, "Error while rollback transaction");
-            }
+            rollbackConnection(connection);
             throw new TransactionException("Error adding user transaction", e);
         } finally {
-            if (connection != null) {
-                try {
-                    connection.setAutoCommit(true);
-                    connection.close();
-                } catch (SQLException e) {
-                    LOGGER.log(Level.ERROR, "Error while close connection");
+            closeConnection(connection);
+        }
+    }
+
+    public boolean submitOrderTransaction(long orderId) throws TransactionException {
+        Connection connection = null;
+        boolean result = false;
+        try {
+            connection = ConnectionPool.INSTANCE.getConnection();
+            connection.setAutoCommit(false);
+            Optional<Wallet> walletOptional = walletDao.findByOrderId(orderId);
+            Optional<Order> orderOptional = orderDao.findById(orderId);
+            if (walletOptional.isPresent() && orderOptional.isPresent()) {
+                Wallet wallet = walletOptional.get();
+                Order order = orderOptional.get();
+                double newBalance = wallet.getBalance() - order.getPrice();
+                wallet.setBalance(newBalance);
+                result = walletDao.update(wallet);
+                if (result) {
+                    orderDao.submit(orderId);
                 }
+            }
+            connection.commit();
+            return result;
+        } catch (ConnectionPoolException | SQLException | DaoException e) {
+            rollbackConnection(connection);
+            throw new TransactionException("Error adding user transaction", e);
+        } finally {
+            closeConnection(connection);
+        }
+    }
+
+    private void rollbackConnection(Connection connection) {
+        try {
+            if (connection != null) {
+                connection.rollback();
+            }
+        } catch (SQLException ex) {
+            LOGGER.log(Level.ERROR, "Error while rollback transaction");
+        }
+    }
+
+    private void closeConnection(Connection connection) {
+        if (connection != null) {
+            try {
+                connection.setAutoCommit(true);
+                connection.close();
+            } catch (SQLException e) {
+                LOGGER.log(Level.ERROR, "Error while closing connection");
             }
         }
     }

@@ -7,8 +7,10 @@ import com.borikov.bullfinch.entity.Tattoo;
 import com.borikov.bullfinch.exception.ServiceException;
 import com.borikov.bullfinch.service.OrderService;
 import com.borikov.bullfinch.service.TattooService;
+import com.borikov.bullfinch.service.WalletService;
 import com.borikov.bullfinch.service.impl.OrderServiceImpl;
 import com.borikov.bullfinch.service.impl.TattooServiceImpl;
+import com.borikov.bullfinch.service.impl.WalletServiceImpl;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -20,6 +22,7 @@ import java.util.Optional;
 public class OrderTattooCommand implements Command {
     private static final OrderService orderService = new OrderServiceImpl();
     private static final TattooService tattooService = new TattooServiceImpl();
+    private static final WalletService walletService = new WalletServiceImpl();
     private static final Logger LOGGER = LogManager.getLogger();
 
     @Override
@@ -32,19 +35,24 @@ public class OrderTattooCommand implements Command {
         HttpSession httpSession = request.getSession();
         String userLogin = (String) httpSession.getAttribute(RequestParameter.LOGIN);
         try {
-            if (orderService.addOrder(date, description, price, tattooId, userLogin)) {
-                request.setAttribute(RequestParameter.TATTOO_ORDER_CONFIRM_MESSAGE, true);
-                page = PagePath.MESSAGE;
-            } else {
-                request.setAttribute(RequestParameter.INCORRECT_DATA_MESSAGE, true);
-                Optional<Tattoo> tattoo = tattooService.findTattooByIdCatalog(tattooId);
-                if (tattoo.isPresent()) {
-                    request.setAttribute(RequestParameter.TATTOO, tattoo.get());
-                    page = PagePath.TATTOO_ORDER;
-                } else {
-                    request.setAttribute(RequestParameter.TATTOO_FIND_ERROR_MESSAGE, true);
+            if (walletService.checkBalanceSize(userLogin, price)) {
+                if (orderService.addOrder(date, description, price, tattooId, userLogin)) {
+                    request.setAttribute(RequestParameter.TATTOO_ORDER_CONFIRM_MESSAGE, true);
                     page = PagePath.MESSAGE;
+                } else {
+                    request.setAttribute(RequestParameter.INCORRECT_DATA_MESSAGE, true);
+                    Optional<Tattoo> tattoo = tattooService.findTattooByIdCatalog(tattooId);
+                    if (tattoo.isPresent()) {
+                        request.setAttribute(RequestParameter.TATTOO, tattoo.get());
+                        page = PagePath.TATTOO_ORDER;
+                    } else {
+                        request.setAttribute(RequestParameter.TATTOO_FIND_ERROR_MESSAGE, true);
+                        page = PagePath.MESSAGE;
+                    }
                 }
+            } else {
+                request.setAttribute(RequestParameter.TATTOO_ORDER_BALANCE_ERROR_MESSAGE, true);
+                page = PagePath.MESSAGE;
             }
         } catch (ServiceException e) {
             LOGGER.log(Level.ERROR, "Error while order tattoo", e);

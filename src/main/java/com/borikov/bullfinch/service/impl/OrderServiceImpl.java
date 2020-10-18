@@ -4,12 +4,14 @@ import com.borikov.bullfinch.builder.OrderBuilder;
 import com.borikov.bullfinch.builder.TattooBuilder;
 import com.borikov.bullfinch.builder.UserBuilder;
 import com.borikov.bullfinch.dao.OrderDao;
+import com.borikov.bullfinch.dao.TransactionManager;
 import com.borikov.bullfinch.dao.impl.OrderDaoImpl;
 import com.borikov.bullfinch.entity.Order;
 import com.borikov.bullfinch.entity.Tattoo;
 import com.borikov.bullfinch.entity.User;
 import com.borikov.bullfinch.exception.DaoException;
 import com.borikov.bullfinch.exception.ServiceException;
+import com.borikov.bullfinch.exception.TransactionException;
 import com.borikov.bullfinch.service.OrderService;
 import com.borikov.bullfinch.validator.impl.OrderValidator;
 import com.borikov.bullfinch.validator.impl.TattooValidator;
@@ -23,6 +25,7 @@ import java.util.Optional;
 
 public class OrderServiceImpl implements OrderService {
     private final OrderDao orderDao = new OrderDaoImpl();
+    private final TransactionManager transactionManager = new TransactionManager();
 
     @Override
     public boolean addOrder(String date, String description,
@@ -82,10 +85,10 @@ public class OrderServiceImpl implements OrderService {
         try {
             if (orderValidator.isIdCorrect(id)) {
                 long orderId = Long.parseLong(id);
-                result = orderDao.submit(orderId);
+                result = transactionManager.submitOrderTransaction(orderId);
             }
             return result;
-        } catch (DaoException e) {
+        } catch (TransactionException e) {
             throw new ServiceException("Error while cancel order", e);
         }
     }

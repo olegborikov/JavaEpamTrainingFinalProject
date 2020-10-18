@@ -12,4 +12,8 @@ public interface WalletDao {
     boolean update(Wallet wallet) throws DaoException;
 
     Optional<Wallet> findById(long id) throws DaoException;
+
+    Optional<Wallet> findByUserLogin(String login) throws DaoException;
+
+    Optional<Wallet> findByOrderId(long id) throws DaoException;
 }

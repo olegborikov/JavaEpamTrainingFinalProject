@@ -6,7 +6,9 @@ import com.borikov.bullfinch.controller.command.Command;
 import com.borikov.bullfinch.entity.Order;
 import com.borikov.bullfinch.exception.ServiceException;
 import com.borikov.bullfinch.service.OrderService;
+import com.borikov.bullfinch.service.WalletService;
 import com.borikov.bullfinch.service.impl.OrderServiceImpl;
+import com.borikov.bullfinch.service.impl.WalletServiceImpl;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -16,6 +18,7 @@ import java.util.Optional;
 
 public class SubmitOrderCommand implements Command {
     private static final OrderService orderService = new OrderServiceImpl();
+    private static final WalletService walletService = new WalletServiceImpl();
     private static final Logger LOGGER = LogManager.getLogger();
 
     @Override
@@ -23,17 +26,22 @@ public class SubmitOrderCommand implements Command {
         String page;
         String orderId = request.getParameter(RequestParameter.ORDER_ID);
         try {
-            if (orderService.submitOrder(orderId)) {
-                Optional<Order> order = orderService.findOrderById(orderId);
-                if (order.isPresent()) {
-                    request.setAttribute(RequestParameter.ORDER, order.get());
-                    page = PagePath.ORDER_ADMIN;
+            if(walletService.checkBalanceSize(orderId)){
+                if (orderService.submitOrder(orderId)) {
+                    Optional<Order> order = orderService.findOrderById(orderId);
+                    if (order.isPresent()) {
+                        request.setAttribute(RequestParameter.ORDER, order.get());
+                        page = PagePath.ORDER_ADMIN;
+                    } else {
+                        request.setAttribute(RequestParameter.ORDER_FIND_ERROR_MESSAGE, true);
+                        page = PagePath.MESSAGE;
+                    }
                 } else {
-                    request.setAttribute(RequestParameter.ORDER_FIND_ERROR_MESSAGE, true);
+                    request.setAttribute(RequestParameter.ORDER_SUBMIT_ERROR_MESSAGE, true);
                     page = PagePath.MESSAGE;
                 }
-            } else {
-                request.setAttribute(RequestParameter.ORDER_SUBMIT_ERROR_MESSAGE, true);
+            }else {
+                request.setAttribute(RequestParameter.TATTOO_ORDER_BALANCE_ERROR_MESSAGE, true);
                 page = PagePath.MESSAGE;
             }
         } catch (ServiceException e) {
