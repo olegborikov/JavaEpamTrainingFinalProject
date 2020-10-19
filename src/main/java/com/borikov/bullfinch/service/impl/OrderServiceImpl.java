@@ -3,8 +3,10 @@ package com.borikov.bullfinch.service.impl;
 import com.borikov.bullfinch.builder.OrderBuilder;
 import com.borikov.bullfinch.builder.TattooBuilder;
 import com.borikov.bullfinch.builder.UserBuilder;
+import com.borikov.bullfinch.dao.DiscountDao;
 import com.borikov.bullfinch.dao.OrderDao;
 import com.borikov.bullfinch.dao.TransactionManager;
+import com.borikov.bullfinch.dao.impl.DiscountDaoImpl;
 import com.borikov.bullfinch.dao.impl.OrderDaoImpl;
 import com.borikov.bullfinch.entity.Order;
 import com.borikov.bullfinch.entity.Tattoo;
@@ -13,6 +15,7 @@ import com.borikov.bullfinch.exception.DaoException;
 import com.borikov.bullfinch.exception.ServiceException;
 import com.borikov.bullfinch.exception.TransactionException;
 import com.borikov.bullfinch.service.OrderService;
+import com.borikov.bullfinch.validator.impl.DiscountValidator;
 import com.borikov.bullfinch.validator.impl.OrderValidator;
 import com.borikov.bullfinch.validator.impl.TattooValidator;
 import com.borikov.bullfinch.validator.impl.UserValidator;
@@ -25,12 +28,13 @@ import java.util.Optional;
 
 public class OrderServiceImpl implements OrderService {
     private final OrderDao orderDao = new OrderDaoImpl();
+    private final DiscountDao discountDao = new DiscountDaoImpl();
     private final TransactionManager transactionManager = new TransactionManager();
 
     @Override
     public boolean addOrder(String date, String description,
                             String price, String tattooId,
-                            String userLogin) throws ServiceException {
+                            String userLogin, String discountId) throws ServiceException {
         boolean result = false;
         OrderValidator orderValidator = new OrderValidator();
         TattooValidator tattooValidator = new TattooValidator();
@@ -56,6 +60,13 @@ public class OrderServiceImpl implements OrderService {
                 orderBuilder.setUser(user);
                 Order order = orderBuilder.getOrder();
                 result = orderDao.add(order);
+                if (result) {
+                    DiscountValidator discountValidator = new DiscountValidator();
+                    if (discountValidator.isIdCorrect(discountId)) {
+                        long discountIdParsed = Long.parseLong(discountId);
+                        discountDao.remove(discountIdParsed);
+                    }
+                }
             }
             return result;
         } catch (DaoException e) {

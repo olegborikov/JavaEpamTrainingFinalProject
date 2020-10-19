@@ -5,9 +5,11 @@ import com.borikov.bullfinch.controller.RequestParameter;
 import com.borikov.bullfinch.controller.command.Command;
 import com.borikov.bullfinch.entity.Tattoo;
 import com.borikov.bullfinch.exception.ServiceException;
+import com.borikov.bullfinch.service.DiscountService;
 import com.borikov.bullfinch.service.OrderService;
 import com.borikov.bullfinch.service.TattooService;
 import com.borikov.bullfinch.service.WalletService;
+import com.borikov.bullfinch.service.impl.DiscountServiceImpl;
 import com.borikov.bullfinch.service.impl.OrderServiceImpl;
 import com.borikov.bullfinch.service.impl.TattooServiceImpl;
 import com.borikov.bullfinch.service.impl.WalletServiceImpl;
@@ -34,9 +36,10 @@ public class OrderTattooCommand implements Command {
         String price = request.getParameter(RequestParameter.PRICE);
         HttpSession httpSession = request.getSession();
         String userLogin = (String) httpSession.getAttribute(RequestParameter.LOGIN);
+        String discountId = request.getParameter(RequestParameter.DISCOUNT_ID);
         try {
             if (walletService.checkBalanceSize(userLogin, price)) {
-                if (orderService.addOrder(date, description, price, tattooId, userLogin)) {
+                if (orderService.addOrder(date, description, price, tattooId, userLogin, discountId)) {
                     request.setAttribute(RequestParameter.TATTOO_ORDER_CONFIRM_MESSAGE, true);
                     page = PagePath.MESSAGE;
                 } else {

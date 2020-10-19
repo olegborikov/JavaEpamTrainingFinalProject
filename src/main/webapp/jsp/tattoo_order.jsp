@@ -32,6 +32,7 @@
                     <form action="controller" method="post" autocomplete="off">
                         <input type="hidden" name="commandName" value="order_tattoo_command">
                         <input type="hidden" name="tattooId" value="${tattoo.tattooId}">
+                        <input type="hidden" id="discountId" name="discountId">
                         <div class="row form-group">
                             <div class="col-6">
                                 <label class="text-white">
@@ -51,10 +52,26 @@
                                 <label class="text-white">
                                     <fmt:message key="tattooOrder.price"/>
                                 </label>
-                                <input style="background-color: black" name="price"
+                                <input id="price" style="background-color: black" name="price"
                                        readonly type="text" class="form-control text-white"
-                                       title='<fmt:message key="tattooOrder.price"/>'
                                        value="${tattoo.price}">
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div style=" filter: invert(1);" class="col-6">
+                                <select class="form-control" size="4">
+                                    <option disabled><fmt:message
+                                            key="tattooOrder.availableDiscount"/></option>
+                                    <option onclick='document.getElementById("price").value = ${tattoo.price};
+                                            document.getElementById("discountId").value = null'>
+                                        <fmt:message key="tattooOrder.zero"/></option>
+                                    <c:forEach var="discount" items="${discounts}">
+                                        <option onclick='document.getElementById("price").value =
+                                            ${(100 - discount.discountPercent) * tattoo.price / 100};
+                                                document.getElementById("discountId").value =${discount.discountId}'>
+                                                ${discount.discountPercent}</option>
+                                    </c:forEach>
+                                </select>
                             </div>
                         </div>
                         <div class="row form-group">
@@ -62,9 +79,9 @@
                                 <label class="text-white">
                                     <fmt:message key="tattooOrder.description"/>
                                 </label>
-                                <textarea style="background-color: black"
-                                          name="description" cols="30" rows="7" required
-                                          class="form-control text-white" maxlength="250"
+                                <textarea style="filter: invert(1);" name="description" cols="30"
+                                          rows="7" required
+                                          class="form-control" maxlength="250"
                                           oninvalid="this.setCustomValidity('<fmt:message
                                                   key="tattooOrder.descriptionValidate"/>')"
                                           onchange="this.setCustomValidity('')"
