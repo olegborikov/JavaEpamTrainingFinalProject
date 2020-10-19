@@ -16,7 +16,7 @@ public class Discount {
     /**
      * The value is used for discount percent storage.
      */
-    private byte discountPercent;
+    private int discountPercent;
 
     /**
      * The value is used for user storage.
@@ -30,7 +30,7 @@ public class Discount {
      * @param discountPercent the discount percent
      * @param user            the user
      */
-    public Discount(Long discountId, byte discountPercent, User user) {
+    public Discount(Long discountId, int discountPercent, User user) {
         this.discountId = discountId;
         this.discountPercent = discountPercent;
         this.user = user;
@@ -59,7 +59,7 @@ public class Discount {
      *
      * @return the discount percent
      */
-    public byte getDiscountPercent() {
+    public int getDiscountPercent() {
         return discountPercent;
     }
 
@@ -68,7 +68,7 @@ public class Discount {
      *
      * @param discountPercent the discount percent
      */
-    public void setDiscountPercent(byte discountPercent) {
+    public void setDiscountPercent(int discountPercent) {
         this.discountPercent = discountPercent;
     }
 
@@ -112,7 +112,7 @@ public class Discount {
     @Override
     public int hashCode() {
         int result = discountId != null ? discountId.hashCode() : 0;
-        result = 31 * result + (int) discountPercent;
+        result = 31 * result + discountPercent;
         result = 31 * result + (user != null ? user.hashCode() : 0);
         return result;
     }

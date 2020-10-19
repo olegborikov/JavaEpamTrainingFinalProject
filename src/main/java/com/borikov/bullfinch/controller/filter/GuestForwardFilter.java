@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.EnumSet;
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -46,8 +45,8 @@ public class GuestForwardFilter implements Filter {
         String commandName = request.getParameter(RequestParameter.COMMAND_NAME);
         String guestRole = UserRole.GUEST.getName();
         if (guestRole.equals(role)) {
-            Optional<Command> command = CommandProvider.defineCommand(commandName);
-            if (command.isPresent() && !(commandsGuest.contains(command.get()))) {
+            Command command = CommandProvider.defineCommand(commandName);
+            if (!(commandsGuest.contains(command))) {
                 httpResponse.sendRedirect(httpRequest.getContextPath() + PagePath.INDEX);
                 return;
             }

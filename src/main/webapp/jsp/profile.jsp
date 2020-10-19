@@ -57,7 +57,7 @@
                     </form>
                 </div>
                 <div class="col-md-4">
-                    <div class="panel panel-primary" id="result_panel">
+                    <div class="panel panel-primary">
                         <div class="panel-heading"><h3 class="panel-title">
                             <fmt:message key="profile.orders"/></h3>
                         </div>
@@ -66,7 +66,8 @@
                                 <ul class="list-group">
                                     <c:if test="${empty orders}">
                                         <li style="color: black" class="list-group-item">
-                                            <strong><fmt:message key="profile.empty"/></strong>
+                                            <strong><fmt:message
+                                                    key="profile.emptyOrders"/></strong>
                                         </li>
                                     </c:if>
 
@@ -83,6 +84,29 @@
                                 </ul>
                             </div>
                         </form>
+                    </div>
+                    <br/>
+                    <div class="panel panel-primary">
+                        <div class="panel-heading"><h3 class="panel-title">
+                            <fmt:message key="profile.discounts"/></h3>
+                        </div>
+                        <div class="panel-body">
+                            <ul class="list-group">
+                                <c:if test="${empty discounts}">
+                                    <li style="color: black" class="list-group-item">
+                                        <strong><fmt:message key="profile.emptyDiscounts"/></strong>
+                                    </li>
+                                </c:if>
+                                <c:forEach var="discount" items="${discounts}">
+                                    <li style="color: black" class="list-group-item">
+                                            <span class="btn">
+                                                <strong>${discount.discountPercent}
+                                                 <fmt:message key="profile.percent"/></strong>
+                                            </span>
+                                    </li>
+                                </c:forEach>
+                            </ul>
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-1">

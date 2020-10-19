@@ -46,8 +46,8 @@ public class UserForwardFilter implements Filter {
         String commandName = request.getParameter(RequestParameter.COMMAND_NAME);
         String userRole = UserRole.USER.getName();
         if (userRole.equals(role)) {
-            Optional<Command> command = CommandProvider.defineCommand(commandName);
-            if (command.isPresent() && !(commandsUser.contains(command.get()))) {
+            Command command = CommandProvider.defineCommand(commandName);
+            if (!(commandsUser.contains(command))) {
                 httpResponse.sendRedirect(httpRequest.getContextPath() + PagePath.INDEX);
                 return;
             }

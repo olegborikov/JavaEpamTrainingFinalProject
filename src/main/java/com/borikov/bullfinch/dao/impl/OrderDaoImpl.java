@@ -23,7 +23,7 @@ public class OrderDaoImpl implements OrderDao {
             " date, tattoo_order_description, is_confirmed, tattoo_id_fk, " +
             "user_account_id_fk) VALUES (?, ?, ?, 0, ?, " +
             "(SELECT user_account_id FROM user_account WHERE BINARY login LIKE ?))";
-    private static final String FIND_BY_LOGIN = "SELECT tattoo_order_id, " +
+    private static final String FIND_BY_USER_LOGIN = "SELECT tattoo_order_id, " +
             "tattoo_name, date, tattoo_order_price FROM tattoo_order INNER JOIN " +
             "tattoo ON tattoo_order.tattoo_id_fk = tattoo.tattoo_id " +
             "INNER JOIN user_account ON tattoo_order.user_account_id_fk = " +
@@ -119,7 +119,7 @@ public class OrderDaoImpl implements OrderDao {
     @Override
     public List<Order> findByUserLogin(String userLogin) throws DaoException {
         try (Connection connection = connectionPool.getConnection();
-             PreparedStatement statement = connection.prepareStatement(FIND_BY_LOGIN)) {
+             PreparedStatement statement = connection.prepareStatement(FIND_BY_USER_LOGIN)) {
             statement.setString(1, userLogin);
             ResultSet resultSet = statement.executeQuery();
             List<Order> orders = new ArrayList<>();

@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.Optional;
 
 @WebServlet(urlPatterns = "/controller")
 public class FrontController extends HttpServlet {
@@ -31,8 +30,7 @@ public class FrontController extends HttpServlet {
     private void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String commandName = request.getParameter(RequestParameter.COMMAND_NAME);
-        Optional<Command> commandOptional = CommandProvider.defineCommand(commandName);
-        Command command = commandOptional.orElseThrow(IllegalArgumentException::new);// TODO: 18.10.2020 add default command
+        Command command = CommandProvider.defineCommand(commandName);
         String page = command.execute(request);
         HttpSession session = request.getSession();
         session.setAttribute(RequestParameter.CURRENT_PAGE, page);
