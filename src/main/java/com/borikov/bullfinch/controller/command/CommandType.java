@@ -34,6 +34,7 @@ public enum CommandType {
     BROWSE_CATALOG_TATTOOS_ADMIN_PAGE_COMMAND(new BrowseCatalogTattoosAdminPageCommand()),
     BROWSE_OFFERED_TATTOOS_ADMIN_PAGE_COMMAND(new BrowseOfferedTattoosAdminPageCommand()),
     BROWSE_ARCHIVED_TATTOOS_ADMIN_PAGE_COMMAND(new BrowseArchivedTattoosAdminPageCommand()),
+    BROWSE_DISCOUNT_ADD_PAGE_COMMAND(new BrowseDiscountAddPageCommand()),
     BROWSE_PROFILE_ADMIN_PAGE_COMMAND(new BrowseProfileAdminPageCommand()),
     FIND_TATTOOS_ADMIN_COMMAND(new FindTattoosAdminCommand()),
     BROWSE_TATTOO_ADMIN_PAGE_COMMAND(new BrowseTattooAdminPageCommand()),

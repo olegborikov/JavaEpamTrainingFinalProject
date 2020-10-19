@@ -23,6 +23,16 @@
             <div class="row">
                 <div class="col-md-2"></div>
                 <div class="col-md-5">
+                    <form name="editProfileForm" method="post" action="controller">
+                        <input type="hidden" name="userId" value="${user.userId}">
+                        <div style="text-align: left">
+                            <button class="btn btn-outline-secondary"
+                                    name="commandName" value="browse_discount_add_page_command">
+                                <fmt:message key="profileAdmin.addDiscount"/>
+                            </button>
+                        </div>
+                    </form>
+                    <br/>
                     <h3 class="text-white"><fmt:message key="profileAdmin.information"/></h3>
                     <p><fmt:message key="profileAdmin.login"/> ${user.login}</p>
                     <p><fmt:message key="profileAdmin.email"/> ${user.email}</p>
@@ -30,7 +40,6 @@
                     <p><fmt:message key="profileAdmin.surname"/> ${user.secondName} </p>
                     <p><fmt:message key="profileAdmin.phoneNumber"/> ${user.phoneNumber} </p>
                     <p><fmt:message key="profileAdmin.walletBalance"/> ${user.wallet.balance}</p>
-
                     <c:if test="${user.blocked}">
                         <form name="" method="post" action="controller">
                             <input type="hidden" name="userId" value="${user.userId}">
@@ -67,7 +76,8 @@
                                 <ul class="list-group">
                                     <c:if test="${empty orders}">
                                         <li style="color: black" class="list-group-item">
-                                            <strong><fmt:message key="profileAdmin.empty"/></strong>
+                                            <strong><fmt:message
+                                                    key="profileAdmin.emptyOrders"/></strong>
                                         </li>
                                     </c:if>
 
@@ -84,6 +94,30 @@
                                 </ul>
                             </div>
                         </form>
+                    </div>
+                    <br/>
+                    <div class="panel panel-primary">
+                        <div class="panel-heading"><h3 class="panel-title">
+                            <fmt:message key="profileAdmin.discounts"/></h3>
+                        </div>
+                        <div class="panel-body">
+                            <ul class="list-group">
+                                <c:if test="${empty discounts}">
+                                    <li style="color: black" class="list-group-item">
+                                        <strong><fmt:message
+                                                key="profileAdmin.emptyDiscounts"/></strong>
+                                    </li>
+                                </c:if>
+                                <c:forEach var="discount" items="${discounts}">
+                                    <li style="color: black" class="list-group-item">
+                                            <span class="btn">
+                                                <strong>${discount.discountPercent}
+                                                 <fmt:message key="profileAdmin.percent"/></strong>
+                                            </span>
+                                    </li>
+                                </c:forEach>
+                            </ul>
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-1">
