@@ -52,6 +52,8 @@ public enum CommandType {
     DENY_ORDER_COMMAND(new DenyOrderCommand()),
     FIND_USERS_COMMAND(new FindUsersCommand()),
     BROWSE_ORDER_ADMIN_PAGE_COMMAND(new BrowseOrderAdminPageCommand()),
+    ADD_DISCOUNT_COMMAND(new AddDiscountCommand()),
+    DELETE_DISCOUNT_COMMAND(new DeleteDiscountCommand()),
     BROWSE_USERS_PAGE_COMMAND(new BrowseUsersPageCommand());
 
     private final Command command;

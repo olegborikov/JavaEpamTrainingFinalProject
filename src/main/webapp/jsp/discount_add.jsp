@@ -24,6 +24,7 @@
                 <div class="col-lg-4 mx-auto">
                     <form method="post" action="controller" autocomplete="off">
                         <div class="form-group">
+                            <input type="hidden" name="userId" value="${userId}">
                             <input style="background-color: black" type="text"
                                    class="form-control text-white" name="discountPercent"
                                    maxlength="2" required

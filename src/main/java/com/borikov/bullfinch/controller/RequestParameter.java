@@ -7,6 +7,7 @@ public class RequestParameter {
 
     public static final String USER_ID = "userId";
     public static final String ORDER_ID = "orderId";
+    public static final String DISCOUNT_ID = "discountId";
     public static final String USER = "user";
     public static final String ROLE = "role";
     public static final String LOGIN = "login";
@@ -20,6 +21,7 @@ public class RequestParameter {
     public static final String TATTOOS = "tattoos";
     public static final String ORDERS = "orders";
     public static final String DISCOUNTS = "discounts";
+    public static final String DISCOUNT_PERCENT = "discountPercent";
     public static final String ORDER = "order";
     public static final String ALL_TATTOOS = "allTattoos";
     public static final String TATTOO_NAME = "tattooName";
@@ -70,6 +72,7 @@ public class RequestParameter {
     public static final String ORDER_DENY_ERROR_MESSAGE = "orderDenyErrorMessage";
     public static final String ORDER_SUBMIT_ERROR_MESSAGE = "orderSubmitErrorMessage";
     public static final String TATTOO_ORDER_BALANCE_ERROR_MESSAGE = "tattooOrderBalanceErrorMessage";
+    public static final String DISCOUNT_DELETE_ERROR_MESSAGE = "discountDeleteErrorMessage";
 
     private RequestParameter() {
     }

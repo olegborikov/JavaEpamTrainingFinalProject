@@ -6,6 +6,7 @@ import com.borikov.bullfinch.entity.Discount;
 import com.borikov.bullfinch.exception.DaoException;
 import com.borikov.bullfinch.exception.ServiceException;
 import com.borikov.bullfinch.service.DiscountService;
+import com.borikov.bullfinch.validator.impl.DiscountValidator;
 import com.borikov.bullfinch.validator.impl.UserValidator;
 
 import java.util.ArrayList;
@@ -22,9 +23,24 @@ public class DiscountServiceImpl implements DiscountService {
             if (userValidator.isLoginCorrect(userLogin)) {
                 discounts = discountDao.findByUserLogin(userLogin);
             }
-        }catch (DaoException e){
+        } catch (DaoException e) {
             throw new ServiceException("Error while finding discounts by login", e);
         }
         return discounts;
+    }
+
+    @Override
+    public boolean removeDiscount(String discountId) throws ServiceException {
+        boolean result = false;
+        DiscountValidator discountValidator = new DiscountValidator();
+        try {
+            if (discountValidator.isIdCorrect(discountId)) {
+                long id = Long.parseLong(discountId);
+                result = discountDao.remove(id);
+            }
+        } catch (DaoException e) {
+            throw new ServiceException("Error while deleting discounts", e);
+        }
+        return result;
     }
 }

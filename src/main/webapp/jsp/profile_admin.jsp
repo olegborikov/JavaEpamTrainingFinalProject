@@ -80,7 +80,6 @@
                                                     key="profileAdmin.emptyOrders"/></strong>
                                         </li>
                                     </c:if>
-
                                     <input type="hidden" name="commandName"
                                            value="browse_order_admin_page_command">
                                     <c:forEach var="order" items="${orders}">
@@ -100,27 +99,38 @@
                         <div class="panel-heading"><h3 class="panel-title">
                             <fmt:message key="profileAdmin.discounts"/></h3>
                         </div>
-                        <div class="panel-body">
-                            <ul class="list-group">
-                                <c:if test="${empty discounts}">
-                                    <li style="color: black" class="list-group-item">
-                                        <strong><fmt:message
-                                                key="profileAdmin.emptyDiscounts"/></strong>
-                                    </li>
-                                </c:if>
-                                <c:forEach var="discount" items="${discounts}">
-                                    <li style="color: black" class="list-group-item">
+                        <form action="controller" method="post">
+                            <div class="panel-body">
+                                <ul class="list-group">
+                                    <c:if test="${empty discounts}">
+                                        <li style="color: black" class="list-group-item">
+                                            <strong><fmt:message
+                                                    key="profileAdmin.emptyDiscounts"/></strong>
+                                        </li>
+                                    </c:if>
+                                    <input type="hidden" name="commandName"
+                                           value="delete_discount_command">
+                                    <input type="hidden" name="login"
+                                           value="${user.login}">
+                                    <c:forEach var="discount" items="${discounts}">
+                                        <li style="color: black" class="list-group-item">
                                             <span class="btn">
                                                 <strong>${discount.discountPercent}
                                                  <fmt:message key="profileAdmin.percent"/></strong>
                                             </span>
-                                    </li>
-                                </c:forEach>
-                            </ul>
-                        </div>
+
+                                            <button class="btn btn-outline-secondary"
+                                                    name="discountId"
+                                                    value="${discount.discountId}">
+                                                <fmt:message key="profileAdmin.delete"/></button>
+                                        </li>
+                                    </c:forEach>
+                                </ul>
+                            </div>
+                        </form>
                     </div>
                 </div>
-                <div class="col-md-1">
+                <div class=" col-md-1">
                 </div>
             </div>
         </div>
