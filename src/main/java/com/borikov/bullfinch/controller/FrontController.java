@@ -32,7 +32,7 @@ public class FrontController extends HttpServlet {
             throws ServletException, IOException {
         String commandName = request.getParameter(RequestParameter.COMMAND_NAME);
         Optional<Command> commandOptional = CommandProvider.defineCommand(commandName);
-        Command command = commandOptional.orElseThrow(IllegalArgumentException::new);
+        Command command = commandOptional.orElseThrow(IllegalArgumentException::new);// TODO: 18.10.2020 add default command
         String page = command.execute(request);
         HttpSession session = request.getSession();
         session.setAttribute(RequestParameter.CURRENT_PAGE, page);
