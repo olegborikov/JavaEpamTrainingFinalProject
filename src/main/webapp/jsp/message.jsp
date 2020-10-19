@@ -121,6 +121,10 @@
                 <h2><fmt:message key="message.tattooOrderBalanceErrorMessage"/></h2>
             </c:if>
 
+            <c:if test="${discountAddConfirmMessage}">
+                <h2><fmt:message key="message.discountAddConfirmMessage"/></h2>
+            </c:if>
+
             <c:if test="${discountDeleteErrorMessage}">
                 <h2><fmt:message key="message.discountDeleteErrorMessage"/></h2>
             </c:if>

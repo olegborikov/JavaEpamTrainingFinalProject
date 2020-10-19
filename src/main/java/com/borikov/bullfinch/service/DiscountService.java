@@ -8,5 +8,7 @@ import java.util.List;
 public interface DiscountService {
     List<Discount> getDiscountsByUserLogin(String userLogin) throws ServiceException;
 
+    boolean addDiscount(String discountPercent, String userId) throws ServiceException;
+
     boolean removeDiscount(String discountId) throws ServiceException;
 }
