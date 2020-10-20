@@ -96,7 +96,7 @@ public class OrderServiceImpl implements OrderService {
         try {
             if (orderValidator.isIdCorrect(id)) {
                 long orderId = Long.parseLong(id);
-                result = transactionManager.submitOrderTransaction(orderId);
+                result = transactionManager.orderSubmitProcess(orderId);
             }
             return result;
         } catch (TransactionException e) {

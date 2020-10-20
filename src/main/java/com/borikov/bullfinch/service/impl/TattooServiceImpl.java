@@ -40,7 +40,7 @@ public class TattooServiceImpl implements TattooService {
                 userBuilder.setLogin(proposedLogin);
                 tattooBuilder.setUser(userBuilder.getUser());
                 Tattoo tattoo = tattooBuilder.getTattoo();
-                result = transactionManager.addTattooTransaction(tattoo);
+                result = transactionManager.addImageAndTattoo(tattoo);
             }
             return result;
         } catch (TransactionException e) {
@@ -58,7 +58,7 @@ public class TattooServiceImpl implements TattooService {
                     && tattooValidator.isIdCorrect(imageId)) {
                 long tattooIdParsed = Long.parseLong(tattooId);
                 long imageIdParsed = Long.parseLong(imageId);
-                result = transactionManager.removeTattooTransaction(
+                result = transactionManager.removeTattooAndImage(
                         tattooIdParsed, imageIdParsed);
             }
             return result;
@@ -113,7 +113,7 @@ public class TattooServiceImpl implements TattooService {
                 userBuilder.setLogin(proposedLogin);
                 tattooBuilder.setUser(userBuilder.getUser());
                 Tattoo tattoo = tattooBuilder.getTattoo();
-                result = transactionManager.offerTattooTransaction(tattoo);
+                result = transactionManager.offerImageAndTattoo(tattoo);
             }
             return result;
         } catch (TransactionException e) {
@@ -194,7 +194,7 @@ public class TattooServiceImpl implements TattooService {
     @Override
     public List<Tattoo> findTattoosByName(String name) throws ServiceException {
         try {
-            List<Tattoo> tattoos = tattooDao.findByName(name);
+            List<Tattoo> tattoos = tattooDao.findByNameSubstring(name);
             return tattoos;
         } catch (DaoException e) {
             throw new ServiceException("Error while finding tattoos by name", e);
@@ -254,7 +254,7 @@ public class TattooServiceImpl implements TattooService {
     public List<Tattoo> findTattoosByNameCatalog(String name)
             throws ServiceException {
         try {
-            List<Tattoo> tattoos = tattooDao.findByNameCatalog(name);
+            List<Tattoo> tattoos = tattooDao.findByNameSubstringCatalog(name);
             return tattoos;
         } catch (DaoException e) {
             throw new ServiceException("Error while finding tattoos by name", e);

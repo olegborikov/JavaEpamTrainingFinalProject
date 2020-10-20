@@ -12,8 +12,8 @@ public class ImageDaoImpl implements ImageDao {
 
     @Override
     public boolean add(Image image, Connection connection) throws DaoException {
-        try (PreparedStatement statement = connection.prepareStatement(ADD,
-                Statement.RETURN_GENERATED_KEYS)) {
+        try (PreparedStatement statement = connection.prepareStatement(
+                ADD, Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, image.getName());
             boolean result = statement.executeUpdate() > 0;
             ResultSet generatedKeys = statement.getGeneratedKeys();
@@ -22,7 +22,7 @@ public class ImageDaoImpl implements ImageDao {
             }
             return result;
         } catch (SQLException e) {
-            throw new DaoException("Adding image error", e);
+            throw new DaoException("Error while adding image: " + image, e);
         }
     }
 
@@ -32,7 +32,7 @@ public class ImageDaoImpl implements ImageDao {
             statement.setLong(1, id);
             return statement.executeUpdate() > 0;
         } catch (SQLException e) {
-            throw new DaoException("Deleting image error", e);
+            throw new DaoException("Error while removing image with id: " + id, e);
         }
     }
 }

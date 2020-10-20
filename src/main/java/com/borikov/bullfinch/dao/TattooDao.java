@@ -26,7 +26,7 @@ public interface TattooDao {
 
     Optional<Tattoo> findById(long id) throws DaoException;
 
-    List<Tattoo> findByName(String name) throws DaoException;
+    List<Tattoo> findByNameSubstring(String nameSubstring) throws DaoException;
 
     List<Tattoo> findByAllowed(boolean isAllowed) throws DaoException;
 
@@ -36,5 +36,5 @@ public interface TattooDao {
 
     Optional<Tattoo> findByIdCatalog(long id) throws DaoException;
 
-    List<Tattoo> findByNameCatalog(String name) throws DaoException;
+    List<Tattoo> findByNameSubstringCatalog(String nameSubstring) throws DaoException;
 }

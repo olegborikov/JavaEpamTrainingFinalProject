@@ -26,7 +26,7 @@ public class SubmitOrderCommand implements Command {
         String page;
         String orderId = request.getParameter(RequestParameter.ORDER_ID);
         try {
-            if(walletService.checkBalanceSize(orderId)){
+            if (walletService.checkBalanceSize(orderId)) {
                 if (orderService.submitOrder(orderId)) {
                     Optional<Order> order = orderService.findOrderById(orderId);
                     if (order.isPresent()) {
@@ -40,7 +40,7 @@ public class SubmitOrderCommand implements Command {
                     request.setAttribute(RequestParameter.ORDER_SUBMIT_ERROR_MESSAGE, true);
                     page = PagePath.MESSAGE;
                 }
-            }else {
+            } else {
                 request.setAttribute(RequestParameter.TATTOO_ORDER_BALANCE_ERROR_MESSAGE, true);
                 page = PagePath.MESSAGE;
             }

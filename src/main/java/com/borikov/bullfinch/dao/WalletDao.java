@@ -13,7 +13,7 @@ public interface WalletDao {
 
     Optional<Wallet> findById(long id) throws DaoException;
 
-    Optional<Wallet> findByUserLogin(String login) throws DaoException;
+    Optional<Wallet> findByUserLogin(String userLogin) throws DaoException;
 
-    Optional<Wallet> findByOrderId(long id) throws DaoException;
+    Optional<Wallet> findByOrderId(long orderId) throws DaoException;
 }

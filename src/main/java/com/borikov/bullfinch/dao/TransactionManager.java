@@ -25,7 +25,7 @@ public class TransactionManager {
     private final UserDao userDao = new UserDaoImpl();
     private final OrderDao orderDao = new OrderDaoImpl();
 
-    public boolean addTattooTransaction(Tattoo tattoo) throws TransactionException {
+    public boolean addImageAndTattoo(Tattoo tattoo) throws TransactionException {
         Connection connection = null;
         try {
             connection = ConnectionPool.INSTANCE.getConnection();
@@ -38,13 +38,14 @@ public class TransactionManager {
             return result;
         } catch (ConnectionPoolException | SQLException | DaoException e) {
             rollbackConnection(connection);
-            throw new TransactionException("Error adding tattoo transaction", e);
+            throw new TransactionException("Error while adding tattoo and image" +
+                    "transaction, tattoo: " + tattoo, e);
         } finally {
             closeConnection(connection);
         }
     }
 
-    public boolean offerTattooTransaction(Tattoo tattoo)
+    public boolean offerImageAndTattoo(Tattoo tattoo)
             throws TransactionException {
         Connection connection = null;
         try {
@@ -58,13 +59,14 @@ public class TransactionManager {
             return result;
         } catch (ConnectionPoolException | SQLException | DaoException e) {
             rollbackConnection(connection);
-            throw new TransactionException("Error offering tattoo transaction", e);
+            throw new TransactionException("Error while offering tattoo and image" +
+                    "transaction, tattoo: " + tattoo, e);
         } finally {
             closeConnection(connection);
         }
     }
 
-    public boolean removeTattooTransaction(long tattooId, long imageId)
+    public boolean removeTattooAndImage(long tattooId, long imageId)
             throws TransactionException {
         Connection connection = null;
         try {
@@ -78,13 +80,15 @@ public class TransactionManager {
             return result;
         } catch (ConnectionPoolException | SQLException | DaoException e) {
             rollbackConnection(connection);
-            throw new TransactionException("Error deleting tattoo transaction", e);
+            throw new TransactionException("Error while removing tattoo and image" +
+                    "transaction, tattoo id: " + tattooId +
+                    ", image id: " + imageId, e);
         } finally {
             closeConnection(connection);
         }
     }
 
-    public boolean addUserTransaction(User user, String password)
+    public boolean addWalletAndUser(User user, String password)
             throws TransactionException {
         Connection connection = null;
         try {
@@ -98,13 +102,14 @@ public class TransactionManager {
             return result;
         } catch (ConnectionPoolException | SQLException | DaoException e) {
             rollbackConnection(connection);
-            throw new TransactionException("Error adding user transaction", e);
+            throw new TransactionException("Error while adding wallet and user " +
+                    "transaction, user: " + user, e);
         } finally {
             closeConnection(connection);
         }
     }
 
-    public boolean submitOrderTransaction(long orderId) throws TransactionException {
+    public boolean orderSubmitProcess(long orderId) throws TransactionException {
         Connection connection = null;
         boolean result = false;
         try {
@@ -126,7 +131,8 @@ public class TransactionManager {
             return result;
         } catch (ConnectionPoolException | SQLException | DaoException e) {
             rollbackConnection(connection);
-            throw new TransactionException("Error adding user transaction", e);
+            throw new TransactionException("Error while process order submit " +
+                    "transaction, orderId: " + orderId, e);
         } finally {
             closeConnection(connection);
         }

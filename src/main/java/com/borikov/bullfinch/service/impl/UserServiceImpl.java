@@ -51,7 +51,7 @@ public class UserServiceImpl implements UserService {
                     userBuilder.setUserRole(UserRole.USER);
                     userBuilder.setWallet(new Wallet(null, 0));
                     User user = userBuilder.getUser();
-                    result = transactionManager.addUserTransaction(
+                    result = transactionManager.addWalletAndUser(
                             user, encryptedPassword.get());
                 }
             }

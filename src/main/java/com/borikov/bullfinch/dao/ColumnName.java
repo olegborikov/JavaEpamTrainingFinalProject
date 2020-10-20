@@ -3,7 +3,6 @@ package com.borikov.bullfinch.dao;
 public class ColumnName {
     public static final String DISCOUNT_ID = "discount_id";
     public static final String DISCOUNT_PERCENT = "discount_percent";
-    public static final String END_DATE = "end_date";
 
     public static final String IMAGE_ID = "image_id";
     public static final String IMAGE_NAME = "image_name";
@@ -14,7 +13,6 @@ public class ColumnName {
     public static final String TATTOO_ORDER_DESCRIPTION = "tattoo_order_description";
     public static final String IS_CONFIRMED = "is_confirmed";
 
-    public static final String ROLE_ID = "role_id";
     public static final String ROLE_NAME = "role_name";
 
     public static final String TATTOO_ID = "tattoo_id";

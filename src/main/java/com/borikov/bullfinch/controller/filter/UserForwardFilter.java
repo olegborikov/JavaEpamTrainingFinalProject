@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.EnumSet;
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 

@@ -29,5 +29,5 @@ public interface UserDao {
 
     Optional<User> findByLogin(String login) throws DaoException;
 
-    List<User> findByLoginSubstring(String login) throws DaoException;
+    List<User> findByLoginSubstring(String loginSubstring) throws DaoException;
 }
