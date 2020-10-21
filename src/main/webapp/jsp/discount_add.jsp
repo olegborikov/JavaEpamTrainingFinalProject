@@ -7,7 +7,8 @@
 <html>
 <head>
     <title><fmt:message key="discountAdd.title"/></title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <link rel="stylesheet" type="text/css"
           href="${pageContext.request.contextPath}/assets/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css"
@@ -28,18 +29,18 @@
                             <input style="background-color: black" type="text"
                                    class="form-control text-white" name="discountPercent"
                                    maxlength="2" required
-                                   oninvalid="this.setCustomValidity('<fmt:message
-                                           key="discountAdd.discountPercentValidate"/>')"
+                                   oninvalid="this.setCustomValidity('<fmt:message key="discountAdd.discountPercentValidate"/>')"
                                    onchange="this.setCustomValidity('')"
-                                   pattern="^[1-9]\d{0,9}$"
+                                   pattern="^[1-9]\d$"
                                    title='<fmt:message key="discountAdd.discountPercentValidate"/>'
                                    placeholder='<fmt:message key="discountAdd.discountPercent"/>'>
                         </div>
                         <c:if test="${incorrectDataMessage}">
-                            <div style="color: red"><fmt:message
-                                    key="discountAdd.incorrectDataMessage"/></div>
+                            <div style="color: red">
+                                <fmt:message key="discountAdd.incorrectDataMessage"/>
+                            </div>
                         </c:if>
-                        <button type="submit" class="btn btn-outline-secondary" name="commandName"
+                        <button class="btn btn-outline-secondary" name="commandName"
                                 value="add_discount_command">
                             <fmt:message key="discountAdd.add"/>
                         </button>

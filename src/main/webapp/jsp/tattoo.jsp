@@ -7,7 +7,8 @@
 <html>
 <head>
     <title><fmt:message key="tattoo.title"/></title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <link rel="stylesheet" type="text/css"
           href="${pageContext.request.contextPath}/assets/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css"
@@ -17,7 +18,7 @@
 </head>
 <body>
 <jsp:include page="navbar.jsp"/>
-<section style="text-align: left; padding-top: 120px" class="masthead">
+<section style="text-align: left" class="masthead content-section">
     <div class="intro-body">
         <div class="container-fluid">
             <div class="row">
@@ -34,7 +35,7 @@
                     <p><fmt:message key="tattoo.description"/> ${tattoo.description}</p>
                     <p><fmt:message key="tattoo.price"/> ${tattoo.price} <fmt:message key="tattoo.rubles"/></p>
                     <c:if test="${role.equals('user')}">
-                        <form name="orderForm" method="post" action="controller">
+                        <form method="post" action="controller">
                             <input type="hidden" name="tattooId" value="${tattoo.tattooId}">
                             <button type="submit" class="btn btn-outline-secondary"
                                     name="commandName"

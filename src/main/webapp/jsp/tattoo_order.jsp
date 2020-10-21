@@ -7,7 +7,8 @@
 <html>
 <head>
     <title><fmt:message key="tattooOrder.title"/></title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <link rel="stylesheet" type="text/css"
           href="${pageContext.request.contextPath}/assets/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css"
@@ -17,7 +18,7 @@
 </head>
 <body id="page-top">
 <jsp:include page="navbar.jsp"/>
-<section style="text-align: left;padding-top: 120px" class="masthead">
+<section style="text-align: left" class="masthead content-section">
     <div class="intro-body">
         <div class="container-fluid">
             <div class="row">
@@ -40,8 +41,7 @@
                                 </label>
                                 <input type="date" style=" filter: invert(1);" name="date"
                                        required class="form-control"
-                                       oninvalid="this.setCustomValidity('<fmt:message
-                                               key="tattooOrder.dateValidate"/>')"
+                                       oninvalid="this.setCustomValidity('<fmt:message key="tattooOrder.dateValidate"/>')"
                                        onchange="this.setCustomValidity('')"
                                        title='<fmt:message key="tattooOrder.dateValidate"/>'
                                        placeholder='<fmt:message key="tattooOrder.date"/>'>
@@ -52,24 +52,25 @@
                                 <label class="text-white">
                                     <fmt:message key="tattooOrder.price"/>
                                 </label>
-                                <input id="price" style="background-color: black" name="price"
-                                       readonly type="text" class="form-control text-white"
+                                <input id="price" style="background-color: black" type="text"
+                                       class="form-control text-white" name="price" readonly
                                        value="${tattoo.price}">
                             </div>
                         </div>
                         <div class="row form-group">
                             <div style=" filter: invert(1);" class="col-6">
                                 <select class="form-control" size="4">
-                                    <option disabled><fmt:message
-                                            key="tattooOrder.availableDiscount"/></option>
+                                    <option disabled><fmt:message key="tattooOrder.availableDiscount"/></option>
                                     <option onclick='document.getElementById("price").value = ${tattoo.price};
                                             document.getElementById("discountId").value = null'>
-                                        <fmt:message key="tattooOrder.zero"/></option>
+                                        <fmt:message key="tattooOrder.zero"/>
+                                    </option>
                                     <c:forEach var="discount" items="${discounts}">
                                         <option onclick='document.getElementById("price").value =
                                             ${(100 - discount.discountPercent) * tattoo.price / 100};
-                                                document.getElementById("discountId").value =${discount.discountId}'>
-                                                ${discount.discountPercent}</option>
+                                                document.getElementById("discountId").value = ${discount.discountId}'>
+                                                ${discount.discountPercent}
+                                        </option>
                                     </c:forEach>
                                 </select>
                             </div>
@@ -79,11 +80,9 @@
                                 <label class="text-white">
                                     <fmt:message key="tattooOrder.description"/>
                                 </label>
-                                <textarea style="filter: invert(1);" name="description" cols="30"
-                                          rows="7" required
-                                          class="form-control" maxlength="250"
-                                          oninvalid="this.setCustomValidity('<fmt:message
-                                                  key="tattooOrder.descriptionValidate"/>')"
+                                <textarea style="filter: invert(1);" name="description" cols="30" rows="7"
+                                          class="form-control" maxlength="250" required
+                                          oninvalid="this.setCustomValidity('<fmt:message key="tattooOrder.descriptionValidate"/>')"
                                           onchange="this.setCustomValidity('')"
                                           title='<fmt:message key="tattooOrder.descriptionValidate"/>'
                                           placeholder='<fmt:message key="tattooOrder.description"/>'></textarea>

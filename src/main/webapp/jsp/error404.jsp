@@ -5,8 +5,9 @@
 <fmt:setBundle basename="i18n.application_message"/>
 <html>
 <head>
-    <title><fmt:message key="error.title"/></title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title><fmt:message key="error404.title"/></title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <link rel="stylesheet" type="text/css"
           href="${pageContext.request.contextPath}/assets/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css"
@@ -19,9 +20,10 @@
 <section class="masthead">
     <div class="intro-body">
         <div class="container">
-            <h5><fmt:message key="error.request"/> ${pageContext.errorData.requestURI}
-                <fmt:message key="error.failed"/></h5> <br/>
-            <h5><fmt:message key="error.code"/> ${pageContext.errorData.statusCode}</h5>
+            <h5><fmt:message key="error404.page"/> ${pageContext.errorData.requestURI}
+                <fmt:message key="error404.notFound"/></h5>
+            <br/>
+            <h5><fmt:message key="error404.code"/> ${pageContext.errorData.statusCode}</h5>
             <br/>
         </div>
     </div>

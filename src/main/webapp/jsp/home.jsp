@@ -4,10 +4,12 @@
 
 <fmt:setLocale value="${currentLocale}"/>
 <fmt:setBundle basename="i18n.application_message"/>
+
 <html>
 <head>
     <title><fmt:message key="home.title"/></title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <link rel="stylesheet" type="text/css"
           href="${pageContext.request.contextPath}/assets/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css"
@@ -17,13 +19,14 @@
 </head>
 <body id="page-top">
 <jsp:include page="navbar.jsp"/>
-<header class="masthead"
-        style="background-image:url('${pageContext.request.contextPath}/assets/image/reception.jpg');">
+<header style="background-image:url('${pageContext.request.contextPath}/assets/image/reception.jpg')" class="masthead">
     <div class="intro-body">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 mx-auto">
-                    <h1 class="brand-heading stroke"><fmt:message key="home.name"/></h1>
+                    <h1 class="brand-heading stroke">
+                        <fmt:message key="home.name"/>
+                    </h1>
                     <h2 class="stroke"><fmt:message key="home.slogan"/></h2>
                 </div>
             </div>
@@ -42,8 +45,8 @@
         </div>
     </div>
 </section>
-<section class="masthead content-section text-center"
-         style="background-image:url('${pageContext.request.contextPath}/assets/image/work_space.jpg');">
+<section style="background-image:url('${pageContext.request.contextPath}/assets/image/work_space.jpg');"
+         class="masthead content-section text-center">
     <div class="container">
         <div class="col-lg-8 mx-auto"></div>
     </div>
@@ -55,12 +58,14 @@
                 <h2><fmt:message key="home.contact"/></h2>
                 <ul class="list-inline banner-social-buttons">
                     <li class="list-inline-item">
-                        <div class="btn btn-outline-secondary">
-                            <span><fmt:message key="home.phoneNumber"/></span></div>
+                            <span class="btn btn-outline-secondary">
+                                <fmt:message key="home.phoneNumber"/>
+                            </span>
                     </li>
                     <li class="list-inline-item">
-                        <div class="btn btn-outline-secondary">
-                            <span><fmt:message key="home.address"/></span></div>
+                          <span class="btn btn-outline-secondary">
+                              <fmt:message key="home.address"/>
+                          </span>
                     </li>
                 </ul>
             </div>

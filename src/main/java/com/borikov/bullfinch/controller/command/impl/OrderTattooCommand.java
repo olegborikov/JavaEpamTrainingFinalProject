@@ -58,7 +58,7 @@ public class OrderTattooCommand implements Command {
         } catch (ServiceException e) {
             LOGGER.log(Level.ERROR, "Error while order tattoo", e);
             request.setAttribute(RequestParameter.ERROR_MESSAGE, e);
-            page = PagePath.ERROR;
+            page = PagePath.ERROR505;
         }
         return page;
     }

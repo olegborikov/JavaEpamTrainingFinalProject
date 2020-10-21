@@ -36,12 +36,12 @@ public class EditTattooCommand implements Command {
                     page = PagePath.MESSAGE;
                 }
             } else {
-                page = PagePath.ERROR;// TODO: 09.10.2020 do smth
+                page = PagePath.ERROR505;// TODO: 09.10.2020 do smth
             }
         } catch (ServiceException e) {
             LOGGER.log(Level.ERROR, "Error while editing tattoo", e);
             request.setAttribute(RequestParameter.ERROR_MESSAGE, e);
-            page = PagePath.ERROR;
+            page = PagePath.ERROR505;
         }
         return page;
     }

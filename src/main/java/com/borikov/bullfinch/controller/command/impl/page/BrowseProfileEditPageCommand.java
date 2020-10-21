@@ -36,7 +36,7 @@ public class BrowseProfileEditPageCommand implements Command {
         } catch (ServiceException e) {
             LOGGER.log(Level.ERROR, "Error while finding tattoo", e);
             request.setAttribute(RequestParameter.ERROR_MESSAGE, e);
-            page = PagePath.ERROR;
+            page = PagePath.ERROR505;
         }
         return page;
     }

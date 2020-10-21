@@ -23,14 +23,13 @@
         <div class="row">
             <div class="col-lg-6"></div>
             <div class="col-lg-4 mb-5">
-                <form name="findTattooForm" method="post" action="controller"
+                <form method="post" action="controller"
                       autocomplete="off">
                     <div class="input-group">
                         <input style="background-color: black" maxlength="25"
                                type="text" class="form-control text-white"
                                name="searchLogin" value="${searchLogin}"
-                               placeholder=<fmt:message
-                                key="usersAdmin.search"/>>
+                               placeholder=<fmt:message key="usersAdmin.search"/>>
                         <div class="input-group-btn">
                             <button type="submit"
                                     class="btn btn-outline-secondary"

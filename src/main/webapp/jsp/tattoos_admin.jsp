@@ -7,7 +7,8 @@
 <html>
 <head>
     <title><fmt:message key="tattoosAdmin.title"/></title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <link rel="stylesheet" type="text/css"
           href="${pageContext.request.contextPath}/assets/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css"
@@ -25,8 +26,7 @@
                     <c:if test="${allTattoos}">
                         <form name="offerForm" method="post" action="controller">
                             <button style="vertical-align: center" class="btn btn-outline-secondary"
-                                    name="commandName"
-                                    value="browse_tattoo_add_page_command">
+                                    name="commandName" value="browse_tattoo_add_page_command">
                                 <fmt:message key="tattoosAdmin.addTattoo"/>
                             </button>
                         </form>
@@ -37,11 +37,10 @@
                 </div>
                 <div class="col-12 col-md-3">
                     <c:if test="${allTattoos}">
-                        <form name="findTattooForm" method="post" action="controller"
-                              autocomplete="off">
+                        <form method="post" action="controller" autocomplete="off">
                             <div class="input-group">
-                                <input style="background-color: black" maxlength="25"
-                                       type="text" class="form-control text-white"
+                                <input style="background-color: black"  type="text"
+                                       class="form-control text-white" maxlength="25"
                                        name="tattooName" value="${tattooName}"
                                        placeholder=<fmt:message key="tattoosAdmin.search"/>>
                                 <div class="input-group-btn">

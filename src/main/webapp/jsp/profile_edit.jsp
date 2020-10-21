@@ -17,29 +17,27 @@
 </head>
 <body>
 <jsp:include page="navbar.jsp"/>
-<section style="text-align: left;" class="masthead">
+<section style="text-align: left" class="masthead">
     <div class="intro-body">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-2"></div>
                 <div class="col-md-3">
                     <div>
-                        <form name="registrationForm" method="post" action="controller"
+                        <form method="post" action="controller"
                               autocomplete="off">
                             <input type="hidden" name="userId" value="${user.userId}">
                             <div class="form-group">
                                 <label><fmt:message key="profileEdit.email"/></label>
                                 <input style="background-color: black" type="text"
-                                       class="form-control text-white" name="email"
-                                       readonly
+                                       class="form-control text-white" name="email" readonly
                                        title='<fmt:message key="profileEdit.email"/>'
                                        value='${user.email}'>
                             </div>
                             <div class="form-group">
                                 <label><fmt:message key="profileEdit.login"/></label>
                                 <input style="background-color: black" type="text"
-                                       class="form-control text-white" name="login"
-                                       maxlength="20" readonly
+                                       class="form-control text-white" name="login" maxlength="20" readonly
                                        title='<fmt:message key="profileEdit.login"/>'
                                        value='${user.login}' >
                             </div>
@@ -47,25 +45,21 @@
                                 <div class="col-sm-6">
                                     <label><fmt:message key="profileEdit.firstName"/></label>
                                     <input style="background-color: black" type="text"
-                                           class="form-control text-white" name="firstName"
-                                           maxlength="25" required
-                                           oninvalid="this.setCustomValidity('<fmt:message
-                                                   key="profileEdit.firstNameValidate"/>')"
+                                           class="form-control text-white" name="firstName" maxlength="25" required
+                                           oninvalid="this.setCustomValidity('<fmt:message key="profileEdit.firstNameValidate"/>')"
                                            onchange="this.setCustomValidity('')"
-                                           pattern="^[\p{L}]{2,25}$"
+                                           pattern="^[a-zA-ZА-Яа-яЁё]{2,25}$"
                                            title='<fmt:message key="profileEdit.firstNameValidate"/>'
                                            value='${user.firstName}'
-                                    placeholder='<fmt:message key="profileEdit.firstName"/>'>
+                                           placeholder='<fmt:message key="profileEdit.firstName"/>'>
                                 </div>
                                 <div class="form-group col-sm-6">
                                     <label><fmt:message key="profileEdit.secondName"/></label>
                                     <input style="background-color: black" type="text"
-                                           class="form-control text-white" name="secondName"
-                                           maxlength="25" required
-                                           oninvalid="this.setCustomValidity('<fmt:message
-                                                   key="profileEdit.secondNameValidate"/>')"
+                                           class="form-control text-white" name="secondName" maxlength="25" required
+                                           oninvalid="this.setCustomValidity('<fmt:message key="profileEdit.secondNameValidate"/>')"
                                            onchange="this.setCustomValidity('')"
-                                           pattern="^[\p{L}]{2,25}$"
+                                           pattern="^[a-zA-ZА-Яа-яЁё]{2,25}$"
                                            title='<fmt:message key="profileEdit.secondNameValidate"/>'
                                            value='${user.secondName}'
                                            placeholder='<fmt:message key="profileEdit.secondName"/>'>
@@ -74,21 +68,20 @@
                             <div class="form-group">
                                 <label> <fmt:message key="profileEdit.phoneNumber"/></label>
                                 <input style="background-color: black" type="text"
-                                       class="form-control text-white" name="phoneNumber"
-                                       maxlength="13" required
-                                       oninvalid="this.setCustomValidity('<fmt:message
-                                               key="profileEdit.phoneNumberValidate"/>')"
+                                       class="form-control text-white" name="phoneNumber" maxlength="13" required
+                                       oninvalid="this.setCustomValidity('<fmt:message key="profileEdit.phoneNumberValidate"/>')"
                                        onchange="this.setCustomValidity('')"
-                                       pattern="\+?375(24|25|29|33|44)[\d]{7}|80(24|25|29|33|44)[\d]{7}$"
+                                       pattern="\+?375(24|25|29|33|44)\d{7}|80(24|25|29|33|44)\d{7}$"
                                        title='<fmt:message key="profileEdit.phoneNumberValidate"/>'
                                        value='${user.phoneNumber}'
                                        placeholder='<fmt:message key="profileEdit.phoneNumber"/>'>
                             </div>
                             <c:if test="${incorrectDataMessage}">
-                                <div style="color: red"><fmt:message
-                                        key="profileEdit.incorrectDataMessage"/></div>
+                                <div style="color: red">
+                                    <fmt:message key="profileEdit.incorrectDataMessage"/>
+                                </div>
                             </c:if>
-                            <button type="submit" class="btn btn-outline-secondary"
+                            <button class="btn btn-outline-secondary"
                                     name="commandName" value="edit_user_command">
                                 <fmt:message key="profileEdit.change"/>
                             </button>
@@ -99,7 +92,6 @@
             <div class="col-md-7">
             </div>
         </div>
-    </div>
     </div>
 </section>
 <jsp:include page="footer.jsp"/>

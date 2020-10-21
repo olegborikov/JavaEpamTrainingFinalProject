@@ -30,7 +30,7 @@ public class CancelOrderCommand implements Command {
         } catch (ServiceException e) {
             LOGGER.log(Level.ERROR, "Error while deleting tattoo", e);
             request.setAttribute(RequestParameter.ERROR_MESSAGE, e);
-            page = PagePath.ERROR;
+            page = PagePath.ERROR505;
         }
         return page;
     }

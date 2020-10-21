@@ -7,7 +7,8 @@
 <html>
 <head>
     <title><fmt:message key="order.title"/></title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <link rel="stylesheet" type="text/css"
           href="${pageContext.request.contextPath}/assets/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css"
@@ -17,7 +18,7 @@
 </head>
 <body id="page-top">
 <jsp:include page="navbar.jsp"/>
-<section style="text-align: left;padding-top: 120px" class="masthead">
+<section style="text-align: left" class="masthead content-section">
     <div class="intro-body">
         <div class="container-fluid">
             <div class="row">
@@ -32,8 +33,7 @@
                     <h3 class="text-white"><fmt:message key="order.information"/></h3>
                     <p><fmt:message key="order.tattooName"/> ${order.tattoo.name}</p>
                     <p><fmt:message key="order.description"/> ${order.description}</p>
-                    <p><fmt:message key="order.price"/> ${order.price} <fmt:message
-                            key="tattoo.rubles"/></p>
+                    <p><fmt:message key="order.price"/> ${order.price} <fmt:message key="tattoo.rubles"/></p>
                     <p><fmt:message key="order.date"/> ${order.date}</p>
                     <p><fmt:message key="order.orderedBy"/> ${order.user.login}</p>
                     <p><fmt:message key="order.isConfirmed"/>

@@ -7,7 +7,8 @@
 <html>
 <head>
     <title><fmt:message key="orderAdmin.title"/></title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <link rel="stylesheet" type="text/css"
           href="${pageContext.request.contextPath}/assets/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css"
@@ -17,7 +18,7 @@
 </head>
 <body id="page-top">
 <jsp:include page="navbar.jsp"/>
-<section style="text-align: left;padding-top: 120px" class="masthead">
+<section style="text-align: left" class="masthead content-section">
     <div class="intro-body">
         <div class="container-fluid">
             <div class="row">
@@ -32,34 +33,32 @@
                     <h3 class="text-white"><fmt:message key="orderAdmin.information"/></h3>
                     <p><fmt:message key="orderAdmin.tattooName"/> ${order.tattoo.name}</p>
                     <p><fmt:message key="orderAdmin.description"/> ${order.description}</p>
-                    <p><fmt:message key="orderAdmin.price"/> ${order.price} <fmt:message
-                            key="tattoo.rubles"/></p>
+                    <p><fmt:message key="orderAdmin.price"/> ${order.price} <fmt:message key="tattoo.rubles"/></p>
                     <p><fmt:message key="orderAdmin.date"/> ${order.date}</p>
                     <p><fmt:message key="orderAdmin.orderedBy"/> ${order.user.login}</p>
                     <p>
                         <fmt:message key="orderAdmin.isConfirmed"/>
                         <c:choose>
-                        <c:when test="${!order.confirmed}">
-                            <fmt:message key="orderAdmin.no"/>
-                    <form name="deleteForm" method="post" action="controller">
-                        <input type="hidden" name="orderId" value="${order.orderId}">
-                        <button type="submit" class="btn btn-outline-secondary"
-                                name="commandName"
-                                value="submit_order_command">
-                            <fmt:message key="orderAdmin.submit"/>
-                        </button>
-
-                        <button type="submit" class="btn btn-outline-secondary"
-                                name="commandName"
-                                value="deny_order_command">
-                            <fmt:message key="orderAdmin.deny"/>
-                        </button>
-                    </form>
-                    </c:when>
-                    <c:otherwise>
-                        <fmt:message key="orderAdmin.yes"/>
-                    </c:otherwise>
-                    </c:choose>
+                            <c:when test="${!order.confirmed}">
+                                <fmt:message key="orderAdmin.no"/>
+                                <form method="post" action="controller">
+                                    <input type="hidden" name="orderId" value="${order.orderId}">
+                                    <button class="btn btn-outline-secondary"
+                                            name="commandName"
+                                            value="submit_order_command">
+                                        <fmt:message key="orderAdmin.submit"/>
+                                    </button>
+                                    <button class="btn btn-outline-secondary"
+                                            name="commandName"
+                                            value="deny_order_command">
+                                        <fmt:message key="orderAdmin.deny"/>
+                                    </button>
+                                 </form>
+                            </c:when>
+                            <c:otherwise>
+                                <fmt:message key="orderAdmin.yes"/>
+                            </c:otherwise>
+                        </c:choose>
                     </p>
                 </div>
                 <div class="col-md-1">

@@ -8,7 +8,8 @@
 <html>
 <head>
     <title><fmt:message key="login.title"/></title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <link rel="stylesheet" type="text/css"
           href="${pageContext.request.contextPath}/assets/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css"
@@ -23,35 +24,33 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 mx-auto">
-                    <form name="loginForm" method="post" action="controller" autocomplete="off">
+                    <form method="post" action="controller" autocomplete="off">
                         <div class="form-group">
                             <label><fmt:message key="login.login"/></label>
                             <input style="background-color: black" type="text"
-                                   class="form-control text-white" name="login"
-                                   maxlength="20" required
-                                   oninvalid="this.setCustomValidity('<fmt:message
-                                           key="login.loginValidate"/>')"
+                                   class="form-control text-white" name="login" maxlength="20" required
+                                   oninvalid="this.setCustomValidity('<fmt:message key="login.loginValidate"/>')"
                                    onchange="this.setCustomValidity('')"
-                                   pattern="^[\w.]{3,20}$"
+                                   pattern="^[a-zA-Z_0-9.]{3,20}$"
                                    title='<fmt:message key="login.loginValidate"/>'
                                    placeholder='<fmt:message key="login.login"/>'>
                         </div>
                         <div class="form-group">
                             <label><fmt:message key="login.password"/></label>
                             <input style="background-color: black" type="password"
-                                   maxlength="20" required
-                                   name="password" class="form-control text-white"
-                                   oninvalid="this.setCustomValidity('<fmt:message
-                                           key="login.passwordValidate"/>')"
+                                   class="form-control text-white" name="password"  maxlength="20" required
+                                   oninvalid="this.setCustomValidity('<fmt:message key="login.passwordValidate"/>')"
                                    onchange="this.setCustomValidity('')"
                                    title='<fmt:message key="login.passwordValidate"/>'
                                    placeholder='<fmt:message key="login.password"/>'>
                         </div>
                         <c:if test="${incorrectDataMessage}">
-                            <div style="color: red"><fmt:message key="login.incorrectDataMessage"/></div>
+                            <div style="color: red">
+                                <fmt:message key="login.incorrectDataMessage"/>
+                            </div>
                         </c:if>
-                        <button type="submit" class="btn btn-outline-secondary" name="commandName"
-                                value="login_command">
+                        <button type="submit" class="btn btn-outline-secondary"
+                                name="commandName" value="login_command">
                             <fmt:message key="login.signIn"/>
                         </button>
                     </form>

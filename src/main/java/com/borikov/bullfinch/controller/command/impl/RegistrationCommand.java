@@ -26,7 +26,7 @@ public class RegistrationCommand implements Command {
         String secondName = request.getParameter(RequestParameter.SECOND_NAME);
         String phoneNumber = request.getParameter(RequestParameter.PHONE_NUMBER);
         String password = request.getParameter(RequestParameter.PASSWORD);
-        String confirmedPassword = request.getParameter(RequestParameter.PASSWORD);
+        String confirmedPassword = request.getParameter(RequestParameter.CONFIRMED_PASSWORD);
         try {
             if (userService.addUser(email, login,
                     firstName, secondName, phoneNumber, password, confirmedPassword)) {
@@ -40,7 +40,7 @@ public class RegistrationCommand implements Command {
         } catch (ServiceException e) {
             LOGGER.log(Level.ERROR, "Error while register user", e);
             request.setAttribute(RequestParameter.ERROR_MESSAGE, e);
-            page = PagePath.ERROR;
+            page = PagePath.ERROR505;
         }
         return page;
     }

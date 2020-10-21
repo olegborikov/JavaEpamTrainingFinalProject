@@ -7,7 +7,8 @@
 <html>
 <head>
     <title><fmt:message key="catalog.title"/></title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <link rel="stylesheet" type="text/css"
           href="${pageContext.request.contextPath}/assets/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css"
@@ -23,7 +24,7 @@
             <div class="row col-12">
                 <div class="col-md-3">
                     <c:if test="${role.equals('user')}">
-                        <form name="offerForm" method="post" action="controller">
+                        <form method="post" action="controller">
                             <button style="vertical-align: center" class="btn btn-outline-secondary"
                                     name="commandName"
                                     value="browse_tattoo_offer_page_command">
@@ -36,11 +37,10 @@
                     <br/>
                 </div>
                 <div class="col-12 col-md-3">
-                    <form name="findTattooForm" method="post" action="controller"
-                          autocomplete="off">
+                    <form method="post" action="controller" autocomplete="off">
                         <div class="input-group">
-                            <input style="background-color: black" maxlength="25"
-                                   type="text" class="form-control text-white"
+                            <input style="background-color: black" type="text"
+                                   class="form-control text-white" maxlength="25"
                                    name="tattooName" value="${tattooName}"
                                    placeholder=<fmt:message key="catalog.search"/>>
                             <div class="input-group-btn">
@@ -68,7 +68,7 @@
                             <div class="image-wrap-2">
                                 <div class="image-info">
                                     <h2 class="mb-3">${tattoo.name}</h2>
-                                    <form name="tattooInfoForm" method="post" action="controller">
+                                    <form method="post" action="controller">
                                         <input type="hidden" name="commandName"
                                                value="browse_tattoo_page_command">
                                         <button class="btn btn-outline-white py-2 px-4"
@@ -83,7 +83,7 @@
                     </c:forEach>
                 </div>
                 <c:if test="${not empty tattoos}">
-                    <form name="paginationForm" method="post" action="controller">
+                    <form method="post" action="controller">
                         <input type="hidden" name="commandName" value="pagination_catalog_command">
                         <c:choose>
                             <c:when test="${pageNumber!=1}">
@@ -98,8 +98,8 @@
                                 </button>
                             </c:otherwise>
                         </c:choose>
-                        <input type="button" class="btn btn-outline-secondary" disabled
-                               value=${pageNumber}>
+                        <input type="button" class="btn btn-outline-secondary"
+                               disabled value=${pageNumber}>
                         <c:choose>
                             <c:when test="${pageNumber<pageAmount}">
                                 <button type="submit" class="btn btn-outline-secondary"

@@ -7,7 +7,8 @@
 <html>
 <head>
     <title><fmt:message key="profile.title"/></title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <link rel="stylesheet" type="text/css"
           href="${pageContext.request.contextPath}/assets/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css"
@@ -17,7 +18,7 @@
 </head>
 <style>
     .list-group {
-        max-height: 300px;
+        max-height: 250px;
         margin-bottom: 10px;
         overflow: scroll;
         -webkit-overflow-scrolling: touch;
@@ -25,7 +26,7 @@
 </style>
 <body>
 <jsp:include page="navbar.jsp"/>
-<section style="text-align: left; padding-top: 120px" class="masthead">
+<section style="text-align: left" class="masthead content-section">
     <div class="intro-body">
         <div class="container-fluid">
             <div class="row">
@@ -66,17 +67,14 @@
                                 <ul class="list-group">
                                     <c:if test="${empty orders}">
                                         <li style="color: black" class="list-group-item">
-                                            <strong><fmt:message
-                                                    key="profile.emptyOrders"/></strong>
+                                            <strong><fmt:message key="profile.emptyOrders"/></strong>
                                         </li>
                                     </c:if>
-
                                     <input type="hidden" name="commandName"
                                            value="browse_order_page_command">
                                     <c:forEach var="order" items="${orders}">
                                         <li style="color: black" class="list-group-item">
-                                            <button class="btn" name="orderId"
-                                                    value="${order.orderId}">
+                                            <button class="btn" name="orderId" value="${order.orderId}">
                                                 <strong>${order.tattoo.name}, ${order.price}, ${order.date}</strong>
                                             </button>
                                         </li>

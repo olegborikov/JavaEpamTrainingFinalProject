@@ -5,7 +5,7 @@ public class PagePath {
     public static final String BALANCE_ENRICH = "/jsp/balance_enrich.jsp";
     public static final String CATALOG = "/jsp/catalog.jsp";
     public static final String DISCOUNT_ADD = "/jsp/discount_add.jsp";
-    public static final String ERROR = "/jsp/error.jsp";
+    public static final String ERROR505 = "/jsp/error505.jsp";
     public static final String HOME = "/jsp/home.jsp";
     public static final String LOGIN = "/jsp/login.jsp";
     public static final String MESSAGE = "/jsp/message.jsp";

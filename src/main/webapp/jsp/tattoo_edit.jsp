@@ -17,7 +17,7 @@
 </head>
 <body>
 <jsp:include page="navbar.jsp"/>
-<section style="text-align: left;padding-top: 120px" class="masthead">
+<section style="text-align: left" class="masthead content-section">
     <div class="intro-body">
         <div class="container-fluid">
             <div class="row">
@@ -40,8 +40,7 @@
                                 <input style="background-color: black" name="name" required
                                        maxlength="25"
                                        type="text" class="form-control text-white"
-                                       oninvalid="this.setCustomValidity('<fmt:message
-                                               key="tattooEdit.nameValidate"/>')"
+                                       oninvalid="this.setCustomValidity('<fmt:message key="tattooEdit.nameValidate"/>')"
                                        onchange="this.setCustomValidity('')"
                                        pattern="^[\p{L}]{2,25}"
                                        title='<fmt:message key="tattooEdit.nameValidate"/>'
@@ -55,12 +54,11 @@
                                     <fmt:message key="tattooEdit.price"/>
                                 </label>
                                 <input style="background-color: black" name="price" required
-                                       maxlength="25"
+                                       maxlength="10"
                                        type="text" class="form-control text-white"
-                                       oninvalid="this.setCustomValidity('<fmt:message
-                                               key="tattooEdit.priceValidate"/>')"
+                                       oninvalid="this.setCustomValidity('<fmt:message key="tattooEdit.priceValidate"/>')"
                                        onchange="this.setCustomValidity('')"
-
+                                       pattern="^[1-9]\d{0,4}(\.\d{0,2})?$"
                                        title='<fmt:message key="tattooEdit.priceValidate"/>'
                                        placeholder='<fmt:message key="tattooEdit.price"/>'
                                        value="${tattoo.price}">
@@ -71,11 +69,9 @@
                                 <label class="text-white">
                                     <fmt:message key="tattooEdit.description"/>
                                 </label>
-                                <textarea style="background-color: black"
-                                          name="description" cols="30" rows="7" required
-                                          class="form-control text-white" maxlength="1000"
-                                          oninvalid="this.setCustomValidity('<fmt:message
-                                                  key="tattooEdit.descriptionValidate"/>')"
+                                <textarea style="background-color: black" cols="30" rows="7" required
+                                          class="form-control text-white" maxlength="1000" name="description"
+                                          oninvalid="this.setCustomValidity('<fmt:message key="tattooEdit.descriptionValidate"/>')"
                                           onchange="this.setCustomValidity('')"
                                           title='<fmt:message key="tattooEdit.descriptionValidate"/>'
                                           placeholder='<fmt:message key="tattooEdit.description"/>'>${tattoo.description}</textarea>

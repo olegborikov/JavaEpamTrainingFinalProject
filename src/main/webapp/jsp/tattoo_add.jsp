@@ -7,7 +7,8 @@
 <html>
 <head>
     <title><fmt:message key="tattooAdd.title"/></title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <link rel="stylesheet" type="text/css"
           href="${pageContext.request.contextPath}/assets/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css"
@@ -29,13 +30,11 @@
                                 <label class="text-white">
                                     <fmt:message key="tattooAdd.name"/>
                                 </label>
-                                <input style="background-color: black" name="name" required
-                                       maxlength="25"
-                                       type="text" class="form-control text-white"
-                                       oninvalid="this.setCustomValidity('<fmt:message
-                                               key="tattooAdd.nameValidate"/>')"
+                                <input style="background-color: black"  type="text"
+                                       class="form-control text-white" name="name" required maxlength="25"
+                                       oninvalid="this.setCustomValidity('<fmt:message key="tattooAdd.nameValidate"/>')"
                                        onchange="this.setCustomValidity('')"
-                                       pattern="^[\p{L}]{2,25}$"
+                                       pattern="^[^<>]{2,25}$"
                                        title='<fmt:message key="tattooAdd.nameValidate"/>'
                                        placeholder='<fmt:message key="tattooAdd.name"/>'>
                             </div>
@@ -45,13 +44,12 @@
                                 <label class="text-white">
                                     <fmt:message key="tattooAdd.price"/>
                                 </label>
-                                <input style="background-color: black" name="price" required
-                                       maxlength="10"
-                                       type="text" class="form-control text-white"
-                                       oninvalid="this.setCustomValidity('<fmt:message
-                                               key="tattooAdd.priceValidate"/>')"
+                                <input style="background-color: black" type="text"
+                                       class="form-control text-white" name="price" required maxlength="10"
+                                       oninvalid="this.setCustomValidity('<fmt:message key="tattooAdd.priceValidate"/>')"
                                        onchange="this.setCustomValidity('')"
                                        title='<fmt:message key="tattooAdd.priceValidate"/>'
+                                       pattern="^[1-9]\d{0,4}(\.\d{0,2})?$"
                                        placeholder='<fmt:message key="tattooAdd.price"/>'>
                             </div>
                         </div>
@@ -60,8 +58,9 @@
                                 <fmt:message key="tattooAdd.fileUpload"/>
                                 <input type="file" name="content" accept="image/jpeg" required>
                                 <c:if test="${incorrectImageMessage}">
-                                    <div style="color: red"><fmt:message
-                                            key="tattooAdd.incorrectImageMessage"/></div>
+                                    <div style="color: red">
+                                        <fmt:message key="tattooAdd.incorrectImageMessage"/>
+                                    </div>
                                 </c:if>
                             </div>
                         </div>
@@ -73,19 +72,19 @@
                                 <textarea style="background-color: black"
                                           name="description" cols="30" rows="7" required
                                           class="form-control text-white" maxlength="1000"
-                                          oninvalid="this.setCustomValidity('<fmt:message
-                                                  key="tattooAdd.descriptionValidate"/>')"
+                                          oninvalid="this.setCustomValidity('<fmt:message key="tattooAdd.descriptionValidate"/>')"
                                           onchange="this.setCustomValidity('')"
                                           title='<fmt:message key="tattooAdd.descriptionValidate"/>'
                                           placeholder='<fmt:message key="tattooAdd.description"/>'></textarea>
                             </div>
                         </div>
                         <c:if test="${incorrectDataMessage}">
-                            <div style="color: red"><fmt:message
-                                    key="tattooAdd.incorrectDataMessage"/></div>
+                            <div style="color: red">
+                                <fmt:message key="tattooAdd.incorrectDataMessage"/>
+                            </div>
                         </c:if>
                         <input type="hidden" name="commandName" value="add_tattoo_command">
-                        <button type="submit" class="btn btn-outline-secondary">
+                        <button class="btn btn-outline-secondary">
                             <fmt:message key="tattooAdd.addTattoo"/>
                         </button>
                     </form>

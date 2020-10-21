@@ -27,7 +27,6 @@ public class EditUserCommand implements Command {
     public String execute(HttpServletRequest request) {
         String page;
         String id = request.getParameter(RequestParameter.USER_ID);
-        System.out.println(id);
         String email = request.getParameter(RequestParameter.EMAIL);
         String login = request.getParameter(RequestParameter.LOGIN);
         String firstName = request.getParameter(RequestParameter.FIRST_NAME);
@@ -46,12 +45,12 @@ public class EditUserCommand implements Command {
                     page = PagePath.MESSAGE;
                 }
             } else {
-                page = PagePath.ERROR;// TODO: 09.10.2020 do smth
+                page = PagePath.ERROR505;// TODO: 09.10.2020 do smth
             }
         } catch (ServiceException e) {
             LOGGER.log(Level.ERROR, "Error while editing tattoo", e);
             request.setAttribute(RequestParameter.ERROR_MESSAGE, e);
-            page = PagePath.ERROR;
+            page = PagePath.ERROR505;
         }
         return page;
     }

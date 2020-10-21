@@ -7,7 +7,8 @@
 <html>
 <head>
     <title><fmt:message key="profileAdmin.title"/></title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <link rel="stylesheet" type="text/css"
           href="${pageContext.request.contextPath}/assets/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css"
@@ -15,9 +16,17 @@
     <link rel="stylesheet" type="text/css"
           href="${pageContext.request.contextPath}/assets/css/project.css">
 </head>
+<style>
+    .list-group {
+        max-height: 250px;
+        margin-bottom: 10px;
+        overflow: scroll;
+        -webkit-overflow-scrolling: touch;
+    }
+</style>
 <body>
 <jsp:include page="navbar.jsp"/>
-<section style="text-align: left" class="masthead">
+<section style="text-align: left" class="masthead content-section">
     <div class="intro-body">
         <div class="container-fluid">
             <div class="row">
@@ -52,9 +61,8 @@
                             </div>
                         </form>
                     </c:if>
-
                     <c:if test="${!user.blocked}">
-                        <form name="" method="post" action="controller">
+                        <form method="post" action="controller">
                             <input type="hidden" name="userId" value="${user.userId}">
                             <div style="text-align: left">
                                 <input type="hidden" name="login" value="${user.login}">
@@ -76,8 +84,7 @@
                                 <ul class="list-group">
                                     <c:if test="${empty orders}">
                                         <li style="color: black" class="list-group-item">
-                                            <strong><fmt:message
-                                                    key="profileAdmin.emptyOrders"/></strong>
+                                            <strong><fmt:message key="profileAdmin.emptyOrders"/></strong>
                                         </li>
                                     </c:if>
                                     <input type="hidden" name="commandName"
@@ -104,8 +111,7 @@
                                 <ul class="list-group">
                                     <c:if test="${empty discounts}">
                                         <li style="color: black" class="list-group-item">
-                                            <strong><fmt:message
-                                                    key="profileAdmin.emptyDiscounts"/></strong>
+                                            <strong><fmt:message key="profileAdmin.emptyDiscounts"/></strong>
                                         </li>
                                     </c:if>
                                     <input type="hidden" name="commandName"
