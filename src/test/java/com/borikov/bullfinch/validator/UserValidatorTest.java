@@ -1,7 +1,5 @@
-package com.borikov.bullfinch.validator.impl;
+package com.borikov.bullfinch.validator;
 
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -9,18 +7,6 @@ import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
 public class UserValidatorTest {
-    private UserValidator userValidator;
-
-    @BeforeClass
-    public void setUp() {
-        userValidator = new UserValidator();
-    }
-
-    @AfterClass
-    public void tearDown() {
-        userValidator = null;
-    }
-
     @DataProvider(name = "isIdCorrectPositiveData")
     public Object[][] createIsIdCorrectPositiveData() {
         return new Object[][]{
@@ -34,7 +20,7 @@ public class UserValidatorTest {
 
     @Test(dataProvider = "isIdCorrectPositiveData")
     public void isIdCorrectPositiveTest(String id) {
-        boolean actual = userValidator.isIdCorrect(id);
+        boolean actual = UserValidator.isIdCorrect(id);
         assertTrue(actual);
     }
 
@@ -53,7 +39,7 @@ public class UserValidatorTest {
 
     @Test(dataProvider = "isIdCorrectNegativeData")
     public void isIdCorrectNegativeTest(String id) {
-        boolean actual = userValidator.isIdCorrect(id);
+        boolean actual = UserValidator.isIdCorrect(id);
         assertFalse(actual);
     }
 
@@ -71,7 +57,7 @@ public class UserValidatorTest {
 
     @Test(dataProvider = "isEmailCorrectPositiveData")
     public void isEmailCorrectPositiveTest(String email) {
-        boolean result = userValidator.isEmailCorrect(email);
+        boolean result = UserValidator.isEmailCorrect(email);
         assertTrue(result);
     }
 
@@ -92,7 +78,7 @@ public class UserValidatorTest {
 
     @Test(dataProvider = "isEmailCorrectNegativeData")
     public void isEmailCorrectNegativeTest(String email) {
-        boolean result = userValidator.isEmailCorrect(email);
+        boolean result = UserValidator.isEmailCorrect(email);
         assertFalse(result);
     }
 
@@ -110,7 +96,7 @@ public class UserValidatorTest {
 
     @Test(dataProvider = "isLoginCorrectPositiveData")
     public void isLoginCorrectPositiveTest(String login) {
-        boolean result = userValidator.isLoginCorrect(login);
+        boolean result = UserValidator.isLoginCorrect(login);
         assertTrue(result);
     }
 
@@ -130,7 +116,7 @@ public class UserValidatorTest {
 
     @Test(dataProvider = "isLoginCorrectNegativeData")
     public void isLoginCorrectNegativeTest(String login) {
-        boolean result = userValidator.isLoginCorrect(login);
+        boolean result = UserValidator.isLoginCorrect(login);
         assertFalse(result);
     }
 
@@ -146,7 +132,7 @@ public class UserValidatorTest {
 
     @Test(dataProvider = "isPasswordCorrectPositiveData")
     public void isPasswordCorrectPositiveTest(String password) {
-        boolean result = userValidator.isPasswordCorrect(password);
+        boolean result = UserValidator.isPasswordCorrect(password);
         assertTrue(result);
     }
 
@@ -169,7 +155,7 @@ public class UserValidatorTest {
 
     @Test(dataProvider = "isPasswordCorrectNegativeData")
     public void isPasswordCorrectNegativeTest(String password) {
-        boolean result = userValidator.isPasswordCorrect(password);
+        boolean result = UserValidator.isPasswordCorrect(password);
         assertFalse(result);
     }
 
@@ -185,7 +171,7 @@ public class UserValidatorTest {
 
     @Test(dataProvider = "isFirstNameCorrectPositiveData")
     public void isFirstNameCorrectPositiveTest(String firstName) {
-        boolean result = userValidator.isFirstNameCorrect(firstName);
+        boolean result = UserValidator.isFirstNameCorrect(firstName);
         assertTrue(result);
     }
 
@@ -207,7 +193,7 @@ public class UserValidatorTest {
 
     @Test(dataProvider = "isFirstNameCorrectNegativeData")
     public void isFirstNameCorrectNegativeTest(String firstName) {
-        boolean result = userValidator.isFirstNameCorrect(firstName);
+        boolean result = UserValidator.isFirstNameCorrect(firstName);
         assertFalse(result);
     }
 
@@ -223,7 +209,7 @@ public class UserValidatorTest {
 
     @Test(dataProvider = "isSecondNameCorrectPositiveData")
     public void isSecondNameCorrectPositiveTest(String secondName) {
-        boolean result = userValidator.isSecondNameCorrect(secondName);
+        boolean result = UserValidator.isSecondNameCorrect(secondName);
         assertTrue(result);
     }
 
@@ -245,7 +231,7 @@ public class UserValidatorTest {
 
     @Test(dataProvider = "isSecondNameCorrectNegativeData")
     public void isSecondNameCorrectNegativeTest(String secondName) {
-        boolean result = userValidator.isSecondNameCorrect(secondName);
+        boolean result = UserValidator.isSecondNameCorrect(secondName);
         assertFalse(result);
     }
 
@@ -262,7 +248,7 @@ public class UserValidatorTest {
 
     @Test(dataProvider = "isPhoneNumberCorrectPositiveData")
     public void isPhoneNumberCorrectPositiveTest(String phoneNumber) {
-        boolean result = userValidator.isPhoneNumberCorrect(phoneNumber);
+        boolean result = UserValidator.isPhoneNumberCorrect(phoneNumber);
         assertTrue(result);
     }
 
@@ -279,7 +265,7 @@ public class UserValidatorTest {
 
     @Test(dataProvider = "isPhoneNumberCorrectNegativeData")
     public void isPhoneNumberCorrectNegativeTest(String phoneNumber) {
-        boolean result = userValidator.isPhoneNumberCorrect(phoneNumber);
+        boolean result = UserValidator.isPhoneNumberCorrect(phoneNumber);
         assertFalse(result);
     }
 }

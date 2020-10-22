@@ -15,10 +15,10 @@ import com.borikov.bullfinch.exception.DaoException;
 import com.borikov.bullfinch.exception.ServiceException;
 import com.borikov.bullfinch.exception.TransactionException;
 import com.borikov.bullfinch.service.OrderService;
-import com.borikov.bullfinch.validator.impl.DiscountValidator;
-import com.borikov.bullfinch.validator.impl.OrderValidator;
-import com.borikov.bullfinch.validator.impl.TattooValidator;
-import com.borikov.bullfinch.validator.impl.UserValidator;
+import com.borikov.bullfinch.validator.DiscountValidator;
+import com.borikov.bullfinch.validator.OrderValidator;
+import com.borikov.bullfinch.validator.TattooValidator;
+import com.borikov.bullfinch.validator.UserValidator;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -36,15 +36,12 @@ public class OrderServiceImpl implements OrderService {
                             String price, String tattooId,
                             String userLogin, String discountId) throws ServiceException {
         boolean result = false;
-        OrderValidator orderValidator = new OrderValidator();
-        TattooValidator tattooValidator = new TattooValidator();
-        UserValidator userValidator = new UserValidator();
         try {
-            if (orderValidator.isDateCorrect(date)
-                    && orderValidator.isDescriptionCorrect(description)
-                    && orderValidator.isPriceCorrect(price)
-                    && tattooValidator.isIdCorrect(tattooId)
-                    && userValidator.isLoginCorrect(userLogin)) {
+            if (OrderValidator.isDateCorrect(date)
+                    && OrderValidator.isDescriptionCorrect(description)
+                    && OrderValidator.isPriceCorrect(price)
+                    && TattooValidator.isIdCorrect(tattooId)
+                    && UserValidator.isLoginCorrect(userLogin)) {
                 OrderBuilder orderBuilder = new OrderBuilder();
                 orderBuilder.setDate(LocalDate.parse(date,
                         DateTimeFormatter.ISO_LOCAL_DATE));
@@ -61,8 +58,7 @@ public class OrderServiceImpl implements OrderService {
                 Order order = orderBuilder.getOrder();
                 result = orderDao.add(order);
                 if (result) {
-                    DiscountValidator discountValidator = new DiscountValidator();
-                    if (discountValidator.isIdCorrect(discountId)) {
+                    if (DiscountValidator.isIdCorrect(discountId)) {
                         long discountIdParsed = Long.parseLong(discountId);
                         discountDao.remove(discountIdParsed);
                     }
@@ -77,9 +73,8 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public boolean removeOrder(String id) throws ServiceException {
         boolean result = false;
-        OrderValidator orderValidator = new OrderValidator();
         try {
-            if (orderValidator.isIdCorrect(id)) {
+            if (OrderValidator.isIdCorrect(id)) {
                 long orderId = Long.parseLong(id);
                 result = orderDao.remove(orderId);
             }
@@ -92,9 +87,8 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public boolean submitOrder(String id) throws ServiceException {
         boolean result = false;
-        OrderValidator orderValidator = new OrderValidator();
         try {
-            if (orderValidator.isIdCorrect(id)) {
+            if (OrderValidator.isIdCorrect(id)) {
                 long orderId = Long.parseLong(id);
                 result = transactionManager.orderSubmitProcess(orderId);
             }
@@ -107,9 +101,8 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public Optional<Order> findOrderById(String id) throws ServiceException {
         Optional<Order> order = Optional.empty();
-        OrderValidator orderValidator = new OrderValidator();
         try {
-            if (orderValidator.isIdCorrect(id)) {
+            if (OrderValidator.isIdCorrect(id)) {
                 long orderId = Long.parseLong(id);
                 order = orderDao.findById(orderId);
             }
@@ -123,9 +116,8 @@ public class OrderServiceImpl implements OrderService {
     public List<Order> getOrdersByUserLogin(String userLogin)
             throws ServiceException {
         List<Order> orders = new ArrayList<>();
-        UserValidator userValidator = new UserValidator();
         try {
-            if (userValidator.isLoginCorrect(userLogin)) {
+            if (UserValidator.isLoginCorrect(userLogin)) {
                 orders = orderDao.findByUserLogin(userLogin);
             }
             return orders;

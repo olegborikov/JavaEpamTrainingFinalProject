@@ -9,9 +9,9 @@ import com.borikov.bullfinch.entity.Wallet;
 import com.borikov.bullfinch.exception.DaoException;
 import com.borikov.bullfinch.exception.ServiceException;
 import com.borikov.bullfinch.service.WalletService;
-import com.borikov.bullfinch.validator.impl.OrderValidator;
-import com.borikov.bullfinch.validator.impl.UserValidator;
-import com.borikov.bullfinch.validator.impl.WalletValidator;
+import com.borikov.bullfinch.validator.OrderValidator;
+import com.borikov.bullfinch.validator.UserValidator;
+import com.borikov.bullfinch.validator.WalletValidator;
 
 import java.util.Optional;
 
@@ -24,16 +24,15 @@ public class WalletServiceImpl implements WalletService {
             throws ServiceException {
         try {
             boolean result = false;
-            WalletValidator walletValidator = new WalletValidator();
-            if (walletValidator.isIdCorrect(walletId)
-                    && walletValidator.isEnrichAmountCorrect(enrichAmount)) {
+            if (WalletValidator.isIdCorrect(walletId)
+                    && WalletValidator.isEnrichAmountCorrect(enrichAmount)) {
                 long id = Long.parseLong(walletId);
                 double amount = Double.parseDouble(enrichAmount);
                 Optional<Wallet> walletOptional = walletDao.findById(id);
                 if (walletOptional.isPresent()) {
                     Wallet wallet = walletOptional.get();
                     double newBalance = wallet.getBalance() + amount;
-                    if (walletValidator.isBalanceCorrect(newBalance)) {
+                    if (WalletValidator.isBalanceCorrect(newBalance)) {
                         wallet.setBalance(newBalance);
                         result = walletDao.update(wallet);
                     }
@@ -50,10 +49,8 @@ public class WalletServiceImpl implements WalletService {
             throws ServiceException {
         try {
             boolean result = false;
-            UserValidator userValidator = new UserValidator();
-            OrderValidator orderValidator = new OrderValidator();
-            if (userValidator.isLoginCorrect(userLogin)
-                    && orderValidator.isPriceCorrect(price)) {
+            if (UserValidator.isLoginCorrect(userLogin)
+                    && OrderValidator.isPriceCorrect(price)) {
                 double orderPrice = Double.parseDouble(price);
                 Optional<Wallet> walletOptional = walletDao.findByUserLogin(userLogin);
                 if (walletOptional.isPresent()) {
@@ -71,8 +68,7 @@ public class WalletServiceImpl implements WalletService {
     public boolean checkBalanceSize(String orderId) throws ServiceException {
         try {
             boolean result = false;
-            OrderValidator orderValidator = new OrderValidator();
-            if (orderValidator.isIdCorrect(orderId)) {
+            if (OrderValidator.isIdCorrect(orderId)) {
                 long id = Long.parseLong(orderId);
                 Optional<Wallet> walletOptional = walletDao.findByOrderId(id);
                 Optional<Order> orderOptional = orderDao.findById(id);

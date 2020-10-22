@@ -1,5 +1,6 @@
-package com.borikov.bullfinch.validator.impl;
+package com.borikov.bullfinch.validator;
 
+import com.borikov.bullfinch.validator.OrderValidator;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
@@ -9,18 +10,6 @@ import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
 public class OrderValidatorTest {
-    private OrderValidator orderValidator;
-
-    @BeforeClass
-    public void setUp() {
-        orderValidator = new OrderValidator();
-    }
-
-    @AfterClass
-    public void tearDown() {
-        orderValidator = null;
-    }
-
     @DataProvider(name = "isIdCorrectPositiveData")
     public Object[][] createIsIdCorrectPositiveData() {
         return new Object[][]{
@@ -34,7 +23,7 @@ public class OrderValidatorTest {
 
     @Test(dataProvider = "isIdCorrectPositiveData")
     public void isIdCorrectPositiveTest(String id) {
-        boolean actual = orderValidator.isIdCorrect(id);
+        boolean actual = OrderValidator.isIdCorrect(id);
         assertTrue(actual);
     }
 
@@ -53,7 +42,7 @@ public class OrderValidatorTest {
 
     @Test(dataProvider = "isIdCorrectNegativeData")
     public void isIdCorrectNegativeTest(String id) {
-        boolean actual = orderValidator.isIdCorrect(id);
+        boolean actual = OrderValidator.isIdCorrect(id);
         assertFalse(actual);
     }
 
@@ -70,7 +59,7 @@ public class OrderValidatorTest {
 
     @Test(dataProvider = "isPriceCorrectPositiveData")
     public void isPriceCorrectPositiveTest(String price) {
-        boolean actual = orderValidator.isPriceCorrect(price);
+        boolean actual = OrderValidator.isPriceCorrect(price);
         assertTrue(actual);
     }
 
@@ -89,7 +78,7 @@ public class OrderValidatorTest {
 
     @Test(dataProvider = "isPriceCorrectNegativeData")
     public void isPriceCorrectNegativeTest(String price) {
-        boolean actual = orderValidator.isPriceCorrect(price);
+        boolean actual = OrderValidator.isPriceCorrect(price);
         assertFalse(actual);
     }
 
@@ -106,7 +95,7 @@ public class OrderValidatorTest {
 
     @Test(dataProvider = "isDateCorrectPositiveData")
     public void isDateCorrectPositiveTest(String date) {
-        boolean actual = orderValidator.isDateCorrect(date);
+        boolean actual = OrderValidator.isDateCorrect(date);
         assertTrue(actual);
     }
 
@@ -124,7 +113,7 @@ public class OrderValidatorTest {
 
     @Test(dataProvider = "isDateCorrectNegativeData")
     public void isDateCorrectNegativeTest(String date) {
-        boolean actual = orderValidator.isDateCorrect(date);
+        boolean actual = OrderValidator.isDateCorrect(date);
         assertFalse(actual);
     }
 
@@ -140,7 +129,7 @@ public class OrderValidatorTest {
 
     @Test(dataProvider = "isDescriptionCorrectPositiveData")
     public void isDescriptionCorrectPositiveTest(String description) {
-        boolean actual = orderValidator.isDescriptionCorrect(description);
+        boolean actual = OrderValidator.isDescriptionCorrect(description);
         assertTrue(actual);
     }
 
@@ -159,7 +148,7 @@ public class OrderValidatorTest {
 
     @Test(dataProvider = "isDescriptionCorrectNegativeData")
     public void isDescriptionCorrectNegativeTest(String description) {
-        boolean actual = orderValidator.isDescriptionCorrect(description);
+        boolean actual = OrderValidator.isDescriptionCorrect(description);
         assertFalse(actual);
     }
 }

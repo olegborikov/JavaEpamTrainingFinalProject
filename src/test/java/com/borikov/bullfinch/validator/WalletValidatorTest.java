@@ -1,7 +1,5 @@
-package com.borikov.bullfinch.validator.impl;
+package com.borikov.bullfinch.validator;
 
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -9,18 +7,6 @@ import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
 public class WalletValidatorTest {
-    private WalletValidator walletValidator;
-
-    @BeforeClass
-    public void setUp() {
-        walletValidator = new WalletValidator();
-    }
-
-    @AfterClass
-    public void tearDown() {
-        walletValidator = null;
-    }
-
     @DataProvider(name = "isIdCorrectPositiveData")
     public Object[][] createIsIdCorrectPositiveData() {
         return new Object[][]{
@@ -34,7 +20,7 @@ public class WalletValidatorTest {
 
     @Test(dataProvider = "isIdCorrectPositiveData")
     public void isIdCorrectPositiveTest(String id) {
-        boolean actual = walletValidator.isIdCorrect(id);
+        boolean actual = WalletValidator.isIdCorrect(id);
         assertTrue(actual);
     }
 
@@ -53,7 +39,7 @@ public class WalletValidatorTest {
 
     @Test(dataProvider = "isIdCorrectNegativeData")
     public void isIdCorrectNegativeTest(String id) {
-        boolean actual = walletValidator.isIdCorrect(id);
+        boolean actual = WalletValidator.isIdCorrect(id);
         assertFalse(actual);
     }
 
@@ -70,7 +56,7 @@ public class WalletValidatorTest {
 
     @Test(dataProvider = "isEnrichAmountCorrectPositiveData")
     public void isEnrichAmountCorrectPositiveTest(String enrichAmount) {
-        boolean actual = walletValidator.isEnrichAmountCorrect(enrichAmount);
+        boolean actual = WalletValidator.isEnrichAmountCorrect(enrichAmount);
         assertTrue(actual);
     }
 
@@ -89,7 +75,7 @@ public class WalletValidatorTest {
 
     @Test(dataProvider = "isEnrichAmountCorrectNegativeData")
     public void isEnrichAmountCorrectNegativeTest(String enrichAmount) {
-        boolean actual = walletValidator.isEnrichAmountCorrect(enrichAmount);
+        boolean actual = WalletValidator.isEnrichAmountCorrect(enrichAmount);
         assertFalse(actual);
     }
 
@@ -106,7 +92,7 @@ public class WalletValidatorTest {
 
     @Test(dataProvider = "isBalanceCorrectPositiveData")
     public void isBalanceCorrectPositiveTest(double balance) {
-        boolean actual = walletValidator.isBalanceCorrect(balance);
+        boolean actual = WalletValidator.isBalanceCorrect(balance);
         assertTrue(actual);
     }
 
@@ -123,7 +109,7 @@ public class WalletValidatorTest {
 
     @Test(dataProvider = "isBalanceCorrectNegativeData")
     public void isBalanceCorrectNegativeTest(double balance) {
-        boolean actual = walletValidator.isBalanceCorrect(balance);
+        boolean actual = WalletValidator.isBalanceCorrect(balance);
         assertFalse(actual);
     }
 }

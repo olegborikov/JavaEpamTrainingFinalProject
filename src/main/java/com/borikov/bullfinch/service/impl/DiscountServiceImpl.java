@@ -9,8 +9,9 @@ import com.borikov.bullfinch.entity.User;
 import com.borikov.bullfinch.exception.DaoException;
 import com.borikov.bullfinch.exception.ServiceException;
 import com.borikov.bullfinch.service.DiscountService;
-import com.borikov.bullfinch.validator.impl.DiscountValidator;
-import com.borikov.bullfinch.validator.impl.UserValidator;
+import com.borikov.bullfinch.validator.DiscountValidator;
+import com.borikov.bullfinch.validator.OrderValidator;
+import com.borikov.bullfinch.validator.UserValidator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,9 +22,8 @@ public class DiscountServiceImpl implements DiscountService {
     @Override
     public List<Discount> getDiscountsByUserLogin(String userLogin) throws ServiceException {
         List<Discount> discounts = new ArrayList<>();
-        UserValidator userValidator = new UserValidator();
         try {
-            if (userValidator.isLoginCorrect(userLogin)) {
+            if (UserValidator.isLoginCorrect(userLogin)) {
                 discounts = discountDao.findByUserLogin(userLogin);
             }
         } catch (DaoException e) {
@@ -35,11 +35,9 @@ public class DiscountServiceImpl implements DiscountService {
     @Override
     public boolean addDiscount(String discountPercent, String userId) throws ServiceException {
         boolean result = false;
-        DiscountValidator discountValidator = new DiscountValidator();
-        UserValidator userValidator = new UserValidator();
         try {
-            if (discountValidator.isDiscountPercentCorrect(discountPercent)
-                    && userValidator.isIdCorrect(userId)) {
+            if (DiscountValidator.isDiscountPercentCorrect(discountPercent)
+                    && UserValidator.isIdCorrect(userId)) {
                 int discountPercentParsed = Integer.parseInt(discountPercent);
                 long userIdParsed = Long.parseLong(userId);
                 DiscountBuilder discountBuilder = new DiscountBuilder();
@@ -60,9 +58,8 @@ public class DiscountServiceImpl implements DiscountService {
     @Override
     public boolean removeDiscount(String discountId) throws ServiceException {
         boolean result = false;
-        DiscountValidator discountValidator = new DiscountValidator();
         try {
-            if (discountValidator.isIdCorrect(discountId)) {
+            if (DiscountValidator.isIdCorrect(discountId)) {
                 long id = Long.parseLong(discountId);
                 result = discountDao.remove(id);
             }

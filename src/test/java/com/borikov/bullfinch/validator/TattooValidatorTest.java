@@ -1,7 +1,5 @@
-package com.borikov.bullfinch.validator.impl;
+package com.borikov.bullfinch.validator;
 
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -9,18 +7,6 @@ import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
 public class TattooValidatorTest {
-    private TattooValidator tattooValidator;
-
-    @BeforeClass
-    public void setUp() {
-        tattooValidator = new TattooValidator();
-    }
-
-    @AfterClass
-    public void tearDown() {
-        tattooValidator = null;
-    }
-
     @DataProvider(name = "isIdCorrectPositiveData")
     public Object[][] createIsIdCorrectPositiveData() {
         return new Object[][]{
@@ -34,7 +20,7 @@ public class TattooValidatorTest {
 
     @Test(dataProvider = "isIdCorrectPositiveData")
     public void isIdCorrectPositiveTest(String id) {
-        boolean actual = tattooValidator.isIdCorrect(id);
+        boolean actual = TattooValidator.isIdCorrect(id);
         assertTrue(actual);
     }
 
@@ -53,7 +39,7 @@ public class TattooValidatorTest {
 
     @Test(dataProvider = "isIdCorrectNegativeData")
     public void isIdCorrectNegativeTest(String id) {
-        boolean actual = tattooValidator.isIdCorrect(id);
+        boolean actual = TattooValidator.isIdCorrect(id);
         assertFalse(actual);
     }
 
@@ -69,7 +55,7 @@ public class TattooValidatorTest {
 
     @Test(dataProvider = "isNameCorrectPositiveData")
     public void isNameCorrectPositiveTest(String name) {
-        boolean actual = tattooValidator.isNameCorrect(name);
+        boolean actual = TattooValidator.isNameCorrect(name);
         assertTrue(actual);
     }
 
@@ -88,7 +74,7 @@ public class TattooValidatorTest {
 
     @Test(dataProvider = "isNameCorrectNegativeData")
     public void isNameCorrectNegativeTest(String name) {
-        boolean actual = tattooValidator.isNameCorrect(name);
+        boolean actual = TattooValidator.isNameCorrect(name);
         assertFalse(actual);
     }
 
@@ -104,7 +90,7 @@ public class TattooValidatorTest {
 
     @Test(dataProvider = "isDescriptionCorrectPositiveData")
     public void isDescriptionCorrectPositiveTest(String description) {
-        boolean actual = tattooValidator.isDescriptionCorrect(description);
+        boolean actual = TattooValidator.isDescriptionCorrect(description);
         assertTrue(actual);
     }
 
@@ -123,7 +109,7 @@ public class TattooValidatorTest {
 
     @Test(dataProvider = "isDescriptionCorrectNegativeData")
     public void isDescriptionCorrectNegativeTest(String description) {
-        boolean actual = tattooValidator.isDescriptionCorrect(description);
+        boolean actual = TattooValidator.isDescriptionCorrect(description);
         assertFalse(actual);
     }
 
@@ -140,7 +126,7 @@ public class TattooValidatorTest {
 
     @Test(dataProvider = "isPriceCorrectPositiveData")
     public void isPriceCorrectPositiveTest(String price) {
-        boolean actual = tattooValidator.isPriceCorrect(price);
+        boolean actual = TattooValidator.isPriceCorrect(price);
         assertTrue(actual);
     }
 
@@ -159,7 +145,7 @@ public class TattooValidatorTest {
 
     @Test(dataProvider = "isPriceCorrectNegativeData")
     public void isPriceCorrectNegativeTest(String price) {
-        boolean actual = tattooValidator.isPriceCorrect(price);
+        boolean actual = TattooValidator.isPriceCorrect(price);
         assertFalse(actual);
     }
 }

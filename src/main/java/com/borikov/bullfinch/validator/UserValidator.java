@@ -1,8 +1,6 @@
-package com.borikov.bullfinch.validator.impl;
+package com.borikov.bullfinch.validator;
 
-import com.borikov.bullfinch.validator.AbstractValidator;
-
-public class UserValidator extends AbstractValidator {
+public class UserValidator {
     private static final String ID_REGEX = "^[1-9]\\d{0,9}$";
     private static final String EMAIL_REGEX =
             "^[\\w.+-]{3,30}@[\\w.-]{2,15}\\.[\\p{Lower}]{2,4}$";
@@ -14,31 +12,42 @@ public class UserValidator extends AbstractValidator {
     private static final String PHONE_NUMBER_REGEX = "^\\+?375(24|25|29|33|44)" +
             "\\d{7}|80(24|25|29|33|44)\\d{7}$";
 
-    public boolean isIdCorrect(String id) {
+    private UserValidator() {
+    }
+
+    public static boolean isIdCorrect(String id) {
         return isStringCorrect(id, ID_REGEX);
     }
 
-    public boolean isEmailCorrect(String email) {
+    public static boolean isEmailCorrect(String email) {
         return isStringCorrect(email, EMAIL_REGEX);
     }
 
-    public boolean isLoginCorrect(String login) {
+    public static boolean isLoginCorrect(String login) {
         return isStringCorrect(login, LOGIN_REGEX);
     }
 
-    public boolean isPasswordCorrect(String email) {
+    public static boolean isPasswordCorrect(String email) {
         return isStringCorrect(email, PASSWORD_REGEX);
     }
 
-    public boolean isFirstNameCorrect(String firstName) {
+    public static boolean isFirstNameCorrect(String firstName) {
         return isStringCorrect(firstName, FIRST_NAME_REGEX);
     }
 
-    public boolean isSecondNameCorrect(String secondName) {
+    public static boolean isSecondNameCorrect(String secondName) {
         return isStringCorrect(secondName, SECOND_NAME_REGEX);
     }
 
-    public boolean isPhoneNumberCorrect(String phoneNumber) {
+    public static boolean isPhoneNumberCorrect(String phoneNumber) {
         return isStringCorrect(phoneNumber, PHONE_NUMBER_REGEX);
+    }
+
+    private static boolean isStringCorrect(String line, String regex) {
+        boolean result = false;
+        if (line != null) {
+            result = line.matches(regex);
+        }
+        return result;
     }
 }

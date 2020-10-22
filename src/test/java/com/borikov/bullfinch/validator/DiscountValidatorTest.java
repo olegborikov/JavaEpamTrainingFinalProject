@@ -1,25 +1,12 @@
-package com.borikov.bullfinch.validator.impl;
+package com.borikov.bullfinch.validator;
 
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.*;
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertTrue;
 
 public class DiscountValidatorTest {
-    private DiscountValidator discountValidator;
-
-    @BeforeClass
-    public void setUp() {
-        discountValidator = new DiscountValidator();
-    }
-
-    @AfterClass
-    public void tearDown() {
-        discountValidator = null;
-    }
-
     @DataProvider(name = "isIdCorrectPositiveData")
     public Object[][] createIsIdCorrectPositiveData() {
         return new Object[][]{
@@ -33,7 +20,7 @@ public class DiscountValidatorTest {
 
     @Test(dataProvider = "isIdCorrectPositiveData")
     public void isIdCorrectPositiveTest(String id) {
-        boolean actual = discountValidator.isIdCorrect(id);
+        boolean actual = DiscountValidator.isIdCorrect(id);
         assertTrue(actual);
     }
 
@@ -52,7 +39,7 @@ public class DiscountValidatorTest {
 
     @Test(dataProvider = "isIdCorrectNegativeData")
     public void isIdCorrectNegativeTest(String id) {
-        boolean actual = discountValidator.isIdCorrect(id);
+        boolean actual = DiscountValidator.isIdCorrect(id);
         assertFalse(actual);
     }
 
@@ -69,7 +56,7 @@ public class DiscountValidatorTest {
 
     @Test(dataProvider = "isDiscountPercentCorrectPositiveData")
     public void isDiscountPercentCorrectPositiveTest(String discountPercent) {
-        boolean actual = discountValidator.isDiscountPercentCorrect(discountPercent);
+        boolean actual = DiscountValidator.isDiscountPercentCorrect(discountPercent);
         assertTrue(actual);
     }
 
@@ -88,7 +75,7 @@ public class DiscountValidatorTest {
 
     @Test(dataProvider = "isDiscountPercentCorrectNegativeData")
     public void isDiscountPercentCorrectNegativeTest(String discountPercent) {
-        boolean actual = discountValidator.isDiscountPercentCorrect(discountPercent);
+        boolean actual = DiscountValidator.isDiscountPercentCorrect(discountPercent);
         assertFalse(actual);
     }
 }

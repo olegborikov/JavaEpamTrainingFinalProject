@@ -11,7 +11,7 @@ import com.borikov.bullfinch.exception.DaoException;
 import com.borikov.bullfinch.exception.ServiceException;
 import com.borikov.bullfinch.exception.TransactionException;
 import com.borikov.bullfinch.service.TattooService;
-import com.borikov.bullfinch.validator.impl.TattooValidator;
+import com.borikov.bullfinch.validator.TattooValidator;
 
 import java.util.List;
 import java.util.Optional;
@@ -25,11 +25,10 @@ public class TattooServiceImpl implements TattooService {
                              String price, String imageName, String proposedLogin)
             throws ServiceException {
         try {
-            TattooValidator tattooValidator = new TattooValidator();
             boolean result = false;
-            if (tattooValidator.isNameCorrect(tattooName)
-                    && tattooValidator.isDescriptionCorrect(description)
-                    && tattooValidator.isPriceCorrect(price)) {
+            if (TattooValidator.isNameCorrect(tattooName)
+                    && TattooValidator.isDescriptionCorrect(description)
+                    && TattooValidator.isPriceCorrect(price)) {
                 double tattooPrice = Double.parseDouble(price);
                 TattooBuilder tattooBuilder = new TattooBuilder();
                 tattooBuilder.setName(tattooName);
@@ -52,10 +51,9 @@ public class TattooServiceImpl implements TattooService {
     public boolean removeTattoo(String tattooId, String imageId)
             throws ServiceException {
         boolean result = false;
-        TattooValidator tattooValidator = new TattooValidator();
         try {
-            if (tattooValidator.isIdCorrect(tattooId)
-                    && tattooValidator.isIdCorrect(imageId)) {
+            if (TattooValidator.isIdCorrect(tattooId)
+                    && TattooValidator.isIdCorrect(imageId)) {
                 long tattooIdParsed = Long.parseLong(tattooId);
                 long imageIdParsed = Long.parseLong(imageId);
                 result = transactionManager.removeTattooAndImage(
@@ -71,12 +69,11 @@ public class TattooServiceImpl implements TattooService {
     public boolean editTattoo(String id, String name, String description,
                               String price) throws ServiceException {
         try {
-            TattooValidator tattooValidator = new TattooValidator();
             boolean result = false;
-            if (tattooValidator.isIdCorrect(id)
-                    && tattooValidator.isNameCorrect(name)
-                    && tattooValidator.isDescriptionCorrect(description)
-                    && tattooValidator.isPriceCorrect(price)) {
+            if (TattooValidator.isIdCorrect(id)
+                    && TattooValidator.isNameCorrect(name)
+                    && TattooValidator.isDescriptionCorrect(description)
+                    && TattooValidator.isPriceCorrect(price)) {
                 long tattooId = Long.parseLong(id);
                 double tattooPrice = Double.parseDouble(price);
                 TattooBuilder tattooBuilder = new TattooBuilder();
@@ -98,11 +95,10 @@ public class TattooServiceImpl implements TattooService {
                                String price, String imageName,
                                String proposedLogin) throws ServiceException {
         try {
-            TattooValidator tattooValidator = new TattooValidator();
             boolean result = false;
-            if (tattooValidator.isNameCorrect(tattooName)
-                    && tattooValidator.isDescriptionCorrect(description)
-                    && tattooValidator.isPriceCorrect(price)) {
+            if (TattooValidator.isNameCorrect(tattooName)
+                    && TattooValidator.isDescriptionCorrect(description)
+                    && TattooValidator.isPriceCorrect(price)) {
                 double tattooPrice = Double.parseDouble(price);
                 TattooBuilder tattooBuilder = new TattooBuilder();
                 tattooBuilder.setName(tattooName);
@@ -124,9 +120,8 @@ public class TattooServiceImpl implements TattooService {
     @Override
     public boolean allowTattoo(String id) throws ServiceException {
         boolean result = false;
-        TattooValidator tattooValidator = new TattooValidator();
         try {
-            if (tattooValidator.isIdCorrect(id)) {
+            if (TattooValidator.isIdCorrect(id)) {
                 long tattooId = Long.parseLong(id);
                 result = tattooDao.allow(tattooId);
             }
@@ -139,9 +134,8 @@ public class TattooServiceImpl implements TattooService {
     @Override
     public boolean archiveTattoo(String id) throws ServiceException {
         boolean result = false;
-        TattooValidator tattooValidator = new TattooValidator();
         try {
-            if (tattooValidator.isIdCorrect(id)) {
+            if (TattooValidator.isIdCorrect(id)) {
                 long tattooId = Long.parseLong(id);
                 result = tattooDao.archive(tattooId);
             }
@@ -154,9 +148,8 @@ public class TattooServiceImpl implements TattooService {
     @Override
     public boolean unarchiveTattoo(String id) throws ServiceException {
         boolean result = false;
-        TattooValidator tattooValidator = new TattooValidator();
         try {
-            if (tattooValidator.isIdCorrect(id)) {
+            if (TattooValidator.isIdCorrect(id)) {
                 long tattooId = Long.parseLong(id);
                 result = tattooDao.unarchive(tattooId);
             }
@@ -179,9 +172,8 @@ public class TattooServiceImpl implements TattooService {
     @Override
     public Optional<Tattoo> findTattooById(String id) throws ServiceException {
         Optional<Tattoo> tattoo = Optional.empty();
-        TattooValidator tattooValidator = new TattooValidator();
         try {
-            if (tattooValidator.isIdCorrect(id)) {
+            if (TattooValidator.isIdCorrect(id)) {
                 long tattooId = Long.parseLong(id);
                 tattoo = tattooDao.findById(tattooId);
             }
@@ -238,9 +230,8 @@ public class TattooServiceImpl implements TattooService {
     public Optional<Tattoo> findTattooByIdCatalog(String id)
             throws ServiceException {
         Optional<Tattoo> tattoo = Optional.empty();
-        TattooValidator tattooValidator = new TattooValidator();
         try {
-            if (tattooValidator.isIdCorrect(id)) {
+            if (TattooValidator.isIdCorrect(id)) {
                 long tattooId = Long.parseLong(id);
                 tattoo = tattooDao.findByIdCatalog(tattooId);
             }

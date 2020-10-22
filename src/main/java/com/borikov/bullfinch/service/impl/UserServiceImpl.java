@@ -12,7 +12,7 @@ import com.borikov.bullfinch.exception.ServiceException;
 import com.borikov.bullfinch.exception.TransactionException;
 import com.borikov.bullfinch.service.UserService;
 import com.borikov.bullfinch.util.PasswordEncryptor;
-import com.borikov.bullfinch.validator.impl.UserValidator;
+import com.borikov.bullfinch.validator.UserValidator;
 
 import java.util.List;
 import java.util.Optional;
@@ -26,14 +26,13 @@ public class UserServiceImpl implements UserService {
                            String secondName, String phoneNumber, String password,
                            String confirmedPassword) throws ServiceException {
         try {
-            UserValidator userValidator = new UserValidator();
             boolean result = false;
-            if (userValidator.isEmailCorrect(email)
-                    && userValidator.isLoginCorrect(login)
-                    && userValidator.isFirstNameCorrect(firstName)
-                    && userValidator.isSecondNameCorrect(secondName)
-                    && userValidator.isPhoneNumberCorrect(phoneNumber)
-                    && userValidator.isPasswordCorrect(password)
+            if (UserValidator.isEmailCorrect(email)
+                    && UserValidator.isLoginCorrect(login)
+                    && UserValidator.isFirstNameCorrect(firstName)
+                    && UserValidator.isSecondNameCorrect(secondName)
+                    && UserValidator.isPhoneNumberCorrect(phoneNumber)
+                    && UserValidator.isPasswordCorrect(password)
                     && password.equals(confirmedPassword)) {
                 Optional<String> encryptedPassword =
                         PasswordEncryptor.encrypt(password);
@@ -65,15 +64,14 @@ public class UserServiceImpl implements UserService {
     public boolean editUser(String id, String email, String login,
                             String firstName, String secondName,
                             String phoneNumber) throws ServiceException {
-        UserValidator userValidator = new UserValidator();
         boolean result = false;
         try {
-            if (userValidator.isIdCorrect(id)
-                    && userValidator.isEmailCorrect(email)
-                    && userValidator.isLoginCorrect(login)
-                    && userValidator.isFirstNameCorrect(firstName)
-                    && userValidator.isSecondNameCorrect(secondName)
-                    && userValidator.isPhoneNumberCorrect(phoneNumber)) {
+            if (UserValidator.isIdCorrect(id)
+                    && UserValidator.isEmailCorrect(email)
+                    && UserValidator.isLoginCorrect(login)
+                    && UserValidator.isFirstNameCorrect(firstName)
+                    && UserValidator.isSecondNameCorrect(secondName)
+                    && UserValidator.isPhoneNumberCorrect(phoneNumber)) {
                 UserBuilder userBuilder = new UserBuilder();
                 long userId = Long.parseLong(id);
                 userBuilder.setUserId(userId);
@@ -108,9 +106,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean blockUser(String login) throws ServiceException {
         boolean result = false;
-        UserValidator userValidator = new UserValidator();
         try {
-            if (userValidator.isLoginCorrect(login)) {
+            if (UserValidator.isLoginCorrect(login)) {
                 result = userDao.block(login);
             }
             return result;
@@ -122,9 +119,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean unblockUser(String login) throws ServiceException {
         boolean result = false;
-        UserValidator userValidator = new UserValidator();
         try {
-            if (userValidator.isLoginCorrect(login)) {
+            if (UserValidator.isLoginCorrect(login)) {
                 result = userDao.unblock(login);
             }
             return result;
@@ -137,10 +133,9 @@ public class UserServiceImpl implements UserService {
     public Optional<User> isUserExists(String login, String password)
             throws ServiceException {
         try {
-            UserValidator userValidator = new UserValidator();
             Optional<User> userOptional = Optional.empty();
-            if (userValidator.isLoginCorrect(login)
-                    && userValidator.isPasswordCorrect(password)) {
+            if (UserValidator.isLoginCorrect(login)
+                    && UserValidator.isPasswordCorrect(password)) {
                 Optional<String> userPasswordOptional =
                         userDao.checkExistingByLogin(login);
                 if (userPasswordOptional.isPresent()) {
@@ -172,9 +167,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public Optional<User> findUserByLogin(String login) throws ServiceException {
         Optional<User> user = Optional.empty();
-        UserValidator userValidator = new UserValidator();
         try {
-            if (userValidator.isLoginCorrect(login)) {
+            if (UserValidator.isLoginCorrect(login)) {
                 user = userDao.findByLogin(login);
             }
             return user;
