@@ -14,15 +14,16 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.sql.Connection;
+import java.util.Optional;
 
 import static org.testng.Assert.*;
 
 public class WalletDaoImplTest {
     private WalletDao walletDao;
-    private Connection connection;
     private Wallet wallet1;
     private Wallet wallet2;
     private Wallet wallet3;
+    private Connection connection;
     private static final Logger LOGGER = LogManager.getLogger();
 
     @BeforeClass
@@ -104,4 +105,69 @@ public class WalletDaoImplTest {
         }
     }
 
+    @Test(priority = 4)
+    public void findByIdPositiveTest() {
+        try {
+            Wallet expected = new Wallet(2L, 1000);
+            Optional<Wallet> actual = walletDao.findById(2);
+            assertEquals(expected, actual.get());
+        } catch (DaoException e) {
+            fail("incorrect data", e);
+        }
+    }
+
+    @Test(priority = 5)
+    public void findByIdNegativeTest() {
+        try {
+            Wallet expected = new Wallet(2L, 1001);
+            Optional<Wallet> actual = walletDao.findById(2);
+            assertNotEquals(expected, actual.get());
+        } catch (DaoException e) {
+            fail("incorrect data", e);
+        }
+    }
+
+    @Test(priority = 6)
+    public void findByUserLoginPositiveTest() {
+        try {
+            Wallet expected = new Wallet(1L, 0);
+            Optional<Wallet> actual = walletDao.findByUserLogin("alex");
+            assertEquals(expected, actual.get());
+        } catch (DaoException e) {
+            fail("incorrect data", e);
+        }
+    }
+
+    @Test(priority = 7)
+    public void findByUserLoginNegativeTest() {
+        try {
+            Wallet expected = new Wallet(3L, 501);
+            Optional<Wallet> actual = walletDao.findByUserLogin("oleg");
+            assertNotEquals(expected, actual.get());
+        } catch (DaoException e) {
+            fail("incorrect data", e);
+        }
+    }
+
+    @Test(priority = 8)
+    public void findByOrderIdPositiveTest() {
+        try {
+            Wallet expected = new Wallet(1L, 0);
+            Optional<Wallet> actual = walletDao.findByOrderId(1);
+            assertEquals(expected, actual.get());
+        } catch (DaoException e) {
+            fail("incorrect data", e);
+        }
+    }
+
+    @Test(priority = 9)
+    public void findByOrderIdNegativeTest() {
+        try {
+            Wallet expected = new Wallet(1L, 1);
+            Optional<Wallet> actual = walletDao.findByOrderId(1);
+            assertNotEquals(expected, actual.get());
+        } catch (DaoException e) {
+            fail("incorrect data", e);
+        }
+    }
 }
