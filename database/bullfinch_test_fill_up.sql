@@ -49,3 +49,13 @@ INSERT INTO bullfinch_test.discount (discount_percent, user_account_id_fk)
 VALUES (10, 2);
 INSERT INTO bullfinch_test.discount (discount_percent, user_account_id_fk)
 VALUES (30, 3);
+
+INSERT INTO bullfinch_test.tattoo_order (tattoo_order_price, date, tattoo_order_description,
+                                         is_confirmed, user_account_id_fk, tattoo_id_fk)
+VALUES (500, 11111111111111, 'Good', 1, 2, 1);
+INSERT INTO bullfinch_test.tattoo_order (tattoo_order_price, date, tattoo_order_description,
+                                         is_confirmed, user_account_id_fk, tattoo_id_fk)
+VALUES (300, 11111111111161, 'Cool', 0, 2, 3);
+INSERT INTO bullfinch_test.tattoo_order (tattoo_order_price, date, tattoo_order_description,
+                                         is_confirmed, user_account_id_fk, tattoo_id_fk)
+VALUES (600, 11111111112111, 'Nice', 0, 3, 2);

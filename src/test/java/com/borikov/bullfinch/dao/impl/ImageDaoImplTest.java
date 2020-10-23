@@ -24,7 +24,7 @@ public class ImageDaoImplTest {
     private Image image2;
     private Image image3;
     private Image image4;
-    Connection connection;
+    private Connection connection;
     private static final Logger LOGGER = LogManager.getLogger();
 
     @BeforeClass
