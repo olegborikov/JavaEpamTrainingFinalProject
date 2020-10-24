@@ -11,6 +11,7 @@ import java.sql.*;
 import java.util.Optional;
 
 public class WalletDaoImpl implements WalletDao {
+    private static final WalletDaoImpl INSTANCE = new WalletDaoImpl();
     private static final String ADD = "INSERT INTO wallet (balance) VALUES (0)";
     private static final String UPDATE = "UPDATE wallet SET balance = ? " +
             "WHERE wallet_id = ?";
@@ -26,6 +27,13 @@ public class WalletDaoImpl implements WalletDao {
             "INNER JOIN tattoo_order " +
             "ON user_account.user_account_id = tattoo_order.user_account_id_fk " +
             "WHERE tattoo_order_id = ?";
+
+    private WalletDaoImpl() {
+    }
+
+    public static WalletDaoImpl getInstance() {
+        return INSTANCE;
+    }
 
     @Override
     public boolean add(Wallet wallet, Connection connection) throws DaoException {

@@ -31,7 +31,7 @@ public class UserDaoImplTest {
 
     @BeforeClass
     public void setUp() {
-        userDao = new UserDaoImpl();
+        userDao = UserDaoImpl.getInstance();
         UserBuilder userBuilder = new UserBuilder();
         userBuilder.setLogin("qwerty");
         userBuilder.setEmail("qwerty@email.com");

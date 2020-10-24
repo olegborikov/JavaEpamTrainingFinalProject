@@ -27,8 +27,8 @@ import java.util.List;
 import java.util.Optional;
 
 public class OrderServiceImpl implements OrderService {
-    private final OrderDao orderDao = new OrderDaoImpl();
-    private final DiscountDao discountDao = new DiscountDaoImpl();
+    private final OrderDao orderDao = OrderDaoImpl.getInstance();
+    private final DiscountDao discountDao = DiscountDaoImpl.getInstance();
     private final TransactionManager transactionManager = new TransactionManager();
 
     @Override

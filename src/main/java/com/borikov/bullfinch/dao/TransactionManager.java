@@ -19,14 +19,11 @@ import java.util.Optional;
 
 public class TransactionManager {
     private static final Logger LOGGER = LogManager.getLogger();
-    private final ImageDao imageDao = new ImageDaoImpl();
-    private final TattooDao tattooDao = new TattooDaoImpl();
-    private final WalletDao walletDao = new WalletDaoImpl();
-    private final UserDao userDao = new UserDaoImpl();
-    private final OrderDao orderDao = new OrderDaoImpl();
 
     public boolean addImageAndTattoo(Tattoo tattoo) throws TransactionException {
         Connection connection = null;
+        ImageDao imageDao = ImageDaoImpl.getInstance();
+        TattooDao tattooDao = TattooDaoImpl.getInstance();
         try {
             connection = ConnectionPool.INSTANCE.getConnection();
             connection.setAutoCommit(false);
@@ -48,6 +45,8 @@ public class TransactionManager {
     public boolean offerImageAndTattoo(Tattoo tattoo)
             throws TransactionException {
         Connection connection = null;
+        ImageDao imageDao = ImageDaoImpl.getInstance();
+        TattooDao tattooDao = TattooDaoImpl.getInstance();
         try {
             connection = ConnectionPool.INSTANCE.getConnection();
             connection.setAutoCommit(false);
@@ -69,6 +68,8 @@ public class TransactionManager {
     public boolean removeTattooAndImage(long tattooId, long imageId)
             throws TransactionException {
         Connection connection = null;
+        ImageDao imageDao = ImageDaoImpl.getInstance();
+        TattooDao tattooDao = TattooDaoImpl.getInstance();
         try {
             connection = ConnectionPool.INSTANCE.getConnection();
             connection.setAutoCommit(false);
@@ -91,6 +92,8 @@ public class TransactionManager {
     public boolean addWalletAndUser(User user, String password)
             throws TransactionException {
         Connection connection = null;
+        WalletDao walletDao = WalletDaoImpl.getInstance();
+        UserDao userDao = UserDaoImpl.getInstance();
         try {
             connection = ConnectionPool.INSTANCE.getConnection();
             connection.setAutoCommit(false);
@@ -112,6 +115,8 @@ public class TransactionManager {
     public boolean orderSubmitProcess(long orderId) throws TransactionException {
         Connection connection = null;
         boolean result = false;
+        WalletDao walletDao = WalletDaoImpl.getInstance();
+        OrderDao orderDao = OrderDaoImpl.getInstance();
         try {
             connection = ConnectionPool.INSTANCE.getConnection();
             connection.setAutoCommit(false);

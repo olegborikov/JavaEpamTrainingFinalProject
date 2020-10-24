@@ -37,7 +37,7 @@ public class OrderDaoImplTest {
 
     @BeforeClass
     public void setUp() {
-        orderDao = new OrderDaoImpl();
+        orderDao = OrderDaoImpl.getInstance();
         UserBuilder userBuilder1 = new UserBuilder();
         userBuilder1.setLogin("oleg");
         TattooBuilder tattooBuilder1 = new TattooBuilder();

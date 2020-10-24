@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class UserDaoImpl implements UserDao {
+    private static final UserDaoImpl INSTANCE = new UserDaoImpl();
     private static final String ADD = "INSERT INTO user_account (email, login, " +
             "password, first_name, second_name, phone_number, is_blocked, " +
             "is_activated, role_id_fk, wallet_id_fk) " +
@@ -49,6 +50,13 @@ public class UserDaoImpl implements UserDao {
             "first_name, second_name FROM user_account " +
             "WHERE BINARY login NOT LIKE 'admin' AND BINARY login LIKE ?";
     private static final String PERCENT = "%";
+
+    private UserDaoImpl() {
+    }
+
+    public static UserDaoImpl getInstance() {
+        return INSTANCE;
+    }
 
     @Override
     public boolean add(User user, String password, Connection connection)

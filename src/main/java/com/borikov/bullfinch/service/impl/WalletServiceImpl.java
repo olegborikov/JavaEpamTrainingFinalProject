@@ -16,8 +16,8 @@ import com.borikov.bullfinch.validator.WalletValidator;
 import java.util.Optional;
 
 public class WalletServiceImpl implements WalletService {
-    private final WalletDao walletDao = new WalletDaoImpl();
-    private final OrderDao orderDao = new OrderDaoImpl();
+    private final WalletDao walletDao = WalletDaoImpl.getInstance();
+    private final OrderDao orderDao = OrderDaoImpl.getInstance();
 
     @Override
     public boolean enrichBalance(String walletId, String enrichAmount)

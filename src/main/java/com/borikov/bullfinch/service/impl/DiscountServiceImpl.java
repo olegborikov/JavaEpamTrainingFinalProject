@@ -10,14 +10,13 @@ import com.borikov.bullfinch.exception.DaoException;
 import com.borikov.bullfinch.exception.ServiceException;
 import com.borikov.bullfinch.service.DiscountService;
 import com.borikov.bullfinch.validator.DiscountValidator;
-import com.borikov.bullfinch.validator.OrderValidator;
 import com.borikov.bullfinch.validator.UserValidator;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class DiscountServiceImpl implements DiscountService {
-    private final DiscountDao discountDao = new DiscountDaoImpl();
+    private final DiscountDao discountDao = DiscountDaoImpl.getInstance();
 
     @Override
     public List<Discount> getDiscountsByUserLogin(String userLogin) throws ServiceException {

@@ -23,7 +23,7 @@ public class DiscountDaoImplTest {
 
     @BeforeClass
     public void setUp() {
-        discountDao = new DiscountDaoImpl();
+        discountDao = DiscountDaoImpl.getInstance();
         UserBuilder userBuilder1 = new UserBuilder();
         userBuilder1.setUserId(2L);
         discount1 = new Discount(null, 50, userBuilder1.getUser());

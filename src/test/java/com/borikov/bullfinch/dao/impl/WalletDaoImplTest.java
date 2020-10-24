@@ -30,7 +30,7 @@ public class WalletDaoImplTest {
 
     @BeforeClass
     public void setUp() {
-        walletDao = new WalletDaoImpl();
+        walletDao = WalletDaoImpl.getInstance();
         wallet1 = new Wallet(null, 0);
         wallet2 = new Wallet(null, 0);
         wallet3 = new Wallet(null, 0);

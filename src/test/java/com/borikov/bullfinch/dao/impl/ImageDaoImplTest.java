@@ -29,7 +29,7 @@ public class ImageDaoImplTest {
 
     @BeforeClass
     public void setUp() {
-        imageDao = new ImageDaoImpl();
+        imageDao = ImageDaoImpl.getInstance();
         image1 = new Image(null, "01cc692c-0e32-4dc2-83bd-ce90eca11111");
         image2 = new Image(null, "01cc692c-0e32-4dc2-83bd-ce90eca11112");
         image3 = new Image(null, "01cc692c-0e32-4dc2-83bd-ce90eca11110");

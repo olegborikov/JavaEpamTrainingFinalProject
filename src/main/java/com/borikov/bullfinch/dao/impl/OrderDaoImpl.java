@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class OrderDaoImpl implements OrderDao {
+    private static final OrderDaoImpl INSTANCE = new OrderDaoImpl();
     private static final String ADD = "INSERT INTO tattoo_order " +
             "(tattoo_order_price, date, tattoo_order_description, " +
             "is_confirmed, tattoo_id_fk, user_account_id_fk) " +
@@ -43,6 +44,13 @@ public class OrderDaoImpl implements OrderDao {
             "INNER JOIN user_account " +
             "ON tattoo_order.user_account_id_fk = user_account.user_account_id " +
             "WHERE login = ?";
+
+    private OrderDaoImpl() {
+    }
+
+    public static OrderDaoImpl getInstance() {
+        return INSTANCE;
+    }
 
     @Override
     public boolean add(Order order) throws DaoException {

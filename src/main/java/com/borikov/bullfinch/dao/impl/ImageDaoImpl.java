@@ -7,8 +7,16 @@ import com.borikov.bullfinch.exception.DaoException;
 import java.sql.*;
 
 public class ImageDaoImpl implements ImageDao {
+    private static final ImageDaoImpl INSTANCE = new ImageDaoImpl();
     private static final String ADD = "INSERT INTO image (image_name) VALUES (?)";
     private static final String REMOVE = "DELETE FROM image WHERE image_id = ?";
+
+    private ImageDaoImpl() {
+    }
+
+    public static ImageDaoImpl getInstance() {
+        return INSTANCE;
+    }
 
     @Override
     public boolean add(Image image, Connection connection) throws DaoException {

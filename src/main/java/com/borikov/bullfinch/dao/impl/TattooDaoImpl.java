@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class TattooDaoImpl implements TattooDao {
+    private static final TattooDaoImpl INSTANCE = new TattooDaoImpl();
     private static final String ADD = "INSERT INTO tattoo (tattoo_name, " +
             "tattoo_description, tattoo_price, is_allowed, is_archived, " +
             "image_id_fk, user_account_id_fk) VALUES (?, ?, ?, 1, 0, ?, " +
@@ -67,6 +68,13 @@ public class TattooDaoImpl implements TattooDao {
             "INNER JOIN image ON tattoo.image_id_fk = image.image_id " +
             "WHERE tattoo_name LIKE ? AND is_allowed = 1 AND is_archived = 0";
     private static final String PERCENT = "%";
+
+    private TattooDaoImpl() {
+    }
+
+    public static TattooDaoImpl getInstance() {
+        return INSTANCE;
+    }
 
     @Override
     public boolean add(Tattoo tattoo, Connection connection) throws DaoException {

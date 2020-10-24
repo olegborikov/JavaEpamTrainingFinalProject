@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DiscountDaoImpl implements DiscountDao {
+    private static final DiscountDaoImpl INSTANCE = new DiscountDaoImpl();
     private static final String ADD = "INSERT INTO discount(discount_percent, " +
             "user_account_id_fk) VALUES (?, ?)";
     private static final String REMOVE = "DELETE FROM discount " +
@@ -21,6 +22,13 @@ public class DiscountDaoImpl implements DiscountDao {
             "discount_percent FROM discount INNER JOIN user_account " +
             "ON discount.user_account_id_fk = user_account.user_account_id " +
             "WHERE login LIKE ?";
+
+    private DiscountDaoImpl() {
+    }
+
+    public static DiscountDaoImpl getInstance() {
+        return INSTANCE;
+    }
 
     @Override
     public boolean add(Discount discount) throws DaoException {

@@ -19,7 +19,7 @@ import java.util.Optional;
 
 public class UserServiceImpl implements UserService {
     private final TransactionManager transactionManager = new TransactionManager();
-    private final UserDao userDao = new UserDaoImpl();
+    private final UserDao userDao = UserDaoImpl.getInstance();
 
     @Override
     public boolean addUser(String email, String login, String firstName,

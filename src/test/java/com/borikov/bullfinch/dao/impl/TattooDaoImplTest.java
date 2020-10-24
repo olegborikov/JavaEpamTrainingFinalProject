@@ -35,7 +35,7 @@ public class TattooDaoImplTest {
 
     @BeforeClass
     public void setUp() {
-        tattooDao = new TattooDaoImpl();
+        tattooDao = TattooDaoImpl.getInstance();
         TattooBuilder tattooBuilder1 = new TattooBuilder();
         tattooBuilder1.setName("Poa");
         tattooBuilder1.setDescription("Cool");
