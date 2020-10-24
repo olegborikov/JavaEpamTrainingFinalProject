@@ -18,6 +18,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
@@ -75,6 +76,13 @@ public class TattooDaoImplTest {
     @AfterClass
     public void tearDown() {
         tattooDao = null;
+        try (PreparedStatement statement = connection.prepareStatement(
+                "DELETE FROM tattoo WHERE tattoo_id = ?")) {
+            statement.setLong(1, tattoo2.getTattooId());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            LOGGER.log(Level.ERROR, "Error while deleting tattoo", e);
+        }
         tattoo1 = null;
         tattoo2 = null;
         tattoo3 = null;

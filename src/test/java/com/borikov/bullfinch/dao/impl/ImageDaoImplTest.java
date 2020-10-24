@@ -48,12 +48,10 @@ public class ImageDaoImplTest {
         image2 = null;
         image3 = null;
         image4 = null;
-        if (connection != null) {
-            try {
-                connection.close();
-            } catch (SQLException e) {
-                LOGGER.log(Level.ERROR, "Error while closing connection", e);
-            }
+        try {
+            connection.close();
+        } catch (SQLException e) {
+            LOGGER.log(Level.ERROR, "Error while closing connection", e);
         }
     }
 

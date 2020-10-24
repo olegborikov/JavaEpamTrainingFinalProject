@@ -16,6 +16,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
@@ -50,14 +51,19 @@ public class UserDaoImplTest {
     @AfterClass
     public void tearDown() {
         userDao = null;
-        user = null;
-        if (connection != null) {
-            try {
-                connection.close();
-            } catch (SQLException e) {
-                LOGGER.log(Level.ERROR, "Error while closing connection", e);
-            }
+        try (PreparedStatement statement = connection.prepareStatement(
+                "DELETE FROM user_account WHERE user_account_id = ?")) {
+            statement.setLong(1, user.getUserId());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            LOGGER.log(Level.ERROR, "Error while deleting user", e);
         }
+        try {
+            connection.close();
+        } catch (SQLException ex) {
+            LOGGER.log(Level.ERROR, "Error while closing connection", ex);
+        }
+        user = null;
     }
 
     @Test(priority = 1)

@@ -14,6 +14,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Optional;
 
@@ -43,6 +44,17 @@ public class WalletDaoImplTest {
     @AfterClass
     public void tearDown() {
         walletDao = null;
+        try (PreparedStatement statement = connection.prepareStatement(
+                "DELETE FROM wallet WHERE wallet_id = ?")) {
+            statement.setLong(1, wallet1.getWalletId());
+            statement.executeUpdate();
+            statement.setLong(1, wallet2.getWalletId());
+            statement.executeUpdate();
+            statement.setLong(1, wallet3.getWalletId());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            LOGGER.log(Level.ERROR, "Error while deleting wallet", e);
+        }
         wallet1 = null;
         wallet2 = null;
         wallet3 = null;

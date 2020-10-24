@@ -3,15 +3,23 @@ package com.borikov.bullfinch.dao.impl;
 import com.borikov.bullfinch.builder.TattooBuilder;
 import com.borikov.bullfinch.builder.UserBuilder;
 import com.borikov.bullfinch.dao.OrderDao;
+import com.borikov.bullfinch.dao.pool.ConnectionPool;
 import com.borikov.bullfinch.entity.Image;
 import com.borikov.bullfinch.entity.Order;
+import com.borikov.bullfinch.exception.ConnectionPoolException;
 import com.borikov.bullfinch.exception.DaoException;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import java.sql.Connection;
 import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +33,7 @@ public class OrderDaoImplTest {
     private Order order2;
     private Order order3;
     private Order order4;
+    private static final Logger LOGGER = LogManager.getLogger();
 
     @BeforeClass
     public void setUp() {
@@ -58,6 +67,14 @@ public class OrderDaoImplTest {
     @AfterClass
     public void tearDown() {
         orderDao = null;
+        try (Connection connection = ConnectionPool.INSTANCE.getConnection();
+             PreparedStatement statement = connection.prepareStatement(
+                     "DELETE FROM tattoo_order WHERE tattoo_order_id = ?")) {
+            statement.setLong(1, order3.getOrderId());
+            statement.executeUpdate();
+        } catch (SQLException | ConnectionPoolException e) {
+            LOGGER.log(Level.ERROR, "Error while deleting order", e);
+        }
         order1 = null;
         order2 = null;
         order3 = null;
