@@ -11,10 +11,7 @@ import com.borikov.bullfinch.entity.User;
 import com.borikov.bullfinch.exception.ConnectionPoolException;
 import com.borikov.bullfinch.exception.DaoException;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -73,13 +70,19 @@ public class TattooDaoImpl implements TattooDao {
 
     @Override
     public boolean add(Tattoo tattoo, Connection connection) throws DaoException {
-        try (PreparedStatement statement = connection.prepareStatement(ADD)) {
+        try (PreparedStatement statement = connection.prepareStatement(ADD,
+                Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, tattoo.getName());
             statement.setString(2, tattoo.getDescription());
             statement.setDouble(3, tattoo.getPrice());
             statement.setLong(4, tattoo.getImage().getImageId());
             statement.setString(5, tattoo.getUser().getLogin());
-            return statement.executeUpdate() > 0;
+            boolean result = statement.executeUpdate() > 0;
+            ResultSet generatedKeys = statement.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                tattoo.setTattooId(generatedKeys.getLong(1));
+            }
+            return result;
         } catch (SQLException e) {
             throw new DaoException("Error while adding tattoo: " + tattoo, e);
         }
@@ -111,13 +114,19 @@ public class TattooDaoImpl implements TattooDao {
 
     @Override
     public boolean offer(Tattoo tattoo, Connection connection) throws DaoException {
-        try (PreparedStatement statement = connection.prepareStatement(OFFER)) {
+        try (PreparedStatement statement = connection.prepareStatement(OFFER,
+                Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, tattoo.getName());
             statement.setString(2, tattoo.getDescription());
             statement.setDouble(3, tattoo.getPrice());
             statement.setLong(4, tattoo.getImage().getImageId());
             statement.setString(5, tattoo.getUser().getLogin());
-            return statement.executeUpdate() > 0;
+            boolean result = statement.executeUpdate() > 0;
+            ResultSet generatedKeys = statement.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                tattoo.setTattooId(generatedKeys.getLong(1));
+            }
+            return result;
         } catch (SQLException e) {
             throw new DaoException("Error while offering tattoo: " + tattoo, e);
         }

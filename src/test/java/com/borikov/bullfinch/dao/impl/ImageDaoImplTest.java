@@ -60,14 +60,14 @@ public class ImageDaoImplTest {
     @DataProvider(name = "addPositiveData")
     public Object[][] createAddPositiveData() {
         return new Object[][]{
-                {image1, connection},
-                {image2, connection},
-                {image3, connection}
+                {image1},
+                {image2},
+                {image3}
         };
     }
 
     @Test(dataProvider = "addPositiveData", priority = 1)
-    public void addPositiveTest(Image image, Connection connection) {
+    public void addPositiveTest(Image image) {
         try {
             boolean actual = imageDao.add(image, connection);
             assertTrue(actual);
@@ -79,13 +79,13 @@ public class ImageDaoImplTest {
     @DataProvider(name = "addExceptionData")
     public Object[][] createAddExceptionData() {
         return new Object[][]{
-                {image4, connection}
+                {image4}
         };
     }
 
     @Test(dataProvider = "addExceptionData",
             expectedExceptions = DaoException.class, priority = 2)
-    public void addExceptionTest(Image image, Connection connection)
+    public void addExceptionTest(Image image)
             throws DaoException {
         imageDao.add(image, connection);
     }
@@ -93,14 +93,14 @@ public class ImageDaoImplTest {
     @DataProvider(name = "removePositiveData")
     public Object[][] createRemovePositiveData() {
         return new Object[][]{
-                {image1.getImageId(), connection},
-                {image2.getImageId(), connection},
-                {image3.getImageId(), connection}
+                {image1.getImageId()},
+                {image2.getImageId()},
+                {image3.getImageId()}
         };
     }
 
     @Test(dataProvider = "removePositiveData", priority = 3)
-    public void removePositiveTest(long id, Connection connection) {
+    public void removePositiveTest(long id) {
         try {
             boolean actual = imageDao.remove(id, connection);
             assertTrue(actual);
@@ -112,14 +112,14 @@ public class ImageDaoImplTest {
     @DataProvider(name = "removeNegativeData")
     public Object[][] createRemoveNegativeData() {
         return new Object[][]{
-                {image3.getImageId() + 1, connection},
-                {image3.getImageId() + 2, connection},
-                {image3.getImageId() + 3, connection}
+                {image3.getImageId() + 1},
+                {image3.getImageId() + 2},
+                {image3.getImageId() + 3}
         };
     }
 
     @Test(dataProvider = "removeNegativeData", priority = 4)
-    public void removeNegativeTest(long id, Connection connection) {
+    public void removeNegativeTest(long id) {
         try {
             boolean actual = imageDao.remove(id, connection);
             assertFalse(actual);

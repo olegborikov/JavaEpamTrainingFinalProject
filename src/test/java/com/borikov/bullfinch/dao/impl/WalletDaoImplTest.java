@@ -14,6 +14,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.Optional;
 
 import static org.testng.Assert.*;
@@ -45,7 +46,11 @@ public class WalletDaoImplTest {
         wallet1 = null;
         wallet2 = null;
         wallet3 = null;
-        connection = null;
+        try {
+            connection.close();
+        } catch (SQLException e) {
+            LOGGER.log(Level.ERROR, "Error while closing connection", e);
+        }
     }
 
     @DataProvider(name = "addPositiveData")
@@ -90,8 +95,8 @@ public class WalletDaoImplTest {
     @DataProvider(name = "updateNegativeData")
     public Object[][] createUpdateNegativeData() {
         return new Object[][]{
-                {new Wallet(wallet3.getWalletId() + 10, 100)},
-                {new Wallet(wallet3.getWalletId() + 20, 30)},
+                {new Wallet(wallet3.getWalletId() + 1, 100)},
+                {new Wallet(wallet3.getWalletId() + 2, 30)},
         };
     }
 
@@ -110,7 +115,7 @@ public class WalletDaoImplTest {
         try {
             Wallet expected = new Wallet(2L, 1000);
             Optional<Wallet> actual = walletDao.findById(2);
-            assertEquals(expected, actual.get());
+            assertEquals(actual.get(), expected);
         } catch (DaoException e) {
             fail("incorrect data", e);
         }
@@ -121,7 +126,7 @@ public class WalletDaoImplTest {
         try {
             Wallet expected = new Wallet(2L, 1001);
             Optional<Wallet> actual = walletDao.findById(2);
-            assertNotEquals(expected, actual.get());
+            assertNotEquals(actual.get(), expected);
         } catch (DaoException e) {
             fail("incorrect data", e);
         }
@@ -132,7 +137,7 @@ public class WalletDaoImplTest {
         try {
             Wallet expected = new Wallet(1L, 0);
             Optional<Wallet> actual = walletDao.findByUserLogin("alex");
-            assertEquals(expected, actual.get());
+            assertEquals(actual.get(), expected);
         } catch (DaoException e) {
             fail("incorrect data", e);
         }
@@ -143,7 +148,7 @@ public class WalletDaoImplTest {
         try {
             Wallet expected = new Wallet(3L, 501);
             Optional<Wallet> actual = walletDao.findByUserLogin("oleg");
-            assertNotEquals(expected, actual.get());
+            assertNotEquals(actual.get(), expected);
         } catch (DaoException e) {
             fail("incorrect data", e);
         }
@@ -154,7 +159,7 @@ public class WalletDaoImplTest {
         try {
             Wallet expected = new Wallet(1L, 0);
             Optional<Wallet> actual = walletDao.findByOrderId(1);
-            assertEquals(expected, actual.get());
+            assertEquals(actual.get(), expected);
         } catch (DaoException e) {
             fail("incorrect data", e);
         }
@@ -165,7 +170,7 @@ public class WalletDaoImplTest {
         try {
             Wallet expected = new Wallet(1L, 1);
             Optional<Wallet> actual = walletDao.findByOrderId(1);
-            assertNotEquals(expected, actual.get());
+            assertNotEquals(actual.get(), expected);
         } catch (DaoException e) {
             fail("incorrect data", e);
         }

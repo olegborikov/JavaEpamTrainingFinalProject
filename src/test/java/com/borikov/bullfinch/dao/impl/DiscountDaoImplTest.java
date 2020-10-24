@@ -126,7 +126,7 @@ public class DiscountDaoImplTest {
             expected.add(discount5);
             expected.add(discount6);
             List<Discount> actual = discountDao.findByUserLogin("alex");
-            assertEquals(expected, actual);
+            assertEquals(actual, expected);
         } catch (DaoException e) {
             fail("incorrect data", e);
         }
@@ -141,7 +141,7 @@ public class DiscountDaoImplTest {
             expected.add(discount5);
             expected.add(discount6);
             List<Discount> actual = discountDao.findByUserLogin("ale");
-            assertNotEquals(expected, actual);
+            assertNotEquals(actual, expected);
         } catch (DaoException e) {
             fail("incorrect data", e);
         }

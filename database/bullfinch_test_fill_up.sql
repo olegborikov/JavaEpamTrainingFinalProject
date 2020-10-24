@@ -37,7 +37,7 @@ VALUES ('01cc692c-0e32-4dc2-83bd-ce90eca3768f');
 
 INSERT INTO bullfinch_test.tattoo (tattoo_name, tattoo_description, tattoo_price,
                               is_allowed, is_archived, image_id_fk, user_account_id_fk)
-VALUES ('Girl', 'Beautiful', 1000, 1, 0, 1, 1);
+VALUES ('Girl', 'Beautiful', 1000, 1, 1, 1, 1);
 INSERT INTO bullfinch_test.tattoo (tattoo_name, tattoo_description, tattoo_price,
                               is_allowed, is_archived, image_id_fk, user_account_id_fk)
 VALUES ('Warrior', 'Cool', 750, 1, 0, 2, 1);

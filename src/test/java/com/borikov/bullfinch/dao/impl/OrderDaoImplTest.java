@@ -100,8 +100,7 @@ public class OrderDaoImplTest {
     public Object[][] createRemovePositiveData() {
         return new Object[][]{
                 {order1.getOrderId()},
-                {order2.getOrderId()},
-                {order3.getOrderId()}
+                {order2.getOrderId()}
         };
     }
 
@@ -137,8 +136,7 @@ public class OrderDaoImplTest {
     @Test(priority = 5)
     public void submitPositiveTest() {
         try {
-            long id = 2;
-            boolean actual = orderDao.submit(id);
+            boolean actual = orderDao.submit(order3.getOrderId());
             assertTrue(actual);
         } catch (DaoException e) {
             fail("incorrect data", e);
@@ -148,8 +146,7 @@ public class OrderDaoImplTest {
     @Test(priority = 6)
     public void submitNegativeTest() {
         try {
-            long id = 5;
-            boolean actual = orderDao.submit(id);
+            boolean actual = orderDao.submit(order3.getOrderId() + 1);
             assertFalse(actual);
         } catch (DaoException e) {
             fail("incorrect data", e);

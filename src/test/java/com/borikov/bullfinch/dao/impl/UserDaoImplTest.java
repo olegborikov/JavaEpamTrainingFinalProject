@@ -16,6 +16,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
@@ -49,14 +50,21 @@ public class UserDaoImplTest {
     @AfterClass
     public void tearDown() {
         userDao = null;
-        connection = null;
         user = null;
+        if (connection != null) {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                LOGGER.log(Level.ERROR, "Error while closing connection", e);
+            }
+        }
     }
 
     @Test(priority = 1)
     public void addPositiveTest() {
         try {
-            boolean actual = userDao.add(user, "e43713ad9e2fc4c55c1e2b373d3f548bd1ffed61", connection);
+            boolean actual = userDao.add(user,
+                    "e43713ad9e2fc4c55c1e2b373d3f548bd1ffed61", connection);
             assertTrue(actual);
         } catch (DaoException e) {
             fail("incorrect data", e);
@@ -84,7 +92,7 @@ public class UserDaoImplTest {
     public void updateNegativeTest() {
         try {
             UserBuilder userBuilder = new UserBuilder();
-            userBuilder.setUserId(user.getUserId() + 10);
+            userBuilder.setUserId(user.getUserId() + 1);
             userBuilder.setLogin("qwerty");
             userBuilder.setEmail("qwerty@email.com");
             userBuilder.setFirstName("Qwerty");
@@ -99,7 +107,7 @@ public class UserDaoImplTest {
         }
     }
 
-    @Test
+    @Test(priority = 5)
     public void authorizePositiveTest() {
         try {
             Optional<User> userOptional = userDao.authorize("alex");
@@ -244,7 +252,7 @@ public class UserDaoImplTest {
     public void findByLoginPositiveTest() {
         try {
             Optional<User> actual = userDao.findByLogin(user.getLogin());
-            assertEquals(user, actual.get());
+            assertEquals(actual.get(), user);
         } catch (DaoException e) {
             fail("incorrect data", e);
         }
@@ -254,7 +262,7 @@ public class UserDaoImplTest {
     public void findByLoginNegativeTest() {
         try {
             Optional<User> actual = userDao.findByLogin("oleg");
-            assertNotEquals(user, actual.get());
+            assertNotEquals(actual.get(), user);
         } catch (DaoException e) {
             fail("incorrect data", e);
         }
