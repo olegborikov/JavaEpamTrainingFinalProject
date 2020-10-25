@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="ctg" uri="customtags" %>
 
 <fmt:setLocale value="${currentLocale}"/>
 <fmt:setBundle basename="i18n.application_message"/>
@@ -18,6 +19,7 @@
 </head>
 <body id="page-top">
 <jsp:include page="navbar.jsp"/>
+<ctg:pagination></ctg:pagination>
 <section style="padding-top: 120px" class="masthead content-section text-center">
     <div class="intro-body">
         <div class="container-fluid">
