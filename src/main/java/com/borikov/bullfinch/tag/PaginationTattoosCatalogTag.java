@@ -2,6 +2,9 @@ package com.borikov.bullfinch.tag;
 
 import com.borikov.bullfinch.controller.RequestParameter;
 import com.borikov.bullfinch.entity.Tattoo;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.TagSupport;
@@ -11,6 +14,7 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class PaginationTattoosCatalogTag extends TagSupport {
+    private static final Logger LOGGER = LogManager.getLogger();
     private static final String TATTOOS_INFO = "tattoosAdmin.info";
     private int pageNumber;
     private int tattoosAmountOnPage;
@@ -52,10 +56,10 @@ public class PaginationTattoosCatalogTag extends TagSupport {
                         "</div>\n" +
                         "</div>\n");
             } catch (IOException e) {
-                // TODO: 26.10.2020 log
+                LOGGER.log(Level.ERROR, "Error while writing to out stream");
             }
             currentTattoo++;
         }
-        return EVAL_BODY_INCLUDE;
+        return SKIP_BODY;
     }
 }

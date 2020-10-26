@@ -17,6 +17,8 @@ import java.util.List;
 public class BrowseUsersPageCommand implements Command {
     private static final Logger LOGGER = LogManager.getLogger();
     private static final UserService userService = new UserServiceImpl();
+    private static final int FIRST_PAGE_NUMBER = 1;
+    private static final int USERS_AMOUNT_ON_PAGE = 10;
 
     @Override
     public String execute(HttpServletRequest request) {
@@ -24,6 +26,10 @@ public class BrowseUsersPageCommand implements Command {
         try {
             List<User> users = userService.findAllUsers();
             request.setAttribute(RequestParameter.USERS, users);
+            request.setAttribute(RequestParameter.PAGE_AMOUNT,
+                    Math.ceil((double) users.size() / USERS_AMOUNT_ON_PAGE));
+            request.setAttribute(RequestParameter.PAGE_NUMBER, FIRST_PAGE_NUMBER);
+            request.setAttribute(RequestParameter.USERS_AMOUNT_ON_PAGE, USERS_AMOUNT_ON_PAGE);
             page = PagePath.USERS_ADMIN;
         } catch (ServiceException e) {
             LOGGER.log(Level.ERROR, "Error while finding users", e);

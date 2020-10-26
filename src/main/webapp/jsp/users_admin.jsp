@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="ctg" uri="customTags" %>
 
 <fmt:setLocale value="${currentLocale}"/>
 <fmt:setBundle basename="i18n.application_message"/>
@@ -53,20 +54,42 @@
                             </div>
                         </div>
                     </c:if>
-                    <c:forEach var="user" items="${users}">
-                        <div class="col-md-12">
-                            <form method="post" action="controller">
-                                <input type="hidden" name="commandName"
-                                       value="browse_profile_admin_page_command">
-                                <input style="background-color: black; text-align: left"
-                                       type="submit"
-                                       class="form-control text-white"
-                                       name="login"
-                                       value="${user.login}">
-                            </form>
-                        </div>
-                    </c:forEach>
+                    <ctg:pagination-users pageNumber="${pageNumber}"
+                                          usersAmountOnPage="${usersAmountOnPage}"/>
                 </div>
+                <c:if test="${not empty users && users.size() > usersAmountOnPage}">
+                    <form method="post" action="controller">
+                        <input type="hidden" name="commandName" value="pagination_command">
+                        <c:choose>
+                            <c:when test="${pageNumber != 1}">
+                                <button type="submit" class="btn btn-outline-secondary"
+                                        name="pageNumber" value=${pageNumber - 1}>
+                                    <fmt:message key="catalog.paginationPrevious"/>
+                                </button>
+                            </c:when>
+                            <c:otherwise>
+                                <button type="submit" class="btn btn-outline-secondary" disabled>
+                                    <fmt:message key="catalog.paginationPrevious"/>
+                                </button>
+                            </c:otherwise>
+                        </c:choose>
+                        <input type="button" class="btn btn-outline-secondary"
+                               disabled value=${pageNumber}>
+                        <c:choose>
+                            <c:when test="${pageNumber < pageAmount}">
+                                <button type="submit" class="btn btn-outline-secondary"
+                                        name="pageNumber" value=${pageNumber + 1}>
+                                    <fmt:message key="catalog.paginationNext"/>
+                                </button>
+                            </c:when>
+                            <c:otherwise>
+                                <button type="submit" class="btn btn-outline-secondary" disabled>
+                                    <fmt:message key="catalog.paginationNext"/>
+                                </button>
+                            </c:otherwise>
+                        </c:choose>
+                    </form>
+                </c:if>
             </div>
         </div>
     </div>

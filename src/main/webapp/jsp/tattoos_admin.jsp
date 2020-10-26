@@ -68,13 +68,13 @@
                     <ctg:pagination-tattoos-admin pageNumber="${pageNumber}"
                                             tattoosAmountOnPage="${tattoosAmountOnPage}"/>
                 </div>
-                <c:if test="${not empty tattoos}">
+                <c:if test="${not empty tattoos && tattoos.size() > tattoosAmountOnPage}">
                     <form method="post" action="controller">
                         <input type="hidden" name="commandName" value="pagination_command">
                         <c:choose>
-                            <c:when test="${pageNumber!=1}">
+                            <c:when test="${pageNumber != 1}">
                                 <button type="submit" class="btn btn-outline-secondary"
-                                        name="pageNumber" value=${pageNumber-1}>
+                                        name="pageNumber" value=${pageNumber - 1}>
                                     <fmt:message key="catalog.paginationPrevious"/>
                                 </button>
                             </c:when>
@@ -87,9 +87,9 @@
                         <input type="button" class="btn btn-outline-secondary"
                                disabled value=${pageNumber}>
                         <c:choose>
-                            <c:when test="${pageNumber<pageAmount}">
+                            <c:when test="${pageNumber < pageAmount}">
                                 <button type="submit" class="btn btn-outline-secondary"
-                                        name="pageNumber" value=${pageNumber+1}>
+                                        name="pageNumber" value=${pageNumber + 1}>
                                     <fmt:message key="catalog.paginationNext"/>
                                 </button>
                             </c:when>

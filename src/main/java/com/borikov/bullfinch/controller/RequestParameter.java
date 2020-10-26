@@ -35,6 +35,7 @@ public class RequestParameter {
     public static final String USERS = "users";
     public static final String PAGE_NUMBER = "pageNumber";
     public static final String TATTOOS_AMOUNT_ON_PAGE = "tattoosAmountOnPage";
+    public static final String USERS_AMOUNT_ON_PAGE = "usersAmountOnPage";
     public static final String PAGE_AMOUNT = "pageAmount";
     public static final String PHOTO_NAME = "photoName";
     public static final String NAME = "name";
