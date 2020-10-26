@@ -37,12 +37,14 @@ public class OrderTattooCommand implements Command {
         String discountId = request.getParameter(RequestParameter.DISCOUNT_ID);
         try {
             if (walletService.checkBalanceSize(userLogin, price)) {
-                if (orderService.addOrder(date, description, price, tattooId, userLogin, discountId)) {
+                if (orderService.addOrder(date, description, price,
+                        tattooId, userLogin, discountId)) {
                     request.setAttribute(RequestParameter.TATTOO_ORDER_CONFIRM_MESSAGE, true);
                     page = PagePath.MESSAGE;
                 } else {
                     request.setAttribute(RequestParameter.INCORRECT_DATA_MESSAGE, true);
-                    Optional<Tattoo> tattoo = tattooService.findTattooByIdCatalog(tattooId);
+                    Optional<Tattoo> tattoo =
+                            tattooService.findTattooByIdCatalog(tattooId);
                     if (tattoo.isPresent()) {
                         request.setAttribute(RequestParameter.TATTOO, tattoo.get());
                         page = PagePath.TATTOO_ORDER;

@@ -37,7 +37,8 @@ public class BlockUserCommand implements Command {
                 if (user.isPresent()) {
                     request.setAttribute(RequestParameter.USER, user.get());
                     List<Order> orders = orderService.getOrdersByUserLogin(login);
-                    List<Discount> discounts = discountService.getDiscountsByUserLogin(login);
+                    List<Discount> discounts =
+                            discountService.getDiscountsByUserLogin(login);
                     request.setAttribute(RequestParameter.ORDERS, orders);
                     request.setAttribute(RequestParameter.DISCOUNTS, discounts);
                     page = PagePath.PROFILE_ADMIN;

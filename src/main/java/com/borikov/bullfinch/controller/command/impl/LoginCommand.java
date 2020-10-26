@@ -31,7 +31,8 @@ public class LoginCommand implements Command {
                 HttpSession session = request.getSession();
                 User user = userOptional.get();
                 if (user.getUserRole().equals(UserRole.ADMIN)) {
-                    session.setAttribute(RequestParameter.ROLE, user.getUserRole().getName());
+                    session.setAttribute(RequestParameter.ROLE,
+                            user.getUserRole().getName());
                     session.setAttribute(RequestParameter.LOGIN, user.getLogin());
                     page = PagePath.HOME;
                 } else {
@@ -41,10 +42,13 @@ public class LoginCommand implements Command {
                     } else {
                         if (user.isActivated()) {
                             page = PagePath.HOME;
-                            session.setAttribute(RequestParameter.ROLE, user.getUserRole().getName());
-                            session.setAttribute(RequestParameter.LOGIN, user.getLogin());
+                            session.setAttribute(RequestParameter.ROLE,
+                                    user.getUserRole().getName());
+                            session.setAttribute(RequestParameter.LOGIN,
+                                    user.getLogin());
                         } else {
-                            request.setAttribute(RequestParameter.USER_EMAIL_CONFIRM_MESSAGE, true);
+                            request.setAttribute(
+                                    RequestParameter.USER_EMAIL_CONFIRM_MESSAGE, true);
                             page = PagePath.MESSAGE;
                         }
                     }

@@ -27,12 +27,13 @@ public class UserForwardFilter implements Filter {
 
     @Override
     public void init(FilterConfig config) {
-        EnumSet<CommandType> commandTypesUser =
-                EnumSet.range(CommandType.BROWSE_CATALOG_PAGE_COMMAND, CommandType.LOGOUT_COMMAND);
+        EnumSet<CommandType> commandTypesUser = EnumSet.range(
+                CommandType.BROWSE_CATALOG_PAGE_COMMAND, CommandType.LOGOUT_COMMAND);
         commandTypesUser.add(CommandType.BROWSE_HOME_PAGE_COMMAND);
         commandTypesUser.add(CommandType.SWITCH_LOCALE_COMMAND);
         commandsUser = commandTypesUser.stream()
-                .map(CommandType::getCommand).collect(Collectors.toSet());
+                .map(CommandType::getCommand)
+                .collect(Collectors.toSet());
     }
 
     @Override
@@ -47,7 +48,8 @@ public class UserForwardFilter implements Filter {
         if (userRole.equals(role)) {
             Command command = CommandProvider.defineCommand(commandName);
             if (!(commandsUser.contains(command))) {
-                httpResponse.sendRedirect(httpRequest.getContextPath() + PagePath.INDEX);
+                httpResponse.sendRedirect(httpRequest.getContextPath() +
+                        PagePath.INDEX);
                 return;
             }
         }

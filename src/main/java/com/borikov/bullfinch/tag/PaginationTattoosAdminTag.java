@@ -6,6 +6,8 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.TagSupport;
 import java.io.IOException;
@@ -15,7 +17,9 @@ import java.util.ResourceBundle;
 
 public class PaginationTattoosAdminTag extends TagSupport {
     private static final Logger LOGGER = LogManager.getLogger();
+    private static final String BUNDLE_PATH = "i18n.application_message";
     private static final String TATTOOS_INFO = "tattoosAdmin.info";
+    private static final String SPLIT_SYMBOL = "_";
     private int pageNumber;
     private int tattoosAmountOnPage;
 
@@ -29,38 +33,45 @@ public class PaginationTattoosAdminTag extends TagSupport {
 
     @Override
     public int doStartTag() throws JspException {
-        List<Tattoo> tattoos = (List<Tattoo>) pageContext.getRequest().getAttribute(RequestParameter.TATTOOS);
-        int currentTattoo = pageNumber * tattoosAmountOnPage - tattoosAmountOnPage;
-        int lastTattoo = pageNumber * tattoosAmountOnPage - 1;
-        String localeName = (String) pageContext.getSession().getAttribute(RequestParameter.CURRENT_LOCALE);
-        String language = localeName.split("_")[0];
-        String country = localeName.split("_")[1];
+        ServletRequest request = pageContext.getRequest();
+        List<Tattoo> tattoos =
+                (List<Tattoo>) request.getAttribute(RequestParameter.TATTOOS);
+        int currentIndex = pageNumber * tattoosAmountOnPage - tattoosAmountOnPage;
+        int lastIndex = pageNumber * tattoosAmountOnPage - 1;
+        HttpSession session = pageContext.getSession();
+        String localeName =
+                (String) session.getAttribute(RequestParameter.CURRENT_LOCALE);
+        String language = localeName.split(SPLIT_SYMBOL)[0];
+        String country = localeName.split(SPLIT_SYMBOL)[1];
         Locale locale = new Locale(language, country);
-        ResourceBundle bundle = ResourceBundle.getBundle("i18n.application_message", locale);
-        while (currentTattoo < tattoos.size() && currentTattoo <= lastTattoo) {
+        ResourceBundle bundle = ResourceBundle.getBundle(BUNDLE_PATH, locale);
+        while (currentIndex < tattoos.size() && currentIndex <= lastIndex) {
             try {
                 pageContext.getOut().write("<div class=\"col-lg-4\">\n" +
                         "<div class=\"image-wrap-2\">\n" +
                         "<div class=\"image-info\">\n" +
-                        "<h2 class=\"mb-3\">" + tattoos.get(currentTattoo).getName() + "</h2>\n" +
+                        "<h2 class=\"mb-3\">" +
+                        tattoos.get(currentIndex).getName() + "</h2>\n" +
                         "<form name=\"tattooInfoForm\" method=\"post\" action=\"controller\">\n" +
                         "<input type=\"hidden\" name=\"commandName\"\n" +
-                        "        value=\"browse_tattoo_admin_page_command\">\n" +
+                        "value=\"browse_tattoo_admin_page_command\">\n" +
                         "<button class=\"btn btn-outline-white py-2 px-4\"\n" +
-                        "        name=\"tattooId\" value=\"" + tattoos.get(currentTattoo).getTattooId() + "\">\n" + bundle.getString(TATTOOS_INFO) +
+                        "name=\"tattooId\" value=\"" +
+                        tattoos.get(currentIndex).getTattooId() +
+                        "\">\n" + bundle.getString(TATTOOS_INFO) +
                         "</button>\n" +
                         "</form>\n" +
                         "</div>\n" +
-                        "<img src=\"/images/" + tattoos.get(currentTattoo).getImage().getName() + ".jpg\"\n" +
-                        "        alt=\"Image\" class=\"img-fluid\">\n" +
+                        "<img src=\"/images/" +
+                        tattoos.get(currentIndex).getImage().getName() + ".jpg\"\n" +
+                        "alt=\"Image\" class=\"img-fluid\">\n" +
                         "</div>\n" +
                         "</div>\n");
             } catch (IOException e) {
                 LOGGER.log(Level.ERROR, "Error while writing to out stream");
             }
-            currentTattoo++;
+            currentIndex++;
         }
         return SKIP_BODY;
     }
 }
-

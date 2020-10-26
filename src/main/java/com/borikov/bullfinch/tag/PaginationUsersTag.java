@@ -6,6 +6,7 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import javax.servlet.ServletRequest;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.TagSupport;
 import java.io.IOException;
@@ -26,10 +27,11 @@ public class PaginationUsersTag extends TagSupport {
 
     @Override
     public int doStartTag() throws JspException {
-        List<User> users = (List<User>) pageContext.getRequest().getAttribute(RequestParameter.USERS);
-        int currentUser = pageNumber * usersAmountOnPage - usersAmountOnPage;
-        int lastUser = pageNumber * usersAmountOnPage - 1;
-        while (currentUser < users.size() && currentUser <= lastUser) {
+        ServletRequest request = pageContext.getRequest();
+        List<User> users = (List<User>) request.getAttribute(RequestParameter.USERS);
+        int currentIndex = pageNumber * usersAmountOnPage - usersAmountOnPage;
+        int lastIndex = pageNumber * usersAmountOnPage - 1;
+        while (currentIndex < users.size() && currentIndex <= lastIndex) {
             try {
                 pageContext.getOut().write("<div class=\"col-md-12\">\n" +
                         "<form method=\"post\" action=\"controller\">\n" +
@@ -39,13 +41,13 @@ public class PaginationUsersTag extends TagSupport {
                         "type=\"submit\"\n" +
                         "class=\"form-control text-white\"\n" +
                         "name=\"login\"\n" +
-                        "value=\"" + users.get(currentUser).getLogin() + "\">\n" +
+                        "value=\"" + users.get(currentIndex).getLogin() + "\">\n" +
                         "</form>\n" +
                         "</div>");
             } catch (IOException e) {
                 LOGGER.log(Level.ERROR, "Error while writing to out stream");
             }
-            currentUser++;
+            currentIndex++;
         }
         return SKIP_BODY;
     }

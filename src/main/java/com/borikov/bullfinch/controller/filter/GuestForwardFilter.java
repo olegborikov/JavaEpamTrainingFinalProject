@@ -27,12 +27,13 @@ public class GuestForwardFilter implements Filter {
 
     @Override
     public void init(FilterConfig config) {
-        EnumSet<CommandType> commandTypesGuest =
-                EnumSet.range(CommandType.LOGIN_COMMAND, CommandType.FIND_TATTOOS_COMMAND);
+        EnumSet<CommandType> commandTypesGuest = EnumSet.range(
+                CommandType.LOGIN_COMMAND, CommandType.FIND_TATTOOS_COMMAND);
         commandTypesGuest.add(CommandType.BROWSE_HOME_PAGE_COMMAND);
         commandTypesGuest.add(CommandType.SWITCH_LOCALE_COMMAND);
         commandsGuest = commandTypesGuest.stream()
-                .map(CommandType::getCommand).collect(Collectors.toSet());
+                .map(CommandType::getCommand)
+                .collect(Collectors.toSet());
     }
 
     @Override
@@ -47,7 +48,8 @@ public class GuestForwardFilter implements Filter {
         if (guestRole.equals(role)) {
             Command command = CommandProvider.defineCommand(commandName);
             if (!(commandsGuest.contains(command))) {
-                httpResponse.sendRedirect(httpRequest.getContextPath() + PagePath.INDEX);
+                httpResponse.sendRedirect(httpRequest.getContextPath() +
+                        PagePath.INDEX);
                 return;
             }
         }
