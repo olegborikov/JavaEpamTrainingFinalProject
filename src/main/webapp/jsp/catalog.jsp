@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="ctg" uri="customTags" %>
 
 <fmt:setLocale value="${currentLocale}"/>
 <fmt:setBundle basename="i18n.application_message"/>
@@ -63,28 +64,12 @@
                             </div>
                         </div>
                     </c:if>
-                    <c:forEach var="tattoo" items="${tattoos}">
-                        <div class="col-lg-4">
-                            <div class="image-wrap-2">
-                                <div class="image-info">
-                                    <h2 class="mb-3">${tattoo.name}</h2>
-                                    <form method="post" action="controller">
-                                        <input type="hidden" name="commandName"
-                                               value="browse_tattoo_page_command">
-                                        <button class="btn btn-outline-white py-2 px-4"
-                                                name="tattooId" value="${tattoo.tattooId}">
-                                            <fmt:message key="catalog.info"/></button>
-                                    </form>
-                                </div>
-                                <img src="/images/${tattoo.image.name}.jpg"
-                                     alt="Image" class="img-fluid">
-                            </div>
-                        </div>
-                    </c:forEach>
+                    <ctg:pagination-tattoos-catalog pageNumber="${pageNumber}"
+                                            tattoosAmountOnPage="${tattoosAmountOnPage}"/>
                 </div>
                 <c:if test="${not empty tattoos}">
                     <form method="post" action="controller">
-                        <input type="hidden" name="commandName" value="pagination_catalog_command">
+                        <input type="hidden" name="commandName" value="pagination_command">
                         <c:choose>
                             <c:when test="${pageNumber!=1}">
                                 <button type="submit" class="btn btn-outline-secondary"

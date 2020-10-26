@@ -21,6 +21,22 @@
             <rtexprvalue>true</rtexprvalue>
         </attribute>
     </tag>
+
+    <tag>
+        <name>pagination-tattoos-catalog</name>
+        <tag-class>com.borikov.bullfinch.tag.PaginationTattoosCatalogTag</tag-class>
+        <body-content>empty</body-content>
+        <attribute>
+            <name>pageNumber</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>tattoosAmountOnPage</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
 </taglib>
 
 
