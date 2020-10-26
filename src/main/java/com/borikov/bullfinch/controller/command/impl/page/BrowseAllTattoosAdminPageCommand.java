@@ -17,6 +17,8 @@ import java.util.List;
 public class BrowseAllTattoosAdminPageCommand implements Command {
     private static final Logger LOGGER = LogManager.getLogger();
     private static final TattooService tattooService = new TattooServiceImpl();
+    private static final int FIRST_PAGE_NUMBER = 1;
+    private static final int TATTOOS_AMOUNT_ON_PAGE = 3;
 
     @Override
     public String execute(HttpServletRequest request) {
@@ -25,6 +27,10 @@ public class BrowseAllTattoosAdminPageCommand implements Command {
             List<Tattoo> tattoos = tattooService.findAllTattoos();
             request.setAttribute(RequestParameter.TATTOOS, tattoos);
             request.setAttribute(RequestParameter.ALL_TATTOOS, true);
+            request.setAttribute(RequestParameter.PAGE_AMOUNT,
+                    Math.ceil((double) tattoos.size() / TATTOOS_AMOUNT_ON_PAGE));
+            request.setAttribute(RequestParameter.PAGE_NUMBER, FIRST_PAGE_NUMBER);
+            request.setAttribute(RequestParameter.TATTOOS_AMOUNT_ON_PAGE, TATTOOS_AMOUNT_ON_PAGE);
             page = PagePath.TATTOOS_ADMIN;
         } catch (ServiceException e) {
             LOGGER.log(Level.ERROR, "Error while finding tattoos", e);

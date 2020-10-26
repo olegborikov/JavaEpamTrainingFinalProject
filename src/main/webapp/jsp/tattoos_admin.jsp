@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="ctg" uri="customtags" %>
+<%@ taglib prefix="ctg" uri="customTags" %>
 
 <fmt:setLocale value="${currentLocale}"/>
 <fmt:setBundle basename="i18n.application_message"/>
@@ -19,7 +19,6 @@
 </head>
 <body id="page-top">
 <jsp:include page="navbar.jsp"/>
-<ctg:pagination></ctg:pagination>
 <section style="padding-top: 120px" class="masthead content-section text-center">
     <div class="intro-body">
         <div class="container-fluid">
@@ -66,25 +65,42 @@
                             </div>
                         </div>
                     </c:if>
-                    <c:forEach var="tattoo" items="${tattoos}">
-                        <div class="col-lg-4">
-                            <div class="image-wrap-2">
-                                <div class="image-info">
-                                    <h2 class="mb-3">${tattoo.name}</h2>
-                                    <form name="tattooInfoForm" method="post" action="controller">
-                                        <input type="hidden" name="commandName"
-                                               value="browse_tattoo_admin_page_command">
-                                        <button class="btn btn-outline-white py-2 px-4"
-                                                name="tattooId" value="${tattoo.tattooId}">
-                                            <fmt:message key="tattoosAdmin.info"/></button>
-                                    </form>
-                                </div>
-                                <img src="/images/${tattoo.image.name}.jpg"
-                                     alt="Image" class="img-fluid">
-                            </div>
-                        </div>
-                    </c:forEach>
+                    <ctg:pagination-tattoos-admin pageNumber="${pageNumber}"
+                                            tattoosAmountOnPage="${tattoosAmountOnPage}"/>
                 </div>
+                <c:if test="${not empty tattoos}">
+                    <form method="post" action="controller">
+                        <input type="hidden" name="commandName" value="pagination_command">
+                        <c:choose>
+                            <c:when test="${pageNumber!=1}">
+                                <button type="submit" class="btn btn-outline-secondary"
+                                        name="pageNumber" value=${pageNumber-1}>
+                                    <fmt:message key="catalog.paginationPrevious"/>
+                                </button>
+                            </c:when>
+                            <c:otherwise>
+                                <button type="submit" class="btn btn-outline-secondary" disabled>
+                                    <fmt:message key="catalog.paginationPrevious"/>
+                                </button>
+                            </c:otherwise>
+                        </c:choose>
+                        <input type="button" class="btn btn-outline-secondary"
+                               disabled value=${pageNumber}>
+                        <c:choose>
+                            <c:when test="${pageNumber<pageAmount}">
+                                <button type="submit" class="btn btn-outline-secondary"
+                                        name="pageNumber" value=${pageNumber+1}>
+                                    <fmt:message key="catalog.paginationNext"/>
+                                </button>
+                            </c:when>
+                            <c:otherwise>
+                                <button type="submit" class="btn btn-outline-secondary" disabled>
+                                    <fmt:message key="catalog.paginationNext"/>
+                                </button>
+                            </c:otherwise>
+                        </c:choose>
+                    </form>
+                </c:if>
             </div>
         </div>
     </div>
