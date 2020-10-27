@@ -36,7 +36,8 @@ public class PaginationTattoosCatalogTag extends TagSupport {
         ServletRequest request = pageContext.getRequest();
         List<Tattoo> tattoos =
                 (List<Tattoo>) request.getAttribute(RequestParameter.TATTOOS);
-        int currentIndex = pageNumber * tattoosAmountOnPage - tattoosAmountOnPage;
+        int currentIndex =
+                pageNumber * tattoosAmountOnPage - tattoosAmountOnPage;
         int lastIndex = pageNumber * tattoosAmountOnPage - 1;
         HttpSession session = pageContext.getSession();
         String localeName =

@@ -23,7 +23,8 @@ public class EmailSenderUtil {
         try {
             Properties properties = new Properties();
             ClassLoader classLoader = EmailSenderUtil.class.getClassLoader();
-            InputStream inputStream = classLoader.getResourceAsStream(FILE_NAME);
+            InputStream inputStream =
+                    classLoader.getResourceAsStream(FILE_NAME);
             properties.load(inputStream);
             Thread thread = new Thread(new EmailSenderThread(email, EMAIL_HEAD,
                     String.format(EMAIL_BODY, url) + login, properties));

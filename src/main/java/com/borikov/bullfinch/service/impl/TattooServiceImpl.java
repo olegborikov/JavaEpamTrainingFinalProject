@@ -18,12 +18,13 @@ import java.util.Optional;
 
 public class TattooServiceImpl implements TattooService {
     private final TattooDao tattooDao = TattooDaoImpl.getInstance();
-    private final TransactionManager transactionManager = new TransactionManager();
+    private final TransactionManager transactionManager =
+            new TransactionManager();
 
     @Override
     public boolean addTattoo(String tattooName, String description,
-                             String price, String imageName, String proposedLogin)
-            throws ServiceException {
+                             String price, String imageName,
+                             String proposedLogin) throws ServiceException {
         try {
             boolean result = false;
             if (TattooValidator.isNameCorrect(tattooName)
@@ -179,17 +180,20 @@ public class TattooServiceImpl implements TattooService {
             }
             return tattoo;
         } catch (DaoException e) {
-            throw new ServiceException("Error while finding tattoos by id", e);
+            throw new ServiceException("Error while finding " +
+                    "tattoos by id", e);
         }
     }
 
     @Override
-    public List<Tattoo> findTattoosByName(String name) throws ServiceException {
+    public List<Tattoo> findTattoosByName(String name)
+            throws ServiceException {
         try {
             List<Tattoo> tattoos = tattooDao.findByNameSubstring(name);
             return tattoos;
         } catch (DaoException e) {
-            throw new ServiceException("Error while finding tattoos by name", e);
+            throw new ServiceException("Error while finding " +
+                    "tattoos by name", e);
         }
     }
 
@@ -237,7 +241,8 @@ public class TattooServiceImpl implements TattooService {
             }
             return tattoo;
         } catch (DaoException e) {
-            throw new ServiceException("Error while finding tattoos by id", e);
+            throw new ServiceException("Error while finding " +
+                    "tattoos by id", e);
         }
     }
 
@@ -248,7 +253,8 @@ public class TattooServiceImpl implements TattooService {
             List<Tattoo> tattoos = tattooDao.findByNameSubstringCatalog(name);
             return tattoos;
         } catch (DaoException e) {
-            throw new ServiceException("Error while finding tattoos by name", e);
+            throw new ServiceException("Error while finding " +
+                    "tattoos by name", e);
         }
     }
 }

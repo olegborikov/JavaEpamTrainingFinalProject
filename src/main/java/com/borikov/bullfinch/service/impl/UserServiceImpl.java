@@ -18,13 +18,15 @@ import java.util.List;
 import java.util.Optional;
 
 public class UserServiceImpl implements UserService {
-    private final TransactionManager transactionManager = new TransactionManager();
+    private final TransactionManager transactionManager =
+            new TransactionManager();
     private final UserDao userDao = UserDaoImpl.getInstance();
 
     @Override
     public boolean addUser(String email, String login, String firstName,
-                           String secondName, String phoneNumber, String password,
-                           String confirmedPassword) throws ServiceException {
+                           String secondName, String phoneNumber,
+                           String password, String confirmedPassword)
+            throws ServiceException {
         try {
             boolean result = false;
             if (UserValidator.isEmailCorrect(email)
@@ -38,7 +40,8 @@ public class UserServiceImpl implements UserService {
                         PasswordEncryptor.encrypt(password);
                 Optional<String> existingUserPassword =
                         userDao.checkExistingByLogin(login);
-                boolean existingUserEmail = userDao.checkExistingByEmail(email);
+                boolean existingUserEmail =
+                        userDao.checkExistingByEmail(email);
                 if (existingUserPassword.isEmpty() && !existingUserEmail
                         && encryptedPassword.isPresent()) {
                     UserBuilder userBuilder = new UserBuilder();
@@ -150,7 +153,8 @@ public class UserServiceImpl implements UserService {
             }
             return userOptional;
         } catch (DaoException e) {
-            throw new ServiceException("Error while checking user for existing", e);
+            throw new ServiceException("Error while checking user " +
+                    "for existing", e);
         }
     }
 
@@ -165,7 +169,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<User> findUserByLogin(String login) throws ServiceException {
+    public Optional<User> findUserByLogin(String login)
+            throws ServiceException {
         Optional<User> user = Optional.empty();
         try {
             if (UserValidator.isLoginCorrect(login)) {
@@ -182,7 +187,8 @@ public class UserServiceImpl implements UserService {
         try {
             return userDao.findByLoginSubstring(login);
         } catch (DaoException e) {
-            throw new ServiceException("Error while finding users by login", e);
+            throw new ServiceException("Error while finding users " +
+                    "by login", e);
         }
     }
 }

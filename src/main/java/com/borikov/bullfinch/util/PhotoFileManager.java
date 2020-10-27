@@ -46,7 +46,8 @@ public class PhotoFileManager {
                                 fileName, e);
                     }
                 } else {
-                    LOGGER.log(Level.ERROR, "Upload failed. File: {}", fileName);
+                    LOGGER.log(Level.ERROR, "Upload failed. File: {}",
+                            fileName);
                 }
             }
         }
@@ -57,8 +58,7 @@ public class PhotoFileManager {
         File file = new File(UPLOAD_DIRECTORY + File.separator
                 + photoName + END_PHOTO_NAME);
         if (file.delete()) {
-            LOGGER.log(Level.INFO, "File {} was deleted",
-                    photoName + END_PHOTO_NAME);
+            LOGGER.log(Level.INFO, "File {} was deleted", photoName);
         }
     }
 }

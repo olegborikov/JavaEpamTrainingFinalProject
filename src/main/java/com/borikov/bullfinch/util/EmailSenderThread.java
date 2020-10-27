@@ -41,7 +41,8 @@ public class EmailSenderThread implements Runnable {
         } catch (AddressException e) {
             LOGGER.log(Level.ERROR, "Invalid address: {}", sendToEmail, e);
         } catch (MessagingException e) {
-            LOGGER.log(Level.ERROR, "Error while generating or sending message: ", e);
+            LOGGER.log(Level.ERROR, "Error while generating or " +
+                    "sending message: ", e);
         }
     }
 
@@ -51,7 +52,8 @@ public class EmailSenderThread implements Runnable {
         try {
             Transport.send(message);
         } catch (MessagingException e) {
-            LOGGER.log(Level.ERROR, "Error while generating or sending message: ", e);
+            LOGGER.log(Level.ERROR, "Error while generating or " +
+                    "sending message: ", e);
         }
     }
 }

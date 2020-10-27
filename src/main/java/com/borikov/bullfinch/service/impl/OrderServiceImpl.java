@@ -29,12 +29,13 @@ import java.util.Optional;
 public class OrderServiceImpl implements OrderService {
     private final OrderDao orderDao = OrderDaoImpl.getInstance();
     private final DiscountDao discountDao = DiscountDaoImpl.getInstance();
-    private final TransactionManager transactionManager = new TransactionManager();
+    private final TransactionManager transactionManager =
+            new TransactionManager();
 
     @Override
     public boolean addOrder(String date, String description,
-                            String price, String tattooId,
-                            String userLogin, String discountId) throws ServiceException {
+                            String price, String tattooId, String userLogin,
+                            String discountId) throws ServiceException {
         boolean result = false;
         try {
             if (OrderValidator.isDateCorrect(date)
@@ -108,7 +109,8 @@ public class OrderServiceImpl implements OrderService {
             }
             return order;
         } catch (DaoException e) {
-            throw new ServiceException("Error while finding orders by login", e);
+            throw new ServiceException("Error while finding " +
+                    "orders by login", e);
         }
     }
 
@@ -122,7 +124,8 @@ public class OrderServiceImpl implements OrderService {
             }
             return orders;
         } catch (DaoException e) {
-            throw new ServiceException("Error while finding orders by login", e);
+            throw new ServiceException("Error while finding " +
+                    "orders by login", e);
         }
     }
 }

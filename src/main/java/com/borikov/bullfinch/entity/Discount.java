@@ -102,11 +102,14 @@ public class Discount {
         if (discountPercent != discount.discountPercent) {
             return false;
         }
-        if (discountId != null ? !discountId.equals(discount.discountId)
+        if (discountId != null
+                ? !discountId.equals(discount.discountId)
                 : discount.discountId != null) {
             return false;
         }
-        return user != null ? user.equals(discount.user) : discount.user == null;
+        return user != null
+                ? user.equals(discount.user)
+                : discount.user == null;
     }
 
     @Override

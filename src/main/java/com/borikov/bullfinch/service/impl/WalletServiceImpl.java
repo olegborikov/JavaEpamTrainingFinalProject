@@ -52,7 +52,8 @@ public class WalletServiceImpl implements WalletService {
             if (UserValidator.isLoginCorrect(userLogin)
                     && OrderValidator.isPriceCorrect(price)) {
                 double orderPrice = Double.parseDouble(price);
-                Optional<Wallet> walletOptional = walletDao.findByUserLogin(userLogin);
+                Optional<Wallet> walletOptional =
+                        walletDao.findByUserLogin(userLogin);
                 if (walletOptional.isPresent()) {
                     Wallet wallet = walletOptional.get();
                     result = wallet.getBalance() >= orderPrice;

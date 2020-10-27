@@ -20,7 +20,6 @@ public class PageRedirectSecurityFilter implements Filter {
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         HttpServletResponse httpResponse = (HttpServletResponse) response;
         httpResponse.sendRedirect(httpRequest.getContextPath() + PagePath.INDEX);
-        chain.doFilter(request, response);
     }
 
     @Override

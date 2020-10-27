@@ -11,7 +11,8 @@ public interface TattooService {
                       String price, String imageName,
                       String proposedLogin) throws ServiceException;
 
-    boolean removeTattoo(String tattooId, String imageId) throws ServiceException;
+    boolean removeTattoo(String tattooId, String imageId)
+            throws ServiceException;
 
     boolean editTattoo(String id, String name, String description,
                        String price) throws ServiceException;
@@ -32,9 +33,11 @@ public interface TattooService {
 
     List<Tattoo> findTattoosByName(String name) throws ServiceException;
 
-    List<Tattoo> findTattoosByAllowed(boolean isAllowed) throws ServiceException;
+    List<Tattoo> findTattoosByAllowed(boolean isAllowed)
+            throws ServiceException;
 
-    List<Tattoo> findTattoosByArchived(boolean isArchived) throws ServiceException;
+    List<Tattoo> findTattoosByArchived(boolean isArchived)
+            throws ServiceException;
 
     List<Tattoo> findAllTattoosCatalog() throws ServiceException;
 

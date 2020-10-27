@@ -9,8 +9,8 @@ public class UserValidator {
     private static final String SECOND_NAME_REGEX = "^\\p{L}{2,25}$";
     private static final String PASSWORD_REGEX =
             "^(?=.*\\p{Lower})(?=.*\\p{Upper})(?=.*\\d)\\p{Alnum}{8,20}$";
-    private static final String PHONE_NUMBER_REGEX = "^\\+?375(24|25|29|33|44)" +
-            "\\d{7}|80(24|25|29|33|44)\\d{7}$";
+    private static final String PHONE_NUMBER_REGEX = "^\\+?375(24|25|29|33" +
+            "|44)\\d{7}|80(24|25|29|33|44)\\d{7}$";
 
     private UserValidator() {
     }

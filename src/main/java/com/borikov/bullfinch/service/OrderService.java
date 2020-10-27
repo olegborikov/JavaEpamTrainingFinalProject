@@ -8,7 +8,8 @@ import java.util.Optional;
 
 public interface OrderService {
     boolean addOrder(String date, String description, String price,
-                     String tattooId, String userLogin, String discountId) throws ServiceException;
+                     String tattooId, String userLogin, String discountId)
+            throws ServiceException;
 
     boolean removeOrder(String id) throws ServiceException;
 

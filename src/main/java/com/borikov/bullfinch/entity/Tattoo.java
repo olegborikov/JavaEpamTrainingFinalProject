@@ -264,7 +264,8 @@ public class Tattoo {
         long temp;
         result = tattooId != null ? tattooId.hashCode() : 0;
         result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result +
+                (description != null ? description.hashCode() : 0);
         temp = Double.doubleToLongBits(price);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         result = 31 * result + (isAllowed ? 1 : 0);

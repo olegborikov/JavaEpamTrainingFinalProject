@@ -297,7 +297,8 @@ public class TattooDaoImplTest {
     @Test(priority = 17)
     public void findByIdPositiveTest() {
         try {
-            Optional<Tattoo> actual = tattooDao.findById(tattoo2.getTattooId());
+            Optional<Tattoo> actual =
+                    tattooDao.findById(tattoo2.getTattooId());
             assertTrue(actual.isPresent());
         } catch (DaoException e) {
             fail("incorrect data", e);

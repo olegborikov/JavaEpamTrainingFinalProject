@@ -19,20 +19,23 @@ public class DiscountServiceImpl implements DiscountService {
     private final DiscountDao discountDao = DiscountDaoImpl.getInstance();
 
     @Override
-    public List<Discount> getDiscountsByUserLogin(String userLogin) throws ServiceException {
+    public List<Discount> getDiscountsByUserLogin(String userLogin)
+            throws ServiceException {
         List<Discount> discounts = new ArrayList<>();
         try {
             if (UserValidator.isLoginCorrect(userLogin)) {
                 discounts = discountDao.findByUserLogin(userLogin);
             }
         } catch (DaoException e) {
-            throw new ServiceException("Error while finding discounts by login", e);
+            throw new ServiceException("Error while finding " +
+                    "discounts by login", e);
         }
         return discounts;
     }
 
     @Override
-    public boolean addDiscount(String discountPercent, String userId) throws ServiceException {
+    public boolean addDiscount(String discountPercent, String userId)
+            throws ServiceException {
         boolean result = false;
         try {
             if (DiscountValidator.isDiscountPercentCorrect(discountPercent)
