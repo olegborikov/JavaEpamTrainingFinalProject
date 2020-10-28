@@ -20,12 +20,10 @@ public class WalletServiceImpl implements WalletService {
     private final OrderDao orderDao = OrderDaoImpl.getInstance();
 
     @Override
-    public boolean enrichBalance(String walletId, String enrichAmount)
-            throws ServiceException {
+    public boolean enrichBalance(String walletId, String enrichAmount) throws ServiceException {
         try {
             boolean result = false;
-            if (WalletValidator.isIdCorrect(walletId)
-                    && WalletValidator.isEnrichAmountCorrect(enrichAmount)) {
+            if (WalletValidator.isIdCorrect(walletId) && WalletValidator.isEnrichAmountCorrect(enrichAmount)) {
                 long id = Long.parseLong(walletId);
                 double amount = Double.parseDouble(enrichAmount);
                 Optional<Wallet> walletOptional = walletDao.findById(id);
@@ -45,15 +43,12 @@ public class WalletServiceImpl implements WalletService {
     }
 
     @Override
-    public boolean checkBalanceSize(String userLogin, String price)
-            throws ServiceException {
+    public boolean checkBalanceSize(String userLogin, String price) throws ServiceException {
         try {
             boolean result = false;
-            if (UserValidator.isLoginCorrect(userLogin)
-                    && OrderValidator.isPriceCorrect(price)) {
+            if (UserValidator.isLoginCorrect(userLogin) && OrderValidator.isPriceCorrect(price)) {
                 double orderPrice = Double.parseDouble(price);
-                Optional<Wallet> walletOptional =
-                        walletDao.findByUserLogin(userLogin);
+                Optional<Wallet> walletOptional = walletDao.findByUserLogin(userLogin);
                 if (walletOptional.isPresent()) {
                     Wallet wallet = walletOptional.get();
                     result = wallet.getBalance() >= orderPrice;

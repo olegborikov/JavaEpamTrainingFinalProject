@@ -27,18 +27,16 @@ public class GuestForwardFilter implements Filter {
 
     @Override
     public void init(FilterConfig config) {
-        EnumSet<CommandType> commandTypesGuest = EnumSet.range(
+        EnumSet<CommandType> commandTypesGuest = EnumSet.range(// TODO: 28.10.2020 to singleton
                 CommandType.LOGIN_COMMAND, CommandType.FIND_TATTOOS_COMMAND);
         commandTypesGuest.add(CommandType.BROWSE_HOME_PAGE_COMMAND);
         commandTypesGuest.add(CommandType.SWITCH_LOCALE_COMMAND);
-        commandsGuest = commandTypesGuest.stream()
-                .map(CommandType::getCommand)
-                .collect(Collectors.toSet());
+        commandsGuest = commandTypesGuest.stream().map(CommandType::getCommand).collect(Collectors.toSet());
     }
 
     @Override
-    public void doFilter(ServletRequest request, ServletResponse response,
-                         FilterChain chain) throws ServletException, IOException {
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+            throws ServletException, IOException {
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         HttpServletResponse httpResponse = (HttpServletResponse) response;
         HttpSession httpSession = httpRequest.getSession();
@@ -48,8 +46,7 @@ public class GuestForwardFilter implements Filter {
         if (guestRole.equals(role)) {
             Command command = CommandProvider.defineCommand(commandName);
             if (!(commandsGuest.contains(command))) {
-                httpResponse.sendRedirect(httpRequest.getContextPath() +
-                        PagePath.INDEX);
+                httpResponse.sendRedirect(httpRequest.getContextPath() + PagePath.INDEX);
                 return;
             }
         }

@@ -6,8 +6,7 @@ import org.apache.logging.log4j.Logger;
 
 public class CommandProvider {
     private static final Logger LOGGER = LogManager.getLogger();
-    private static final Command DEFAULT_COMMAND =
-            CommandType.BROWSE_HOME_PAGE_COMMAND.getCommand();
+    private static final Command DEFAULT_COMMAND = CommandType.BROWSE_HOME_PAGE_COMMAND.getCommand();
 
     private CommandProvider() {
     }

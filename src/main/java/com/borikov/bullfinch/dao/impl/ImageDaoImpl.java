@@ -20,8 +20,7 @@ public class ImageDaoImpl implements ImageDao {
 
     @Override
     public boolean add(Image image, Connection connection) throws DaoException {
-        try (PreparedStatement statement = connection.prepareStatement(
-                ADD, Statement.RETURN_GENERATED_KEYS)) {
+        try (PreparedStatement statement = connection.prepareStatement(ADD, Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, image.getName());
             boolean result = statement.executeUpdate() > 0;
             ResultSet generatedKeys = statement.getGeneratedKeys();

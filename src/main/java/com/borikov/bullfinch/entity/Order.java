@@ -208,15 +208,13 @@ public class Order {
         if (isConfirmed != order.isConfirmed) {
             return false;
         }
-        if (orderId != null ? !orderId.equals(order.orderId)
-                : order.orderId != null) {
+        if (orderId != null ? !orderId.equals(order.orderId) : order.orderId != null) {
             return false;
         }
         if (date != null ? !date.equals(order.date) : order.date != null) {
             return false;
         }
-        if (description != null ? !description.equals(order.description)
-                : order.description != null) {
+        if (description != null ? !description.equals(order.description) : order.description != null) {
             return false;
         }
         if (user != null ? !user.equals(order.user) : order.user != null) {

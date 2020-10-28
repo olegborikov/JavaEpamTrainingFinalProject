@@ -18,8 +18,7 @@ public class TattooValidator {
     }
 
     public static boolean isDescriptionCorrect(String description) {
-        return isStringCorrect(description, DESCRIPTION_REGEX)
-                && !description.isBlank();
+        return isStringCorrect(description, DESCRIPTION_REGEX) && !description.isBlank();
     }
 
     public static boolean isPriceCorrect(String price) {

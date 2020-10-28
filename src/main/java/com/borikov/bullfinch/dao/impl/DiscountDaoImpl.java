@@ -14,14 +14,11 @@ import java.util.List;
 
 public class DiscountDaoImpl implements DiscountDao {
     private static final DiscountDaoImpl INSTANCE = new DiscountDaoImpl();
-    private static final String ADD = "INSERT INTO discount(discount_percent, " +
-            "user_account_id_fk) VALUES (?, ?)";
-    private static final String REMOVE = "DELETE FROM discount " +
-            "WHERE discount_id = ?";
-    private static final String FIND_BY_USER_LOGIN = "SELECT discount_id, " +
-            "discount_percent FROM discount INNER JOIN user_account " +
-            "ON discount.user_account_id_fk = user_account.user_account_id " +
-            "WHERE login LIKE ?";
+    private static final String ADD = "INSERT INTO discount(discount_percent, user_account_id_fk) VALUES (?, ?)";
+    private static final String REMOVE = "DELETE FROM discount WHERE discount_id = ?";
+    private static final String FIND_BY_USER_LOGIN = "SELECT discount_id, discount_percent FROM discount "
+            + "INNER JOIN user_account ON discount.user_account_id_fk = user_account.user_account_id "
+            + "WHERE login LIKE ?";
 
     private DiscountDaoImpl() {
     }
@@ -33,8 +30,7 @@ public class DiscountDaoImpl implements DiscountDao {
     @Override
     public boolean add(Discount discount) throws DaoException {
         try (Connection connection = ConnectionPool.INSTANCE.getConnection();
-             PreparedStatement statement = connection.prepareStatement(
-                     ADD, Statement.RETURN_GENERATED_KEYS)) {
+             PreparedStatement statement = connection.prepareStatement(ADD, Statement.RETURN_GENERATED_KEYS)) {
             statement.setInt(1, discount.getDiscountPercent());
             statement.setLong(2, discount.getUser().getUserId());
             boolean result = statement.executeUpdate() > 0;
@@ -62,8 +58,7 @@ public class DiscountDaoImpl implements DiscountDao {
     @Override
     public List<Discount> findByUserLogin(String userLogin) throws DaoException {
         try (Connection connection = ConnectionPool.INSTANCE.getConnection();
-             PreparedStatement statement =
-                     connection.prepareStatement(FIND_BY_USER_LOGIN)) {
+             PreparedStatement statement = connection.prepareStatement(FIND_BY_USER_LOGIN)) {
             statement.setString(1, userLogin);
             List<Discount> discounts = new ArrayList<>();
             ResultSet resultSet = statement.executeQuery();
@@ -72,13 +67,11 @@ public class DiscountDaoImpl implements DiscountDao {
             }
             return discounts;
         } catch (SQLException | ConnectionPoolException e) {
-            throw new DaoException("Error while finding discounts " +
-                    "by user login: " + userLogin, e);
+            throw new DaoException("Error while finding discounts by user login: " + userLogin, e);
         }
     }
 
-    private Discount createDiscountFromResultSet(ResultSet resultSet)
-            throws SQLException {
+    private Discount createDiscountFromResultSet(ResultSet resultSet) throws SQLException {
         long id = resultSet.getLong(ColumnName.DISCOUNT_ID);
         int discountPercent = resultSet.getInt(ColumnName.DISCOUNT_PERCENT);
         DiscountBuilder discountBuilder = new DiscountBuilder();

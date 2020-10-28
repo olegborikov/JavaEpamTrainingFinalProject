@@ -77,9 +77,7 @@ public class Wallet {
         if (Double.compare(wallet.balance, balance) != 0) {
             return false;
         }
-        return walletId != null
-                ? walletId.equals(wallet.walletId)
-                : wallet.walletId == null;
+        return walletId != null ? walletId.equals(wallet.walletId) : wallet.walletId == null;
     }
 
     @Override

@@ -56,8 +56,7 @@ public class DiscountValidatorTest {
 
     @Test(dataProvider = "isDiscountPercentCorrectPositiveData")
     public void isDiscountPercentCorrectPositiveTest(String discountPercent) {
-        boolean actual =
-                DiscountValidator.isDiscountPercentCorrect(discountPercent);
+        boolean actual = DiscountValidator.isDiscountPercentCorrect(discountPercent);
         assertTrue(actual);
     }
 
@@ -76,8 +75,7 @@ public class DiscountValidatorTest {
 
     @Test(dataProvider = "isDiscountPercentCorrectNegativeData")
     public void isDiscountPercentCorrectNegativeTest(String discountPercent) {
-        boolean actual =
-                DiscountValidator.isDiscountPercentCorrect(discountPercent);
+        boolean actual = DiscountValidator.isDiscountPercentCorrect(discountPercent);
         assertFalse(actual);
     }
 }

@@ -33,8 +33,7 @@ public class EditUserCommand implements Command {
         String secondName = request.getParameter(RequestParameter.SECOND_NAME);
         String phoneNumber = request.getParameter(RequestParameter.PHONE_NUMBER);
         try {
-            if (userService.editUser(id, email, login, firstName,
-                    secondName, phoneNumber)) {
+            if (userService.editUser(id, email, login, firstName, secondName, phoneNumber)) {
                 Optional<User> user = userService.findUserByLogin(login);
                 if (user.isPresent()) {
                     request.setAttribute(RequestParameter.USER, user.get());

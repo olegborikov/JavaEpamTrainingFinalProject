@@ -73,8 +73,7 @@ public class DiscountDaoImplTest {
         };
     }
 
-    @Test(dataProvider = "addExceptionData",
-            expectedExceptions = DaoException.class, priority = 2)
+    @Test(dataProvider = "addExceptionData", expectedExceptions = DaoException.class, priority = 2)
     public void addExceptionTest(Discount discount) throws DaoException {
         discountDao.add(discount);
     }

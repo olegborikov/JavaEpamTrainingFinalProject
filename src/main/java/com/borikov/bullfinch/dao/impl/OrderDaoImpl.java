@@ -20,30 +20,20 @@ import java.util.Optional;
 
 public class OrderDaoImpl implements OrderDao {
     private static final OrderDaoImpl INSTANCE = new OrderDaoImpl();
-    private static final String ADD = "INSERT INTO tattoo_order " +
-            "(tattoo_order_price, date, tattoo_order_description, " +
-            "is_confirmed, tattoo_id_fk, user_account_id_fk) " +
-            "VALUES (?, ?, ?, 0, ?, " +
-            "(SELECT user_account_id FROM user_account WHERE BINARY login LIKE ?))";
-    private static final String REMOVE = "DELETE FROM tattoo_order " +
-            "WHERE tattoo_order_id = ?";
-    private static final String SUBMIT = "UPDATE tattoo_order " +
-            "SET is_confirmed = 1 WHERE tattoo_order_id = ?";
-    private static final String FIND_BY_ID = "SELECT tattoo_order_id, " +
-            "tattoo_order_price, date, tattoo_order_description, " +
-            "is_confirmed, image_name, tattoo_name, login " +
-            "FROM tattoo_order INNER JOIN tattoo " +
-            "ON tattoo_order.tattoo_id_fk = tattoo.tattoo_id " +
-            "INNER JOIN user_account " +
-            "ON tattoo_order.user_account_id_fk = user_account.user_account_id " +
-            "INNER JOIN image ON tattoo.image_id_fk = image.image_id " +
-            "WHERE tattoo_order_id = ?";
-    private static final String FIND_BY_USER_LOGIN = "SELECT tattoo_order_id, " +
-            "tattoo_name, date, tattoo_order_price FROM tattoo_order " +
-            "INNER JOIN tattoo ON tattoo_order.tattoo_id_fk = tattoo.tattoo_id " +
-            "INNER JOIN user_account " +
-            "ON tattoo_order.user_account_id_fk = user_account.user_account_id " +
-            "WHERE login = ?";
+    private static final String ADD = "INSERT INTO tattoo_order (tattoo_order_price, date, "
+            + "tattoo_order_description, is_confirmed, tattoo_id_fk, user_account_id_fk) VALUES (?, ?, ?, 0, ?, "
+            + "(SELECT user_account_id FROM user_account WHERE BINARY login LIKE ?))";
+    private static final String REMOVE = "DELETE FROM tattoo_order WHERE tattoo_order_id = ?";
+    private static final String SUBMIT = "UPDATE tattoo_order SET is_confirmed = 1 WHERE tattoo_order_id = ?";
+    private static final String FIND_BY_ID = "SELECT tattoo_order_id, tattoo_order_price, date, "
+            + "tattoo_order_description, is_confirmed, image_name, tattoo_name, login FROM tattoo_order "
+            + "INNER JOIN tattoo ON tattoo_order.tattoo_id_fk = tattoo.tattoo_id INNER JOIN user_account "
+            + "ON tattoo_order.user_account_id_fk = user_account.user_account_id "
+            + "INNER JOIN image ON tattoo.image_id_fk = image.image_id WHERE tattoo_order_id = ?";
+    private static final String FIND_BY_USER_LOGIN = "SELECT tattoo_order_id, tattoo_name, date, "
+            + "tattoo_order_price FROM tattoo_order INNER JOIN tattoo "
+            + "ON tattoo_order.tattoo_id_fk = tattoo.tattoo_id INNER JOIN user_account "
+            + "ON tattoo_order.user_account_id_fk = user_account.user_account_id WHERE login = ?";
 
     private OrderDaoImpl() {
     }
@@ -55,8 +45,7 @@ public class OrderDaoImpl implements OrderDao {
     @Override
     public boolean add(Order order) throws DaoException {
         try (Connection connection = ConnectionPool.INSTANCE.getConnection();
-             PreparedStatement statement = connection.prepareStatement(
-                     ADD, Statement.RETURN_GENERATED_KEYS)) {
+             PreparedStatement statement = connection.prepareStatement(ADD, Statement.RETURN_GENERATED_KEYS)) {
             statement.setDouble(1, order.getPrice());
             Date date = Date.valueOf(order.getDate());
             statement.setLong(2, date.getTime());
@@ -99,8 +88,7 @@ public class OrderDaoImpl implements OrderDao {
     @Override
     public Optional<Order> findById(long id) throws DaoException {
         try (Connection connection = ConnectionPool.INSTANCE.getConnection();
-             PreparedStatement statement =
-                     connection.prepareStatement(FIND_BY_ID)) {
+             PreparedStatement statement = connection.prepareStatement(FIND_BY_ID)) {
             statement.setLong(1, id);
             ResultSet resultSet = statement.executeQuery();
             Optional<Order> order = Optional.empty();
@@ -116,8 +104,7 @@ public class OrderDaoImpl implements OrderDao {
     @Override
     public List<Order> findByUserLogin(String userLogin) throws DaoException {
         try (Connection connection = ConnectionPool.INSTANCE.getConnection();
-             PreparedStatement statement =
-                     connection.prepareStatement(FIND_BY_USER_LOGIN)) {
+             PreparedStatement statement = connection.prepareStatement(FIND_BY_USER_LOGIN)) {
             statement.setString(1, userLogin);
             ResultSet resultSet = statement.executeQuery();
             List<Order> orders = new ArrayList<>();
@@ -126,13 +113,11 @@ public class OrderDaoImpl implements OrderDao {
             }
             return orders;
         } catch (SQLException | ConnectionPoolException e) {
-            throw new DaoException("Error while finding orders " +
-                    "by user login: " + userLogin, e);
+            throw new DaoException("Error while finding orders by user login: " + userLogin, e);
         }
     }
 
-    private Order createPartOrderFromResultSet(ResultSet resultSet)
-            throws SQLException {
+    private Order createPartOrderFromResultSet(ResultSet resultSet) throws SQLException {
         long id = resultSet.getLong(ColumnName.TATTOO_ORDER_ID);
         String tattooName = resultSet.getString(ColumnName.TATTOO_NAME);
         Date date = new Date(resultSet.getLong(ColumnName.DATE));
@@ -148,8 +133,7 @@ public class OrderDaoImpl implements OrderDao {
         return orderBuilder.getOrder();
     }
 
-    private Order createFullOrderFromResultSet(ResultSet resultSet)
-            throws SQLException {
+    private Order createFullOrderFromResultSet(ResultSet resultSet) throws SQLException {
         long id = resultSet.getLong(ColumnName.TATTOO_ORDER_ID);
         double price = resultSet.getDouble(ColumnName.TATTOO_ORDER_PRICE);
         Date date = new Date(resultSet.getLong(ColumnName.DATE));

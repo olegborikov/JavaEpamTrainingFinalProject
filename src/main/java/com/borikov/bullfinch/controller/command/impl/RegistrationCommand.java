@@ -28,8 +28,7 @@ public class RegistrationCommand implements Command {
         String password = request.getParameter(RequestParameter.PASSWORD);
         String confirmedPassword = request.getParameter(RequestParameter.CONFIRMED_PASSWORD);
         try {
-            if (userService.addUser(email, login,
-                    firstName, secondName, phoneNumber, password, confirmedPassword)) {
+            if (userService.addUser(email, login, firstName, secondName, phoneNumber, password, confirmedPassword)) {
                 EmailSenderUtil.sendMessage(email, login, request.getRequestURL().toString());
                 request.setAttribute(RequestParameter.USER_EMAIL_CONFIRM_MESSAGE, true);
                 page = PagePath.MESSAGE;

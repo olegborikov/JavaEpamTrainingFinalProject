@@ -19,12 +19,9 @@ public class ImageController extends HttpServlet {
             throws ServletException, IOException {
         String filename = request.getPathInfo().substring(BEGIN_INDEX);
         File file = new File(UPLOAD_DIRECTORY, filename);
-        response.setHeader(RequestParameter.CONTENT_TYPE,
-                getServletContext().getMimeType(filename));
-        response.setHeader(RequestParameter.CONTENT_LENGTH,
-                String.valueOf(file.length()));
-        response.setHeader(RequestParameter.CONTENT_DISPOSITION,
-                String.format(CONTENT_DISPOSITION_VALUE, filename));
+        response.setHeader(RequestParameter.CONTENT_TYPE, getServletContext().getMimeType(filename));
+        response.setHeader(RequestParameter.CONTENT_LENGTH, String.valueOf(file.length()));
+        response.setHeader(RequestParameter.CONTENT_DISPOSITION, String.format(CONTENT_DISPOSITION_VALUE, filename));
         Files.copy(file.toPath(), response.getOutputStream());
     }
 }

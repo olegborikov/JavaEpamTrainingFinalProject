@@ -69,8 +69,7 @@ public class UserDaoImplTest {
     @Test(priority = 1)
     public void addPositiveTest() {
         try {
-            boolean actual = userDao.add(user,
-                    "e43713ad9e2fc4c55c1e2b373d3f548bd1ffed61", connection);
+            boolean actual = userDao.add(user, "e43713ad9e2fc4c55c1e2b373d3f548bd1ffed61", connection);
             assertTrue(actual);
         } catch (DaoException e) {
             fail("incorrect data", e);

@@ -2,8 +2,7 @@ package com.borikov.bullfinch.validator;
 
 public class WalletValidator {
     private static final String ID_REGEX = "^[1-9]\\d{0,9}$";
-    private static final String ENRICH_AMOUNT_REGEX =
-            "^[1-9]\\d{0,4}(\\.\\d{0,2})?$";
+    private static final String ENRICH_AMOUNT_REGEX = "^[1-9]\\d{0,4}(\\.\\d{0,2})?$";
     private static final double MIN_BALANCE = 0.01;
     private static final double MAX_BALANCE = 99999.99;
 

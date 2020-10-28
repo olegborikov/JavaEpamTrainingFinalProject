@@ -78,10 +78,8 @@ public class User {
      * @param userRole    the user role
      * @param wallet      the wallet
      */
-    public User(Long userId, String email, String login,
-                String firstName, String secondName,
-                String phoneNumber, boolean isBlocked,
-                boolean isActivated, UserRole userRole, Wallet wallet) {
+    public User(Long userId, String email, String login, String firstName, String secondName,
+                String phoneNumber, boolean isBlocked, boolean isActivated, UserRole userRole, Wallet wallet) {
         this.userId = userId;
         this.email = email;
         this.login = login;
@@ -289,42 +287,28 @@ public class User {
         if (isActivated != user.isActivated) {
             return false;
         }
-        if (userId != null
-                ? !userId.equals(user.userId)
-                : user.userId != null) {
+        if (userId != null ? !userId.equals(user.userId) : user.userId != null) {
             return false;
         }
-        if (email != null
-                ? !email.equals(user.email)
-                : user.email != null) {
+        if (email != null ? !email.equals(user.email) : user.email != null) {
             return false;
         }
-        if (login != null
-                ? !login.equals(user.login)
-                : user.login != null) {
+        if (login != null ? !login.equals(user.login) : user.login != null) {
             return false;
         }
-        if (firstName != null
-                ? !firstName.equals(user.firstName)
-                : user.firstName != null) {
+        if (firstName != null ? !firstName.equals(user.firstName) : user.firstName != null) {
             return false;
         }
-        if (secondName != null
-                ? !secondName.equals(user.secondName)
-                : user.secondName != null) {
+        if (secondName != null ? !secondName.equals(user.secondName) : user.secondName != null) {
             return false;
         }
-        if (phoneNumber != null ?
-                !phoneNumber.equals(user.phoneNumber)
-                : user.phoneNumber != null) {
+        if (phoneNumber != null ? !phoneNumber.equals(user.phoneNumber) : user.phoneNumber != null) {
             return false;
         }
         if (userRole != user.userRole) {
             return false;
         }
-        return wallet != null
-                ? wallet.equals(user.wallet)
-                : user.wallet == null;
+        return wallet != null ? wallet.equals(user.wallet) : user.wallet == null;
     }
 
     @Override
@@ -333,10 +317,8 @@ public class User {
         result = 31 * result + (email != null ? email.hashCode() : 0);
         result = 31 * result + (login != null ? login.hashCode() : 0);
         result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
-        result = 31 * result
-                + (secondName != null ? secondName.hashCode() : 0);
-        result = 31 * result
-                + (phoneNumber != null ? phoneNumber.hashCode() : 0);
+        result = 31 * result + (secondName != null ? secondName.hashCode() : 0);
+        result = 31 * result + (phoneNumber != null ? phoneNumber.hashCode() : 0);
         result = 31 * result + (isBlocked ? 1 : 0);
         result = 31 * result + (isActivated ? 1 : 0);
         result = 31 * result + (userRole != null ? userRole.hashCode() : 0);

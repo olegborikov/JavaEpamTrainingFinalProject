@@ -29,23 +29,18 @@ import java.util.Optional;
 public class OrderServiceImpl implements OrderService {
     private final OrderDao orderDao = OrderDaoImpl.getInstance();
     private final DiscountDao discountDao = DiscountDaoImpl.getInstance();
-    private final TransactionManager transactionManager =
-            new TransactionManager();
+    private final TransactionManager transactionManager = new TransactionManager();
 
     @Override
-    public boolean addOrder(String date, String description,
-                            String price, String tattooId, String userLogin,
+    public boolean addOrder(String date, String description, String price, String tattooId, String userLogin,
                             String discountId) throws ServiceException {
         boolean result = false;
         try {
-            if (OrderValidator.isDateCorrect(date)
-                    && OrderValidator.isDescriptionCorrect(description)
-                    && OrderValidator.isPriceCorrect(price)
-                    && TattooValidator.isIdCorrect(tattooId)
+            if (OrderValidator.isDateCorrect(date) && OrderValidator.isDescriptionCorrect(description)
+                    && OrderValidator.isPriceCorrect(price) && TattooValidator.isIdCorrect(tattooId)
                     && UserValidator.isLoginCorrect(userLogin)) {
                 OrderBuilder orderBuilder = new OrderBuilder();
-                orderBuilder.setDate(LocalDate.parse(date,
-                        DateTimeFormatter.ISO_LOCAL_DATE));
+                orderBuilder.setDate(LocalDate.parse(date, DateTimeFormatter.ISO_LOCAL_DATE));
                 orderBuilder.setDescription(description);
                 orderBuilder.setPrice(Double.parseDouble(price));
                 TattooBuilder tattooBuilder = new TattooBuilder();
@@ -109,14 +104,12 @@ public class OrderServiceImpl implements OrderService {
             }
             return order;
         } catch (DaoException e) {
-            throw new ServiceException("Error while finding " +
-                    "orders by login", e);
+            throw new ServiceException("Error while finding orders by login", e);
         }
     }
 
     @Override
-    public List<Order> getOrdersByUserLogin(String userLogin)
-            throws ServiceException {
+    public List<Order> getOrdersByUserLogin(String userLogin) throws ServiceException {
         List<Order> orders = new ArrayList<>();
         try {
             if (UserValidator.isLoginCorrect(userLogin)) {
@@ -124,8 +117,7 @@ public class OrderServiceImpl implements OrderService {
             }
             return orders;
         } catch (DaoException e) {
-            throw new ServiceException("Error while finding " +
-                    "orders by login", e);
+            throw new ServiceException("Error while finding orders by login", e);
         }
     }
 }

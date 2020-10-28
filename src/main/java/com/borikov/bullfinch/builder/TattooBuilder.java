@@ -47,8 +47,7 @@ public class TattooBuilder {
     }
 
     public Tattoo getTattoo() {
-        return new Tattoo(tattooId, name, description, price,
-                isAllowed, isArchived, image, user);
+        return new Tattoo(tattooId, name, description, price, isAllowed, isArchived, image, user);
     }
 }
 

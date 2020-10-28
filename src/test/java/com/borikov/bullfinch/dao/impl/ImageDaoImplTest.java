@@ -81,10 +81,8 @@ public class ImageDaoImplTest {
         };
     }
 
-    @Test(dataProvider = "addExceptionData",
-            expectedExceptions = DaoException.class, priority = 2)
-    public void addExceptionTest(Image image)
-            throws DaoException {
+    @Test(dataProvider = "addExceptionData", expectedExceptions = DaoException.class, priority = 2)
+    public void addExceptionTest(Image image) throws DaoException {
         imageDao.add(image, connection);
     }
 

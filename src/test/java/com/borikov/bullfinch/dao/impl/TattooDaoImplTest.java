@@ -162,8 +162,7 @@ public class TattooDaoImplTest {
     @Test(dataProvider = "removePositiveData", priority = 5)
     public void removePositiveTest(Tattoo tattoo) {
         try {
-            boolean actual =
-                    tattooDao.remove(tattoo.getTattooId(), connection);
+            boolean actual = tattooDao.remove(tattoo.getTattooId(), connection);
             assertTrue(actual);
         } catch (DaoException e) {
             fail("incorrect data", e);
@@ -173,8 +172,7 @@ public class TattooDaoImplTest {
     @Test(priority = 6)
     public void removeNegativeTest() {
         try {
-            boolean actual =
-                    tattooDao.remove(tattoo2.getTattooId() + 1, connection);
+            boolean actual = tattooDao.remove(tattoo2.getTattooId() + 1, connection);
             assertFalse(actual);
         } catch (DaoException e) {
             fail("incorrect data", e);
@@ -255,8 +253,7 @@ public class TattooDaoImplTest {
     @Test(priority = 13)
     public void unarchivePositiveTest() {
         try {
-            boolean actual =
-                    tattooDao.unarchive(tattoo2.getTattooId());
+            boolean actual = tattooDao.unarchive(tattoo2.getTattooId());
             assertTrue(actual);
         } catch (DaoException e) {
             fail("incorrect data", e);
@@ -297,8 +294,7 @@ public class TattooDaoImplTest {
     @Test(priority = 17)
     public void findByIdPositiveTest() {
         try {
-            Optional<Tattoo> actual =
-                    tattooDao.findById(tattoo2.getTattooId());
+            Optional<Tattoo> actual = tattooDao.findById(tattoo2.getTattooId());
             assertTrue(actual.isPresent());
         } catch (DaoException e) {
             fail("incorrect data", e);
@@ -308,8 +304,7 @@ public class TattooDaoImplTest {
     @Test(priority = 18)
     public void findByIdNegativeTest() {
         try {
-            Optional<Tattoo> actual =
-                    tattooDao.findById(tattoo2.getTattooId() + 1);
+            Optional<Tattoo> actual = tattooDao.findById(tattoo2.getTattooId() + 1);
             assertFalse(actual.isPresent());
         } catch (DaoException e) {
             fail("incorrect data", e);
@@ -413,8 +408,7 @@ public class TattooDaoImplTest {
     @Test(priority = 28)
     public void findByIdCatalogNegativeTest() {
         try {
-            Optional<Tattoo> actual =
-                    tattooDao.findByIdCatalog(tattoo2.getTattooId());
+            Optional<Tattoo> actual = tattooDao.findByIdCatalog(tattoo2.getTattooId());
             assertFalse(actual.isEmpty());
         } catch (DaoException e) {
             fail("incorrect data", e);

@@ -8,8 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface UserDao {
-    boolean add(User user, String password, Connection connection)
-            throws DaoException;
+    boolean add(User user, String password, Connection connection) throws DaoException;
 
     boolean update(User user) throws DaoException;
 

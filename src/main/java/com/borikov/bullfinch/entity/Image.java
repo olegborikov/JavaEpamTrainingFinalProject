@@ -74,8 +74,7 @@ public class Image {
             return false;
         }
         Image image = (Image) o;
-        if (imageId != null ? !imageId.equals(image.imageId)
-                : image.imageId != null) {
+        if (imageId != null ? !imageId.equals(image.imageId) : image.imageId != null) {
             return false;
         }
         return name != null ? name.equals(image.name) : image.name == null;

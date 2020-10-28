@@ -28,8 +28,7 @@ public class PaginationUsersTag extends TagSupport {
     @Override
     public int doStartTag() throws JspException {
         ServletRequest request = pageContext.getRequest();
-        List<User> users =
-                (List<User>) request.getAttribute(RequestParameter.USERS);
+        List<User> users = (List<User>) request.getAttribute(RequestParameter.USERS);
         int currentIndex = pageNumber * usersAmountOnPage - usersAmountOnPage;
         int lastIndex = pageNumber * usersAmountOnPage - 1;
         while (currentIndex < users.size() && currentIndex <= lastIndex) {

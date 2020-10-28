@@ -29,8 +29,7 @@ public class OfferTattooCommand implements Command {
         HttpSession httpSession = request.getSession();
         String proposedLogin = (String) httpSession.getAttribute(RequestParameter.LOGIN);
         try {
-            if (tattooService.offerTattoo(tattooName, description,
-                    price, photoName, proposedLogin)) {
+            if (tattooService.offerTattoo(tattooName, description, price, photoName, proposedLogin)) {
                 request.setAttribute(RequestParameter.TATTOO_OFFER_CONFIRM_MESSAGE, true);
                 page = PagePath.MESSAGE;
             } else {

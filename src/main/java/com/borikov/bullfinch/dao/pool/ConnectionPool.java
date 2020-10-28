@@ -32,8 +32,7 @@ public enum ConnectionPool {
             freeConnections = new LinkedBlockingDeque<>(POOL_SIZE);
             givenConnections = new ArrayDeque<>();
             for (int i = 0; i < POOL_SIZE; i++) {
-                Connection connection =
-                        DriverManager.getConnection(url, username, password);
+                Connection connection = DriverManager.getConnection(url, username, password);
                 freeConnections.offer(new ProxyConnection(connection));
             }
         } catch (SQLException | ClassNotFoundException e) {
@@ -53,8 +52,7 @@ public enum ConnectionPool {
     }
 
     public void releaseConnection(Connection connection) {
-        if (connection instanceof ProxyConnection
-                && givenConnections.remove(connection)) {
+        if (connection instanceof ProxyConnection && givenConnections.remove(connection)) {
             freeConnections.offer((ProxyConnection) connection);
         } else {
             logger.log(Level.ERROR, "Connection {} is invalid", connection);

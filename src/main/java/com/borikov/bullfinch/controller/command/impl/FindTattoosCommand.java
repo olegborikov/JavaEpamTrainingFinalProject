@@ -32,8 +32,7 @@ public class FindTattoosCommand implements Command {
             request.setAttribute(RequestParameter.PAGE_AMOUNT,
                     Math.ceil((double) tattoos.size() / TATTOOS_AMOUNT_ON_PAGE));
             request.setAttribute(RequestParameter.PAGE_NUMBER, FIRST_PAGE_NUMBER);
-            request.setAttribute(RequestParameter.TATTOOS_AMOUNT_ON_PAGE,
-                    TATTOOS_AMOUNT_ON_PAGE);
+            request.setAttribute(RequestParameter.TATTOOS_AMOUNT_ON_PAGE, TATTOOS_AMOUNT_ON_PAGE);
             page = PagePath.CATALOG;
         } catch (ServiceException e) {
             LOGGER.log(Level.ERROR, "Error while finding tattoos", e);

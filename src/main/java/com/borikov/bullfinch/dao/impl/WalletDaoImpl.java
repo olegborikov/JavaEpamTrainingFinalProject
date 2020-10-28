@@ -13,20 +13,13 @@ import java.util.Optional;
 public class WalletDaoImpl implements WalletDao {
     private static final WalletDaoImpl INSTANCE = new WalletDaoImpl();
     private static final String ADD = "INSERT INTO wallet (balance) VALUES (0)";
-    private static final String UPDATE = "UPDATE wallet SET balance = ? " +
-            "WHERE wallet_id = ?";
-    private static final String FIND_BY_ID = "SELECT wallet_id, balance " +
-            "FROM wallet WHERE wallet_id = ?";
-    private static final String FIND_BY_USER_LOGIN = "SELECT wallet_id, balance " +
-            "FROM wallet INNER JOIN user_account " +
-            "ON wallet.wallet_id = user_account.wallet_id_fk " +
-            "WHERE BINARY login LIKE ?";
-    private static final String FIND_BY_ORDER_ID = "SELECT wallet_id, balance " +
-            "FROM wallet INNER JOIN user_account " +
-            "ON wallet.wallet_id = user_account.wallet_id_fk " +
-            "INNER JOIN tattoo_order " +
-            "ON user_account.user_account_id = tattoo_order.user_account_id_fk " +
-            "WHERE tattoo_order_id = ?";
+    private static final String UPDATE = "UPDATE wallet SET balance = ? WHERE wallet_id = ?";
+    private static final String FIND_BY_ID = "SELECT wallet_id, balance FROM wallet WHERE wallet_id = ?";
+    private static final String FIND_BY_USER_LOGIN = "SELECT wallet_id, balance FROM wallet INNER JOIN user_account "
+            + "ON wallet.wallet_id = user_account.wallet_id_fk WHERE BINARY login LIKE ?";
+    private static final String FIND_BY_ORDER_ID = "SELECT wallet_id, balance FROM wallet INNER JOIN user_account "
+            + "ON wallet.wallet_id = user_account.wallet_id_fk INNER JOIN tattoo_order "
+            + "ON user_account.user_account_id = tattoo_order.user_account_id_fk WHERE tattoo_order_id = ?";
 
     private WalletDaoImpl() {
     }
@@ -37,8 +30,7 @@ public class WalletDaoImpl implements WalletDao {
 
     @Override
     public boolean add(Wallet wallet, Connection connection) throws DaoException {
-        try (PreparedStatement statement = connection.prepareStatement(ADD,
-                Statement.RETURN_GENERATED_KEYS)) {
+        try (PreparedStatement statement = connection.prepareStatement(ADD, Statement.RETURN_GENERATED_KEYS)) {
             boolean result = statement.executeUpdate() > 0;
             ResultSet generatedKeys = statement.getGeneratedKeys();
             if (generatedKeys.next()) {
@@ -66,8 +58,7 @@ public class WalletDaoImpl implements WalletDao {
     public Optional<Wallet> findById(long id) throws DaoException {
         Optional<Wallet> walletOptional = Optional.empty();
         try (Connection connection = ConnectionPool.INSTANCE.getConnection();
-             PreparedStatement statement =
-                     connection.prepareStatement(FIND_BY_ID)) {
+             PreparedStatement statement = connection.prepareStatement(FIND_BY_ID)) {
             statement.setLong(1, id);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
@@ -83,8 +74,7 @@ public class WalletDaoImpl implements WalletDao {
     public Optional<Wallet> findByUserLogin(String userLogin) throws DaoException {
         Optional<Wallet> walletOptional = Optional.empty();
         try (Connection connection = ConnectionPool.INSTANCE.getConnection();
-             PreparedStatement statement =
-                     connection.prepareStatement(FIND_BY_USER_LOGIN)) {
+             PreparedStatement statement = connection.prepareStatement(FIND_BY_USER_LOGIN)) {
             statement.setString(1, userLogin);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
@@ -92,8 +82,7 @@ public class WalletDaoImpl implements WalletDao {
             }
             return walletOptional;
         } catch (SQLException | ConnectionPoolException e) {
-            throw new DaoException("Error while finding wallets " +
-                    "by user login:" + userLogin, e);
+            throw new DaoException("Error while finding wallets by user login:" + userLogin, e);
         }
     }
 
@@ -101,8 +90,7 @@ public class WalletDaoImpl implements WalletDao {
     public Optional<Wallet> findByOrderId(long orderId) throws DaoException {
         Optional<Wallet> walletOptional = Optional.empty();
         try (Connection connection = ConnectionPool.INSTANCE.getConnection();
-             PreparedStatement statement =
-                     connection.prepareStatement(FIND_BY_ORDER_ID)) {
+             PreparedStatement statement = connection.prepareStatement(FIND_BY_ORDER_ID)) {
             statement.setLong(1, orderId);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
@@ -110,8 +98,7 @@ public class WalletDaoImpl implements WalletDao {
             }
             return walletOptional;
         } catch (SQLException | ConnectionPoolException e) {
-            throw new DaoException("Error while finding wallets " +
-                    "by order id:" + orderId, e);
+            throw new DaoException("Error while finding wallets by order id:" + orderId, e);
         }
     }
 

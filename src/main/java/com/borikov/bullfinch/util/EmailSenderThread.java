@@ -22,8 +22,7 @@ public class EmailSenderThread implements Runnable {
     private static final Logger LOGGER = LogManager.getLogger();
     private static final String TEXT_TYPE = "text/html";
 
-    public EmailSenderThread(String sendToEmail, String mailSubject,
-                             String mailText, Properties properties) {
+    public EmailSenderThread(String sendToEmail, String mailSubject, String mailText, Properties properties) {
         this.sendToEmail = sendToEmail;
         this.mailSubject = mailSubject;
         this.mailText = mailText;
@@ -36,13 +35,11 @@ public class EmailSenderThread implements Runnable {
             message = new MimeMessage(mailSession);
             message.setSubject(mailSubject);
             message.setContent(mailText, TEXT_TYPE);
-            message.setRecipient(Message.RecipientType.TO,
-                    new InternetAddress(sendToEmail));
+            message.setRecipient(Message.RecipientType.TO, new InternetAddress(sendToEmail));
         } catch (AddressException e) {
             LOGGER.log(Level.ERROR, "Invalid address: {}", sendToEmail, e);
         } catch (MessagingException e) {
-            LOGGER.log(Level.ERROR, "Error while generating or " +
-                    "sending message: ", e);
+            LOGGER.log(Level.ERROR, "Error while generating or sending message: ", e);
         }
     }
 
@@ -52,8 +49,7 @@ public class EmailSenderThread implements Runnable {
         try {
             Transport.send(message);
         } catch (MessagingException e) {
-            LOGGER.log(Level.ERROR, "Error while generating or " +
-                    "sending message: ", e);
+            LOGGER.log(Level.ERROR, "Error while generating or sending message: ", e);
         }
     }
 }

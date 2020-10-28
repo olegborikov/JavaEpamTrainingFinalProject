@@ -66,9 +66,8 @@ public class Tattoo {
      * @param image       the image
      * @param user        the user
      */
-    public Tattoo(Long tattooId, String name, String description,
-                  double price, boolean isAllowed, boolean isArchived,
-                  Image image, User user) {
+    public Tattoo(Long tattooId, String name, String description, double price, boolean isAllowed,
+                  boolean isArchived, Image image, User user) {
         this.tattooId = tattooId;
         this.name = name;
         this.description = description;
@@ -241,15 +240,13 @@ public class Tattoo {
         if (isArchived != tattoo.isArchived) {
             return false;
         }
-        if (tattooId != null ? !tattooId.equals(tattoo.tattooId)
-                : tattoo.tattooId != null) {
+        if (tattooId != null ? !tattooId.equals(tattoo.tattooId) : tattoo.tattooId != null) {
             return false;
         }
         if (name != null ? !name.equals(tattoo.name) : tattoo.name != null) {
             return false;
         }
-        if (description != null ? !description.equals(tattoo.description)
-                : tattoo.description != null) {
+        if (description != null ? !description.equals(tattoo.description) : tattoo.description != null) {
             return false;
         }
         if (image != null ? !image.equals(tattoo.image) : tattoo.image != null) {
@@ -264,8 +261,7 @@ public class Tattoo {
         long temp;
         result = tattooId != null ? tattooId.hashCode() : 0;
         result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result +
-                (description != null ? description.hashCode() : 0);
+        result = 31 * result + (description != null ? description.hashCode() : 0);
         temp = Double.doubleToLongBits(price);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         result = 31 * result + (isAllowed ? 1 : 0);

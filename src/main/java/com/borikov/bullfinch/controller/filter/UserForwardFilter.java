@@ -27,18 +27,16 @@ public class UserForwardFilter implements Filter {
 
     @Override
     public void init(FilterConfig config) {
-        EnumSet<CommandType> commandTypesUser = EnumSet.range(
+        EnumSet<CommandType> commandTypesUser = EnumSet.range(// TODO: 28.10.2020 to singleton
                 CommandType.BROWSE_CATALOG_PAGE_COMMAND, CommandType.LOGOUT_COMMAND);
         commandTypesUser.add(CommandType.BROWSE_HOME_PAGE_COMMAND);
         commandTypesUser.add(CommandType.SWITCH_LOCALE_COMMAND);
-        commandsUser = commandTypesUser.stream()
-                .map(CommandType::getCommand)
-                .collect(Collectors.toSet());
+        commandsUser = commandTypesUser.stream().map(CommandType::getCommand).collect(Collectors.toSet());
     }
 
     @Override
-    public void doFilter(ServletRequest request, ServletResponse response,
-                         FilterChain chain) throws ServletException, IOException {
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+            throws ServletException, IOException {
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         HttpServletResponse httpResponse = (HttpServletResponse) response;
         HttpSession httpSession = httpRequest.getSession();

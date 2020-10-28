@@ -34,14 +34,11 @@ public class PaginationTattoosCatalogTag extends TagSupport {
     @Override
     public int doStartTag() throws JspException {
         ServletRequest request = pageContext.getRequest();
-        List<Tattoo> tattoos =
-                (List<Tattoo>) request.getAttribute(RequestParameter.TATTOOS);
-        int currentIndex =
-                pageNumber * tattoosAmountOnPage - tattoosAmountOnPage;
+        List<Tattoo> tattoos = (List<Tattoo>) request.getAttribute(RequestParameter.TATTOOS);
+        int currentIndex = pageNumber * tattoosAmountOnPage - tattoosAmountOnPage;
         int lastIndex = pageNumber * tattoosAmountOnPage - 1;
         HttpSession session = pageContext.getSession();
-        String localeName =
-                (String) session.getAttribute(RequestParameter.CURRENT_LOCALE);
+        String localeName = (String) session.getAttribute(RequestParameter.CURRENT_LOCALE);
         String language = localeName.split(SPLIT_SYMBOL)[0];
         String country = localeName.split(SPLIT_SYMBOL)[1];
         Locale locale = new Locale(language, country);

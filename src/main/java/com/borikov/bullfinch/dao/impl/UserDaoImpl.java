@@ -17,38 +17,28 @@ import java.util.Optional;
 
 public class UserDaoImpl implements UserDao {
     private static final UserDaoImpl INSTANCE = new UserDaoImpl();
-    private static final String ADD = "INSERT INTO user_account (email, login, " +
-            "password, first_name, second_name, phone_number, is_blocked, " +
-            "is_activated, role_id_fk, wallet_id_fk) " +
-            "VALUES (?, ?, ?, ?, ?, ?, 0, 0, ?, ?)";
-    private static final String UPDATE = "UPDATE user_account SET email = ?, " +
-            "login = ?, first_name = ?, second_name = ?, phone_number = ? " +
-            "WHERE user_account_id = ?";
-    private static final String AUTHORIZE = "SELECT login, is_blocked, " +
-            "is_activated, role_name FROM user_account INNER JOIN role " +
-            "ON user_account.role_id_fk = role.role_id WHERE login LIKE ?";
-    private static final String CONFIRM_EMAIL = "UPDATE user_account " +
-            "SET is_activated = 1 WHERE login LIKE ?";
-    private static final String BLOCK = "UPDATE user_account " +
-            "SET is_blocked = 1 WHERE BINARY login LIKE ?";
-    private static final String UNBLOCK = "UPDATE user_account " +
-            "SET is_blocked = 0 WHERE BINARY login LIKE ?";
-    private static final String CHECK_EXISTING_BY_LOGIN = "SELECT password " +
-            "FROM user_account WHERE BINARY login LIKE ?";
-    private static final String CHECK_EXISTING_BY_EMAIL = "SELECT user_account_id " +
-            "FROM user_account WHERE email LIKE ?";
-    private static final String FIND_ALL = "SELECT login, email, first_name, " +
-            "second_name FROM user_account WHERE BINARY login NOT LIKE 'admin'";
-    private static final String FIND_BY_LOGIN = "SELECT user_account_id, email, " +
-            "login, first_name, second_name, phone_number, is_blocked, " +
-            "is_activated, wallet_id, balance, role_name " +
-            "FROM user_account INNER JOIN role " +
-            "ON user_account.role_id_fk = role.role_id " +
-            "INNER JOIN wallet ON user_account.wallet_id_fk = wallet.wallet_id " +
-            "WHERE login LIKE ?";
-    private static final String FIND_BY_LOGIN_SUBSTRING = "SELECT login, email, " +
-            "first_name, second_name FROM user_account " +
-            "WHERE BINARY login NOT LIKE 'admin' AND BINARY login LIKE ?";
+    private static final String ADD = "INSERT INTO user_account (email, login, password, first_name, second_name, "
+            + "phone_number, is_blocked, is_activated, role_id_fk, wallet_id_fk) "
+            + "VALUES (?, ?, ?, ?, ?, ?, 0, 0, ?, ?)";
+    private static final String UPDATE = "UPDATE user_account SET email = ?, login = ?, first_name = ?, "
+            + "second_name = ?, phone_number = ? WHERE user_account_id = ?";
+    private static final String AUTHORIZE = "SELECT login, is_blocked, is_activated, role_name FROM user_account "
+            + "INNER JOIN role ON user_account.role_id_fk = role.role_id WHERE login LIKE ?";
+    private static final String CONFIRM_EMAIL = "UPDATE user_account SET is_activated = 1 WHERE login LIKE ?";
+    private static final String BLOCK = "UPDATE user_account SET is_blocked = 1 WHERE BINARY login LIKE ?";
+    private static final String UNBLOCK = "UPDATE user_account SET is_blocked = 0 WHERE BINARY login LIKE ?";
+    private static final String CHECK_EXISTING_BY_LOGIN = "SELECT password FROM user_account "
+            + "WHERE BINARY login LIKE ?";
+    private static final String CHECK_EXISTING_BY_EMAIL = "SELECT user_account_id FROM user_account "
+            + "WHERE email LIKE ?";
+    private static final String FIND_ALL = "SELECT login, email, first_name, second_name FROM user_account "
+            + "WHERE BINARY login NOT LIKE 'admin'";
+    private static final String FIND_BY_LOGIN = "SELECT user_account_id, email, login, first_name, second_name, "
+            + "phone_number, is_blocked, is_activated, wallet_id, balance, role_name "
+            + "FROM user_account INNER JOIN role ON user_account.role_id_fk = role.role_id "
+            + "INNER JOIN wallet ON user_account.wallet_id_fk = wallet.wallet_id WHERE login LIKE ?";
+    private static final String FIND_BY_LOGIN_SUBSTRING = "SELECT login, email, first_name, second_name "
+            + "FROM user_account WHERE BINARY login NOT LIKE 'admin' AND BINARY login LIKE ?";
     private static final String PERCENT = "%";
 
     private UserDaoImpl() {
@@ -59,10 +49,8 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public boolean add(User user, String password, Connection connection)
-            throws DaoException {
-        try (PreparedStatement statement = connection.prepareStatement(
-                ADD, Statement.RETURN_GENERATED_KEYS)) {
+    public boolean add(User user, String password, Connection connection) throws DaoException {
+        try (PreparedStatement statement = connection.prepareStatement(ADD, Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, user.getEmail());
             statement.setString(2, user.getLogin());
             statement.setString(3, password);
@@ -101,8 +89,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public Optional<User> authorize(String login) throws DaoException {
         try (Connection connection = ConnectionPool.INSTANCE.getConnection();
-             PreparedStatement statement =
-                     connection.prepareStatement(AUTHORIZE)) {
+             PreparedStatement statement = connection.prepareStatement(AUTHORIZE)) {
             statement.setString(1, login);
             ResultSet resultSet = statement.executeQuery();
             Optional<User> userOptional = Optional.empty();
@@ -111,21 +98,18 @@ public class UserDaoImpl implements UserDao {
             }
             return userOptional;
         } catch (SQLException | ConnectionPoolException e) {
-            throw new DaoException("Error while authorize user " +
-                    "with login: " + login, e);
+            throw new DaoException("Error while authorize user with login: " + login, e);
         }
     }
 
     @Override
     public boolean confirmEmail(String login) throws DaoException {
         try (Connection connection = ConnectionPool.INSTANCE.getConnection();
-             PreparedStatement statement =
-                     connection.prepareStatement(CONFIRM_EMAIL)) {
+             PreparedStatement statement = connection.prepareStatement(CONFIRM_EMAIL)) {
             statement.setString(1, login);
             return statement.executeUpdate() > 0;
         } catch (SQLException | ConnectionPoolException e) {
-            throw new DaoException("Error while confirming email of user " +
-                    "with login: " + login, e);
+            throw new DaoException("Error while confirming email of user with login: " + login, e);
         }
     }
 
@@ -136,8 +120,7 @@ public class UserDaoImpl implements UserDao {
             statement.setString(1, login);
             return statement.executeUpdate() > 0;
         } catch (SQLException | ConnectionPoolException e) {
-            throw new DaoException("Error while blocking user " +
-                    "with login: " + login, e);
+            throw new DaoException("Error while blocking user with login: " + login, e);
         }
     }
 
@@ -148,16 +131,14 @@ public class UserDaoImpl implements UserDao {
             statement.setString(1, login);
             return statement.executeUpdate() > 0;
         } catch (SQLException | ConnectionPoolException e) {
-            throw new DaoException("Error while unblocking user " +
-                    "with login: " + login, e);
+            throw new DaoException("Error while unblocking user with login: " + login, e);
         }
     }
 
     @Override
     public Optional<String> checkExistingByLogin(String login) throws DaoException {
         try (Connection connection = ConnectionPool.INSTANCE.getConnection();
-             PreparedStatement statement =
-                     connection.prepareStatement(CHECK_EXISTING_BY_LOGIN)) {
+             PreparedStatement statement = connection.prepareStatement(CHECK_EXISTING_BY_LOGIN)) {
             statement.setString(1, login);
             ResultSet resultSet = statement.executeQuery();
             Optional<String> passwordOptional = Optional.empty();
@@ -167,30 +148,26 @@ public class UserDaoImpl implements UserDao {
             }
             return passwordOptional;
         } catch (SQLException | ConnectionPoolException e) {
-            throw new DaoException("Error while checking for existing user " +
-                    "by login: " + login, e);
+            throw new DaoException("Error while checking for existing user by login: " + login, e);
         }
     }
 
     @Override
     public boolean checkExistingByEmail(String email) throws DaoException {
         try (Connection connection = ConnectionPool.INSTANCE.getConnection();
-             PreparedStatement statement =
-                     connection.prepareStatement(CHECK_EXISTING_BY_EMAIL)) {
+             PreparedStatement statement = connection.prepareStatement(CHECK_EXISTING_BY_EMAIL)) {
             statement.setString(1, email);
             ResultSet resultSet = statement.executeQuery();
             return resultSet.next();
         } catch (SQLException | ConnectionPoolException e) {
-            throw new DaoException("Error while checking for existing user " +
-                    "by email: " + email, e);
+            throw new DaoException("Error while checking for existing user by email: " + email, e);
         }
     }
 
     @Override
     public List<User> findAll() throws DaoException {
         try (Connection connection = ConnectionPool.INSTANCE.getConnection();
-             PreparedStatement statement =
-                     connection.prepareStatement(FIND_ALL)) {
+             PreparedStatement statement = connection.prepareStatement(FIND_ALL)) {
             ResultSet resultSet = statement.executeQuery();
             List<User> users = new ArrayList<>();
             while (resultSet.next()) {
@@ -205,8 +182,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public Optional<User> findByLogin(String login) throws DaoException {
         try (Connection connection = ConnectionPool.INSTANCE.getConnection();
-             PreparedStatement statement =
-                     connection.prepareStatement(FIND_BY_LOGIN)) {
+             PreparedStatement statement = connection.prepareStatement(FIND_BY_LOGIN)) {
             statement.setString(1, login);
             ResultSet resultSet = statement.executeQuery();
             Optional<User> userOptional = Optional.empty();
@@ -220,13 +196,10 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public List<User> findByLoginSubstring(String loginSubstring)
-            throws DaoException {
+    public List<User> findByLoginSubstring(String loginSubstring) throws DaoException {
         try (Connection connection = ConnectionPool.INSTANCE.getConnection();
-             PreparedStatement statement =
-                     connection.prepareStatement(FIND_BY_LOGIN_SUBSTRING)) {
-            statement.setString(1, PERCENT +
-                    loginSubstring + PERCENT);
+             PreparedStatement statement = connection.prepareStatement(FIND_BY_LOGIN_SUBSTRING)) {
+            statement.setString(1, PERCENT + loginSubstring + PERCENT);
             ResultSet resultSet = statement.executeQuery();
             List<User> users = new ArrayList<>();
             while (resultSet.next()) {
@@ -234,13 +207,11 @@ public class UserDaoImpl implements UserDao {
             }
             return users;
         } catch (SQLException | ConnectionPoolException e) {
-            throw new DaoException("Error while finding users by login" +
-                    "substring : " + loginSubstring, e);
+            throw new DaoException("Error while finding users by login substring : " + loginSubstring, e);
         }
     }
 
-    private User createAuthorizeUserFromResultSet(ResultSet resultSet)
-            throws SQLException {
+    private User createAuthorizeUserFromResultSet(ResultSet resultSet) throws SQLException {
         String login = resultSet.getString(ColumnName.LOGIN);
         boolean isBlocked = resultSet.getInt(ColumnName.IS_BLOCKED) != 0;
         boolean isActivated = resultSet.getInt(ColumnName.IS_ACTIVATED) != 0;
@@ -253,8 +224,7 @@ public class UserDaoImpl implements UserDao {
         return userBuilder.getUser();
     }
 
-    private User createPartUserFromResultSet(ResultSet resultSet)
-            throws SQLException {
+    private User createPartUserFromResultSet(ResultSet resultSet) throws SQLException {
         String login = resultSet.getString(ColumnName.LOGIN);
         String email = resultSet.getString(ColumnName.EMAIL);
         String firstName = resultSet.getString(ColumnName.FIRST_NAME);
@@ -267,8 +237,7 @@ public class UserDaoImpl implements UserDao {
         return userBuilder.getUser();
     }
 
-    private User createFullUserFromResultSet(ResultSet resultSet)
-            throws SQLException {
+    private User createFullUserFromResultSet(ResultSet resultSet) throws SQLException {
         long userId = resultSet.getLong(ColumnName.USER_ACCOUNT_ID);
         String login = resultSet.getString(ColumnName.LOGIN);
         String email = resultSet.getString(ColumnName.EMAIL);

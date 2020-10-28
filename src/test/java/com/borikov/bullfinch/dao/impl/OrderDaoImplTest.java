@@ -177,8 +177,7 @@ public class OrderDaoImplTest {
             userBuilder.setLogin("alex");
             TattooBuilder tattooBuilder = new TattooBuilder();
             tattooBuilder.setName("Girl");
-            Image image =
-                    new Image(null, "935aeb3c-b0b5-4337-b59e-a2546a8fa94b");
+            Image image = new Image(null, "935aeb3c-b0b5-4337-b59e-a2546a8fa94b");
             tattooBuilder.setImage(image);
             Date date = new Date(11111111111111L);
             Order expected = new Order(1L, 500, date.toLocalDate(), "Good",
@@ -197,8 +196,7 @@ public class OrderDaoImplTest {
             userBuilder.setLogin("alex");
             TattooBuilder tattooBuilder = new TattooBuilder();
             tattooBuilder.setName("Girl");
-            Image image =
-                    new Image(null, "935aeb3c-b0b5-4337-b59e-a2546a8fa94b");
+            Image image = new Image(null, "935aeb3c-b0b5-4337-b59e-a2546a8fa94b");
             tattooBuilder.setImage(image);
             Date date = new Date(0);
             Order expected = new Order(1L, 500, date.toLocalDate(), "Good",
@@ -237,8 +235,7 @@ public class OrderDaoImplTest {
     public void findByUserLoginNegativeTest() {
         try {
             TattooBuilder tattooBuilder1 = new TattooBuilder();
-            Image image1 =
-                    new Image(null, "935aeb3c-b0b5-4337-b59e-a2546a8fa94b");
+            Image image1 = new Image(null, "935aeb3c-b0b5-4337-b59e-a2546a8fa94b");
             tattooBuilder1.setName("Girl");
             tattooBuilder1.setImage(image1);
             Date date1 = new Date(11111111111111L);
@@ -246,8 +243,7 @@ public class OrderDaoImplTest {
                     null, false, null, tattooBuilder1.getTattoo());
             TattooBuilder tattooBuilder2 = new TattooBuilder();
             tattooBuilder2.setName("Street");
-            Image image2 =
-                    new Image(null, "01cc692c-0e32-4dc2-83bd-ce90eca3768f");
+            Image image2 = new Image(null, "01cc692c-0e32-4dc2-83bd-ce90eca3768f");
             tattooBuilder2.setImage(image2);
             Date date2 = new Date(11111111111121L);
             Order order6 = new Order(2L, 300, date2.toLocalDate(),

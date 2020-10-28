@@ -12,9 +12,8 @@ public class PaginationCommand implements Command {
     @Override
     public String execute(HttpServletRequest request) {
         HttpSession session = request.getSession();
-        RequestAttributeHandler requestAttributeHandler =
-                (RequestAttributeHandler) session.getAttribute(
-                        RequestParameter.REQUEST_ATTRIBUTE_HANDLER);
+        RequestAttributeHandler requestAttributeHandler
+                = (RequestAttributeHandler) session.getAttribute(RequestParameter.REQUEST_ATTRIBUTE_HANDLER);
         Map<String, Object> attributes = requestAttributeHandler.getAttributes();
         for (Map.Entry<String, Object> entry : attributes.entrySet()) {
             request.setAttribute(entry.getKey(), entry.getValue());

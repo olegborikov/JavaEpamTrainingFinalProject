@@ -18,17 +18,14 @@ import java.util.Optional;
 
 public class TattooServiceImpl implements TattooService {
     private final TattooDao tattooDao = TattooDaoImpl.getInstance();
-    private final TransactionManager transactionManager =
-            new TransactionManager();
+    private final TransactionManager transactionManager = new TransactionManager();
 
     @Override
-    public boolean addTattoo(String tattooName, String description,
-                             String price, String imageName,
+    public boolean addTattoo(String tattooName, String description, String price, String imageName,
                              String proposedLogin) throws ServiceException {
         try {
             boolean result = false;
-            if (TattooValidator.isNameCorrect(tattooName)
-                    && TattooValidator.isDescriptionCorrect(description)
+            if (TattooValidator.isNameCorrect(tattooName) && TattooValidator.isDescriptionCorrect(description)
                     && TattooValidator.isPriceCorrect(price)) {
                 double tattooPrice = Double.parseDouble(price);
                 TattooBuilder tattooBuilder = new TattooBuilder();
@@ -49,16 +46,13 @@ public class TattooServiceImpl implements TattooService {
     }
 
     @Override
-    public boolean removeTattoo(String tattooId, String imageId)
-            throws ServiceException {
+    public boolean removeTattoo(String tattooId, String imageId) throws ServiceException {
         boolean result = false;
         try {
-            if (TattooValidator.isIdCorrect(tattooId)
-                    && TattooValidator.isIdCorrect(imageId)) {
+            if (TattooValidator.isIdCorrect(tattooId) && TattooValidator.isIdCorrect(imageId)) {
                 long tattooIdParsed = Long.parseLong(tattooId);
                 long imageIdParsed = Long.parseLong(imageId);
-                result = transactionManager.removeTattooAndImage(
-                        tattooIdParsed, imageIdParsed);
+                result = transactionManager.removeTattooAndImage(tattooIdParsed, imageIdParsed);
             }
             return result;
         } catch (TransactionException e) {
@@ -67,14 +61,11 @@ public class TattooServiceImpl implements TattooService {
     }
 
     @Override
-    public boolean editTattoo(String id, String name, String description,
-                              String price) throws ServiceException {
+    public boolean editTattoo(String id, String name, String description, String price) throws ServiceException {
         try {
             boolean result = false;
-            if (TattooValidator.isIdCorrect(id)
-                    && TattooValidator.isNameCorrect(name)
-                    && TattooValidator.isDescriptionCorrect(description)
-                    && TattooValidator.isPriceCorrect(price)) {
+            if (TattooValidator.isIdCorrect(id) && TattooValidator.isNameCorrect(name)
+                    && TattooValidator.isDescriptionCorrect(description) && TattooValidator.isPriceCorrect(price)) {
                 long tattooId = Long.parseLong(id);
                 double tattooPrice = Double.parseDouble(price);
                 TattooBuilder tattooBuilder = new TattooBuilder();
@@ -92,13 +83,11 @@ public class TattooServiceImpl implements TattooService {
     }
 
     @Override
-    public boolean offerTattoo(String tattooName, String description,
-                               String price, String imageName,
+    public boolean offerTattoo(String tattooName, String description, String price, String imageName,
                                String proposedLogin) throws ServiceException {
         try {
             boolean result = false;
-            if (TattooValidator.isNameCorrect(tattooName)
-                    && TattooValidator.isDescriptionCorrect(description)
+            if (TattooValidator.isNameCorrect(tattooName) && TattooValidator.isDescriptionCorrect(description)
                     && TattooValidator.isPriceCorrect(price)) {
                 double tattooPrice = Double.parseDouble(price);
                 TattooBuilder tattooBuilder = new TattooBuilder();
@@ -180,26 +169,22 @@ public class TattooServiceImpl implements TattooService {
             }
             return tattoo;
         } catch (DaoException e) {
-            throw new ServiceException("Error while finding " +
-                    "tattoos by id", e);
+            throw new ServiceException("Error while finding tattoos by id", e);
         }
     }
 
     @Override
-    public List<Tattoo> findTattoosByName(String name)
-            throws ServiceException {
+    public List<Tattoo> findTattoosByName(String name) throws ServiceException {
         try {
             List<Tattoo> tattoos = tattooDao.findByNameSubstring(name);
             return tattoos;
         } catch (DaoException e) {
-            throw new ServiceException("Error while finding " +
-                    "tattoos by name", e);
+            throw new ServiceException("Error while finding tattoos by name", e);
         }
     }
 
     @Override
-    public List<Tattoo> findTattoosByAllowed(boolean isAllowed)
-            throws ServiceException {
+    public List<Tattoo> findTattoosByAllowed(boolean isAllowed) throws ServiceException {
         try {
             List<Tattoo> tattoos = tattooDao.findByAllowed(isAllowed);
             return tattoos;
@@ -209,8 +194,7 @@ public class TattooServiceImpl implements TattooService {
     }
 
     @Override
-    public List<Tattoo> findTattoosByArchived(boolean isArchived)
-            throws ServiceException {
+    public List<Tattoo> findTattoosByArchived(boolean isArchived) throws ServiceException {
         try {
             List<Tattoo> tattoos = tattooDao.findByArchived(isArchived);
             return tattoos;
@@ -220,8 +204,7 @@ public class TattooServiceImpl implements TattooService {
     }
 
     @Override
-    public List<Tattoo> findAllTattoosCatalog()
-            throws ServiceException {
+    public List<Tattoo> findAllTattoosCatalog() throws ServiceException {
         try {
             List<Tattoo> tattoos = tattooDao.findAllCatalog();
             return tattoos;
@@ -231,8 +214,7 @@ public class TattooServiceImpl implements TattooService {
     }
 
     @Override
-    public Optional<Tattoo> findTattooByIdCatalog(String id)
-            throws ServiceException {
+    public Optional<Tattoo> findTattooByIdCatalog(String id) throws ServiceException {
         Optional<Tattoo> tattoo = Optional.empty();
         try {
             if (TattooValidator.isIdCorrect(id)) {
@@ -241,20 +223,17 @@ public class TattooServiceImpl implements TattooService {
             }
             return tattoo;
         } catch (DaoException e) {
-            throw new ServiceException("Error while finding " +
-                    "tattoos by id", e);
+            throw new ServiceException("Error while finding tattoos by id", e);
         }
     }
 
     @Override
-    public List<Tattoo> findTattoosByNameCatalog(String name)
-            throws ServiceException {
+    public List<Tattoo> findTattoosByNameCatalog(String name) throws ServiceException {
         try {
             List<Tattoo> tattoos = tattooDao.findByNameSubstringCatalog(name);
             return tattoos;
         } catch (DaoException e) {
-            throw new ServiceException("Error while finding " +
-                    "tattoos by name", e);
+            throw new ServiceException("Error while finding tattoos by name", e);
         }
     }
 }

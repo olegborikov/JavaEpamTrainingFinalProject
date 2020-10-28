@@ -8,14 +8,44 @@ INSERT INTO bullfinch.role (role_name)
 VALUES ('admin');
 
 INSERT INTO bullfinch.wallet (balance)
+VALUES (500);
+INSERT INTO bullfinch.wallet (balance)
+VALUES (1000);
+INSERT INTO bullfinch.wallet (balance)
+VALUES (300);
+INSERT INTO bullfinch.wallet (balance)
+VALUES (100);
+INSERT INTO bullfinch.wallet (balance)
+VALUES (500);
+INSERT INTO bullfinch.wallet (balance)
 VALUES (0);
 
 INSERT INTO bullfinch.user_account (login, password, is_blocked, is_activated, role_id_fk)
 VALUES ('admin', 'a753c776ff3ed4fefa2af948af87448910153281', 0, 1, 3);
 INSERT INTO bullfinch.user_account (email, login, password, first_name, second_name, phone_number,
                                     is_blocked, is_activated, role_id_fk, wallet_id_fk)
-VALUES ('ob375259542181@gmail.com', 'oleg', 'e43713ad9e2fc4c55c1e2b373d3f548bd1ffed6e', 'Oleg',
-        'Borikov', '375251234567', 0, 1, 2, 1);
+VALUES ('olegborikov@gmail.com', 'oleg', 'e43713ad9e2fc4c55c1e2b373d3f548bd1ffed6e', 'Oleg',
+        'Borikov', '+375257654321', 0, 1, 2, 1);
+INSERT INTO bullfinch.user_account (email, login, password, first_name, second_name, phone_number,
+                                    is_blocked, is_activated, role_id_fk, wallet_id_fk)
+VALUES ('alexblack@gmail.com', 'alex', 'a753c776ff3ed4fefa2af948af87448910153281', 'Alex',
+        'Black', '375251234567', 0, 1, 2, 2);
+INSERT INTO bullfinch.user_account (email, login, password, first_name, second_name, phone_number,
+                                    is_blocked, is_activated, role_id_fk, wallet_id_fk)
+VALUES ('ethanarmstron@gmail.com', 'ethan', '281e7dfeb794f29876d950987a49496beaccbe77', 'Ethan',
+        'Armstrong', '375251111111', 0, 1, 2, 3);
+INSERT INTO bullfinch.user_account (email, login, password, first_name, second_name, phone_number,
+                                    is_blocked, is_activated, role_id_fk, wallet_id_fk)
+VALUES ('gregorydoyle@gmail.com', 'gregory', '1e0c47c2561e486b945d4e98548553053691219a', 'Gregory',
+        'Doyle', '375252222222', 0, 1, 2, 4);
+INSERT INTO bullfinch.user_account (email, login, password, first_name, second_name, phone_number,
+                                    is_blocked, is_activated, role_id_fk, wallet_id_fk)
+VALUES ('theodorelawson@gmail.com', 'theodore', '6e35b3ac7879d2c21929d021bb450555eb4daf0c', 'Theodore',
+        'Lawson', '375253333333', 1, 1, 2, 5);
+INSERT INTO bullfinch.user_account (email, login, password, first_name, second_name, phone_number,
+                                    is_blocked, is_activated, role_id_fk, wallet_id_fk)
+VALUES ('mileswells@gmail.com', 'miles', 'eca52b195914a01854594a55f42e5679d859f77e', 'Miles',
+        'Wells', '375254444444', 0, 1, 2, 6);
 
 INSERT INTO bullfinch.image (image_name)
 VALUES ('77a7cd94-6a94-4151-b7e0-18853e16a7f8');
@@ -33,6 +63,10 @@ INSERT INTO bullfinch.image (image_name)
 VALUES ('747d0b93-b9a5-40e1-b9b4-cbc841951a85');
 INSERT INTO bullfinch.image (image_name)
 VALUES ('5edae083-e474-469d-ad16-2eb2e6a9e702');
+INSERT INTO bullfinch.image (image_name)
+VALUES ('19318057-9d6c-4f2a-899d-5d784ee6839f');
+INSERT INTO bullfinch.image (image_name)
+VALUES ('60fb5365-e21d-4378-981a-e3d3b8959195');
 
 INSERT INTO bullfinch.tattoo (tattoo_name, tattoo_description, tattoo_price,
                               is_allowed, is_archived, image_id_fk, user_account_id_fk)
@@ -49,7 +83,7 @@ INSERT INTO bullfinch.tattoo (tattoo_name, tattoo_description, tattoo_price,
                               is_allowed, is_archived, image_id_fk, user_account_id_fk)
 VALUES ('Child of the devil',
         'Devil tattoos are tattoos of Satan or one of his minions and have come under a lot of fire recently from fundamentalist Christians and Christian groups that do not have a clear understanding of the meaning of the tattoos. Articles are appearing on the web that denounce devil tattoos and make outrageous claims that the devil tattoo is the mark of Satan and you advocate his following by having his image on your body. They are clearly ignorant of the tradition of body art and the decisions made by the body art enthusiast. The devil tattoo can have many ramifications and meanings, but only a small part of the population of tattooed people use them as a symbol of evil or benevolence.',
-        700, 1, 0, 3, 1);
+        700, 1, 0, 3, 2);
 INSERT INTO bullfinch.tattoo (tattoo_name, tattoo_description, tattoo_price,
                               is_allowed, is_archived, image_id_fk, user_account_id_fk)
 VALUES ('Odi et amo',
@@ -74,4 +108,32 @@ INSERT INTO bullfinch.tattoo (tattoo_name, tattoo_description, tattoo_price,
                               is_allowed, is_archived, image_id_fk, user_account_id_fk)
 VALUES ('Key to all doors',
         'The key tattoo is not a mainstream tattoo, but it is a popular choice. It is sometimes seen alone or in combination with other symbols. A common combination is the key and lock tattoo. If you think about it, keys are a very big part of our every day life. They open doors for us. They also close things. Because of this double meaning, key tattoo meanings can be looked at in a number of ways. Key tattoos come in different varieties. It can be one single key, a key and lock or designed as a skeleton key. Some are rather simple while others are very artistic in style. Though these are more common, other designs include combinations with heart tattoos, ribbon tattoos, padlock tattoos, start tattoos and chain tattoos. The design can often be seen as a bracelet or necklace.',
-        500, 1, 0, 8, 1);
+        500, 1, 1, 8, 1);
+INSERT INTO bullfinch.tattoo (tattoo_name, tattoo_description, tattoo_price,
+                              is_allowed, is_archived, image_id_fk, user_account_id_fk)
+VALUES ('Moon',
+        'Moon tattoo - mystery, calmness, harmony. If in the image the star is hiding behind the clouds, it symbolizes mysticism. The astrological meaning of such a tattoo is maternal warmth and love, light, tenderness and care, which will always be with its owner. From this point of view, the Moon is a sign that the world is impermanent. We can say that this is a symbol of the mother, the master of thoughts, feelings and emotions.',
+        600, 1, 1, 9, 2);
+INSERT INTO bullfinch.tattoo (tattoo_name, tattoo_description, tattoo_price,
+                              is_allowed, is_archived, image_id_fk, user_account_id_fk)
+VALUES ('Girl',
+        'A tattoo in the form of a girl on the skin is some kind of warning sign. You can even say that this sign shouts to others: “Caution! It''s a bad joke with this person! " Most often, such a tattoo is stuffed by people for whom character traits such as vindictiveness and rigidity are not an empty phrase',
+        400, 0, 0, 10, 2);
+
+INSERT INTO discount(discount_percent, user_account_id_fk)
+VALUES (50, 2);
+INSERT INTO discount(discount_percent, user_account_id_fk)
+VALUES (70, 2);
+INSERT INTO discount(discount_percent, user_account_id_fk)
+VALUES (20, 2);
+INSERT INTO discount(discount_percent, user_account_id_fk)
+VALUES (40, 3);
+INSERT INTO discount(discount_percent, user_account_id_fk)
+VALUES (60, 4);
+
+INSERT INTO tattoo_order(tattoo_order_price, date, tattoo_order_description,
+                         is_confirmed, user_account_id_fk, tattoo_id_fk)
+VALUES (500, 1605819600000, 'Want to modify sketch a little bit', 1, 2, 1);
+INSERT INTO tattoo_order(tattoo_order_price, date, tattoo_order_description,
+                         is_confirmed, user_account_id_fk, tattoo_id_fk)
+VALUES (500, 1606770000000, 'Very nice sketch', 0, 2, 2);
