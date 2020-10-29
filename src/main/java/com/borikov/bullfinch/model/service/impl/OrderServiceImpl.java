@@ -29,7 +29,7 @@ import java.util.Optional;
 public class OrderServiceImpl implements OrderService {
     private final OrderDao orderDao = OrderDaoImpl.getInstance();
     private final DiscountDao discountDao = DiscountDaoImpl.getInstance();
-    private final TransactionManager transactionManager = new TransactionManager();
+    private final TransactionManager transactionManager = TransactionManager.getInstance();
 
     @Override
     public boolean addOrder(String date, String description, String price, String tattooId, String userLogin,

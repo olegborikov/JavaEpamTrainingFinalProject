@@ -12,13 +12,14 @@ import com.borikov.bullfinch.model.entity.Image;
 import com.borikov.bullfinch.model.entity.Tattoo;
 import com.borikov.bullfinch.model.service.TattooService;
 import com.borikov.bullfinch.model.validator.TattooValidator;
+import com.borikov.bullfinch.model.validator.UserValidator;
 
 import java.util.List;
 import java.util.Optional;
 
 public class TattooServiceImpl implements TattooService {
     private final TattooDao tattooDao = TattooDaoImpl.getInstance();
-    private final TransactionManager transactionManager = new TransactionManager();
+    private final TransactionManager transactionManager = TransactionManager.getInstance();
 
     @Override
     public boolean addTattoo(String tattooName, String description, String price, String imageName,
@@ -26,7 +27,7 @@ public class TattooServiceImpl implements TattooService {
         try {
             boolean result = false;
             if (TattooValidator.isNameCorrect(tattooName) && TattooValidator.isDescriptionCorrect(description)
-                    && TattooValidator.isPriceCorrect(price)) {
+                    && TattooValidator.isPriceCorrect(price) && UserValidator.isLoginCorrect(proposedLogin)) {
                 double tattooPrice = Double.parseDouble(price);
                 TattooBuilder tattooBuilder = new TattooBuilder();
                 tattooBuilder.setName(tattooName);
@@ -91,7 +92,7 @@ public class TattooServiceImpl implements TattooService {
         try {
             boolean result = false;
             if (TattooValidator.isNameCorrect(tattooName) && TattooValidator.isDescriptionCorrect(description)
-                    && TattooValidator.isPriceCorrect(price)) {
+                    && TattooValidator.isPriceCorrect(price) && UserValidator.isLoginCorrect(proposedLogin)) {
                 double tattooPrice = Double.parseDouble(price);
                 TattooBuilder tattooBuilder = new TattooBuilder();
                 tattooBuilder.setName(tattooName);

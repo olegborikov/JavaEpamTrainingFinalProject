@@ -17,7 +17,15 @@ import java.sql.SQLException;
 import java.util.Optional;
 
 public class TransactionManager {
+    private static final TransactionManager INSTANCE = new TransactionManager();
     private static final Logger LOGGER = LogManager.getLogger();
+
+    private TransactionManager() {
+    }
+
+    public static TransactionManager getInstance() {
+        return INSTANCE;
+    }
 
     public boolean addImageAndTattoo(Tattoo tattoo) throws TransactionException {
         Connection connection = null;

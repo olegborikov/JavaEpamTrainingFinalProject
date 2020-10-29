@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class UserServiceImpl implements UserService {
-    private final TransactionManager transactionManager = new TransactionManager();
+    private final TransactionManager transactionManager = TransactionManager.getInstance();
     private final UserDao userDao = UserDaoImpl.getInstance();
 
     @Override
