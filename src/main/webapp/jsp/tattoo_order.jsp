@@ -40,7 +40,7 @@
                                     <fmt:message key="tattooOrder.date"/>
                                 </label>
                                 <input type="date" style=" filter: invert(1);" name="date"
-                                       required class="form-control" min="${minDate}"
+                                       required class="form-control" min="${currentDate}"
                                        oninvalid="this.setCustomValidity('<fmt:message key="tattooOrder.dateValidate"/>')"
                                        onchange="this.setCustomValidity('')"
                                        title='<fmt:message key="tattooOrder.dateValidate"/>'

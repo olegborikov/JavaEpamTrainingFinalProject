@@ -49,7 +49,7 @@ public class UserServiceImplTest {
         try {
             when(transactionManager.addWalletAndUser(any(User.class), any(String.class))).thenReturn(true);
             boolean actual = userService.addUser("oleg@gmail.com", "oleg", "oleg",
-                    "black", "375251111111", "123456Aa","123456Aa");
+                    "black", "375251111111", "123456Aa", "123456Aa");
             assertTrue(actual);
         } catch (ServiceException | TransactionException e) {
             fail("Incorrect data", e);
@@ -61,7 +61,7 @@ public class UserServiceImplTest {
         try {
             when(transactionManager.addWalletAndUser(any(User.class), any(String.class))).thenReturn(true);
             boolean actual = userService.addUser("", "oleg", "oleg",
-                    "black", "375251111111", "123456Aa","123456Aa");
+                    "black", "375251111111", "123456Aa", "123456Aa");
             assertFalse(actual);
         } catch (ServiceException | TransactionException e) {
             fail("Incorrect data", e);
@@ -93,9 +93,8 @@ public class UserServiceImplTest {
     @Test
     public void confirmUserEmailPositiveTest() {
         try {
-            String login = "oleg";
             when(userDao.confirmEmail(any(String.class))).thenReturn(true);
-            boolean actual = userService.confirmUserEmail(login);
+            boolean actual = userService.confirmUserEmail("oleg");
             assertTrue(actual);
         } catch (ServiceException | DaoException e) {
             fail("Incorrect data", e);
@@ -105,9 +104,8 @@ public class UserServiceImplTest {
     @Test
     public void confirmUserEmailNegativeTest() {
         try {
-            String login = " ";
             when(userDao.confirmEmail(any(String.class))).thenReturn(true);
-            boolean actual = userService.confirmUserEmail(login);
+            boolean actual = userService.confirmUserEmail(" ");
             assertFalse(actual);
         } catch (ServiceException | DaoException e) {
             fail("Incorrect data", e);
@@ -117,9 +115,8 @@ public class UserServiceImplTest {
     @Test
     public void blockUserPositiveTest() {
         try {
-            String login = "oleg";
             when(userDao.block(any(String.class))).thenReturn(true);
-            boolean actual = userService.blockUser(login);
+            boolean actual = userService.blockUser("oleg");
             assertTrue(actual);
         } catch (ServiceException | DaoException e) {
             fail("Incorrect data", e);
@@ -129,9 +126,8 @@ public class UserServiceImplTest {
     @Test
     public void blockUserNegativeTest() {
         try {
-            String login = " ";
             when(userDao.block(any(String.class))).thenReturn(true);
-            boolean actual = userService.blockUser(login);
+            boolean actual = userService.blockUser(" ");
             assertFalse(actual);
         } catch (ServiceException | DaoException e) {
             fail("Incorrect data", e);
@@ -141,9 +137,8 @@ public class UserServiceImplTest {
     @Test
     public void unblockUserPositiveTest() {
         try {
-            String login = "oleg";
             when(userDao.unblock(any(String.class))).thenReturn(true);
-            boolean actual = userService.unblockUser(login);
+            boolean actual = userService.unblockUser("oleg");
             assertTrue(actual);
         } catch (ServiceException | DaoException e) {
             fail("Incorrect data", e);
@@ -153,9 +148,8 @@ public class UserServiceImplTest {
     @Test
     public void unblockUserNegativeTest() {
         try {
-            String login = " ";
             when(userDao.unblock(any(String.class))).thenReturn(true);
-            boolean actual = userService.unblockUser(login);
+            boolean actual = userService.unblockUser(" ");
             assertFalse(actual);
         } catch (ServiceException | DaoException e) {
             fail("Incorrect data", e);
@@ -165,13 +159,11 @@ public class UserServiceImplTest {
     @Test
     public void authorizeUserPositiveTest() {
         try {
-            String login = "oleg";
-            String password = "1234567Aa";
             User expected = new UserBuilder().getUser();
             when(userDao.checkExistingByLogin(any(String.class)))
                     .thenReturn(Optional.of("3b648288c16bba6bf7b6dbceb1c179a7e6ce26cc"));
             when(userDao.authorize(any(String.class))).thenReturn(Optional.of(new UserBuilder().getUser()));
-            Optional<User> actual = userService.authorizeUser(login, password);
+            Optional<User> actual = userService.authorizeUser("oleg", "1234567Aa");
             assertEquals(actual.get(), expected);
         } catch (ServiceException | DaoException e) {
             fail("Incorrect data", e);
@@ -181,13 +173,11 @@ public class UserServiceImplTest {
     @Test
     public void authorizeUserNegativeTest() {
         try {
-            String login = "oleg";
-            String password = "123456Aa";
             Optional<User> expected = Optional.of(new UserBuilder().getUser());
             when(userDao.checkExistingByLogin(any(String.class)))
                     .thenReturn(Optional.of("3b648288c16bba6bf7b6dbceb1c179a7e6ce26cc"));
             when(userDao.authorize(any(String.class))).thenReturn(Optional.of(new UserBuilder().getUser()));
-            Optional<User> actual = userService.authorizeUser(login, password);
+            Optional<User> actual = userService.authorizeUser("oleg", "123456Aa");
             assertNotEquals(actual, expected);
         } catch (ServiceException | DaoException e) {
             fail("Incorrect data", e);
@@ -221,10 +211,9 @@ public class UserServiceImplTest {
     @Test
     public void findUserByLoginPositiveTest() {
         try {
-            String login = "oleg";
             User expected = new UserBuilder().getUser();
             when(userDao.findByLogin(any(String.class))).thenReturn(Optional.of(new UserBuilder().getUser()));
-            Optional<User> actual = userService.findUserByLogin(login);
+            Optional<User> actual = userService.findUserByLogin("oleg");
             assertEquals(actual.get(), expected);
         } catch (ServiceException | DaoException e) {
             fail("Incorrect data", e);
@@ -234,10 +223,9 @@ public class UserServiceImplTest {
     @Test
     public void findUserByLoginNegativeTest() {
         try {
-            String login = " ";
             Optional<User> expected = Optional.of(new UserBuilder().getUser());
             when(userDao.findByLogin(any(String.class))).thenReturn(Optional.of(new UserBuilder().getUser()));
-            Optional<User> actual = userService.findUserByLogin(login);
+            Optional<User> actual = userService.findUserByLogin(" ");
             assertNotEquals(actual, expected);
         } catch (ServiceException | DaoException e) {
             fail("Incorrect data", e);
@@ -247,10 +235,9 @@ public class UserServiceImplTest {
     @Test
     public void findUsersByLoginSubstringPositiveTest() {
         try {
-            String loginSubstring = "a";
             List<User> expected = new ArrayList<>();
             when(userDao.findByLoginSubstring(any(String.class))).thenReturn(new ArrayList<>());
-            List<User> actual = userService.findUsersByLoginSubstring(loginSubstring);
+            List<User> actual = userService.findUsersByLoginSubstring("a");
             assertEquals(actual, expected);
         } catch (ServiceException | DaoException e) {
             fail("Incorrect data", e);
@@ -260,10 +247,9 @@ public class UserServiceImplTest {
     @Test
     public void findUsersByLoginSubstringNegativeTest() {
         try {
-            String loginSubstring = "a";
             List<User> expected = null;
             when(userDao.findByLoginSubstring(any(String.class))).thenReturn(new ArrayList<>());
-            List<User> actual = userService.findUsersByLoginSubstring(loginSubstring);
+            List<User> actual = userService.findUsersByLoginSubstring("a");
             assertNotEquals(actual, expected);
         } catch (ServiceException | DaoException e) {
             fail("Incorrect data", e);

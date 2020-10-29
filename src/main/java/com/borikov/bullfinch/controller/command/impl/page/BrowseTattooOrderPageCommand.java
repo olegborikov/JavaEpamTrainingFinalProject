@@ -37,7 +37,7 @@ public class BrowseTattooOrderPageCommand implements Command {
                 request.setAttribute(RequestParameter.TATTOO, tattoo.get());
                 List<Discount> discounts = discountService.findDiscountsByUserLogin(login);
                 request.setAttribute(RequestParameter.DISCOUNTS, discounts);
-                request.setAttribute(RequestParameter.MIN_DATE, LocalDate.now());
+                request.setAttribute(RequestParameter.CURRENT_DATE, LocalDate.now());
                 page = PagePath.TATTOO_ORDER;
             } else {
                 request.setAttribute(RequestParameter.TATTOO_FIND_ERROR_MESSAGE, true);

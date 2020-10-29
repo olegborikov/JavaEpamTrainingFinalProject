@@ -139,9 +139,8 @@ public class TattooServiceImplTest {
     @Test
     public void allowTattooPositiveTest() {
         try {
-            String id = "1";
             when(tattooDao.allow(any(Long.class))).thenReturn(true);
-            boolean actual = tattooService.allowTattoo(id);
+            boolean actual = tattooService.allowTattoo("1");
             assertTrue(actual);
         } catch (ServiceException | DaoException e) {
             fail("Incorrect data", e);
@@ -151,9 +150,8 @@ public class TattooServiceImplTest {
     @Test
     public void allowTattooNegativeTest() {
         try {
-            String id = "fdsa";
             when(tattooDao.allow(any(Long.class))).thenReturn(true);
-            boolean actual = tattooService.allowTattoo(id);
+            boolean actual = tattooService.allowTattoo("fdsa");
             assertFalse(actual);
         } catch (ServiceException | DaoException e) {
             fail("Incorrect data", e);
@@ -163,9 +161,8 @@ public class TattooServiceImplTest {
     @Test
     public void archiveTattooPositiveTest() {
         try {
-            String id = "1";
             when(tattooDao.archive(any(Long.class))).thenReturn(true);
-            boolean actual = tattooService.archiveTattoo(id);
+            boolean actual = tattooService.archiveTattoo("1");
             assertTrue(actual);
         } catch (ServiceException | DaoException e) {
             fail("Incorrect data", e);
@@ -175,9 +172,8 @@ public class TattooServiceImplTest {
     @Test
     public void archiveTattooNegativeTest() {
         try {
-            String id = "fdsa";
             when(tattooDao.archive(any(Long.class))).thenReturn(true);
-            boolean actual = tattooService.archiveTattoo(id);
+            boolean actual = tattooService.archiveTattoo("fdsa");
             assertFalse(actual);
         } catch (ServiceException | DaoException e) {
             fail("Incorrect data", e);
@@ -187,9 +183,8 @@ public class TattooServiceImplTest {
     @Test
     public void unarchiveTattooPositiveTest() {
         try {
-            String id = "1";
             when(tattooDao.unarchive(any(Long.class))).thenReturn(true);
-            boolean actual = tattooService.unarchiveTattoo(id);
+            boolean actual = tattooService.unarchiveTattoo( "1");
             assertTrue(actual);
         } catch (ServiceException | DaoException e) {
             fail("Incorrect data", e);
@@ -199,9 +194,8 @@ public class TattooServiceImplTest {
     @Test
     public void unarchiveTattooNegativeTest() {
         try {
-            String id = "fdsa";
             when(tattooDao.unarchive(any(Long.class))).thenReturn(true);
-            boolean actual = tattooService.unarchiveTattoo(id);
+            boolean actual = tattooService.unarchiveTattoo("fdsa");
             assertFalse(actual);
         } catch (ServiceException | DaoException e) {
             fail("Incorrect data", e);
@@ -235,10 +229,9 @@ public class TattooServiceImplTest {
     @Test
     public void findTattooByIdPositiveTest() {
         try {
-            String id = "1";
             Tattoo expected = new TattooBuilder().getTattoo();
             when(tattooDao.findById(any(Long.class))).thenReturn(Optional.of(new TattooBuilder().getTattoo()));
-            Optional<Tattoo> actual = tattooService.findTattooById(id);
+            Optional<Tattoo> actual = tattooService.findTattooById("1");
             assertEquals(actual.get(), expected);
         } catch (ServiceException | DaoException e) {
             fail("Incorrect data", e);
@@ -248,10 +241,9 @@ public class TattooServiceImplTest {
     @Test
     public void findTattooByIdNegativeTest() {
         try {
-            String id = "d";
             Optional<Tattoo> expected = Optional.of(new TattooBuilder().getTattoo());
             when(tattooDao.findById(any(Long.class))).thenReturn(Optional.of(new TattooBuilder().getTattoo()));
-            Optional<Tattoo> actual = tattooService.findTattooById(id);
+            Optional<Tattoo> actual = tattooService.findTattooById("d");
             assertNotEquals(actual, expected);
         } catch (ServiceException | DaoException e) {
             fail("Incorrect data", e);
@@ -261,10 +253,9 @@ public class TattooServiceImplTest {
     @Test
     public void findTattoosByNameSubstringPositiveTest() {
         try {
-            String nameSubstring = "moon";
             List<Tattoo> expected = new ArrayList<>();
             when(tattooDao.findByNameSubstring(any(String.class))).thenReturn(new ArrayList<>());
-            List<Tattoo> actual = tattooService.findTattoosByNameSubstring(nameSubstring);
+            List<Tattoo> actual = tattooService.findTattoosByNameSubstring("moon");
             assertEquals(actual, expected);
         } catch (ServiceException | DaoException e) {
             fail("Incorrect data", e);
@@ -274,10 +265,9 @@ public class TattooServiceImplTest {
     @Test
     public void findTattoosByNameSubstringNegativeTest() {
         try {
-            String nameSubstring = "moon";
             List<Tattoo> expected = null;
             when(tattooDao.findByNameSubstring(any(String.class))).thenReturn(new ArrayList<>());
-            List<Tattoo> actual = tattooService.findTattoosByNameSubstring(nameSubstring);
+            List<Tattoo> actual = tattooService.findTattoosByNameSubstring("moon");
             assertNotEquals(actual, expected);
         } catch (ServiceException | DaoException e) {
             fail("Incorrect data", e);
@@ -287,10 +277,9 @@ public class TattooServiceImplTest {
     @Test
     public void findTattoosByAllowedPositiveTest() {
         try {
-            boolean isAllowed = true;
             List<Tattoo> expected = new ArrayList<>();
             when(tattooDao.findByAllowed(any(Boolean.class))).thenReturn(new ArrayList<>());
-            List<Tattoo> actual = tattooService.findTattoosByAllowed(isAllowed);
+            List<Tattoo> actual = tattooService.findTattoosByAllowed(true);
             assertEquals(actual, expected);
         } catch (ServiceException | DaoException e) {
             fail("Incorrect data", e);
@@ -300,10 +289,9 @@ public class TattooServiceImplTest {
     @Test
     public void findTattoosByAllowedNegativeTest() {
         try {
-            boolean isAllowed = true;
             List<Tattoo> expected = null;
             when(tattooDao.findByAllowed(any(Boolean.class))).thenReturn(new ArrayList<>());
-            List<Tattoo> actual = tattooService.findTattoosByAllowed(isAllowed);
+            List<Tattoo> actual = tattooService.findTattoosByAllowed(true);
             assertNotEquals(actual, expected);
         } catch (ServiceException | DaoException e) {
             fail("Incorrect data", e);
@@ -313,10 +301,9 @@ public class TattooServiceImplTest {
     @Test
     public void findTattoosByArchivedPositiveTest() {
         try {
-            boolean isArchived = true;
             List<Tattoo> expected = new ArrayList<>();
             when(tattooDao.findByArchived(any(Boolean.class))).thenReturn(new ArrayList<>());
-            List<Tattoo> actual = tattooService.findTattoosByArchived(isArchived);
+            List<Tattoo> actual = tattooService.findTattoosByArchived(true);
             assertEquals(actual, expected);
         } catch (ServiceException | DaoException e) {
             fail("Incorrect data", e);
@@ -326,10 +313,9 @@ public class TattooServiceImplTest {
     @Test
     public void findTattoosByArchivedNegativeTest() {
         try {
-            boolean isArchived = true;
             List<Tattoo> expected = null;
             when(tattooDao.findByArchived(any(Boolean.class))).thenReturn(new ArrayList<>());
-            List<Tattoo> actual = tattooService.findTattoosByArchived(isArchived);
+            List<Tattoo> actual = tattooService.findTattoosByArchived(true);
             assertNotEquals(actual, expected);
         } catch (ServiceException | DaoException e) {
             fail("Incorrect data", e);
@@ -363,11 +349,10 @@ public class TattooServiceImplTest {
     @Test
     public void testFindTattooByIdCatalogPositiveTest() {
         try {
-            String id = "1";
             Tattoo expected = new TattooBuilder().getTattoo();
             when(tattooDao.findByIdCatalog(any(Long.class)))
                     .thenReturn(Optional.of(new TattooBuilder().getTattoo()));
-            Optional<Tattoo> actual = tattooService.findTattooByIdCatalog(id);
+            Optional<Tattoo> actual = tattooService.findTattooByIdCatalog("1");
             assertEquals(actual.get(), expected);
         } catch (ServiceException | DaoException e) {
             fail("Incorrect data", e);
@@ -377,11 +362,10 @@ public class TattooServiceImplTest {
     @Test
     public void testFindTattooByIdCatalogNegativeTest() {
         try {
-            String id = "d";
             Optional<Tattoo> expected = Optional.of(new TattooBuilder().getTattoo());
             when(tattooDao.findByIdCatalog(any(Long.class)))
                     .thenReturn(Optional.of(new TattooBuilder().getTattoo()));
-            Optional<Tattoo> actual = tattooService.findTattooByIdCatalog(id);
+            Optional<Tattoo> actual = tattooService.findTattooByIdCatalog("d");
             assertNotEquals(actual, expected);
         } catch (ServiceException | DaoException e) {
             fail("Incorrect data", e);
@@ -391,10 +375,9 @@ public class TattooServiceImplTest {
     @Test
     public void findTattoosByNameSubstringCatalogPositiveTest() {
         try {
-            String nameSubstring = "moon";
             List<Tattoo> expected = new ArrayList<>();
             when(tattooDao.findByNameSubstringCatalog(any(String.class))).thenReturn(new ArrayList<>());
-            List<Tattoo> actual = tattooService.findTattoosByNameSubstringCatalog(nameSubstring);
+            List<Tattoo> actual = tattooService.findTattoosByNameSubstringCatalog("moon");
             assertEquals(actual, expected);
         } catch (ServiceException | DaoException e) {
             fail("Incorrect data", e);
@@ -404,10 +387,9 @@ public class TattooServiceImplTest {
     @Test
     public void findTattoosByNameSubstringCatalogNegativeTest() {
         try {
-            String nameSubstring = "moon";
             List<Tattoo> expected = null;
             when(tattooDao.findByNameSubstringCatalog(any(String.class))).thenReturn(new ArrayList<>());
-            List<Tattoo> actual = tattooService.findTattoosByNameSubstringCatalog(nameSubstring);
+            List<Tattoo> actual = tattooService.findTattoosByNameSubstringCatalog("moon");
             assertNotEquals(actual, expected);
         } catch (ServiceException | DaoException e) {
             fail("Incorrect data", e);

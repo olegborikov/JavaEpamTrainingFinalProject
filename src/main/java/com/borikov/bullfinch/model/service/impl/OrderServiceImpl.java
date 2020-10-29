@@ -97,6 +97,15 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    public List<Order> findAllOrders() throws ServiceException {
+        try {
+            return orderDao.findAll();
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
     public Optional<Order> findOrderById(String id) throws ServiceException {
         try {
             Optional<Order> order = Optional.empty();

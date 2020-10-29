@@ -24,12 +24,15 @@ public class OrderDaoImpl implements OrderDao {
             + "(SELECT user_account_id FROM user_account WHERE BINARY login LIKE ?))";
     private static final String REMOVE = "DELETE FROM tattoo_order WHERE tattoo_order_id = ?";
     private static final String SUBMIT = "UPDATE tattoo_order SET is_confirmed = 1 WHERE tattoo_order_id = ?";
+    private static final String FIND_ALL = "SELECT tattoo_order_id, tattoo_name, date, is_confirmed, "
+            + "tattoo_order_price FROM tattoo_order INNER JOIN tattoo "
+            + "ON tattoo_order.tattoo_id_fk = tattoo.tattoo_id ORDER BY is_confirmed";
     private static final String FIND_BY_ID = "SELECT tattoo_order_id, tattoo_order_price, date, "
             + "tattoo_order_description, is_confirmed, image_name, tattoo_name, login FROM tattoo_order "
             + "INNER JOIN tattoo ON tattoo_order.tattoo_id_fk = tattoo.tattoo_id INNER JOIN user_account "
             + "ON tattoo_order.user_account_id_fk = user_account.user_account_id "
             + "INNER JOIN image ON tattoo.image_id_fk = image.image_id WHERE tattoo_order_id = ?";
-    private static final String FIND_BY_USER_LOGIN = "SELECT tattoo_order_id, tattoo_name, date, "
+    private static final String FIND_BY_USER_LOGIN = "SELECT tattoo_order_id, tattoo_name, date, is_confirmed,  "
             + "tattoo_order_price FROM tattoo_order INNER JOIN tattoo "
             + "ON tattoo_order.tattoo_id_fk = tattoo.tattoo_id INNER JOIN user_account "
             + "ON tattoo_order.user_account_id_fk = user_account.user_account_id WHERE login = ?";
@@ -85,6 +88,21 @@ public class OrderDaoImpl implements OrderDao {
     }
 
     @Override
+    public List<Order> findAll() throws DaoException {
+        try (Connection connection = ConnectionPool.INSTANCE.getConnection();
+             PreparedStatement statement = connection.prepareStatement(FIND_ALL)) {
+            ResultSet resultSet = statement.executeQuery();
+            List<Order> orders = new ArrayList<>();
+            while (resultSet.next()) {
+                orders.add(createPartOrderFromResultSet(resultSet));
+            }
+            return orders;
+        } catch (SQLException e) {
+            throw new DaoException("Error while finding all orders", e);
+        }
+    }
+
+    @Override
     public Optional<Order> findById(long id) throws DaoException {
         try (Connection connection = ConnectionPool.INSTANCE.getConnection();
              PreparedStatement statement = connection.prepareStatement(FIND_BY_ID)) {
@@ -120,6 +138,7 @@ public class OrderDaoImpl implements OrderDao {
         long id = resultSet.getLong(ColumnName.TATTOO_ORDER_ID);
         String tattooName = resultSet.getString(ColumnName.TATTOO_NAME);
         Date date = new Date(resultSet.getLong(ColumnName.DATE));
+        boolean isConfirmed = resultSet.getInt(ColumnName.IS_CONFIRMED) != 0;
         double price = resultSet.getDouble(ColumnName.TATTOO_ORDER_PRICE);
         OrderBuilder orderBuilder = new OrderBuilder();
         orderBuilder.setOrderId(id);
@@ -128,6 +147,7 @@ public class OrderDaoImpl implements OrderDao {
         Tattoo tattoo = tattooBuilder.getTattoo();
         orderBuilder.setTattoo(tattoo);
         orderBuilder.setDate(date.toLocalDate());
+        orderBuilder.setConfirmed(isConfirmed);
         orderBuilder.setPrice(price);
         return orderBuilder.getOrder();
     }

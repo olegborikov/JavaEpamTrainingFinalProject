@@ -88,10 +88,8 @@ public class WalletServiceImplTest {
     @Test
     public void checkBalanceSizeUserLoginPositiveTest() {
         try {
-            String userLogin = "oleg";
-            String price = "100";
             when(walletDao.findByUserLogin(any(String.class))).thenReturn(Optional.of(new Wallet(1L, 500)));
-            boolean actual = walletService.checkBalanceSize(userLogin, price);
+            boolean actual = walletService.checkBalanceSize("oleg", "100");
             assertTrue(actual);
         } catch (ServiceException | DaoException e) {
             fail("Incorrect data", e);
@@ -121,12 +119,11 @@ public class WalletServiceImplTest {
     @Test
     public void checkBalanceSizeOrderIdPositiveTest() {
         try {
-            String id = "1";
             when(walletDao.findByOrderId(any(Long.class))).thenReturn(Optional.of(new Wallet(1L, 500)));
             OrderBuilder orderBuilder = new OrderBuilder();
             orderBuilder.setPrice(500);
             when(orderDao.findById(any(Long.class))).thenReturn(Optional.of(orderBuilder.getOrder()));
-            boolean actual = walletService.checkBalanceSize(id);
+            boolean actual = walletService.checkBalanceSize("1");
             assertTrue(actual);
         } catch (ServiceException | DaoException e) {
             fail("Incorrect data", e);
@@ -136,12 +133,11 @@ public class WalletServiceImplTest {
     @Test
     public void checkBalanceSizeOrderIdNegativeTest() {
         try {
-            String id = "1";
             when(walletDao.findByOrderId(any(Long.class))).thenReturn(Optional.of(new Wallet(1L, 500)));
             OrderBuilder orderBuilder = new OrderBuilder();
             orderBuilder.setPrice(501);
             when(orderDao.findById(any(Long.class))).thenReturn(Optional.of(orderBuilder.getOrder()));
-            boolean actual = walletService.checkBalanceSize(id);
+            boolean actual = walletService.checkBalanceSize("1");
             assertFalse(actual);
         } catch (ServiceException | DaoException e) {
             fail("Incorrect data", e);

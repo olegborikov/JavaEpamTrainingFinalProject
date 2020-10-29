@@ -5,7 +5,8 @@ import org.testng.annotations.Test;
 
 import java.util.Optional;
 
-import static org.testng.Assert.*;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotEquals;
 
 public class PasswordEncryptorTest {
     @DataProvider(name = "encryptPositiveData")

@@ -111,6 +111,16 @@
                                 <button style="color:white"
                                         class="btn navbar-brand js-scroll-trigger"
                                         name="commandName"
+                                        value="browse_orders_page_command">
+                                    <fmt:message key="navbar.orders"/>
+                                </button>
+                            </li>
+                        </form>
+                        <form method="post" action="controller">
+                            <li class="nav-item nav-link js-scroll-trigger" role="presentation">
+                                <button style="color:white"
+                                        class="btn navbar-brand js-scroll-trigger"
+                                        name="commandName"
                                         value="browse_users_page_command">
                                     <fmt:message key="navbar.users"/>
                                 </button>

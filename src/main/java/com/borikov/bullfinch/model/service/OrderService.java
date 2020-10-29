@@ -14,6 +14,8 @@ public interface OrderService {
 
     boolean submitOrder(String id) throws ServiceException;
 
+    List<Order> findAllOrders() throws ServiceException;
+
     Optional<Order> findOrderById(String id) throws ServiceException;
 
     List<Order> findOrdersByUserLogin(String userLogin) throws ServiceException;

@@ -133,7 +133,7 @@ VALUES (60, 4);
 
 INSERT INTO tattoo_order(tattoo_order_price, date, tattoo_order_description,
                          is_confirmed, user_account_id_fk, tattoo_id_fk)
-VALUES (500, 1605819600000, 'Want to modify sketch a little bit', 1, 2, 1);
+VALUES (500, 1606770000000, 'Want to modify sketch a little bit', 1, 2, 1);
 INSERT INTO tattoo_order(tattoo_order_price, date, tattoo_order_description,
                          is_confirmed, user_account_id_fk, tattoo_id_fk)
-VALUES (500, 1606770000000, 'Very nice sketch', 0, 2, 2);
+VALUES (400, 1605819600000, 'Very nice sketch', 0, 2, 2);

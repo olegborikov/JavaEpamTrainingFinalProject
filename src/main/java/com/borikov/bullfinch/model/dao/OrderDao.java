@@ -13,6 +13,8 @@ public interface OrderDao {
 
     boolean submit(long id) throws DaoException;
 
+    List<Order> findAll() throws DaoException;
+
     Optional<Order> findById(long id) throws DaoException;
 
     List<Order> findByUserLogin(String userLogin) throws DaoException;

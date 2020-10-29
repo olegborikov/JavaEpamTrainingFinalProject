@@ -8,6 +8,7 @@ import com.borikov.bullfinch.model.dao.OrderDao;
 import com.borikov.bullfinch.model.dao.TransactionManager;
 import com.borikov.bullfinch.model.dao.impl.OrderDaoImpl;
 import com.borikov.bullfinch.model.entity.Order;
+import com.borikov.bullfinch.model.entity.Tattoo;
 import com.borikov.bullfinch.model.service.OrderService;
 import org.powermock.reflect.Whitebox;
 import org.testng.annotations.AfterClass;
@@ -41,6 +42,7 @@ public class OrderServiceImplTest {
     @AfterClass
     public void tearDown() {
         orderDao = null;
+        transactionManager = null;
         orderService = null;
     }
 
@@ -147,6 +149,30 @@ public class OrderServiceImplTest {
     }
 
     @Test
+    public void findAllOrdersPositiveTest() {
+        try {
+            List<Order> expected = new ArrayList<>();
+            when(orderDao.findAll()).thenReturn(new ArrayList<>());
+            List<Order> actual = orderService.findAllOrders();
+            assertEquals(actual, expected);
+        } catch (ServiceException | DaoException e) {
+            fail("Incorrect data", e);
+        }
+    }
+
+    @Test
+    public void findAllOrdersNegativeTest() {
+        try {
+            List<Order> expected = null;
+            when(orderDao.findAll()).thenReturn(new ArrayList<>());
+            List<Order> actual = orderService.findAllOrders();
+            assertNotEquals(actual, expected);
+        } catch (ServiceException | DaoException e) {
+            fail("Incorrect data", e);
+        }
+    }
+
+    @Test
     public void findOrderByIdPositiveTest() {
         try {
             Optional<Order> expected = Optional.of(new OrderBuilder().getOrder());
@@ -188,7 +214,7 @@ public class OrderServiceImplTest {
         try {
             List<Order> expected = new ArrayList<>();
             expected.add(new OrderBuilder().getOrder());
-            when(orderDao.findByUserLogin(any(String.class))).thenReturn(expected);
+            when(orderDao.findByUserLogin(any(String.class))).thenReturn(new ArrayList<>());
             List<Order> actual = orderService.findOrdersByUserLogin(null);
             assertNotEquals(actual, expected);
         } catch (ServiceException | DaoException e) {
