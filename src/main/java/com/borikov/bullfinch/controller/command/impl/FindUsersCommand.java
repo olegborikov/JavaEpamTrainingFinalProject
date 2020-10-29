@@ -3,10 +3,10 @@ package com.borikov.bullfinch.controller.command.impl;
 import com.borikov.bullfinch.controller.PagePath;
 import com.borikov.bullfinch.controller.RequestParameter;
 import com.borikov.bullfinch.controller.command.Command;
-import com.borikov.bullfinch.entity.User;
 import com.borikov.bullfinch.exception.ServiceException;
-import com.borikov.bullfinch.service.UserService;
-import com.borikov.bullfinch.service.impl.UserServiceImpl;
+import com.borikov.bullfinch.model.entity.User;
+import com.borikov.bullfinch.model.service.UserService;
+import com.borikov.bullfinch.model.service.impl.UserServiceImpl;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -25,7 +25,7 @@ public class FindUsersCommand implements Command {
         String page;
         String searchLogin = request.getParameter(RequestParameter.SEARCH_LOGIN);
         try {
-            List<User> users = userService.findUsersByLogin(searchLogin);
+            List<User> users = userService.findUsersByLoginSubstring(searchLogin);
             request.setAttribute(RequestParameter.USERS, users);
             request.setAttribute(RequestParameter.PAGE_AMOUNT,
                     Math.ceil((double) users.size() / USERS_AMOUNT_ON_PAGE));

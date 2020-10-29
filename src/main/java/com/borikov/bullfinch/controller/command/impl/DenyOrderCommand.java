@@ -4,8 +4,8 @@ import com.borikov.bullfinch.controller.PagePath;
 import com.borikov.bullfinch.controller.RequestParameter;
 import com.borikov.bullfinch.controller.command.Command;
 import com.borikov.bullfinch.exception.ServiceException;
-import com.borikov.bullfinch.service.OrderService;
-import com.borikov.bullfinch.service.impl.OrderServiceImpl;
+import com.borikov.bullfinch.model.service.OrderService;
+import com.borikov.bullfinch.model.service.impl.OrderServiceImpl;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -28,7 +28,7 @@ public class DenyOrderCommand implements Command {
             }
             page = PagePath.MESSAGE;
         } catch (ServiceException e) {
-            LOGGER.log(Level.ERROR, "Error while deleting tattoo", e);
+            LOGGER.log(Level.ERROR, "Error while denying order", e);
             request.setAttribute(RequestParameter.ERROR_MESSAGE, e);
             page = PagePath.ERROR505;
         }

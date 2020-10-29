@@ -3,10 +3,10 @@ package com.borikov.bullfinch.controller.command.impl.page;
 import com.borikov.bullfinch.controller.PagePath;
 import com.borikov.bullfinch.controller.RequestParameter;
 import com.borikov.bullfinch.controller.command.Command;
-import com.borikov.bullfinch.entity.Tattoo;
 import com.borikov.bullfinch.exception.ServiceException;
-import com.borikov.bullfinch.service.TattooService;
-import com.borikov.bullfinch.service.impl.TattooServiceImpl;
+import com.borikov.bullfinch.model.entity.Tattoo;
+import com.borikov.bullfinch.model.service.TattooService;
+import com.borikov.bullfinch.model.service.impl.TattooServiceImpl;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -32,7 +32,7 @@ public class BrowseCatalogTattoosAdminPageCommand implements Command {
             request.setAttribute(RequestParameter.TATTOOS_AMOUNT_ON_PAGE, TATTOOS_AMOUNT_ON_PAGE);
             page = PagePath.TATTOOS_ADMIN;
         } catch (ServiceException e) {
-            LOGGER.log(Level.ERROR, "Error while finding tattoos", e);
+            LOGGER.log(Level.ERROR, "Error while browsing catalog tattoos admin page", e);
             request.setAttribute(RequestParameter.ERROR_MESSAGE, e);
             page = PagePath.ERROR505;
         }

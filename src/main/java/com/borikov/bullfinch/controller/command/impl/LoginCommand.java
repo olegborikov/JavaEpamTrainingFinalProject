@@ -3,11 +3,11 @@ package com.borikov.bullfinch.controller.command.impl;
 import com.borikov.bullfinch.controller.PagePath;
 import com.borikov.bullfinch.controller.RequestParameter;
 import com.borikov.bullfinch.controller.command.Command;
-import com.borikov.bullfinch.entity.User;
-import com.borikov.bullfinch.entity.UserRole;
 import com.borikov.bullfinch.exception.ServiceException;
-import com.borikov.bullfinch.service.UserService;
-import com.borikov.bullfinch.service.impl.UserServiceImpl;
+import com.borikov.bullfinch.model.entity.User;
+import com.borikov.bullfinch.model.entity.UserRole;
+import com.borikov.bullfinch.model.service.UserService;
+import com.borikov.bullfinch.model.service.impl.UserServiceImpl;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -26,7 +26,7 @@ public class LoginCommand implements Command {
         String login = request.getParameter(RequestParameter.LOGIN);
         String password = request.getParameter(RequestParameter.PASSWORD);
         try {
-            Optional<User> userOptional = userService.isUserExists(login, password);
+            Optional<User> userOptional = userService.authorizeUser(login, password);
             if (userOptional.isPresent()) {
                 HttpSession session = request.getSession();
                 User user = userOptional.get();
@@ -54,7 +54,7 @@ public class LoginCommand implements Command {
                 page = PagePath.LOGIN;
             }
         } catch (ServiceException e) {
-            LOGGER.log(Level.ERROR, "Error while login user", e);
+            LOGGER.log(Level.ERROR, "Error while logging in user", e);
             request.setAttribute(RequestParameter.ERROR_MESSAGE, e);
             page = PagePath.ERROR505;
         }

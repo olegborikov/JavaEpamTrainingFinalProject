@@ -3,7 +3,7 @@ package com.borikov.bullfinch.controller.command.impl.page;
 import com.borikov.bullfinch.controller.PagePath;
 import com.borikov.bullfinch.controller.RequestParameter;
 import com.borikov.bullfinch.controller.command.Command;
-import com.borikov.bullfinch.entity.UserRole;
+import com.borikov.bullfinch.model.entity.UserRole;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;

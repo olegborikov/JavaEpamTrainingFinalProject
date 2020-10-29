@@ -49,6 +49,22 @@
                     <p><fmt:message key="profileAdmin.surname"/> ${user.secondName} </p>
                     <p><fmt:message key="profileAdmin.phoneNumber"/> ${user.phoneNumber} </p>
                     <p><fmt:message key="profileAdmin.walletBalance"/> ${user.wallet.balance}</p>
+                    <p><fmt:message key="profileAdmin.activated"/>
+                        <c:if test="${user.activated}">
+                            <fmt:message key="profileAdmin.yes"/>
+                        </c:if>
+                        <c:if test="${!user.activated}">
+                            <fmt:message key="profileAdmin.no"/>
+                        </c:if>
+                    </p>
+                    <p><fmt:message key="profileAdmin.blocked"/>
+                        <c:if test="${user.blocked}">
+                            <fmt:message key="profileAdmin.yes"/>
+                        </c:if>
+                        <c:if test="${!user.blocked}">
+                            <fmt:message key="profileAdmin.no"/>
+                        </c:if>
+                    </p>
                     <c:if test="${user.blocked}">
                         <form name="" method="post" action="controller">
                             <input type="hidden" name="userId" value="${user.userId}">

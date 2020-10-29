@@ -28,7 +28,7 @@ public class PasswordEncryptor {
             BigInteger passwordBigInt = new BigInteger(SIGNUM_DEFAULT, passwordEncodedBytes);
             encryptedPassword = Optional.of(passwordBigInt.toString(HEXADECIMAL_RADIX));
         } catch (NoSuchAlgorithmException e) {
-            LOGGER.log(Level.ERROR, "Error while encrypting password");
+            LOGGER.log(Level.ERROR, "Error while encrypting password with {} algorithm", ENCRYPTION_ALGORITHM, e);
         }
         return encryptedPassword;
     }

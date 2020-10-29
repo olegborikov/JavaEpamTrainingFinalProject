@@ -3,14 +3,14 @@ package com.borikov.bullfinch.controller.command.impl;
 import com.borikov.bullfinch.controller.PagePath;
 import com.borikov.bullfinch.controller.RequestParameter;
 import com.borikov.bullfinch.controller.command.Command;
-import com.borikov.bullfinch.entity.Tattoo;
 import com.borikov.bullfinch.exception.ServiceException;
-import com.borikov.bullfinch.service.OrderService;
-import com.borikov.bullfinch.service.TattooService;
-import com.borikov.bullfinch.service.WalletService;
-import com.borikov.bullfinch.service.impl.OrderServiceImpl;
-import com.borikov.bullfinch.service.impl.TattooServiceImpl;
-import com.borikov.bullfinch.service.impl.WalletServiceImpl;
+import com.borikov.bullfinch.model.entity.Tattoo;
+import com.borikov.bullfinch.model.service.OrderService;
+import com.borikov.bullfinch.model.service.TattooService;
+import com.borikov.bullfinch.model.service.WalletService;
+import com.borikov.bullfinch.model.service.impl.OrderServiceImpl;
+import com.borikov.bullfinch.model.service.impl.TattooServiceImpl;
+import com.borikov.bullfinch.model.service.impl.WalletServiceImpl;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -56,7 +56,7 @@ public class OrderTattooCommand implements Command {
                 page = PagePath.MESSAGE;
             }
         } catch (ServiceException e) {
-            LOGGER.log(Level.ERROR, "Error while order tattoo", e);
+            LOGGER.log(Level.ERROR, "Error while ordering tattoo", e);
             request.setAttribute(RequestParameter.ERROR_MESSAGE, e);
             page = PagePath.ERROR505;
         }

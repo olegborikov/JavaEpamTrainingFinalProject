@@ -3,13 +3,13 @@ package com.borikov.bullfinch.controller.command.impl;
 import com.borikov.bullfinch.controller.PagePath;
 import com.borikov.bullfinch.controller.RequestParameter;
 import com.borikov.bullfinch.controller.command.Command;
-import com.borikov.bullfinch.entity.Order;
-import com.borikov.bullfinch.entity.User;
 import com.borikov.bullfinch.exception.ServiceException;
-import com.borikov.bullfinch.service.OrderService;
-import com.borikov.bullfinch.service.UserService;
-import com.borikov.bullfinch.service.impl.OrderServiceImpl;
-import com.borikov.bullfinch.service.impl.UserServiceImpl;
+import com.borikov.bullfinch.model.entity.Order;
+import com.borikov.bullfinch.model.entity.User;
+import com.borikov.bullfinch.model.service.OrderService;
+import com.borikov.bullfinch.model.service.UserService;
+import com.borikov.bullfinch.model.service.impl.OrderServiceImpl;
+import com.borikov.bullfinch.model.service.impl.UserServiceImpl;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -38,7 +38,7 @@ public class EditUserCommand implements Command {
                 if (user.isPresent()) {
                     request.setAttribute(RequestParameter.USER, user.get());
                     page = PagePath.PROFILE;
-                    List<Order> orders = orderService.getOrdersByUserLogin(login);
+                    List<Order> orders = orderService.findOrdersByUserLogin(login);
                     request.setAttribute(RequestParameter.ORDERS, orders);
                 } else {
                     request.setAttribute(RequestParameter.USER_FIND_ERROR_MESSAGE, true);
@@ -48,7 +48,7 @@ public class EditUserCommand implements Command {
                 page = PagePath.ERROR505;// TODO: 09.10.2020 do smth
             }
         } catch (ServiceException e) {
-            LOGGER.log(Level.ERROR, "Error while editing tattoo", e);
+            LOGGER.log(Level.ERROR, "Error while editing user", e);
             request.setAttribute(RequestParameter.ERROR_MESSAGE, e);
             page = PagePath.ERROR505;
         }

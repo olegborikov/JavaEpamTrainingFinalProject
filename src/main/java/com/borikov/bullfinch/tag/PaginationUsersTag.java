@@ -1,7 +1,7 @@
 package com.borikov.bullfinch.tag;
 
 import com.borikov.bullfinch.controller.RequestParameter;
-import com.borikov.bullfinch.entity.User;
+import com.borikov.bullfinch.model.entity.User;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -45,7 +45,7 @@ public class PaginationUsersTag extends TagSupport {
                         "</form>\n" +
                         "</div>");
             } catch (IOException e) {
-                LOGGER.log(Level.ERROR, "Error while writing to out stream");
+                LOGGER.log(Level.ERROR, "Error while writing to out stream", e);
             }
             currentIndex++;
         }

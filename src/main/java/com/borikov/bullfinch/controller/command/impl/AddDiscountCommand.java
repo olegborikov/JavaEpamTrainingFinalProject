@@ -4,8 +4,8 @@ import com.borikov.bullfinch.controller.PagePath;
 import com.borikov.bullfinch.controller.RequestParameter;
 import com.borikov.bullfinch.controller.command.Command;
 import com.borikov.bullfinch.exception.ServiceException;
-import com.borikov.bullfinch.service.DiscountService;
-import com.borikov.bullfinch.service.impl.DiscountServiceImpl;
+import com.borikov.bullfinch.model.service.DiscountService;
+import com.borikov.bullfinch.model.service.impl.DiscountServiceImpl;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -31,7 +31,7 @@ public class AddDiscountCommand implements Command {
                 page = PagePath.TATTOO_OFFER;
             }
         } catch (ServiceException e) {
-            LOGGER.log(Level.ERROR, "Error while adding tattoo", e);
+            LOGGER.log(Level.ERROR, "Error while adding discount", e);
             request.setAttribute(RequestParameter.ERROR_MESSAGE, e);
             page = PagePath.ERROR505;
         }

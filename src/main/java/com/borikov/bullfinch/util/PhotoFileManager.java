@@ -16,7 +16,7 @@ import java.util.UUID;
 
 public class PhotoFileManager {
     private static final String UPLOAD_DIRECTORY = "C:\\uploads";
-    private static final String END_PHOTO_NAME = ".jpg";
+    private static final String FILE_EXTENSION = ".jpg";
     private static final Logger LOGGER = LogManager.getLogger();
 
     public Optional<String> add(Collection<Part> photoParts) {
@@ -32,10 +32,10 @@ public class PhotoFileManager {
         for (Part part : photoParts) {
             String fileName = part.getSubmittedFileName();
             if (fileName != null) {
-                if (fileName.endsWith(END_PHOTO_NAME)) {
+                if (fileName.endsWith(FILE_EXTENSION)) {
                     try {
                         String newFileName = UUID.randomUUID().toString();
-                        part.write(UPLOAD_DIRECTORY + File.separator + newFileName + END_PHOTO_NAME);
+                        part.write(UPLOAD_DIRECTORY + File.separator + newFileName + FILE_EXTENSION);
                         LOGGER.log(Level.INFO, "Upload successful. File: {}", fileName);
                         photoName = Optional.of(newFileName);
                     } catch (IOException e) {
@@ -50,9 +50,12 @@ public class PhotoFileManager {
     }
 
     public void delete(String photoName) {
-        File file = new File(UPLOAD_DIRECTORY + File.separator + photoName + END_PHOTO_NAME);
-        if (file.delete()) {
-            LOGGER.log(Level.INFO, "File {} was deleted", photoName);
+        Path path = Path.of(UPLOAD_DIRECTORY + File.separator + photoName + FILE_EXTENSION);
+        try {
+            Files.delete(path);
+            LOGGER.log(Level.INFO, "Delete successful. File: {}", photoName);
+        } catch (IOException e) {
+            LOGGER.log(Level.ERROR, "Error while deleting file {}", photoName, e);
         }
     }
 }

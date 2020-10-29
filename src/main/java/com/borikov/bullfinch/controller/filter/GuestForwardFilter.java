@@ -5,7 +5,7 @@ import com.borikov.bullfinch.controller.RequestParameter;
 import com.borikov.bullfinch.controller.command.Command;
 import com.borikov.bullfinch.controller.command.CommandProvider;
 import com.borikov.bullfinch.controller.command.CommandType;
-import com.borikov.bullfinch.entity.UserRole;
+import com.borikov.bullfinch.model.entity.UserRole;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;

@@ -3,10 +3,10 @@ package com.borikov.bullfinch.controller.command.impl.page;
 import com.borikov.bullfinch.controller.PagePath;
 import com.borikov.bullfinch.controller.RequestParameter;
 import com.borikov.bullfinch.controller.command.Command;
-import com.borikov.bullfinch.entity.User;
 import com.borikov.bullfinch.exception.ServiceException;
-import com.borikov.bullfinch.service.UserService;
-import com.borikov.bullfinch.service.impl.UserServiceImpl;
+import com.borikov.bullfinch.model.entity.User;
+import com.borikov.bullfinch.model.service.UserService;
+import com.borikov.bullfinch.model.service.impl.UserServiceImpl;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -32,7 +32,7 @@ public class BrowseUsersPageCommand implements Command {
             request.setAttribute(RequestParameter.USERS_AMOUNT_ON_PAGE, USERS_AMOUNT_ON_PAGE);
             page = PagePath.USERS_ADMIN;
         } catch (ServiceException e) {
-            LOGGER.log(Level.ERROR, "Error while finding users", e);
+            LOGGER.log(Level.ERROR, "Error while browsing users page", e);
             request.setAttribute(RequestParameter.ERROR_MESSAGE, e);
             page = PagePath.ERROR505;
         }

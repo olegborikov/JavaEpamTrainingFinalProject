@@ -3,10 +3,10 @@ package com.borikov.bullfinch.controller.command.impl.page;
 import com.borikov.bullfinch.controller.PagePath;
 import com.borikov.bullfinch.controller.RequestParameter;
 import com.borikov.bullfinch.controller.command.Command;
-import com.borikov.bullfinch.entity.Order;
 import com.borikov.bullfinch.exception.ServiceException;
-import com.borikov.bullfinch.service.OrderService;
-import com.borikov.bullfinch.service.impl.OrderServiceImpl;
+import com.borikov.bullfinch.model.entity.Order;
+import com.borikov.bullfinch.model.service.OrderService;
+import com.borikov.bullfinch.model.service.impl.OrderServiceImpl;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -32,7 +32,7 @@ public class BrowseOrderPageCommand implements Command {
                 page = PagePath.MESSAGE;
             }
         } catch (ServiceException e) {
-            LOGGER.log(Level.ERROR, "Error while finding order", e);
+            LOGGER.log(Level.ERROR, "Error while browsing order page", e);
             request.setAttribute(RequestParameter.ERROR_MESSAGE, e);
             page = PagePath.ERROR505;
         }

@@ -1,7 +1,7 @@
 package com.borikov.bullfinch.tag;
 
 import com.borikov.bullfinch.controller.RequestParameter;
-import com.borikov.bullfinch.entity.Tattoo;
+import com.borikov.bullfinch.model.entity.Tattoo;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -66,7 +66,7 @@ public class PaginationTattoosAdminTag extends TagSupport {
                         "</div>\n" +
                         "</div>\n");
             } catch (IOException e) {
-                LOGGER.log(Level.ERROR, "Error while writing to out stream");
+                LOGGER.log(Level.ERROR, "Error while writing to out stream", e);
             }
             currentIndex++;
         }

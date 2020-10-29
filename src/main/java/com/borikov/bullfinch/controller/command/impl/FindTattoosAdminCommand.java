@@ -3,10 +3,10 @@ package com.borikov.bullfinch.controller.command.impl;
 import com.borikov.bullfinch.controller.PagePath;
 import com.borikov.bullfinch.controller.RequestParameter;
 import com.borikov.bullfinch.controller.command.Command;
-import com.borikov.bullfinch.entity.Tattoo;
 import com.borikov.bullfinch.exception.ServiceException;
-import com.borikov.bullfinch.service.TattooService;
-import com.borikov.bullfinch.service.impl.TattooServiceImpl;
+import com.borikov.bullfinch.model.entity.Tattoo;
+import com.borikov.bullfinch.model.service.TattooService;
+import com.borikov.bullfinch.model.service.impl.TattooServiceImpl;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -25,7 +25,7 @@ public class FindTattoosAdminCommand implements Command {
         String page;
         String tattooName = request.getParameter(RequestParameter.TATTOO_NAME);
         try {
-            List<Tattoo> tattoos = tattooService.findTattoosByName(tattooName);
+            List<Tattoo> tattoos = tattooService.findTattoosByNameSubstring(tattooName);
             request.setAttribute(RequestParameter.TATTOOS, tattoos);
             request.setAttribute(RequestParameter.ALL_TATTOOS, true);
             request.setAttribute(RequestParameter.TATTOO_NAME, tattooName);
