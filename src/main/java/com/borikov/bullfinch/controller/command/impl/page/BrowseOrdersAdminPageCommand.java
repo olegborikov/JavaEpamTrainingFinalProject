@@ -14,11 +14,11 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
-public class BrowseOrdersPageCommand implements Command {
+public class BrowseOrdersAdminPageCommand implements Command {
     private static final Logger LOGGER = LogManager.getLogger();
     private static final OrderService orderService = new OrderServiceImpl();
     private static final int FIRST_PAGE_NUMBER = 1;
-    private static final int OFFERS_AMOUNT_ON_PAGE = 10;
+    private static final int ORDERS_AMOUNT_ON_PAGE = 10;
 
     @Override
     public String execute(HttpServletRequest request) {
@@ -27,12 +27,12 @@ public class BrowseOrdersPageCommand implements Command {
             List<Order> orders = orderService.findAllOrders();
             request.setAttribute(RequestParameter.ORDERS, orders);
             request.setAttribute(RequestParameter.PAGE_AMOUNT,
-                    Math.ceil((double) orders.size() / OFFERS_AMOUNT_ON_PAGE));
+                    Math.ceil((double) orders.size() / ORDERS_AMOUNT_ON_PAGE));
             request.setAttribute(RequestParameter.PAGE_NUMBER, FIRST_PAGE_NUMBER);
-            request.setAttribute(RequestParameter.USERS_AMOUNT_ON_PAGE, OFFERS_AMOUNT_ON_PAGE);
-            page = PagePath.ORDERS;
+            request.setAttribute(RequestParameter.ORDERS_AMOUNT_ON_PAGE, ORDERS_AMOUNT_ON_PAGE);
+            page = PagePath.ORDERS_ADMIN;
         } catch (ServiceException e) {
-            LOGGER.log(Level.ERROR, "Error while browsing orders page", e);
+            LOGGER.log(Level.ERROR, "Error while browsing orders admin page", e);
             request.setAttribute(RequestParameter.ERROR_MESSAGE, e);
             page = PagePath.ERROR505;
         }

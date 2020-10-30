@@ -30,7 +30,7 @@
                         <input style="background-color: black" maxlength="25"
                                type="text" class="form-control text-white"
                                name="searchLogin" value="${searchLogin}"
-                               placeholder=<fmt:message key="usersAdmin.search"/>>
+                               placeholder=<fmt:message key="usersAdmin.login"/>>
                         <div class="input-group-btn">
                             <button type="submit"
                                     class="btn btn-outline-secondary"
@@ -54,7 +54,7 @@
                             </div>
                         </div>
                     </c:if>
-                    <ctg:pagination-users pageNumber="${pageNumber}"
+                    <ctg:pagination-users-admin pageNumber="${pageNumber}"
                                           usersAmountOnPage="${usersAmountOnPage}"/>
                 </div>
                 <c:if test="${not empty users && users.size() > usersAmountOnPage}">

@@ -54,7 +54,7 @@ public enum CommandType {
     BROWSE_ORDER_ADMIN_PAGE_COMMAND(new BrowseOrderAdminPageCommand()),
     ADD_DISCOUNT_COMMAND(new AddDiscountCommand()),
     DELETE_DISCOUNT_COMMAND(new DeleteDiscountCommand()),
-    BROWSE_ORDERS_PAGE_COMMAND(new BrowseOrdersPageCommand()),
+    BROWSE_ORDERS_ADMIN_PAGE_COMMAND(new BrowseOrdersAdminPageCommand()),
     BROWSE_USERS_PAGE_COMMAND(new BrowseUsersPageCommand());
 
     private final Command command;

@@ -1,3 +1,52 @@
+# Project description
+Website for maintaining the operability of the tattoo parlor, and managing internal information.
+
+#
+### Actors
+#### Guest
+An unauthorized user can go to the site and get acquainted with the catalog of tattoos, as well as register or authorize to be able to make an order.
+#### User
+An authorized user has access to the catalog of tattoos, can make an order and offer his own tattoo. It is also possible to top up the balance and view discounts and order statuses in your personal profile.
+#### Administrator
+Manages the system: users and tattoo catalog. Works with the proposed content, also monitors the relevance of goods and prices.
+#
+### Description of actors' actions
+* General actions
+  * Browse catalog
+  * Search in catalog
+  * View tattoo information
+  * Change localization
+* Guest
+  * Registration
+  * Authorization
+* User
+  * Suggest own tattoo
+  * Checkout tattoo
+  * View order
+  * Cancel order
+  * View personal profile
+  * View order history
+  * View available discounts
+  * Balance replenishment
+  * Edit profile information
+* Administrator
+  * Add tattoo
+  * Accept or refuse the proposed tattoo
+  * Manage tattoo archive
+  * Edit tattoo
+  * View all users
+  * Search by users
+  * View user profile
+  * View user's orders
+  * View user's order
+  * Acceptance or refusal to user order
+  * View user's discounts
+  * Add discount to the user
+  * Remove user discount
+  * User lock control
+
+##
+
 # Описание проекта
 Сайт по поддержанию работоспособности тату-салона, а также управлением внутренней информацией. 
 
@@ -7,7 +56,7 @@
 Неавторизованный пользователь может зайти на сайт и ознакомиться с каталогом татуировок, а также пройти регистрацию или авторизацию для возможности сделать заказ.
 #### Пользователь
 Авторизованный пользователь имеет доступ к каталогу татуировок, может сделать заказ и предложить свою татуировку. А также возможно пополнение баланса и просмотр скидок и статусов заказов в личном профиле.
-#### Админ
+#### Администратор
 Управляет системой: пользователями и каталогом татуировок. Работает с предложенным контентом, также следит за актуальностью товаров и цен. 
 #
 ### Описание действий актёров
@@ -38,9 +87,9 @@
   * Поиск по пользователям
   * Просмотр профиля пользователя
   * Просмотр заказов пользователя
+  * Просмотр заказа пользователя
+  * Прием или отказ в заказе пользователю
   * Просмотр скидок пользователя
   * Добавление скидки пользователю
   * Удаление скидки пользователя
-  * Просмотр заказа пользователя
-  * Прием или отказ в заказе пользователю
   * Управление блокировкой пользователя

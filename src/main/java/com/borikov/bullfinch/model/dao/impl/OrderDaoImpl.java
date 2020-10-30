@@ -35,7 +35,7 @@ public class OrderDaoImpl implements OrderDao {
     private static final String FIND_BY_USER_LOGIN = "SELECT tattoo_order_id, tattoo_name, date, is_confirmed,  "
             + "tattoo_order_price FROM tattoo_order INNER JOIN tattoo "
             + "ON tattoo_order.tattoo_id_fk = tattoo.tattoo_id INNER JOIN user_account "
-            + "ON tattoo_order.user_account_id_fk = user_account.user_account_id WHERE login = ?";
+            + "ON tattoo_order.user_account_id_fk = user_account.user_account_id WHERE BINARY login LIKE ?";
 
     private OrderDaoImpl() {
     }

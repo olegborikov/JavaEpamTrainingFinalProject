@@ -43,7 +43,7 @@
                             <input style="background-color: black" type="text"
                                    class="form-control text-white" maxlength="25"
                                    name="tattooName" value="${tattooName}"
-                                   placeholder=<fmt:message key="catalog.search"/>>
+                                   placeholder=<fmt:message key="catalog.name"/>>
                             <div class="input-group-btn">
                                 <button type="submit" class="btn btn-outline-secondary"
                                         name="commandName" value="find_tattoos_command">

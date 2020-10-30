@@ -39,8 +39,8 @@
     </tag>
 
     <tag>
-        <name>pagination-users</name>
-        <tag-class>com.borikov.bullfinch.tag.PaginationUsersTag</tag-class>
+        <name>pagination-users-admin</name>
+        <tag-class>com.borikov.bullfinch.tag.PaginationUsersAdminTag</tag-class>
         <body-content>empty</body-content>
         <attribute>
             <name>pageNumber</name>
@@ -49,6 +49,22 @@
         </attribute>
         <attribute>
             <name>usersAmountOnPage</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+
+    <tag>
+        <name>pagination-orders-admin</name>
+        <tag-class>com.borikov.bullfinch.tag.PaginationOrdersAdminTag</tag-class>
+        <body-content>empty</body-content>
+        <attribute>
+            <name>pageNumber</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>ordersAmountOnPage</name>
             <required>true</required>
             <rtexprvalue>true</rtexprvalue>
         </attribute>

@@ -12,7 +12,7 @@ import javax.servlet.jsp.tagext.TagSupport;
 import java.io.IOException;
 import java.util.List;
 
-public class PaginationUsersTag extends TagSupport {
+public class PaginationUsersAdminTag extends TagSupport {
     private static final Logger LOGGER = LogManager.getLogger();
     private int pageNumber;
     private int usersAmountOnPage;
@@ -33,17 +33,21 @@ public class PaginationUsersTag extends TagSupport {
         int lastIndex = pageNumber * usersAmountOnPage - 1;
         while (currentIndex < users.size() && currentIndex <= lastIndex) {
             try {
-                pageContext.getOut().write("<div class=\"col-md-12\">\n" +
-                        "<form method=\"post\" action=\"controller\">\n" +
-                        "<input type=\"hidden\" name=\"commandName\"\n" +
-                        "value=\"browse_profile_admin_page_command\">\n" +
-                        "<input style=\"background-color: black; text-align: left\"\n" +
-                        "type=\"submit\"\n" +
-                        "class=\"form-control text-white\"\n" +
-                        "name=\"login\"\n" +
-                        "value=\"" + users.get(currentIndex).getLogin() + "\">\n" +
-                        "</form>\n" +
-                        "</div>");
+                pageContext.getOut().write("<div class=\"col-md-12\">\n"
+                        + "<form method=\"post\" action=\"controller\">\n"
+                        + "<input type=\"hidden\" name=\"commandName\"\n"
+                        + "value=\"browse_profile_admin_page_command\">\n"
+                        + "<button style=\"background-color: black; text-align: left\"\n"
+                        + "class=\"form-control text-white\"\n"
+                        + "name=\"login\"\n"
+                        + "value=\"" + users.get(currentIndex).getLogin()+ "\">\n"
+                        + users.get(currentIndex).getLogin() + ", "
+                        + users.get(currentIndex).getEmail() + ", "
+                        + users.get(currentIndex).getFirstName() + " "
+                        + users.get(currentIndex).getSecondName()
+                        + "</button>\n"
+                        + "</form>\n"
+                        + "</div>");
             } catch (IOException e) {
                 LOGGER.log(Level.ERROR, "Error while writing to out stream", e);
             }

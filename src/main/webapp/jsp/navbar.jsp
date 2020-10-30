@@ -111,7 +111,7 @@
                                 <button style="color:white"
                                         class="btn navbar-brand js-scroll-trigger"
                                         name="commandName"
-                                        value="browse_orders_page_command">
+                                        value="browse_orders_admin_page_command">
                                     <fmt:message key="navbar.orders"/>
                                 </button>
                             </li>

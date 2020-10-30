@@ -45,26 +45,26 @@ public class PaginationTattoosAdminTag extends TagSupport {
         ResourceBundle bundle = ResourceBundle.getBundle(BUNDLE_PATH, locale);
         while (currentIndex < tattoos.size() && currentIndex <= lastIndex) {
             try {
-                pageContext.getOut().write("<div class=\"col-lg-4\">\n" +
-                        "<div class=\"image-wrap-2\">\n" +
-                        "<div class=\"image-info\">\n" +
-                        "<h2 class=\"mb-3\">" +
-                        tattoos.get(currentIndex).getName() + "</h2>\n" +
-                        "<form name=\"tattooInfoForm\" method=\"post\" action=\"controller\">\n" +
-                        "<input type=\"hidden\" name=\"commandName\"\n" +
-                        "value=\"browse_tattoo_admin_page_command\">\n" +
-                        "<button class=\"btn btn-outline-white py-2 px-4\"\n" +
-                        "name=\"tattooId\" value=\"" +
-                        tattoos.get(currentIndex).getTattooId() +
-                        "\">\n" + bundle.getString(TATTOOS_INFO) +
-                        "</button>\n" +
-                        "</form>\n" +
-                        "</div>\n" +
-                        "<img src=\"/images/" +
-                        tattoos.get(currentIndex).getImage().getName() + ".jpg\"\n" +
-                        "alt=\"Image\" class=\"img-fluid\">\n" +
-                        "</div>\n" +
-                        "</div>\n");
+                pageContext.getOut().write("<div class=\"col-lg-4\">\n"
+                        + "<div class=\"image-wrap-2\">\n"
+                        + "<div class=\"image-info\">\n"
+                        + "<h2 class=\"mb-3\">"
+                        + tattoos.get(currentIndex).getName() + "</h2>\n"
+                        + "<form name=\"tattooInfoForm\" method=\"post\" action=\"controller\">\n"
+                        + "<input type=\"hidden\" name=\"commandName\"\n"
+                        + "value=\"browse_tattoo_admin_page_command\">\n"
+                        + "<button class=\"btn btn-outline-white py-2 px-4\"\n"
+                        + "name=\"tattooId\" value=\""
+                        + tattoos.get(currentIndex).getTattooId()
+                        + "\">\n" + bundle.getString(TATTOOS_INFO)
+                        + "</button>\n"
+                        + "</form>\n"
+                        + "</div>\n"
+                        + "<img src=\"/images/"
+                        + tattoos.get(currentIndex).getImage().getName() + ".jpg\"\n"
+                        + "alt=\"Image\" class=\"img-fluid\">\n"
+                        + "</div>\n"
+                        + "</div>\n");
             } catch (IOException e) {
                 LOGGER.log(Level.ERROR, "Error while writing to out stream", e);
             }

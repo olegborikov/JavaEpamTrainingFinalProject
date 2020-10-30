@@ -10,7 +10,7 @@ public class PagePath {
     public static final String LOGIN = "/jsp/login.jsp";
     public static final String MESSAGE = "/jsp/message.jsp";
     public static final String ORDER = "/jsp/order.jsp";
-    public static final String ORDERS = "/jsp/orders.jsp";
+    public static final String ORDERS_ADMIN = "/jsp/orders_admin.jsp";
     public static final String ORDER_ADMIN = "/jsp/order_admin.jsp";
     public static final String PROFILE = "/jsp/profile.jsp";
     public static final String PROFILE_ADMIN = "/jsp/profile_admin.jsp";
