@@ -184,7 +184,7 @@ public class TattooServiceImplTest {
     public void unarchiveTattooPositiveTest() {
         try {
             when(tattooDao.unarchive(any(Long.class))).thenReturn(true);
-            boolean actual = tattooService.unarchiveTattoo( "1");
+            boolean actual = tattooService.unarchiveTattoo("1");
             assertTrue(actual);
         } catch (ServiceException | DaoException e) {
             fail("Incorrect data", e);

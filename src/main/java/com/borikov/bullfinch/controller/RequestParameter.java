@@ -49,6 +49,8 @@ public class RequestParameter {
     public static final String IMAGE_ID = "imageId";
     public static final String SEARCH_LOGIN = "searchLogin";
     public static final String REQUEST_ATTRIBUTE_HANDLER = "requestAttributeHandler";
+    public static final String BEGIN_DATE = "beginDate";
+    public static final String END_DATE = "endDate";
 
     public static final String INCORRECT_IMAGE_MESSAGE = "incorrectImageMessage";
     public static final String INCORRECT_DATA_MESSAGE = "incorrectDataMessage";

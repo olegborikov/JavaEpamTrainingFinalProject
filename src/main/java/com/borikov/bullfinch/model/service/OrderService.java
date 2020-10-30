@@ -18,5 +18,7 @@ public interface OrderService {
 
     Optional<Order> findOrderById(String id) throws ServiceException;
 
+    List<Order> findOrdersByDates(String beginDate, String endDate) throws ServiceException;
+
     List<Order> findOrdersByUserLogin(String userLogin) throws ServiceException;
 }

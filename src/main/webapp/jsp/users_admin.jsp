@@ -24,8 +24,7 @@
         <div class="row">
             <div class="col-lg-6"></div>
             <div class="col-lg-4 mb-5">
-                <form method="post" action="controller"
-                      autocomplete="off">
+                <form method="post" action="controller" autocomplete="off">
                     <div class="input-group">
                         <input style="background-color: black" maxlength="25"
                                type="text" class="form-control text-white"
@@ -35,7 +34,7 @@
                             <button type="submit"
                                     class="btn btn-outline-secondary"
                                     name="commandName"
-                                    value="find_users_command">
+                                    value="find_users_admin_command">
                                 <fmt:message key="usersAdmin.search"/>
                             </button>
                         </div>

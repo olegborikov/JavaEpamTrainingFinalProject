@@ -8,7 +8,6 @@ import com.borikov.bullfinch.model.dao.OrderDao;
 import com.borikov.bullfinch.model.dao.TransactionManager;
 import com.borikov.bullfinch.model.dao.impl.OrderDaoImpl;
 import com.borikov.bullfinch.model.entity.Order;
-import com.borikov.bullfinch.model.entity.Tattoo;
 import com.borikov.bullfinch.model.service.OrderService;
 import org.powermock.reflect.Whitebox;
 import org.testng.annotations.AfterClass;
@@ -16,6 +15,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -190,6 +190,32 @@ public class OrderServiceImplTest {
             Optional<Order> expected = Optional.of(new OrderBuilder().getOrder());
             when(orderDao.findById(any(Long.class))).thenReturn(expected);
             Optional<Order> actual = orderService.findOrderById("oleg");
+            assertNotEquals(actual, expected);
+        } catch (ServiceException | DaoException e) {
+            fail("Incorrect data", e);
+        }
+    }
+
+    @Test
+    public void findOrdersByDatesPositiveTest() {
+        try {
+            List<Order> expected = new ArrayList<>();
+            expected.add(new OrderBuilder().getOrder());
+            when(orderDao.findByDates(any(LocalDate.class), any(LocalDate.class))).thenReturn(expected);
+            List<Order> actual = orderService.findOrdersByDates("2020-10-11", "2020-10-12");
+            assertEquals(actual, expected);
+        } catch (ServiceException | DaoException e) {
+            fail("Incorrect data", e);
+        }
+    }
+
+    @Test
+    public void findOrdersByDatesNegativeTest() {
+        try {
+            List<Order> expected = new ArrayList<>();
+            expected.add(new OrderBuilder().getOrder());
+            when(orderDao.findByDates(any(LocalDate.class), any(LocalDate.class))).thenReturn(expected);
+            List<Order> actual = orderService.findOrdersByDates("2020-10-11", "2020-10-10");
             assertNotEquals(actual, expected);
         } catch (ServiceException | DaoException e) {
             fail("Incorrect data", e);

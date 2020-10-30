@@ -40,7 +40,7 @@ public class PaginationUsersAdminTag extends TagSupport {
                         + "<button style=\"background-color: black; text-align: left\"\n"
                         + "class=\"form-control text-white\"\n"
                         + "name=\"login\"\n"
-                        + "value=\"" + users.get(currentIndex).getLogin()+ "\">\n"
+                        + "value=\"" + users.get(currentIndex).getLogin() + "\">\n"
                         + users.get(currentIndex).getLogin() + ", "
                         + users.get(currentIndex).getEmail() + ", "
                         + users.get(currentIndex).getFirstName() + " "

@@ -14,7 +14,7 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
-public class FindUsersCommand implements Command {
+public class FindUsersAdminCommand implements Command {
     private static final Logger LOGGER = LogManager.getLogger();
     private static final UserService userService = new UserServiceImpl();
     private static final int FIRST_PAGE_NUMBER = 1;

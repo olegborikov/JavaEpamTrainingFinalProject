@@ -17,6 +17,7 @@ import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.time.LocalDate;
 import java.util.Optional;
 
 public class OrderTattooCommand implements Command {
@@ -41,6 +42,7 @@ public class OrderTattooCommand implements Command {
                     request.setAttribute(RequestParameter.TATTOO_ORDER_CONFIRM_MESSAGE, true);
                     page = PagePath.MESSAGE;
                 } else {
+                    request.setAttribute(RequestParameter.CURRENT_DATE, LocalDate.now());
                     request.setAttribute(RequestParameter.INCORRECT_DATA_MESSAGE, true);
                     Optional<Tattoo> tattoo = tattooService.findTattooByIdCatalog(tattooId);
                     if (tattoo.isPresent()) {

@@ -120,6 +120,23 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    public List<Order> findOrdersByDates(String beginDate, String endDate) throws ServiceException {
+        try {
+            List<Order> orders = new ArrayList<>();
+            if (OrderValidator.isDateCorrect(beginDate) && OrderValidator.isDateCorrect(endDate)) {
+                LocalDate beginDateParsed = LocalDate.parse(beginDate, DateTimeFormatter.ISO_LOCAL_DATE);
+                LocalDate endDateParsed = LocalDate.parse(endDate, DateTimeFormatter.ISO_LOCAL_DATE);
+                if (beginDateParsed.compareTo(endDateParsed) < 0) {
+                    orders = orderDao.findByDates(beginDateParsed, endDateParsed);
+                }
+            }
+            return orders;
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
     public List<Order> findOrdersByUserLogin(String userLogin) throws ServiceException {
         try {
             List<Order> orders = new ArrayList<>();

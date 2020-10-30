@@ -13,6 +13,7 @@ import com.borikov.bullfinch.model.entity.Tattoo;
 import com.borikov.bullfinch.model.entity.User;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -32,6 +33,10 @@ public class OrderDaoImpl implements OrderDao {
             + "INNER JOIN tattoo ON tattoo_order.tattoo_id_fk = tattoo.tattoo_id INNER JOIN user_account "
             + "ON tattoo_order.user_account_id_fk = user_account.user_account_id "
             + "INNER JOIN image ON tattoo.image_id_fk = image.image_id WHERE tattoo_order_id = ?";
+    private static final String FIND_BY_DATES = "SELECT tattoo_order_id, tattoo_name, date, is_confirmed, "
+            + "tattoo_order_price FROM tattoo_order INNER JOIN tattoo "
+            + "ON tattoo_order.tattoo_id_fk = tattoo.tattoo_id " +
+            "WHERE date BETWEEN ? AND ? ORDER BY is_confirmed";
     private static final String FIND_BY_USER_LOGIN = "SELECT tattoo_order_id, tattoo_name, date, is_confirmed,  "
             + "tattoo_order_price FROM tattoo_order INNER JOIN tattoo "
             + "ON tattoo_order.tattoo_id_fk = tattoo.tattoo_id INNER JOIN user_account "
@@ -115,6 +120,26 @@ public class OrderDaoImpl implements OrderDao {
             return order;
         } catch (SQLException e) {
             throw new DaoException("Error while finding order by id: " + id, e);
+        }
+    }
+
+    @Override
+    public List<Order> findByDates(LocalDate beginDate, LocalDate endDate) throws DaoException {
+        try (Connection connection = ConnectionPool.INSTANCE.getConnection();
+             PreparedStatement statement = connection.prepareStatement(FIND_BY_DATES)) {
+            Date beginDateParse = Date.valueOf(beginDate);
+            Date endDateParse = Date.valueOf(endDate);
+            statement.setLong(1, beginDateParse.getTime());
+            statement.setLong(2, endDateParse.getTime());
+            ResultSet resultSet = statement.executeQuery();
+            List<Order> orders = new ArrayList<>();
+            while (resultSet.next()) {
+                orders.add(createPartOrderFromResultSet(resultSet));
+            }
+            return orders;
+        } catch (SQLException e) {
+            throw new DaoException("Error while finding orders by dates: begin date = "
+                    + beginDate + ", end date = " + endDate, e);
         }
     }
 

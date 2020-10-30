@@ -179,7 +179,7 @@ public class OrderDaoImplTest {
                     null, true, null, tattooBuilder1.getTattoo());
             TattooBuilder tattooBuilder2 = new TattooBuilder();
             tattooBuilder2.setName("Street");
-            Date date2 = new Date(11111111111121L);
+            Date date2 = new Date(11111111111161L);
             Order order6 = new Order(2L, 300, date2.toLocalDate(),
                     null, false, null, tattooBuilder2.getTattoo());
             TattooBuilder tattooBuilder3 = new TattooBuilder();
@@ -213,7 +213,7 @@ public class OrderDaoImplTest {
                     null, true, null, tattooBuilder1.getTattoo());
             TattooBuilder tattooBuilder2 = new TattooBuilder();
             tattooBuilder2.setName("Street");
-            Date date2 = new Date(11111111111121L);
+            Date date2 = new Date(11111111111161L);
             Order order6 = new Order(2L, 300, date2.toLocalDate(),
                     null, false, null, tattooBuilder2.getTattoo());
             TattooBuilder tattooBuilder3 = new TattooBuilder();
@@ -271,6 +271,68 @@ public class OrderDaoImplTest {
     }
 
     @Test(priority = 11)
+    public void findByDatesLoginPositiveTest() {
+        try {
+            Date beginDate = new Date(11111111121111L);
+            Date endDate = new Date(11111211111161L);
+            TattooBuilder tattooBuilder1 = new TattooBuilder();
+            tattooBuilder1.setName("Girl");
+            Date date1 = new Date(11111111111111L);
+            Order order5 = new Order(1L, 500, date1.toLocalDate(),
+                    null, true, null, tattooBuilder1.getTattoo());
+            TattooBuilder tattooBuilder2 = new TattooBuilder();
+            tattooBuilder2.setName("Street");
+            Date date2 = new Date(11111111111161L);
+            Order order6 = new Order(2L, 300, date2.toLocalDate(),
+                    null, false, null, tattooBuilder2.getTattoo());
+            TattooBuilder tattooBuilder3 = new TattooBuilder();
+            tattooBuilder3.setName("Warrior");
+            Date date3 = new Date(11111111112111L);
+            Order order7 = new Order(3L, 600, date3.toLocalDate(),
+                    null, false, null, tattooBuilder3.getTattoo());
+            List<Order> expected = new ArrayList<>();
+            expected.add(order6);
+            expected.add(order7);
+            expected.add(order5);
+            List<Order> actual = orderDao.findByDates(beginDate.toLocalDate(), endDate.toLocalDate());
+            assertEquals(actual, expected);
+        } catch (DaoException e) {
+            fail("Incorrect data", e);
+        }
+    }
+
+    @Test(priority = 12)
+    public void findByDatesLoginNegativeTest() {
+        try {
+            Date beginDate = new Date(11111111121111L);
+            Date endDate = new Date(11111211111161L);
+            TattooBuilder tattooBuilder1 = new TattooBuilder();
+            tattooBuilder1.setName("Girl");
+            Date date1 = new Date(11111111111111L);
+            Order order5 = new Order(1L, 500, date1.toLocalDate(),
+                    null, true, null, tattooBuilder1.getTattoo());
+            TattooBuilder tattooBuilder2 = new TattooBuilder();
+            tattooBuilder2.setName("Street");
+            Date date2 = new Date(11111111111161L);
+            Order order6 = new Order(2L, 300, date2.toLocalDate(),
+                    null, false, null, tattooBuilder2.getTattoo());
+            TattooBuilder tattooBuilder3 = new TattooBuilder();
+            tattooBuilder3.setName("Warrior");
+            Date date3 = new Date(11111111112111L);
+            Order order7 = new Order(3L, 600, date3.toLocalDate(),
+                    null, false, null, tattooBuilder3.getTattoo());
+            List<Order> expected = new ArrayList<>();
+            expected.add(order5);
+            expected.add(order6);
+            expected.add(order7);
+            List<Order> actual = orderDao.findByDates(beginDate.toLocalDate(), endDate.toLocalDate());
+            assertNotEquals(actual, expected);
+        } catch (DaoException e) {
+            fail("Incorrect data", e);
+        }
+    }
+
+    @Test(priority = 13)
     public void findByUserLoginPositiveTest() {
         try {
             TattooBuilder tattooBuilder1 = new TattooBuilder();
@@ -280,7 +342,8 @@ public class OrderDaoImplTest {
                     null, true, null, tattooBuilder1.getTattoo());
             TattooBuilder tattooBuilder2 = new TattooBuilder();
             tattooBuilder2.setName("Street");
-            Date date2 = new Date(11111111111121L);
+            Date date2 = new Date(11111111111161L);
+            System.out.println(new Date(11111111111161L));
             Order order6 = new Order(2L, 300, date2.toLocalDate(),
                     null, false, null, tattooBuilder2.getTattoo());
             List<Order> expected = new ArrayList<>();
@@ -293,7 +356,7 @@ public class OrderDaoImplTest {
         }
     }
 
-    @Test(priority = 12)
+    @Test(priority = 14)
     public void findByUserLoginNegativeTest() {
         try {
             TattooBuilder tattooBuilder1 = new TattooBuilder();
@@ -307,7 +370,7 @@ public class OrderDaoImplTest {
             tattooBuilder2.setName("Street");
             Image image2 = new Image(null, "01cc692c-0e32-4dc2-83bd-ce90eca3768f");
             tattooBuilder2.setImage(image2);
-            Date date2 = new Date(11111111111121L);
+            Date date2 = new Date(11111111111161L);
             Order order6 = new Order(2L, 300, date2.toLocalDate(),
                     null, false, null, tattooBuilder2.getTattoo());
             List<Order> expected = new ArrayList<>();

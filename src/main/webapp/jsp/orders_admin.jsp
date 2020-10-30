@@ -22,7 +22,32 @@
 <section style="padding-top: 170px" class="masthead">
     <div class="container">
         <div class="row">
-            <div class="col-lg-2"></div>
+            <div class="col-lg-3">
+                <form action="controller" method="post" class="form">
+                    <div class="form-group">
+                        <strong class="form-label"><fmt:message key="ordersAdmin.beginDate"/></strong>
+                        <input type="date" style=" filter: invert(1);" name="beginDate"
+                               required class="form-control"
+                               oninvalid="this.setCustomValidity('<fmt:message key="ordersAdmin.dateValidate"/>')"
+                               onchange="this.setCustomValidity('')" value="${beginDate}"
+                               title='<fmt:message key="ordersAdmin.dateValidate"/>'
+                               placeholder='<fmt:message key="ordersAdmin.date"/>'>
+                    </div>
+                    <div class="form-group">
+                        <strong class="form-label"><fmt:message key="ordersAdmin.endDate"/></strong>
+                        <input type="date" style=" filter: invert(1);" name="endDate"
+                               required class="form-control"
+                               oninvalid="this.setCustomValidity('<fmt:message key="ordersAdmin.dateValidate"/>')"
+                               onchange="this.setCustomValidity('')" value="${endDate}"
+                               title='<fmt:message key="ordersAdmin.dateValidate"/>'
+                               placeholder='<fmt:message key="ordersAdmin.date"/>'>
+                    </div>  
+                    <button type="submit" class="btn btn-outline-secondary"
+                            name="commandName" value="find_orders_admin_command">
+                        <fmt:message key="ordersAdmin.search"/>
+                    </button>
+                </form>
+            </div>
             <div class="col-lg-8 mb-5">
                 <div class="row form-group">
                     <c:if test="${empty orders}">

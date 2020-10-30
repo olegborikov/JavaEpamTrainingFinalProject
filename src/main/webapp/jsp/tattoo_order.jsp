@@ -88,6 +88,11 @@
                                           placeholder='<fmt:message key="tattooOrder.description"/>'></textarea>
                             </div>
                         </div>
+                        <c:if test="${incorrectDataMessage}">
+                            <div style="color: red">
+                                <fmt:message key="tattooOrder.incorrectDataMessage"/>
+                            </div>
+                        </c:if>
                         <button type="submit" class="btn btn-outline-secondary">
                             <fmt:message key="tattooOrder.order"/>
                         </button>
