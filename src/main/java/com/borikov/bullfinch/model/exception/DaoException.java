@@ -1,4 +1,4 @@
-package com.borikov.bullfinch.exception;
+package com.borikov.bullfinch.model.exception;
 
 public class DaoException extends Exception {
     public DaoException() {

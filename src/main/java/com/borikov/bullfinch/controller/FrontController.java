@@ -2,7 +2,7 @@ package com.borikov.bullfinch.controller;
 
 import com.borikov.bullfinch.controller.command.Command;
 import com.borikov.bullfinch.controller.command.CommandProvider;
-import com.borikov.bullfinch.model.dao.pool.ConnectionPool;
+import com.borikov.bullfinch.model.pool.ConnectionPool;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;

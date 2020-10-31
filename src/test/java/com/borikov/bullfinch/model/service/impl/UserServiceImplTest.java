@@ -1,8 +1,8 @@
 package com.borikov.bullfinch.model.service.impl;
 
-import com.borikov.bullfinch.exception.DaoException;
-import com.borikov.bullfinch.exception.ServiceException;
-import com.borikov.bullfinch.exception.TransactionException;
+import com.borikov.bullfinch.model.exception.DaoException;
+import com.borikov.bullfinch.model.exception.ServiceException;
+import com.borikov.bullfinch.model.exception.TransactionException;
 import com.borikov.bullfinch.model.builder.UserBuilder;
 import com.borikov.bullfinch.model.dao.TransactionManager;
 import com.borikov.bullfinch.model.dao.UserDao;

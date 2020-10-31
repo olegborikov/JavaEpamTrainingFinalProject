@@ -1,4 +1,4 @@
-package com.borikov.bullfinch.exception;
+package com.borikov.bullfinch.model.exception;
 
 public class ServiceException extends Exception {
     public ServiceException() {

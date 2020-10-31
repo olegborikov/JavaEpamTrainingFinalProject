@@ -1,4 +1,4 @@
-package com.borikov.bullfinch.model.dao.pool;
+package com.borikov.bullfinch.model.pool;
 
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;

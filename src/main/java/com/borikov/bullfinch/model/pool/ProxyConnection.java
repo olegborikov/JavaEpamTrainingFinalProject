@@ -1,4 +1,4 @@
-package com.borikov.bullfinch.model.dao.pool;
+package com.borikov.bullfinch.model.pool;
 
 import java.sql.*;
 import java.util.Map;

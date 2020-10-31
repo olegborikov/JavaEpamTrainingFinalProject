@@ -3,7 +3,7 @@ package com.borikov.bullfinch.controller.command.impl.page;
 import com.borikov.bullfinch.controller.PagePath;
 import com.borikov.bullfinch.controller.RequestParameter;
 import com.borikov.bullfinch.controller.command.Command;
-import com.borikov.bullfinch.exception.ServiceException;
+import com.borikov.bullfinch.model.exception.ServiceException;
 import com.borikov.bullfinch.model.entity.Discount;
 import com.borikov.bullfinch.model.entity.Tattoo;
 import com.borikov.bullfinch.model.service.DiscountService;

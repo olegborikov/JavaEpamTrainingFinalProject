@@ -1,6 +1,6 @@
 package com.borikov.bullfinch.model.dao.impl;
 
-import com.borikov.bullfinch.exception.DaoException;
+import com.borikov.bullfinch.model.exception.DaoException;
 import com.borikov.bullfinch.model.dao.ImageDao;
 import com.borikov.bullfinch.model.entity.Image;
 

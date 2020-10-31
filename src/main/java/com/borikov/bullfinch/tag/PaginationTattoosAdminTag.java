@@ -67,6 +67,7 @@ public class PaginationTattoosAdminTag extends TagSupport {
                         + "</div>\n");
             } catch (IOException e) {
                 LOGGER.log(Level.ERROR, "Error while writing to out stream", e);
+                throw new JspException("Error while writing to out stream", e);
             }
             currentIndex++;
         }

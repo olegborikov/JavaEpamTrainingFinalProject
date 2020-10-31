@@ -1,6 +1,6 @@
 package com.borikov.bullfinch.model.service;
 
-import com.borikov.bullfinch.exception.ServiceException;
+import com.borikov.bullfinch.model.exception.ServiceException;
 
 public interface WalletService {
     boolean enrichBalance(String walletId, String enrichAmount) throws ServiceException;

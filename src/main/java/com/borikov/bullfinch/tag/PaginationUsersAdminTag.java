@@ -50,6 +50,7 @@ public class PaginationUsersAdminTag extends TagSupport {
                         + "</div>");
             } catch (IOException e) {
                 LOGGER.log(Level.ERROR, "Error while writing to out stream", e);
+                throw new JspException("Error while writing to out stream", e);
             }
             currentIndex++;
         }

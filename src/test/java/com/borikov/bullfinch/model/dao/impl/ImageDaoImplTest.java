@@ -1,8 +1,8 @@
 package com.borikov.bullfinch.model.dao.impl;
 
-import com.borikov.bullfinch.exception.DaoException;
+import com.borikov.bullfinch.model.exception.DaoException;
 import com.borikov.bullfinch.model.dao.ImageDao;
-import com.borikov.bullfinch.model.dao.pool.ConnectionPool;
+import com.borikov.bullfinch.model.pool.ConnectionPool;
 import com.borikov.bullfinch.model.entity.Image;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
