@@ -1,14 +1,15 @@
 package com.borikov.bullfinch.model.dao.impl;
 
-import com.borikov.bullfinch.model.exception.DaoException;
 import com.borikov.bullfinch.model.builder.TattooBuilder;
 import com.borikov.bullfinch.model.builder.UserBuilder;
 import com.borikov.bullfinch.model.dao.ColumnName;
 import com.borikov.bullfinch.model.dao.TattooDao;
-import com.borikov.bullfinch.model.pool.ConnectionPool;
 import com.borikov.bullfinch.model.entity.Image;
 import com.borikov.bullfinch.model.entity.Tattoo;
-import com.borikov.bullfinch.model.entity.User;
+import com.borikov.bullfinch.model.exception.DaoException;
+import com.borikov.bullfinch.model.pool.ConnectionPool;
+import com.mysql.cj.protocol.ColumnDefinition;
+import com.mysql.cj.protocol.a.result.NativeResultset;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -161,7 +162,7 @@ public class TattooDaoImpl implements TattooDao {
             ResultSet resultSet = statement.executeQuery();
             List<Tattoo> tattoos = new ArrayList<>();
             while (resultSet.next()) {
-                tattoos.add(createPartTattooFromResultSet(resultSet));
+                tattoos.add(createTattooFromResultSet(resultSet));
             }
             return tattoos;
         } catch (SQLException e) {
@@ -177,7 +178,7 @@ public class TattooDaoImpl implements TattooDao {
             ResultSet resultSet = statement.executeQuery();
             Optional<Tattoo> tattooOptional = Optional.empty();
             if (resultSet.next()) {
-                tattooOptional = Optional.of(createFullTattooFromResultSet(resultSet));
+                tattooOptional = Optional.of(createTattooFromResultSet(resultSet));
             }
             return tattooOptional;
         } catch (SQLException e) {
@@ -193,7 +194,7 @@ public class TattooDaoImpl implements TattooDao {
             ResultSet resultSet = statement.executeQuery();
             List<Tattoo> tattoos = new ArrayList<>();
             while (resultSet.next()) {
-                tattoos.add(createPartTattooFromResultSet(resultSet));
+                tattoos.add(createTattooFromResultSet(resultSet));
             }
             return tattoos;
         } catch (SQLException e) {
@@ -209,7 +210,7 @@ public class TattooDaoImpl implements TattooDao {
             ResultSet resultSet = statement.executeQuery();
             List<Tattoo> tattoos = new ArrayList<>();
             while (resultSet.next()) {
-                tattoos.add(createPartTattooFromResultSet(resultSet));
+                tattoos.add(createTattooFromResultSet(resultSet));
             }
             return tattoos;
         } catch (SQLException e) {
@@ -225,7 +226,7 @@ public class TattooDaoImpl implements TattooDao {
             ResultSet resultSet = statement.executeQuery();
             List<Tattoo> tattoos = new ArrayList<>();
             while (resultSet.next()) {
-                tattoos.add(createPartTattooFromResultSet(resultSet));
+                tattoos.add(createTattooFromResultSet(resultSet));
             }
             return tattoos;
         } catch (SQLException e) {
@@ -240,7 +241,7 @@ public class TattooDaoImpl implements TattooDao {
             ResultSet resultSet = statement.executeQuery();
             List<Tattoo> tattoos = new ArrayList<>();
             while (resultSet.next()) {
-                tattoos.add(createPartTattooFromResultSet(resultSet));
+                tattoos.add(createTattooFromResultSet(resultSet));
             }
             return tattoos;
         } catch (SQLException e) {
@@ -256,7 +257,7 @@ public class TattooDaoImpl implements TattooDao {
             ResultSet resultSet = statement.executeQuery();
             Optional<Tattoo> tattooOptional = Optional.empty();
             if (resultSet.next()) {
-                tattooOptional = Optional.of(createPartTattooCatalogFromResultSet(resultSet));
+                tattooOptional = Optional.of(createTattooFromResultSet(resultSet));
             }
             return tattooOptional;
         } catch (SQLException e) {
@@ -273,7 +274,7 @@ public class TattooDaoImpl implements TattooDao {
             ResultSet resultSet = statement.executeQuery();
             List<Tattoo> tattoos = new ArrayList<>();
             while (resultSet.next()) {
-                tattoos.add(createPartTattooFromResultSet(resultSet));
+                tattoos.add(createTattooFromResultSet(resultSet));
             }
             return tattoos;
         } catch (SQLException e) {
@@ -282,59 +283,38 @@ public class TattooDaoImpl implements TattooDao {
         }
     }
 
-    private Tattoo createPartTattooFromResultSet(ResultSet resultSet) throws SQLException {
+    private Tattoo createTattooFromResultSet(ResultSet resultSet) throws SQLException {
+        ColumnDefinition columnDefinition = ((NativeResultset) resultSet).getColumnDefinition();
+        TattooBuilder tattooBuilder = new TattooBuilder();
         long tattooId = resultSet.getLong(ColumnName.TATTOO_ID);
+        tattooBuilder.setTattooId(tattooId);
         String tattooName = resultSet.getString(ColumnName.TATTOO_NAME);
+        tattooBuilder.setName(tattooName);
         long imageId = resultSet.getLong(ColumnName.IMAGE_ID);
         String imageName = resultSet.getString(ColumnName.IMAGE_NAME);
-        Image image = new Image(imageId, imageName);
-        TattooBuilder tattooBuilder = new TattooBuilder();
-        tattooBuilder.setTattooId(tattooId);
-        tattooBuilder.setName(tattooName);
-        tattooBuilder.setImage(image);
-        return tattooBuilder.getTattoo();
-    }
-
-    private Tattoo createPartTattooCatalogFromResultSet(ResultSet resultSet) throws SQLException {
-        long tattooId = resultSet.getLong(ColumnName.TATTOO_ID);
-        String tattooName = resultSet.getString(ColumnName.TATTOO_NAME);
-        long imageId = resultSet.getLong(ColumnName.IMAGE_ID);
-        String imageName = resultSet.getString(ColumnName.IMAGE_NAME);
-        String description = resultSet.getString(ColumnName.TATTOO_DESCRIPTION);
-        double price = resultSet.getDouble(ColumnName.TATTOO_PRICE);
-        Image image = new Image(imageId, imageName);
-        TattooBuilder tattooBuilder = new TattooBuilder();
-        tattooBuilder.setTattooId(tattooId);
-        tattooBuilder.setName(tattooName);
-        tattooBuilder.setDescription(description);
-        tattooBuilder.setPrice(price);
-        tattooBuilder.setImage(image);
-        return tattooBuilder.getTattoo();
-    }
-
-    private Tattoo createFullTattooFromResultSet(ResultSet resultSet) throws SQLException {
-        long tattooId = resultSet.getLong(ColumnName.TATTOO_ID);
-        String tattooName = resultSet.getString(ColumnName.TATTOO_NAME);
-        String description = resultSet.getString(ColumnName.TATTOO_DESCRIPTION);
-        double price = resultSet.getDouble(ColumnName.TATTOO_PRICE);
-        boolean isAllowed = resultSet.getInt(ColumnName.IS_ALLOWED) != 0;
-        boolean isArchived = resultSet.getInt(ColumnName.IS_ARCHIVED) != 0;
-        long imageId = resultSet.getLong(ColumnName.IMAGE_ID);
-        String imageName = resultSet.getString(ColumnName.IMAGE_NAME);
-        String login = resultSet.getString(ColumnName.LOGIN);
-        UserBuilder userBuilder = new UserBuilder();
-        userBuilder.setLogin(login);
-        User user = userBuilder.getUser();
-        Image image = new Image(imageId, imageName);
-        TattooBuilder tattooBuilder = new TattooBuilder();
-        tattooBuilder.setTattooId(tattooId);
-        tattooBuilder.setName(tattooName);
-        tattooBuilder.setDescription(description);
-        tattooBuilder.setPrice(price);
-        tattooBuilder.setAllowed(isAllowed);
-        tattooBuilder.setArchived(isArchived);
-        tattooBuilder.setImage(image);
-        tattooBuilder.setUser(user);
+        tattooBuilder.setImage(new Image(imageId, imageName));
+        if (columnDefinition.findColumn(ColumnName.TATTOO_DESCRIPTION, true, 1) != -1) {
+            String description = resultSet.getString(ColumnName.TATTOO_DESCRIPTION);
+            tattooBuilder.setDescription(description);
+        }
+        if (columnDefinition.findColumn(ColumnName.TATTOO_PRICE, true, 1) != -1) {
+            double price = resultSet.getDouble(ColumnName.TATTOO_PRICE);
+            tattooBuilder.setPrice(price);
+        }
+        if (columnDefinition.findColumn(ColumnName.IS_ALLOWED, true, 1) != -1) {
+            boolean isAllowed = resultSet.getInt(ColumnName.IS_ALLOWED) != 0;
+            tattooBuilder.setAllowed(isAllowed);
+        }
+        if (columnDefinition.findColumn(ColumnName.IS_ARCHIVED, true, 1) != -1) {
+            boolean isArchived = resultSet.getInt(ColumnName.IS_ARCHIVED) != 0;
+            tattooBuilder.setArchived(isArchived);
+        }
+        if (columnDefinition.findColumn(ColumnName.LOGIN, true, 1) != -1) {
+            String login = resultSet.getString(ColumnName.LOGIN);
+            UserBuilder userBuilder = new UserBuilder();
+            userBuilder.setLogin(login);
+            tattooBuilder.setUser(userBuilder.getUser());
+        }
         return tattooBuilder.getTattoo();
     }
 }

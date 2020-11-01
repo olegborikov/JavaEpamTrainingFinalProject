@@ -1,13 +1,15 @@
 package com.borikov.bullfinch.model.dao.impl;
 
-import com.borikov.bullfinch.model.exception.DaoException;
 import com.borikov.bullfinch.model.builder.UserBuilder;
 import com.borikov.bullfinch.model.dao.ColumnName;
 import com.borikov.bullfinch.model.dao.UserDao;
-import com.borikov.bullfinch.model.pool.ConnectionPool;
 import com.borikov.bullfinch.model.entity.User;
 import com.borikov.bullfinch.model.entity.UserRole;
 import com.borikov.bullfinch.model.entity.Wallet;
+import com.borikov.bullfinch.model.exception.DaoException;
+import com.borikov.bullfinch.model.pool.ConnectionPool;
+import com.mysql.cj.protocol.ColumnDefinition;
+import com.mysql.cj.protocol.a.result.NativeResultset;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -93,7 +95,7 @@ public class UserDaoImpl implements UserDao {
             ResultSet resultSet = statement.executeQuery();
             Optional<User> userOptional = Optional.empty();
             if (resultSet.next()) {
-                userOptional = Optional.of(createAuthorizeUserFromResultSet(resultSet));
+                userOptional = Optional.of(createUserFromResultSet(resultSet));
             }
             return userOptional;
         } catch (SQLException e) {
@@ -170,7 +172,7 @@ public class UserDaoImpl implements UserDao {
             ResultSet resultSet = statement.executeQuery();
             List<User> users = new ArrayList<>();
             while (resultSet.next()) {
-                users.add(createPartUserFromResultSet(resultSet));
+                users.add(createUserFromResultSet(resultSet));
             }
             return users;
         } catch (SQLException e) {
@@ -186,7 +188,7 @@ public class UserDaoImpl implements UserDao {
             ResultSet resultSet = statement.executeQuery();
             Optional<User> userOptional = Optional.empty();
             if (resultSet.next()) {
-                userOptional = Optional.of(createFullUserFromResultSet(resultSet));
+                userOptional = Optional.of(createUserFromResultSet(resultSet));
             }
             return userOptional;
         } catch (SQLException e) {
@@ -202,7 +204,7 @@ public class UserDaoImpl implements UserDao {
             ResultSet resultSet = statement.executeQuery();
             List<User> users = new ArrayList<>();
             while (resultSet.next()) {
-                users.add(createPartUserFromResultSet(resultSet));
+                users.add(createUserFromResultSet(resultSet));
             }
             return users;
         } catch (SQLException e) {
@@ -210,56 +212,49 @@ public class UserDaoImpl implements UserDao {
         }
     }
 
-    private User createAuthorizeUserFromResultSet(ResultSet resultSet) throws SQLException {
-        String login = resultSet.getString(ColumnName.LOGIN);
-        boolean isBlocked = resultSet.getInt(ColumnName.IS_BLOCKED) != 0;
-        boolean isActivated = resultSet.getInt(ColumnName.IS_ACTIVATED) != 0;
+    private User createUserFromResultSet(ResultSet resultSet) throws SQLException {
+        ColumnDefinition columnDefinition = ((NativeResultset) resultSet).getColumnDefinition();
         UserBuilder userBuilder = new UserBuilder();
-        userBuilder.setLogin(login);
-        userBuilder.setBlocked(isBlocked);
-        userBuilder.setActivated(isActivated);
-        String roleName = resultSet.getString(ColumnName.ROLE_NAME);
-        userBuilder.setUserRole(UserRole.valueOf(roleName.toUpperCase()));
-        return userBuilder.getUser();
-    }
-
-    private User createPartUserFromResultSet(ResultSet resultSet) throws SQLException {
         String login = resultSet.getString(ColumnName.LOGIN);
-        String email = resultSet.getString(ColumnName.EMAIL);
-        String firstName = resultSet.getString(ColumnName.FIRST_NAME);
-        String secondName = resultSet.getString(ColumnName.SECOND_NAME);
-        UserBuilder userBuilder = new UserBuilder();
         userBuilder.setLogin(login);
-        userBuilder.setEmail(email);
-        userBuilder.setFirstName(firstName);
-        userBuilder.setSecondName(secondName);
-        return userBuilder.getUser();
-    }
-
-    private User createFullUserFromResultSet(ResultSet resultSet) throws SQLException {
-        long userId = resultSet.getLong(ColumnName.USER_ACCOUNT_ID);
-        String login = resultSet.getString(ColumnName.LOGIN);
-        String email = resultSet.getString(ColumnName.EMAIL);
-        String firstName = resultSet.getString(ColumnName.FIRST_NAME);
-        String secondName = resultSet.getString(ColumnName.SECOND_NAME);
-        String phoneNumber = resultSet.getString(ColumnName.PHONE_NUMBER);
-        boolean isBlocked = resultSet.getInt(ColumnName.IS_BLOCKED) != 0;
-        boolean isActivated = resultSet.getInt(ColumnName.IS_ACTIVATED) != 0;
-        String roleName = resultSet.getString(ColumnName.ROLE_NAME);
-        long walletId = resultSet.getLong(ColumnName.WALLET_ID);
-        double balance = resultSet.getDouble(ColumnName.BALANCE);
-        Wallet wallet = new Wallet(walletId, balance);
-        UserBuilder userBuilder = new UserBuilder();
-        userBuilder.setUserId(userId);
-        userBuilder.setLogin(login);
-        userBuilder.setEmail(email);
-        userBuilder.setFirstName(firstName);
-        userBuilder.setSecondName(secondName);
-        userBuilder.setPhoneNumber(phoneNumber);
-        userBuilder.setBlocked(isBlocked);
-        userBuilder.setActivated(isActivated);
-        userBuilder.setUserRole(UserRole.valueOf(roleName.toUpperCase()));
-        userBuilder.setWallet(wallet);
+        if (columnDefinition.findColumn(ColumnName.USER_ACCOUNT_ID, true, 1) != -1) {
+            long userId = resultSet.getLong(ColumnName.USER_ACCOUNT_ID);
+            userBuilder.setUserId(userId);
+        }
+        if (columnDefinition.findColumn(ColumnName.EMAIL, true, 1) != -1) {
+            String email = resultSet.getString(ColumnName.EMAIL);
+            userBuilder.setEmail(email);
+        }
+        if (columnDefinition.findColumn(ColumnName.FIRST_NAME, true, 1) != -1) {
+            String firstName = resultSet.getString(ColumnName.FIRST_NAME);
+            userBuilder.setFirstName(firstName);
+        }
+        if (columnDefinition.findColumn(ColumnName.SECOND_NAME, true, 1) != -1) {
+            String secondName = resultSet.getString(ColumnName.SECOND_NAME);
+            userBuilder.setSecondName(secondName);
+        }
+        if (columnDefinition.findColumn(ColumnName.PHONE_NUMBER, true, 1) != -1) {
+            String phoneNumber = resultSet.getString(ColumnName.PHONE_NUMBER);
+            userBuilder.setPhoneNumber(phoneNumber);
+        }
+        if (columnDefinition.findColumn(ColumnName.IS_BLOCKED, true, 1) != -1) {
+            boolean isBlocked = resultSet.getInt(ColumnName.IS_BLOCKED) != 0;
+            userBuilder.setBlocked(isBlocked);
+        }
+        if (columnDefinition.findColumn(ColumnName.IS_ACTIVATED, true, 1) != -1) {
+            boolean isActivated = resultSet.getInt(ColumnName.IS_ACTIVATED) != 0;
+            userBuilder.setActivated(isActivated);
+        }
+        if (columnDefinition.findColumn(ColumnName.ROLE_NAME, true, 1) != -1) {
+            String roleName = resultSet.getString(ColumnName.ROLE_NAME);
+            userBuilder.setUserRole(UserRole.valueOf(roleName.toUpperCase()));
+        }
+        if (columnDefinition.findColumn(ColumnName.WALLET_ID, true, 1) != -1
+                && columnDefinition.findColumn(ColumnName.BALANCE, true, 1) != -1) {
+            long walletId = resultSet.getLong(ColumnName.WALLET_ID);
+            double balance = resultSet.getDouble(ColumnName.BALANCE);
+            userBuilder.setWallet(new Wallet(walletId, balance));
+        }
         return userBuilder.getUser();
     }
 }

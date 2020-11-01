@@ -1,10 +1,10 @@
 package com.borikov.bullfinch.model.dao.impl;
 
-import com.borikov.bullfinch.model.exception.DaoException;
 import com.borikov.bullfinch.model.dao.ColumnName;
 import com.borikov.bullfinch.model.dao.WalletDao;
-import com.borikov.bullfinch.model.pool.ConnectionPool;
 import com.borikov.bullfinch.model.entity.Wallet;
+import com.borikov.bullfinch.model.exception.DaoException;
+import com.borikov.bullfinch.model.pool.ConnectionPool;
 
 import java.sql.*;
 import java.util.Optional;
