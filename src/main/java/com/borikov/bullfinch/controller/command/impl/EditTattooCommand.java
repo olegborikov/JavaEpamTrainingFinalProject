@@ -26,17 +26,19 @@ public class EditTattooCommand implements Command {
         String description = request.getParameter(RequestParameter.DESCRIPTION);
         String price = request.getParameter(RequestParameter.PRICE);
         try {
-            if (tattooService.editTattoo(id, name, description, price)) {
-                Optional<Tattoo> tattoo = tattooService.findTattooById(id);
-                if (tattoo.isPresent()) {
-                    request.setAttribute(RequestParameter.TATTOO, tattoo.get());
+            boolean result = tattooService.editTattoo(id, name, description, price);
+            Optional<Tattoo> tattoo = tattooService.findTattooById(id);
+            if (tattoo.isPresent()) {
+                request.setAttribute(RequestParameter.TATTOO, tattoo.get());
+                if (result) {
                     page = PagePath.TATTOO_ADMIN;
                 } else {
-                    request.setAttribute(RequestParameter.TATTOO_FIND_ERROR_MESSAGE, true);
-                    page = PagePath.MESSAGE;
+                    request.setAttribute(RequestParameter.INCORRECT_DATA_MESSAGE, true);
+                    page = PagePath.TATTOO_EDIT;
                 }
             } else {
-                page = PagePath.ERROR505;// TODO: 09.10.2020 do smth
+                request.setAttribute(RequestParameter.TATTOO_FIND_ERROR_MESSAGE, true);
+                page = PagePath.MESSAGE;
             }
         } catch (ServiceException e) {
             LOGGER.log(Level.ERROR, "Error while editing tattoo", e);

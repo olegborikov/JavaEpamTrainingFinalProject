@@ -33,19 +33,21 @@ public class EditProfileCommand implements Command {
         String secondName = request.getParameter(RequestParameter.SECOND_NAME);
         String phoneNumber = request.getParameter(RequestParameter.PHONE_NUMBER);
         try {
-            if (userService.editUser(id, email, login, firstName, secondName, phoneNumber)) {
-                Optional<User> user = userService.findUserByLogin(login);
-                if (user.isPresent()) {
-                    request.setAttribute(RequestParameter.USER, user.get());
+            boolean result = userService.editUser(id, email, login, firstName, secondName, phoneNumber);
+            Optional<User> user = userService.findUserByLogin(login);
+            if (user.isPresent()) {
+                request.setAttribute(RequestParameter.USER, user.get());
+                if (result) {
                     page = PagePath.PROFILE;
                     List<Order> orders = orderService.findOrdersByUserLogin(login);
                     request.setAttribute(RequestParameter.ORDERS, orders);
                 } else {
-                    request.setAttribute(RequestParameter.USER_FIND_ERROR_MESSAGE, true);
-                    page = PagePath.MESSAGE;
+                    request.setAttribute(RequestParameter.INCORRECT_DATA_MESSAGE, true);
+                    page = PagePath.PROFILE_EDIT;
                 }
             } else {
-                page = PagePath.ERROR505;// TODO: 09.10.2020 do smth
+                request.setAttribute(RequestParameter.USER_FIND_ERROR_MESSAGE, true);
+                page = PagePath.MESSAGE;
             }
         } catch (ServiceException e) {
             LOGGER.log(Level.ERROR, "Error while editing user", e);

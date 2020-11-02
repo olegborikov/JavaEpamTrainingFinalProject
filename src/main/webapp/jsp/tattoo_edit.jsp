@@ -77,6 +77,11 @@
                                           placeholder='<fmt:message key="tattooEdit.description"/>'>${tattoo.description}</textarea>
                             </div>
                         </div>
+                        <c:if test="${incorrectDataMessage}">
+                            <div style="color: red">
+                                <fmt:message key="tattooEdit.incorrectDataMessage"/>
+                            </div>
+                        </c:if>
                         <button type="submit" class="btn btn-outline-secondary">
                             <fmt:message key="tattooEdit.edit"/>
                         </button>
