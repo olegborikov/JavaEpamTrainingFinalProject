@@ -3,9 +3,9 @@ package com.borikov.bullfinch.controller.command.impl;
 import com.borikov.bullfinch.controller.PagePath;
 import com.borikov.bullfinch.controller.RequestParameter;
 import com.borikov.bullfinch.controller.command.Command;
-import com.borikov.bullfinch.model.exception.ServiceException;
 import com.borikov.bullfinch.model.entity.Order;
 import com.borikov.bullfinch.model.entity.User;
+import com.borikov.bullfinch.model.exception.ServiceException;
 import com.borikov.bullfinch.model.service.OrderService;
 import com.borikov.bullfinch.model.service.UserService;
 import com.borikov.bullfinch.model.service.impl.OrderServiceImpl;
@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Optional;
 
-public class EditUserCommand implements Command {
+public class EditProfileCommand implements Command {
     private static final UserService userService = new UserServiceImpl();
     private static final OrderService orderService = new OrderServiceImpl();
     private static final Logger LOGGER = LogManager.getLogger();

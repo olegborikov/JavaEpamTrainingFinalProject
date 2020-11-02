@@ -1,11 +1,11 @@
 package com.borikov.bullfinch.model.service.impl;
 
-import com.borikov.bullfinch.model.exception.DaoException;
-import com.borikov.bullfinch.model.exception.ServiceException;
 import com.borikov.bullfinch.model.builder.UserBuilder;
 import com.borikov.bullfinch.model.dao.DiscountDao;
 import com.borikov.bullfinch.model.dao.impl.DiscountDaoImpl;
 import com.borikov.bullfinch.model.entity.Discount;
+import com.borikov.bullfinch.model.exception.DaoException;
+import com.borikov.bullfinch.model.exception.ServiceException;
 import com.borikov.bullfinch.model.service.DiscountService;
 import org.powermock.reflect.Whitebox;
 import org.testng.annotations.AfterClass;

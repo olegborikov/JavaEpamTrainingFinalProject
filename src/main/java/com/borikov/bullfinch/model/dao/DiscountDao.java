@@ -1,7 +1,7 @@
 package com.borikov.bullfinch.model.dao;
 
-import com.borikov.bullfinch.model.exception.DaoException;
 import com.borikov.bullfinch.model.entity.Discount;
+import com.borikov.bullfinch.model.exception.DaoException;
 
 import java.util.List;
 

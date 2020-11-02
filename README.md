@@ -1,6 +1,5 @@
 # Project description
-Website for maintaining the operability of the tattoo parlor, and managing internal information.
-
+Website for maintaining the operability of the tattoo parlor, and managing internal information. The client has the opportunity to replenish the balance, search and order images in the catalog. The order confirm or reject by the administrator. The client can offer his images to the salon, for which he can receive a discount. The administrator manages the clients and the content of the system.
 #
 ### Actors
 #### Guest
@@ -48,8 +47,7 @@ Manages the system: users and tattoo catalog. Works with the proposed content, a
 ##
 
 # Описание проекта
-Сайт по поддержанию работоспособности тату-салона, а также управлением внутренней информацией. 
-
+Сайт по поддержанию работоспособности тату-салона, а также управлением внутренней информацией. Клиент имеет возможность пополнять баланс, осуществлять поиск и заказ изображений в каталоге. Заказ подтверждает или отклоняет администратор. Клиент может предлагать свои изображения салону, за что может получить скидку. Администратор управляет клиентами и контентом системы.
 #
 ### Актёры
 #### Гость 

@@ -1,9 +1,9 @@
 package com.borikov.bullfinch.model.dao.impl;
 
-import com.borikov.bullfinch.model.exception.DaoException;
 import com.borikov.bullfinch.model.builder.UserBuilder;
 import com.borikov.bullfinch.model.dao.DiscountDao;
 import com.borikov.bullfinch.model.entity.Discount;
+import com.borikov.bullfinch.model.exception.DaoException;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;

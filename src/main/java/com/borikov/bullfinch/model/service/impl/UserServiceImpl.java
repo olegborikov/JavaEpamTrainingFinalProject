@@ -1,8 +1,5 @@
 package com.borikov.bullfinch.model.service.impl;
 
-import com.borikov.bullfinch.model.exception.DaoException;
-import com.borikov.bullfinch.model.exception.ServiceException;
-import com.borikov.bullfinch.model.exception.TransactionException;
 import com.borikov.bullfinch.model.builder.UserBuilder;
 import com.borikov.bullfinch.model.dao.TransactionManager;
 import com.borikov.bullfinch.model.dao.UserDao;
@@ -10,6 +7,9 @@ import com.borikov.bullfinch.model.dao.impl.UserDaoImpl;
 import com.borikov.bullfinch.model.entity.User;
 import com.borikov.bullfinch.model.entity.UserRole;
 import com.borikov.bullfinch.model.entity.Wallet;
+import com.borikov.bullfinch.model.exception.DaoException;
+import com.borikov.bullfinch.model.exception.ServiceException;
+import com.borikov.bullfinch.model.exception.TransactionException;
 import com.borikov.bullfinch.model.service.UserService;
 import com.borikov.bullfinch.model.validator.UserValidator;
 import com.borikov.bullfinch.util.PasswordEncryptor;

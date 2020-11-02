@@ -82,7 +82,7 @@
                                 </div>
                             </c:if>
                             <button class="btn btn-outline-secondary"
-                                    name="commandName" value="edit_user_command">
+                                    name="commandName" value="edit_profile_command">
                                 <fmt:message key="profileEdit.change"/>
                             </button>
                         </form>

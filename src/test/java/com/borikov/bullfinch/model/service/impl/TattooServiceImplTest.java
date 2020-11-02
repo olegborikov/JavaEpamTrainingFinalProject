@@ -1,13 +1,13 @@
 package com.borikov.bullfinch.model.service.impl;
 
-import com.borikov.bullfinch.model.exception.DaoException;
-import com.borikov.bullfinch.model.exception.ServiceException;
-import com.borikov.bullfinch.model.exception.TransactionException;
 import com.borikov.bullfinch.model.builder.TattooBuilder;
 import com.borikov.bullfinch.model.dao.TattooDao;
 import com.borikov.bullfinch.model.dao.TransactionManager;
 import com.borikov.bullfinch.model.dao.impl.TattooDaoImpl;
 import com.borikov.bullfinch.model.entity.Tattoo;
+import com.borikov.bullfinch.model.exception.DaoException;
+import com.borikov.bullfinch.model.exception.ServiceException;
+import com.borikov.bullfinch.model.exception.TransactionException;
 import com.borikov.bullfinch.model.service.TattooService;
 import org.powermock.reflect.Whitebox;
 import org.testng.annotations.AfterClass;

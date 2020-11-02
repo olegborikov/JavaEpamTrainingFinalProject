@@ -1,13 +1,13 @@
 package com.borikov.bullfinch.model.service.impl;
 
-import com.borikov.bullfinch.model.exception.DaoException;
-import com.borikov.bullfinch.model.exception.ServiceException;
 import com.borikov.bullfinch.model.builder.OrderBuilder;
 import com.borikov.bullfinch.model.dao.OrderDao;
 import com.borikov.bullfinch.model.dao.WalletDao;
 import com.borikov.bullfinch.model.dao.impl.OrderDaoImpl;
 import com.borikov.bullfinch.model.dao.impl.WalletDaoImpl;
 import com.borikov.bullfinch.model.entity.Wallet;
+import com.borikov.bullfinch.model.exception.DaoException;
+import com.borikov.bullfinch.model.exception.ServiceException;
 import com.borikov.bullfinch.model.service.WalletService;
 import org.powermock.reflect.Whitebox;
 import org.testng.annotations.AfterClass;

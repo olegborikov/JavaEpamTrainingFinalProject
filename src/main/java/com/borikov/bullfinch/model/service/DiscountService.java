@@ -1,7 +1,7 @@
 package com.borikov.bullfinch.model.service;
 
-import com.borikov.bullfinch.model.exception.ServiceException;
 import com.borikov.bullfinch.model.entity.Discount;
+import com.borikov.bullfinch.model.exception.ServiceException;
 
 import java.util.List;
 

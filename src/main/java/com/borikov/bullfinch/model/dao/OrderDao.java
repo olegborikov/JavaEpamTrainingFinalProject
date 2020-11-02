@@ -1,7 +1,7 @@
 package com.borikov.bullfinch.model.dao;
 
-import com.borikov.bullfinch.model.exception.DaoException;
 import com.borikov.bullfinch.model.entity.Order;
+import com.borikov.bullfinch.model.exception.DaoException;
 
 import java.time.LocalDate;
 import java.util.List;

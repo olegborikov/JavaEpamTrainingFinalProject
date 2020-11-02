@@ -1,8 +1,5 @@
 package com.borikov.bullfinch.model.service.impl;
 
-import com.borikov.bullfinch.model.exception.DaoException;
-import com.borikov.bullfinch.model.exception.ServiceException;
-import com.borikov.bullfinch.model.exception.TransactionException;
 import com.borikov.bullfinch.model.builder.OrderBuilder;
 import com.borikov.bullfinch.model.builder.TattooBuilder;
 import com.borikov.bullfinch.model.builder.UserBuilder;
@@ -14,6 +11,9 @@ import com.borikov.bullfinch.model.dao.impl.OrderDaoImpl;
 import com.borikov.bullfinch.model.entity.Order;
 import com.borikov.bullfinch.model.entity.Tattoo;
 import com.borikov.bullfinch.model.entity.User;
+import com.borikov.bullfinch.model.exception.DaoException;
+import com.borikov.bullfinch.model.exception.ServiceException;
+import com.borikov.bullfinch.model.exception.TransactionException;
 import com.borikov.bullfinch.model.service.OrderService;
 import com.borikov.bullfinch.model.validator.DiscountValidator;
 import com.borikov.bullfinch.model.validator.OrderValidator;

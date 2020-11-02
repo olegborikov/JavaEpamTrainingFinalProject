@@ -1,7 +1,7 @@
 package com.borikov.bullfinch.model.dao;
 
-import com.borikov.bullfinch.model.exception.DaoException;
 import com.borikov.bullfinch.model.entity.User;
+import com.borikov.bullfinch.model.exception.DaoException;
 
 import java.sql.Connection;
 import java.util.List;
