@@ -9,6 +9,9 @@ import com.borikov.bullfinch.model.pool.ConnectionPool;
 import java.sql.*;
 import java.util.Optional;
 
+/**
+ * The type Wallet dao.
+ */
 public class WalletDaoImpl implements WalletDao {
     private static final WalletDaoImpl INSTANCE = new WalletDaoImpl();
     private static final String ADD = "INSERT INTO wallet (balance) VALUES (0)";
@@ -23,6 +26,11 @@ public class WalletDaoImpl implements WalletDao {
     private WalletDaoImpl() {
     }
 
+    /**
+     * Gets instance.
+     *
+     * @return the instance
+     */
     public static WalletDaoImpl getInstance() {
         return INSTANCE;
     }

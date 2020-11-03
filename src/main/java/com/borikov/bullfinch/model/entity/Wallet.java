@@ -1,7 +1,7 @@
 package com.borikov.bullfinch.model.entity;
 
 /**
- * The {@code Wallet} class represents wallet entity
+ * The {@code Wallet} class represents wallet entity.
  *
  * @author Oleg Borikov
  * @version 1.0

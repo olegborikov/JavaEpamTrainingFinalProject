@@ -12,15 +12,32 @@ import javax.servlet.jsp.tagext.TagSupport;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * The {@code PaginationUsersAdminTag} class represents pagination users admin.
+ *
+ * @author Oleg Borikov
+ * @version 1.0
+ * @since 2020-10-16
+ */
 public class PaginationUsersAdminTag extends TagSupport {
     private static final Logger LOGGER = LogManager.getLogger();
     private int pageNumber;
     private int usersAmountOnPage;
 
+    /**
+     * Sets page number.
+     *
+     * @param pageNumber the page number
+     */
     public void setPageNumber(int pageNumber) {
         this.pageNumber = pageNumber;
     }
 
+    /**
+     * Sets users amount on page.
+     *
+     * @param usersAmountOnPage the users amount on page
+     */
     public void setUsersAmountOnPage(int usersAmountOnPage) {
         this.usersAmountOnPage = usersAmountOnPage;
     }

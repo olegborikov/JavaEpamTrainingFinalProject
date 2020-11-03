@@ -11,6 +11,9 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type Discount dao.
+ */
 public class DiscountDaoImpl implements DiscountDao {
     private static final DiscountDaoImpl INSTANCE = new DiscountDaoImpl();
     private static final String ADD = "INSERT INTO discount(discount_percent, user_account_id_fk) VALUES (?, ?)";
@@ -22,6 +25,11 @@ public class DiscountDaoImpl implements DiscountDao {
     private DiscountDaoImpl() {
     }
 
+    /**
+     * Gets instance.
+     *
+     * @return the instance
+     */
     public static DiscountDaoImpl getInstance() {
         return INSTANCE;
     }

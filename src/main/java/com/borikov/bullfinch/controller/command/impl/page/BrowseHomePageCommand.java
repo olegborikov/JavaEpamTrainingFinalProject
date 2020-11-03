@@ -8,6 +8,9 @@ import com.borikov.bullfinch.model.entity.UserRole;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+/**
+ * The type Browse home page command.
+ */
 public class BrowseHomePageCommand implements Command {
     private static final String ENGLISH_LOCALE = "en_US";
 

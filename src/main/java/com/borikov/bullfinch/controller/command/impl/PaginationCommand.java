@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Map;
 
+/**
+ * The type Pagination command.
+ */
 public class PaginationCommand implements Command {
     @Override
     public String execute(HttpServletRequest request) {

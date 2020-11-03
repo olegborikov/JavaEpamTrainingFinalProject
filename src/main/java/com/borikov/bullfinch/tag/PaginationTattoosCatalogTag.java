@@ -15,6 +15,9 @@ import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+/**
+ * The type Pagination tattoos catalog tag.
+ */
 public class PaginationTattoosCatalogTag extends TagSupport {
     private static final Logger LOGGER = LogManager.getLogger();
     private static final String BUNDLE_PATH = "i18n.application_message";
@@ -23,10 +26,20 @@ public class PaginationTattoosCatalogTag extends TagSupport {
     private int pageNumber;
     private int tattoosAmountOnPage;
 
+    /**
+     * Sets page number.
+     *
+     * @param pageNumber the page number
+     */
     public void setPageNumber(int pageNumber) {
         this.pageNumber = pageNumber;
     }
 
+    /**
+     * Sets tattoos amount on page.
+     *
+     * @param tattoosAmountOnPage the tattoos amount on page
+     */
     public void setTattoosAmountOnPage(int tattoosAmountOnPage) {
         this.tattoosAmountOnPage = tattoosAmountOnPage;
     }

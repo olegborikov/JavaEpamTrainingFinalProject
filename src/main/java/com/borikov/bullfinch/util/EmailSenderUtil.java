@@ -8,6 +8,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+/**
+ * The {@code EmailSenderUtil} class represents email sender.
+ *
+ * @author Oleg Borikov
+ * @version 1.0
+ * @since 2020-10-16
+ */
 public class EmailSenderUtil {
     private static final String EMAIL_HEAD = "Bullfinch tattoo";
     private static final String EMAIL_BODY = "Follow link to confirm your mail to register "
@@ -18,6 +25,13 @@ public class EmailSenderUtil {
     private EmailSenderUtil() {
     }
 
+    /**
+     * Send message.
+     *
+     * @param email the email
+     * @param login the login
+     * @param url   the url
+     */
     public static void sendMessage(String email, String login, String url) {
         try {
             Properties properties = new Properties();

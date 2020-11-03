@@ -9,6 +9,9 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 
+/**
+ * The type Image controller.
+ */
 @WebServlet("/images/*")
 public class ImageController extends HttpServlet {
     private static final int BEGIN_INDEX = 1;

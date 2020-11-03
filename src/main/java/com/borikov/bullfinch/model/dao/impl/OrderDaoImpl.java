@@ -18,6 +18,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The type Order dao.
+ */
 public class OrderDaoImpl implements OrderDao {
     private static final OrderDaoImpl INSTANCE = new OrderDaoImpl();
     private static final String ADD = "INSERT INTO tattoo_order (tattoo_order_price, date, "
@@ -45,6 +48,11 @@ public class OrderDaoImpl implements OrderDao {
     private OrderDaoImpl() {
     }
 
+    /**
+     * Gets instance.
+     *
+     * @return the instance
+     */
     public static OrderDaoImpl getInstance() {
         return INSTANCE;
     }

@@ -6,6 +6,9 @@ import com.borikov.bullfinch.controller.command.Command;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * The type Browse balance enrich page command.
+ */
 public class BrowseBalanceEnrichPageCommand implements Command {
     @Override
     public String execute(HttpServletRequest request) {

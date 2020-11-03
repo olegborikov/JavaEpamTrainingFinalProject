@@ -4,6 +4,9 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+/**
+ * The type Command provider.
+ */
 public class CommandProvider {
     private static final Logger LOGGER = LogManager.getLogger();
     private static final Command DEFAULT_COMMAND = CommandType.BROWSE_HOME_PAGE_COMMAND.getCommand();
@@ -11,6 +14,12 @@ public class CommandProvider {
     private CommandProvider() {
     }
 
+    /**
+     * Define command command.
+     *
+     * @param commandName the command name
+     * @return the command
+     */
     public static Command defineCommand(String commandName) {
         Command currentCommand;
         if (commandName != null && !commandName.isBlank()) {

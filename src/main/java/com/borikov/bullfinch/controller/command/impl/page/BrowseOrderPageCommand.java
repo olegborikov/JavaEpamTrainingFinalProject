@@ -14,6 +14,9 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
 
+/**
+ * The type Browse order page command.
+ */
 public class BrowseOrderPageCommand implements Command {
     private static final OrderService orderService = new OrderServiceImpl();
     private static final Logger LOGGER = LogManager.getLogger();

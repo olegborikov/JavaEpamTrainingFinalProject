@@ -1,7 +1,7 @@
 package com.borikov.bullfinch.model.entity;
 
 /**
- * The {@code Discount} class represents discount entity
+ * The {@code Discount} class represents discount entity.
  *
  * @author Oleg Borikov
  * @version 1.0

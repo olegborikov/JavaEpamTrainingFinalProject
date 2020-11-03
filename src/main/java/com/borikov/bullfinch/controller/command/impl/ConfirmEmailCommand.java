@@ -12,6 +12,9 @@ import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * The type Confirm email command.
+ */
 public class ConfirmEmailCommand implements Command {
     private static final Logger LOGGER = LogManager.getLogger();
     private static final UserService userService = new UserServiceImpl();

@@ -1,7 +1,7 @@
 package com.borikov.bullfinch.model.entity;
 
 /**
- * The {@code Image} class represents image entity
+ * The {@code Image} class represents image entity.
  *
  * @author Oleg Borikov
  * @version 1.0

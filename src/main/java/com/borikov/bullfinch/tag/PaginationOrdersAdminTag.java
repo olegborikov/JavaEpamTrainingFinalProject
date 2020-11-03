@@ -15,6 +15,9 @@ import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+/**
+ * The type Pagination orders admin tag.
+ */
 public class PaginationOrdersAdminTag extends TagSupport {
     private static final Logger LOGGER = LogManager.getLogger();
     private static final String BUNDLE_PATH = "i18n.application_message";
@@ -24,10 +27,20 @@ public class PaginationOrdersAdminTag extends TagSupport {
     private int pageNumber;
     private int ordersAmountOnPage;
 
+    /**
+     * Sets page number.
+     *
+     * @param pageNumber the page number
+     */
     public void setPageNumber(int pageNumber) {
         this.pageNumber = pageNumber;
     }
 
+    /**
+     * Sets orders amount on page.
+     *
+     * @param ordersAmountOnPage the orders amount on page
+     */
     public void setOrdersAmountOnPage(int ordersAmountOnPage) {
         this.ordersAmountOnPage = ordersAmountOnPage;
     }

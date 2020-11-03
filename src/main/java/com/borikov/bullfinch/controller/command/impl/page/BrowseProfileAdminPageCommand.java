@@ -21,6 +21,9 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The type Browse profile admin page command.
+ */
 public class BrowseProfileAdminPageCommand implements Command {
     private static final Logger LOGGER = LogManager.getLogger();
     private static final UserService userService = new UserServiceImpl();

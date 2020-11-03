@@ -15,6 +15,9 @@ import com.borikov.bullfinch.model.validator.UserValidator;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type Discount service.
+ */
 public class DiscountServiceImpl implements DiscountService {
     private final DiscountDao discountDao = DiscountDaoImpl.getInstance();
 

@@ -12,6 +12,9 @@ import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * The type Enrich balance command.
+ */
 public class EnrichBalanceCommand implements Command {
     private static final Logger LOGGER = LogManager.getLogger();
     private static final WalletService walletService = new WalletServiceImpl();

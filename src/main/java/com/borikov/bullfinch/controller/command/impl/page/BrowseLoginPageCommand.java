@@ -5,6 +5,9 @@ import com.borikov.bullfinch.controller.command.Command;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * The type Browse login page command.
+ */
 public class BrowseLoginPageCommand implements Command {
     @Override
     public String execute(HttpServletRequest request) {

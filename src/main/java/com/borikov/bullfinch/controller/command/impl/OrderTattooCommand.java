@@ -20,6 +20,9 @@ import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
 import java.util.Optional;
 
+/**
+ * The type Order tattoo command.
+ */
 public class OrderTattooCommand implements Command {
     private static final OrderService orderService = new OrderServiceImpl();
     private static final TattooService tattooService = new TattooServiceImpl();

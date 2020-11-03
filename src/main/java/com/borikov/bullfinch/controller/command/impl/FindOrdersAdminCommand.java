@@ -15,6 +15,9 @@ import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDate;
 import java.util.List;
 
+/**
+ * The type Find orders admin command.
+ */
 public class FindOrdersAdminCommand implements Command {
     private static final Logger LOGGER = LogManager.getLogger();
     private static final OrderService orderService = new OrderServiceImpl();

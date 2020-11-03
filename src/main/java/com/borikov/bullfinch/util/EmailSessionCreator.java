@@ -4,6 +4,13 @@ import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import java.util.Properties;
 
+/**
+ * The {@code EmailSessionCreator} class represents email session creator.
+ *
+ * @author Oleg Borikov
+ * @version 1.0
+ * @since 2020-10-16
+ */
 public class EmailSessionCreator {
     private static final String MAIL_USER_NAME = "mail.user.name";
     private static final String MAIL_USER_PASSWORD = "mail.user.password";
@@ -11,6 +18,12 @@ public class EmailSessionCreator {
     private EmailSessionCreator() {
     }
 
+    /**
+     * Create session.
+     *
+     * @param properties the properties
+     * @return the session
+     */
     public static Session createSession(Properties properties) {
         String userName = properties.getProperty(MAIL_USER_NAME);
         String userPasswordHidden = properties.getProperty(MAIL_USER_PASSWORD);

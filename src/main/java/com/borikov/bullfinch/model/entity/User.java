@@ -1,7 +1,7 @@
 package com.borikov.bullfinch.model.entity;
 
 /**
- * The {@code User} class represents user_account entity
+ * The {@code User} class represents user_account entity.
  *
  * @author Oleg Borikov
  * @version 1.0

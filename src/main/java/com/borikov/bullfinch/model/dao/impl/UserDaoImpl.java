@@ -16,6 +16,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The type User dao.
+ */
 public class UserDaoImpl implements UserDao {
     private static final UserDaoImpl INSTANCE = new UserDaoImpl();
     private static final String ADD = "INSERT INTO user_account (email, login, password, first_name, second_name, "
@@ -45,6 +48,11 @@ public class UserDaoImpl implements UserDao {
     private UserDaoImpl() {
     }
 
+    /**
+     * Gets instance.
+     *
+     * @return the instance
+     */
     public static UserDaoImpl getInstance() {
         return INSTANCE;
     }

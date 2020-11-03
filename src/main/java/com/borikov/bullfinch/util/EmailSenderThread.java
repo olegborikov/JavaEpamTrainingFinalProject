@@ -13,6 +13,13 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.util.Properties;
 
+/**
+ * The {@code EmailSenderThread} class represents email sender thread.
+ *
+ * @author Oleg Borikov
+ * @version 1.0
+ * @since 2020-10-16
+ */
 public class EmailSenderThread implements Runnable {
     private MimeMessage message;
     private final String sendToEmail;
@@ -22,6 +29,14 @@ public class EmailSenderThread implements Runnable {
     private static final Logger LOGGER = LogManager.getLogger();
     private static final String TEXT_TYPE = "text/html";
 
+    /**
+     * Instantiates a new Email sender thread.
+     *
+     * @param sendToEmail the send to email
+     * @param mailSubject the mail subject
+     * @param mailText    the mail text
+     * @param properties  the properties
+     */
     public EmailSenderThread(String sendToEmail, String mailSubject, String mailText, Properties properties) {
         this.sendToEmail = sendToEmail;
         this.mailSubject = mailSubject;

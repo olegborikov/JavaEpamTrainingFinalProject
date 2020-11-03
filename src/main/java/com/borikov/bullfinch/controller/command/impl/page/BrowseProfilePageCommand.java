@@ -22,6 +22,9 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The type Browse profile page command.
+ */
 public class BrowseProfilePageCommand implements Command {
     private static final Logger LOGGER = LogManager.getLogger();
     private static final UserService userService = new UserServiceImpl();

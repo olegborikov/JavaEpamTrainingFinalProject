@@ -17,6 +17,9 @@ import com.borikov.bullfinch.util.PasswordEncryptor;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The type User service.
+ */
 public class UserServiceImpl implements UserService {
     private final TransactionManager transactionManager = TransactionManager.getInstance();
     private final UserDao userDao = UserDaoImpl.getInstance();

@@ -18,6 +18,9 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The type Edit profile command.
+ */
 public class EditProfileCommand implements Command {
     private static final UserService userService = new UserServiceImpl();
     private static final OrderService orderService = new OrderServiceImpl();

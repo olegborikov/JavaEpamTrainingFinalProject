@@ -6,6 +6,9 @@ import com.borikov.bullfinch.controller.command.Command;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * The type Browse discount add page command.
+ */
 public class BrowseDiscountAddPageCommand implements Command {
     @Override
     public String execute(HttpServletRequest request) {

@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Map;
 
+/**
+ * The type Switch locale command.
+ */
 public class SwitchLocaleCommand implements Command {
     @Override
     public String execute(HttpServletRequest request) {

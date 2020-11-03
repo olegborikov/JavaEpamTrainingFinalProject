@@ -21,6 +21,9 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The type Block user command.
+ */
 public class BlockUserCommand implements Command {
     private static final UserService userService = new UserServiceImpl();
     private static final Logger LOGGER = LogManager.getLogger();

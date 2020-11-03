@@ -16,6 +16,9 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
 
+/**
+ * The type Submit order command.
+ */
 public class SubmitOrderCommand implements Command {
     private static final OrderService orderService = new OrderServiceImpl();
     private static final WalletService walletService = new WalletServiceImpl();

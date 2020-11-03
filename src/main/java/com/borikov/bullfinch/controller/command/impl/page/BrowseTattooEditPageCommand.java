@@ -14,6 +14,9 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
 
+/**
+ * The type Browse tattoo edit page command.
+ */
 public class BrowseTattooEditPageCommand implements Command {
     private static final TattooService tattooService = new TattooServiceImpl();
     private static final Logger LOGGER = LogManager.getLogger();

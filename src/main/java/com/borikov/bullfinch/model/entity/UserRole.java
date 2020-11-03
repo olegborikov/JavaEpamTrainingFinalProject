@@ -1,7 +1,7 @@
 package com.borikov.bullfinch.model.entity;
 
 /**
- * The {@code UserRole} class represents role entity
+ * The {@code UserRole} class represents role entity.
  *
  * @author Oleg Borikov
  * @version 1.0

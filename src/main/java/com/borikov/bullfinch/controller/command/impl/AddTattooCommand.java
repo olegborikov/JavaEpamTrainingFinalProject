@@ -14,6 +14,9 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+/**
+ * The type Add tattoo command.
+ */
 public class AddTattooCommand implements Command {
     private static final PhotoFileManager photoFileManager = new PhotoFileManager();
     private static final TattooService tattooService = new TattooServiceImpl();

@@ -6,6 +6,9 @@ import com.borikov.bullfinch.controller.command.Command;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+/**
+ * The type Logout command.
+ */
 public class LogoutCommand implements Command {
     @Override
     public String execute(HttpServletRequest request) {

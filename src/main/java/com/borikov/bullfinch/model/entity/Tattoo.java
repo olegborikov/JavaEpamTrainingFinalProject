@@ -1,7 +1,7 @@
 package com.borikov.bullfinch.model.entity;
 
 /**
- * The {@code Tattoo} class represents tattoo entity
+ * The {@code Tattoo} class represents tattoo entity.
  *
  * @author Oleg Borikov
  * @version 1.0

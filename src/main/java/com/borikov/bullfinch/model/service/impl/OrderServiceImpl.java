@@ -26,6 +26,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The type Order service.
+ */
 public class OrderServiceImpl implements OrderService {
     private final OrderDao orderDao = OrderDaoImpl.getInstance();
     private final DiscountDao discountDao = DiscountDaoImpl.getInstance();

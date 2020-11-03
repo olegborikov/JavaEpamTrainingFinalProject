@@ -12,6 +12,9 @@ import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * The type Deny order command.
+ */
 public class DenyOrderCommand implements Command {
     private static final OrderService orderService = new OrderServiceImpl();
     private static final Logger LOGGER = LogManager.getLogger();

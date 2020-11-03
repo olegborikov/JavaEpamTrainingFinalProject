@@ -17,6 +17,9 @@ import com.borikov.bullfinch.model.validator.UserValidator;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The type Tattoo service.
+ */
 public class TattooServiceImpl implements TattooService {
     private final TattooDao tattooDao = TattooDaoImpl.getInstance();
     private final TransactionManager transactionManager = TransactionManager.getInstance();

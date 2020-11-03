@@ -8,6 +8,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+/**
+ * The type Database config.
+ */
 class DatabaseConfig {
     private static final Logger LOGGER = LogManager.getLogger();
     private static final String FILE_NAME = "property/database.properties";
@@ -20,6 +23,9 @@ class DatabaseConfig {
     private final String username;
     private final String password;
 
+    /**
+     * Instantiates a new Database config.
+     */
     DatabaseConfig() {
         Properties properties = new Properties();
         try {
@@ -36,18 +42,38 @@ class DatabaseConfig {
         password = properties.getProperty(DATABASE_PASSWORD);
     }
 
+    /**
+     * Gets driver name.
+     *
+     * @return the driver name
+     */
     public String getDriverName() {
         return driverName;
     }
 
+    /**
+     * Gets url.
+     *
+     * @return the url
+     */
     public String getUrl() {
         return url;
     }
 
+    /**
+     * Gets username.
+     *
+     * @return the username
+     */
     public String getUsername() {
         return username;
     }
 
+    /**
+     * Gets password.
+     *
+     * @return the password
+     */
     public String getPassword() {
         return password;
     }

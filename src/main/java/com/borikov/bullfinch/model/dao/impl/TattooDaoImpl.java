@@ -16,6 +16,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The type Tattoo dao.
+ */
 public class TattooDaoImpl implements TattooDao {
     private static final TattooDaoImpl INSTANCE = new TattooDaoImpl();
     private static final String ADD = "INSERT INTO tattoo (tattoo_name, tattoo_description, tattoo_price, "
@@ -56,6 +59,11 @@ public class TattooDaoImpl implements TattooDao {
     private TattooDaoImpl() {
     }
 
+    /**
+     * Gets instance.
+     *
+     * @return the instance
+     */
     public static TattooDaoImpl getInstance() {
         return INSTANCE;
     }

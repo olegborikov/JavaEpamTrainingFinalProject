@@ -14,6 +14,9 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
 
+/**
+ * The type Unarchive tattoo command.
+ */
 public class UnarchiveTattooCommand implements Command {
     private static final TattooService tattooService = new TattooServiceImpl();
     private static final Logger LOGGER = LogManager.getLogger();

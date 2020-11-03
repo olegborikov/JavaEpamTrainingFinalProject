@@ -3,7 +3,7 @@ package com.borikov.bullfinch.model.entity;
 import java.time.LocalDate;
 
 /**
- * The {@code Order} class represents tattoo_order entity
+ * The {@code Order} class represents tattoo_order entity.
  *
  * @author Oleg Borikov
  * @version 1.0

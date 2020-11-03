@@ -10,6 +10,13 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Optional;
 
+/**
+ * The {@code PasswordEncryptor} class represents password encryptor.
+ *
+ * @author Oleg Borikov
+ * @version 1.0
+ * @since 2020-10-16
+ */
 public class PasswordEncryptor {
     private static final String ENCRYPTION_ALGORITHM = "SHA-1";
     private static final int SIGNUM_DEFAULT = 1;
@@ -19,6 +26,12 @@ public class PasswordEncryptor {
     private PasswordEncryptor() {
     }
 
+    /**
+     * Encrypt password.
+     *
+     * @param password the password
+     * @return the optional
+     */
     public static Optional<String> encrypt(String password) {
         Optional<String> encryptedPassword = Optional.empty();
         try {

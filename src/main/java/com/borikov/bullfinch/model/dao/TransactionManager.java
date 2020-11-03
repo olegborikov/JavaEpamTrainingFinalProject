@@ -16,6 +16,9 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Optional;
 
+/**
+ * The type Transaction manager.
+ */
 public class TransactionManager {
     private static final TransactionManager INSTANCE = new TransactionManager();
     private static final Logger LOGGER = LogManager.getLogger();
@@ -23,10 +26,22 @@ public class TransactionManager {
     private TransactionManager() {
     }
 
+    /**
+     * Gets instance.
+     *
+     * @return the instance
+     */
     public static TransactionManager getInstance() {
         return INSTANCE;
     }
 
+    /**
+     * Add image and tattoo boolean.
+     *
+     * @param tattoo the tattoo
+     * @return the boolean
+     * @throws TransactionException the transaction exception
+     */
     public boolean addImageAndTattoo(Tattoo tattoo) throws TransactionException {
         Connection connection = null;
         ImageDao imageDao = ImageDaoImpl.getInstance();
@@ -48,6 +63,13 @@ public class TransactionManager {
         }
     }
 
+    /**
+     * Offer image and tattoo boolean.
+     *
+     * @param tattoo the tattoo
+     * @return the boolean
+     * @throws TransactionException the transaction exception
+     */
     public boolean offerImageAndTattoo(Tattoo tattoo) throws TransactionException {
         Connection connection = null;
         ImageDao imageDao = ImageDaoImpl.getInstance();
@@ -69,6 +91,14 @@ public class TransactionManager {
         }
     }
 
+    /**
+     * Remove tattoo and image boolean.
+     *
+     * @param tattooId the tattoo id
+     * @param imageId  the image id
+     * @return the boolean
+     * @throws TransactionException the transaction exception
+     */
     public boolean removeTattooAndImage(long tattooId, long imageId) throws TransactionException {
         Connection connection = null;
         ImageDao imageDao = ImageDaoImpl.getInstance();
@@ -91,6 +121,14 @@ public class TransactionManager {
         }
     }
 
+    /**
+     * Add wallet and user boolean.
+     *
+     * @param user     the user
+     * @param password the password
+     * @return the boolean
+     * @throws TransactionException the transaction exception
+     */
     public boolean addWalletAndUser(User user, String password) throws TransactionException {
         Connection connection = null;
         WalletDao walletDao = WalletDaoImpl.getInstance();
@@ -112,6 +150,13 @@ public class TransactionManager {
         }
     }
 
+    /**
+     * Order submit process boolean.
+     *
+     * @param orderId the order id
+     * @return the boolean
+     * @throws TransactionException the transaction exception
+     */
     public boolean orderSubmitProcess(long orderId) throws TransactionException {
         Connection connection = null;
         boolean result = false;

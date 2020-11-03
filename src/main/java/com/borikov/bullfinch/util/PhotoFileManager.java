@@ -14,11 +14,24 @@ import java.util.Collection;
 import java.util.Optional;
 import java.util.UUID;
 
+/**
+ * The {@code PhotoFileManager} class represents photo manager.
+ *
+ * @author Oleg Borikov
+ * @version 1.0
+ * @since 2020-10-16
+ */
 public class PhotoFileManager {
     private static final String UPLOAD_DIRECTORY = "C:\\uploads";
     private static final String FILE_EXTENSION = ".jpg";
     private static final Logger LOGGER = LogManager.getLogger();
 
+    /**
+     * Add photo.
+     *
+     * @param photoParts the photo parts
+     * @return the optional
+     */
     public Optional<String> add(Collection<Part> photoParts) {
         Path path = Paths.get(UPLOAD_DIRECTORY);
         if (!Files.exists(path)) {
@@ -49,6 +62,11 @@ public class PhotoFileManager {
         return photoName;
     }
 
+    /**
+     * Delete photo.
+     *
+     * @param photoName the photo name
+     */
     public void delete(String photoName) {
         Path path = Path.of(UPLOAD_DIRECTORY + File.separator + photoName + FILE_EXTENSION);
         try {

@@ -14,6 +14,9 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
+/**
+ * The type Find users admin command.
+ */
 public class FindUsersAdminCommand implements Command {
     private static final Logger LOGGER = LogManager.getLogger();
     private static final UserService userService = new UserServiceImpl();

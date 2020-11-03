@@ -17,6 +17,9 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Set;
 
+/**
+ * The type Role security filter.
+ */
 @WebFilter(urlPatterns = {"/*"})
 public class RoleSecurityFilter implements Filter {
     private static final Logger LOGGER = LogManager.getLogger();

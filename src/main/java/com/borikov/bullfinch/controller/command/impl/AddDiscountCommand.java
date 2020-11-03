@@ -12,6 +12,9 @@ import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * The type Add discount command.
+ */
 public class AddDiscountCommand implements Command {
     private static final DiscountService discountService = new DiscountServiceImpl();
     private static final Logger LOGGER = LogManager.getLogger();

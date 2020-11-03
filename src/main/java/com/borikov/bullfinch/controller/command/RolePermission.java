@@ -6,7 +6,13 @@ import java.util.stream.Stream;
 
 import static com.borikov.bullfinch.controller.command.CommandType.*;
 
+/**
+ * The enum Role permission.
+ */
 public enum RolePermission {
+    /**
+     * Guest role permission.
+     */
     GUEST(Stream.of(
             SWITCH_LOCALE_COMMAND,
             BROWSE_HOME_PAGE_COMMAND,
@@ -20,6 +26,9 @@ public enum RolePermission {
             PAGINATION_COMMAND,
             FIND_TATTOOS_COMMAND
     ).map(CommandType::getCommand).collect(Collectors.toSet())),
+    /**
+     * User role permission.
+     */
     USER(Stream.of(
             SWITCH_LOCALE_COMMAND,
             BROWSE_HOME_PAGE_COMMAND,
@@ -40,6 +49,9 @@ public enum RolePermission {
             CANCEL_ORDER_COMMAND,
             LOGOUT_COMMAND
     ).map(CommandType::getCommand).collect(Collectors.toSet())),
+    /**
+     * Admin role permission.
+     */
     ADMIN(Stream.of(
             SWITCH_LOCALE_COMMAND,
             BROWSE_HOME_PAGE_COMMAND,
@@ -81,6 +93,11 @@ public enum RolePermission {
         this.commands = commands;
     }
 
+    /**
+     * Gets commands.
+     *
+     * @return the commands
+     */
     public Set<Command> getCommands() {
         return commands;
     }

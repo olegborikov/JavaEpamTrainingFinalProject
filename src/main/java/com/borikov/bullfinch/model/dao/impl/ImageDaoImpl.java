@@ -6,6 +6,9 @@ import com.borikov.bullfinch.model.exception.DaoException;
 
 import java.sql.*;
 
+/**
+ * The type Image dao.
+ */
 public class ImageDaoImpl implements ImageDao {
     private static final ImageDaoImpl INSTANCE = new ImageDaoImpl();
     private static final String ADD = "INSERT INTO image (image_name) VALUES (?)";
@@ -14,6 +17,11 @@ public class ImageDaoImpl implements ImageDao {
     private ImageDaoImpl() {
     }
 
+    /**
+     * Gets instance.
+     *
+     * @return the instance
+     */
     public static ImageDaoImpl getInstance() {
         return INSTANCE;
     }
