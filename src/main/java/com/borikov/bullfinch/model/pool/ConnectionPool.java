@@ -13,7 +13,10 @@ import java.util.concurrent.BlockingDeque;
 import java.util.concurrent.LinkedBlockingDeque;
 
 /**
- * The enum Connection pool.
+ * The {@code ConnectionPool} enum represents connection pool.
+ *
+ * @author Oleg Borikov
+ * @version 1.0
  */
 public enum ConnectionPool {
     /**

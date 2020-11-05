@@ -1,7 +1,10 @@
 package com.borikov.bullfinch.model.exception;
 
 /**
- * The type Dao exception.
+ * The {@code DaoException} class represents dao exception.
+ *
+ * @author Oleg Borikov
+ * @version 1.0
  */
 public class DaoException extends Exception {
     /**

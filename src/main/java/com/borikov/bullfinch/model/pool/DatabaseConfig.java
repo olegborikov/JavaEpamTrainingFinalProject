@@ -9,7 +9,10 @@ import java.io.InputStream;
 import java.util.Properties;
 
 /**
- * The type Database config.
+ * The {@code DatabaseConfig} class represents database config.
+ *
+ * @author Oleg Borikov
+ * @version 1.0
  */
 class DatabaseConfig {
     private static final Logger LOGGER = LogManager.getLogger();

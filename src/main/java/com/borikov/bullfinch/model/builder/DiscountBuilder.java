@@ -4,7 +4,10 @@ import com.borikov.bullfinch.model.entity.Discount;
 import com.borikov.bullfinch.model.entity.User;
 
 /**
- * The type Discount builder.
+ * The {@code DiscountBuilder} class represents discount builder.
+ *
+ * @author Oleg Borikov
+ * @version 1.0
  */
 public class DiscountBuilder {
     private Long discountId;

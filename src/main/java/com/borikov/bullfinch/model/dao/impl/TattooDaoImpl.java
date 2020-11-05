@@ -17,7 +17,10 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * The type Tattoo dao.
+ * The {@code TattooDaoImpl} class represents tattoo dao implementation.
+ *
+ * @author Oleg Borikov
+ * @version 1.0
  */
 public class TattooDaoImpl implements TattooDao {
     private static final TattooDaoImpl INSTANCE = new TattooDaoImpl();

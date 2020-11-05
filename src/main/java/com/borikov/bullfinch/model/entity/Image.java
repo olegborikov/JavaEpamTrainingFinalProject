@@ -5,7 +5,6 @@ package com.borikov.bullfinch.model.entity;
  *
  * @author Oleg Borikov
  * @version 1.0
- * @since 2020-10-16
  */
 public class Image {
     /**

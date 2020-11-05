@@ -27,7 +27,7 @@
                     <div class="form-group">
                         <strong class="form-label"><fmt:message key="ordersAdmin.beginDate"/></strong>
                         <input type="date" style=" filter: invert(1);" name="beginDate"
-                               required class="form-control"
+                               required class="form-control" min="${currentDate}"
                                oninvalid="this.setCustomValidity('<fmt:message key="ordersAdmin.dateValidate"/>')"
                                onchange="this.setCustomValidity('')" value="${beginDate}"
                                title='<fmt:message key="ordersAdmin.dateValidate"/>'
@@ -36,7 +36,7 @@
                     <div class="form-group">
                         <strong class="form-label"><fmt:message key="ordersAdmin.endDate"/></strong>
                         <input type="date" style=" filter: invert(1);" name="endDate"
-                               required class="form-control"
+                               required class="form-control" min="${currentDate}"
                                oninvalid="this.setCustomValidity('<fmt:message key="ordersAdmin.dateValidate"/>')"
                                onchange="this.setCustomValidity('')" value="${endDate}"
                                title='<fmt:message key="ordersAdmin.dateValidate"/>'

@@ -19,7 +19,10 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * The type Order dao.
+ * The {@code OrderDaoImpl} class represents order dao implementation.
+ *
+ * @author Oleg Borikov
+ * @version 1.0
  */
 public class OrderDaoImpl implements OrderDao {
     private static final OrderDaoImpl INSTANCE = new OrderDaoImpl();

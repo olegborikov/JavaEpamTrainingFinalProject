@@ -7,7 +7,10 @@ import com.borikov.bullfinch.model.exception.DaoException;
 import java.sql.*;
 
 /**
- * The type Image dao.
+ * The {@code ImageDaoImpl} class represents image dao implementation.
+ *
+ * @author Oleg Borikov
+ * @version 1.0
  */
 public class ImageDaoImpl implements ImageDao {
     private static final ImageDaoImpl INSTANCE = new ImageDaoImpl();

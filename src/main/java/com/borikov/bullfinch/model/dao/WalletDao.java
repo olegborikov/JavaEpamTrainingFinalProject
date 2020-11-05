@@ -7,11 +7,14 @@ import java.sql.Connection;
 import java.util.Optional;
 
 /**
- * The interface Wallet dao.
+ * The {@code WalletDao} interface represents wallet dao.
+ *
+ * @author Oleg Borikov
+ * @version 1.0
  */
 public interface WalletDao {
     /**
-     * Add boolean.
+     * Add wallet.
      *
      * @param wallet     the wallet
      * @param connection the connection
@@ -21,7 +24,7 @@ public interface WalletDao {
     boolean add(Wallet wallet, Connection connection) throws DaoException;
 
     /**
-     * Update boolean.
+     * Update wallet.
      *
      * @param wallet the wallet
      * @return the boolean
@@ -30,28 +33,28 @@ public interface WalletDao {
     boolean update(Wallet wallet) throws DaoException;
 
     /**
-     * Find by id optional.
+     * Find wallet by id.
      *
      * @param id the id
-     * @return the optional
+     * @return the optional of found wallet
      * @throws DaoException the dao exception
      */
     Optional<Wallet> findById(long id) throws DaoException;
 
     /**
-     * Find by user login optional.
+     * Find wallet by user login.
      *
      * @param userLogin the user login
-     * @return the optional
+     * @return the optional of found wallet
      * @throws DaoException the dao exception
      */
     Optional<Wallet> findByUserLogin(String userLogin) throws DaoException;
 
     /**
-     * Find by order id optional.
+     * Find wallet by order id.
      *
      * @param orderId the order id
-     * @return the optional
+     * @return the optional of found wallet
      * @throws DaoException the dao exception
      */
     Optional<Wallet> findByOrderId(long orderId) throws DaoException;

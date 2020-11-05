@@ -15,7 +15,6 @@ import java.util.Optional;
  *
  * @author Oleg Borikov
  * @version 1.0
- * @since 2020-10-16
  */
 public class PasswordEncryptor {
     private static final String ENCRYPTION_ALGORITHM = "SHA-1";
@@ -30,7 +29,7 @@ public class PasswordEncryptor {
      * Encrypt password.
      *
      * @param password the password
-     * @return the optional
+     * @return the optional of encrypted password
      */
     public static Optional<String> encrypt(String password) {
         Optional<String> encryptedPassword = Optional.empty();

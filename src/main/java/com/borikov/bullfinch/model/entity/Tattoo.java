@@ -5,7 +5,6 @@ package com.borikov.bullfinch.model.entity;
  *
  * @author Oleg Borikov
  * @version 1.0
- * @since 2020-10-16
  */
 public class Tattoo {
     /**
@@ -29,12 +28,12 @@ public class Tattoo {
     private double price;
 
     /**
-     * The value is used for allow flag storage.
+     * The value is used for allow storage.
      */
     private boolean isAllowed;
 
     /**
-     * The value is used for archived flag storage.
+     * The value is used for archived storage.
      */
     private boolean isArchived;
 
@@ -47,12 +46,6 @@ public class Tattoo {
      * The value is used for user storage.
      */
     private User user;
-
-    /**
-     * Instantiates a new Tattoo.
-     */
-    public Tattoo() {
-    }
 
     /**
      * Instantiates a new Tattoo.
@@ -151,7 +144,7 @@ public class Tattoo {
     }
 
     /**
-     * Is allowed boolean.
+     * Gets allowed.
      *
      * @return the boolean
      */
@@ -169,7 +162,7 @@ public class Tattoo {
     }
 
     /**
-     * Is archived boolean.
+     * Gets archived.
      *
      * @return the boolean
      */

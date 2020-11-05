@@ -1,7 +1,10 @@
 package com.borikov.bullfinch.model.validator;
 
 /**
- * The type User validator.
+ * The {@code UserValidator} class represents user validator.
+ *
+ * @author Oleg Borikov
+ * @version 1.0
  */
 public class UserValidator {
     private static final String ID_REGEX = "^[1-9]\\d{0,9}$";
@@ -16,7 +19,7 @@ public class UserValidator {
     }
 
     /**
-     * Is id correct boolean.
+     * Check id for correct.
      *
      * @param id the id
      * @return the boolean
@@ -26,7 +29,7 @@ public class UserValidator {
     }
 
     /**
-     * Is email correct boolean.
+     * Check email for correct.
      *
      * @param email the email
      * @return the boolean
@@ -36,7 +39,7 @@ public class UserValidator {
     }
 
     /**
-     * Is login correct boolean.
+     * Check login for correct.
      *
      * @param login the login
      * @return the boolean
@@ -46,7 +49,7 @@ public class UserValidator {
     }
 
     /**
-     * Is password correct boolean.
+     * Check password for correct.
      *
      * @param email the email
      * @return the boolean
@@ -56,7 +59,7 @@ public class UserValidator {
     }
 
     /**
-     * Is first name correct boolean.
+     * Check first name for correct.
      *
      * @param firstName the first name
      * @return the boolean
@@ -66,7 +69,7 @@ public class UserValidator {
     }
 
     /**
-     * Is second name correct boolean.
+     * Check second name for correct.
      *
      * @param secondName the second name
      * @return the boolean
@@ -76,7 +79,7 @@ public class UserValidator {
     }
 
     /**
-     * Is phone number correct boolean.
+     * Check phone number for correct.
      *
      * @param phoneNumber the phone number
      * @return the boolean

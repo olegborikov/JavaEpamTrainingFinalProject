@@ -5,7 +5,10 @@ import com.borikov.bullfinch.model.entity.UserRole;
 import com.borikov.bullfinch.model.entity.Wallet;
 
 /**
- * The type User builder.
+ * The {@code UserBuilder} class represents user builder.
+ *
+ * @author Oleg Borikov
+ * @version 1.0
  */
 public class UserBuilder {
     private Long userId;

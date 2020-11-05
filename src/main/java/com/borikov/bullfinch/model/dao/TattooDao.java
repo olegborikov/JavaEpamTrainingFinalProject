@@ -8,11 +8,14 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * The interface Tattoo dao.
+ * The {@code TattooDao} interface represents tattoo dao.
+ *
+ * @author Oleg Borikov
+ * @version 1.0
  */
 public interface TattooDao {
     /**
-     * Add boolean.
+     * Add tattoo.
      *
      * @param tattoo     the tattoo
      * @param connection the connection
@@ -22,7 +25,7 @@ public interface TattooDao {
     boolean add(Tattoo tattoo, Connection connection) throws DaoException;
 
     /**
-     * Remove boolean.
+     * Remove tattoo.
      *
      * @param id         the id
      * @param connection the connection
@@ -32,7 +35,7 @@ public interface TattooDao {
     boolean remove(long id, Connection connection) throws DaoException;
 
     /**
-     * Update boolean.
+     * Update tattoo.
      *
      * @param tattoo the tattoo
      * @return the boolean
@@ -41,7 +44,7 @@ public interface TattooDao {
     boolean update(Tattoo tattoo) throws DaoException;
 
     /**
-     * Offer boolean.
+     * Offer tattoo.
      *
      * @param tattoo     the tattoo
      * @param connection the connection
@@ -51,7 +54,7 @@ public interface TattooDao {
     boolean offer(Tattoo tattoo, Connection connection) throws DaoException;
 
     /**
-     * Allow boolean.
+     * Allow tattoo.
      *
      * @param id the id
      * @return the boolean
@@ -60,7 +63,7 @@ public interface TattooDao {
     boolean allow(long id) throws DaoException;
 
     /**
-     * Archive boolean.
+     * Archive tattoo.
      *
      * @param id the id
      * @return the boolean
@@ -69,7 +72,7 @@ public interface TattooDao {
     boolean archive(long id) throws DaoException;
 
     /**
-     * Unarchive boolean.
+     * Unarchive tattoo.
      *
      * @param id the id
      * @return the boolean
@@ -78,71 +81,71 @@ public interface TattooDao {
     boolean unarchive(long id) throws DaoException;
 
     /**
-     * Find all list.
+     * Find all tattoos.
      *
-     * @return the list
+     * @return the list of found tattoos
      * @throws DaoException the dao exception
      */
     List<Tattoo> findAll() throws DaoException;
 
     /**
-     * Find by id optional.
+     * Find tattoo by id.
      *
      * @param id the id
-     * @return the optional
+     * @return the optional of found tattoo
      * @throws DaoException the dao exception
      */
     Optional<Tattoo> findById(long id) throws DaoException;
 
     /**
-     * Find by name substring list.
+     * Find tattoos by name substring.
      *
      * @param nameSubstring the name substring
-     * @return the list
+     * @return the list of found tattoos
      * @throws DaoException the dao exception
      */
     List<Tattoo> findByNameSubstring(String nameSubstring) throws DaoException;
 
     /**
-     * Find by allowed list.
+     * Find tattoos by allowed.
      *
      * @param isAllowed the is allowed
-     * @return the list
+     * @return the list of found tattoos
      * @throws DaoException the dao exception
      */
     List<Tattoo> findByAllowed(boolean isAllowed) throws DaoException;
 
     /**
-     * Find by archived list.
+     * Find tattoos by archived.
      *
      * @param isArchived the is archived
-     * @return the list
+     * @return the list of found tattoos
      * @throws DaoException the dao exception
      */
     List<Tattoo> findByArchived(boolean isArchived) throws DaoException;
 
     /**
-     * Find all catalog list.
+     * Find all catalog tattoos.
      *
-     * @return the list
+     * @return the list of found tattoos
      * @throws DaoException the dao exception
      */
     List<Tattoo> findAllCatalog() throws DaoException;
 
     /**
-     * Find by id catalog optional.
+     * Find tattoo by id catalog.
      *
      * @param id the id
-     * @return the optional
+     * @return the optional of found tattoo
      * @throws DaoException the dao exception
      */
     Optional<Tattoo> findByIdCatalog(long id) throws DaoException;
 
     /**
-     * Find by name substring catalog list.
+     * Find tattoos by name substring catalog.
      *
      * @param nameSubstring the name substring
-     * @return the list
+     * @return the list of found tattoos
      * @throws DaoException the dao exception
      */
     List<Tattoo> findByNameSubstringCatalog(String nameSubstring) throws DaoException;

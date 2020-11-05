@@ -3,11 +3,10 @@ package com.borikov.bullfinch.model.entity;
 import java.time.LocalDate;
 
 /**
- * The {@code Order} class represents tattoo_order entity.
+ * The {@code Order} class represents order entity.
  *
  * @author Oleg Borikov
  * @version 1.0
- * @since 2020-10-16
  */
 public class Order {
     /**
@@ -31,7 +30,7 @@ public class Order {
     private String description;
 
     /**
-     * The value is used for confirmed flag storage.
+     * The value is used for confirmed storage.
      */
     private boolean isConfirmed;
 
@@ -140,7 +139,7 @@ public class Order {
     }
 
     /**
-     * Is confirmed boolean.
+     * Gets confirmed.
      *
      * @return the boolean
      */

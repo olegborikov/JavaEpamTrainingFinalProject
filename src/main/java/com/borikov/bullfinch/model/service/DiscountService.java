@@ -6,11 +6,14 @@ import com.borikov.bullfinch.model.exception.ServiceException;
 import java.util.List;
 
 /**
- * The interface Discount service.
+ * The {@code DiscountService} interface represents discount service.
+ *
+ * @author Oleg Borikov
+ * @version 1.0
  */
 public interface DiscountService {
     /**
-     * Add discount boolean.
+     * Add discount.
      *
      * @param discountPercent the discount percent
      * @param userId          the user id
@@ -20,7 +23,7 @@ public interface DiscountService {
     boolean addDiscount(String discountPercent, String userId) throws ServiceException;
 
     /**
-     * Remove discount boolean.
+     * Remove discount.
      *
      * @param discountId the discount id
      * @return the boolean
@@ -29,10 +32,10 @@ public interface DiscountService {
     boolean removeDiscount(String discountId) throws ServiceException;
 
     /**
-     * Find discounts by user login list.
+     * Find discounts by user login.
      *
      * @param userLogin the user login
-     * @return the list
+     * @return the list of found discounts
      * @throws ServiceException the service exception
      */
     List<Discount> findDiscountsByUserLogin(String userLogin) throws ServiceException;

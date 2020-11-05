@@ -7,11 +7,14 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * The interface User service.
+ * The {@code UserService} interface represents user service.
+ *
+ * @author Oleg Borikov
+ * @version 1.0
  */
 public interface UserService {
     /**
-     * Add user boolean.
+     * Add user.
      *
      * @param email             the email
      * @param login             the login
@@ -27,7 +30,7 @@ public interface UserService {
                     String password, String confirmedPassword) throws ServiceException;
 
     /**
-     * Edit user boolean.
+     * Edit user.
      *
      * @param id          the id
      * @param email       the email
@@ -42,7 +45,7 @@ public interface UserService {
                      String phoneNumber) throws ServiceException;
 
     /**
-     * Confirm user email boolean.
+     * Confirm user email.
      *
      * @param login the login
      * @return the boolean
@@ -51,7 +54,7 @@ public interface UserService {
     boolean confirmUserEmail(String login) throws ServiceException;
 
     /**
-     * Block user boolean.
+     * Block user.
      *
      * @param login the login
      * @return the boolean
@@ -60,7 +63,7 @@ public interface UserService {
     boolean blockUser(String login) throws ServiceException;
 
     /**
-     * Unblock user boolean.
+     * Unblock user.
      *
      * @param login the login
      * @return the boolean
@@ -69,37 +72,37 @@ public interface UserService {
     boolean unblockUser(String login) throws ServiceException;
 
     /**
-     * Authorize user optional.
+     * Authorize user.
      *
      * @param login    the login
      * @param password the password
-     * @return the optional
+     * @return the optional of authorized user
      * @throws ServiceException the service exception
      */
     Optional<User> authorizeUser(String login, String password) throws ServiceException;
 
     /**
-     * Find all users list.
+     * Find all users.
      *
-     * @return the list
+     * @return the list of found users
      * @throws ServiceException the service exception
      */
     List<User> findAllUsers() throws ServiceException;
 
     /**
-     * Find user by login optional.
+     * Find user by login.
      *
      * @param login the login
-     * @return the optional
+     * @return the optional of found user
      * @throws ServiceException the service exception
      */
     Optional<User> findUserByLogin(String login) throws ServiceException;
 
     /**
-     * Find users by login substring list.
+     * Find users by login substring.
      *
      * @param loginSubstring the login substring
-     * @return the list
+     * @return the list of found users
      * @throws ServiceException the service exception
      */
     List<User> findUsersByLoginSubstring(String loginSubstring) throws ServiceException;

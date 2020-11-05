@@ -1,7 +1,10 @@
 package com.borikov.bullfinch.model.validator;
 
 /**
- * The type Tattoo validator.
+ * The {@code TattooValidator} class represents tattoo validator.
+ *
+ * @author Oleg Borikov
+ * @version 1.0
  */
 public class TattooValidator {
     private static final String ID_REGEX = "^[1-9]\\d{0,9}$";
@@ -13,7 +16,7 @@ public class TattooValidator {
     }
 
     /**
-     * Is id correct boolean.
+     * Check id for correct.
      *
      * @param id the id
      * @return the boolean
@@ -23,7 +26,7 @@ public class TattooValidator {
     }
 
     /**
-     * Is name correct boolean.
+     * Check name for correct.
      *
      * @param name the name
      * @return the boolean
@@ -33,7 +36,7 @@ public class TattooValidator {
     }
 
     /**
-     * Is description correct boolean.
+     * Check description for correct.
      *
      * @param description the description
      * @return the boolean
@@ -43,7 +46,7 @@ public class TattooValidator {
     }
 
     /**
-     * Is price correct boolean.
+     * Check price for correct.
      *
      * @param price the price
      * @return the boolean

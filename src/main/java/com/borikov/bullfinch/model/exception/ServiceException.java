@@ -1,7 +1,10 @@
 package com.borikov.bullfinch.model.exception;
 
 /**
- * The type Service exception.
+ * The {@code ServiceException} class represents service exception.
+ *
+ * @author Oleg Borikov
+ * @version 1.0
  */
 public class ServiceException extends Exception {
     /**

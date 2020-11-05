@@ -7,11 +7,14 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * The interface Tattoo service.
+ * The {@code TattooService} interface represents tattoo service.
+ *
+ * @author Oleg Borikov
+ * @version 1.0
  */
 public interface TattooService {
     /**
-     * Add tattoo boolean.
+     * Add tattoo.
      *
      * @param tattooName    the tattoo name
      * @param description   the description
@@ -25,7 +28,7 @@ public interface TattooService {
                       String proposedLogin) throws ServiceException;
 
     /**
-     * Remove tattoo boolean.
+     * Remove tattoo.
      *
      * @param tattooId the tattoo id
      * @param imageId  the image id
@@ -35,7 +38,7 @@ public interface TattooService {
     boolean removeTattoo(String tattooId, String imageId) throws ServiceException;
 
     /**
-     * Edit tattoo boolean.
+     * Edit tattoo.
      *
      * @param id          the id
      * @param name        the name
@@ -47,7 +50,7 @@ public interface TattooService {
     boolean editTattoo(String id, String name, String description, String price) throws ServiceException;
 
     /**
-     * Offer tattoo boolean.
+     * Offer tattoo.
      *
      * @param tattooName    the tattoo name
      * @param description   the description
@@ -61,7 +64,7 @@ public interface TattooService {
                         String proposedLogin) throws ServiceException;
 
     /**
-     * Allow tattoo boolean.
+     * Allow tattoo.
      *
      * @param id the id
      * @return the boolean
@@ -70,7 +73,7 @@ public interface TattooService {
     boolean allowTattoo(String id) throws ServiceException;
 
     /**
-     * Archive tattoo boolean.
+     * Archive tattoo.
      *
      * @param id the id
      * @return the boolean
@@ -79,7 +82,7 @@ public interface TattooService {
     boolean archiveTattoo(String id) throws ServiceException;
 
     /**
-     * Unarchive tattoo boolean.
+     * Unarchive tattoo.
      *
      * @param id the id
      * @return the boolean
@@ -88,71 +91,71 @@ public interface TattooService {
     boolean unarchiveTattoo(String id) throws ServiceException;
 
     /**
-     * Find all tattoos list.
+     * Find all tattoos.
      *
-     * @return the list
+     * @return the list of found tattoos
      * @throws ServiceException the service exception
      */
     List<Tattoo> findAllTattoos() throws ServiceException;
 
     /**
-     * Find tattoo by id optional.
+     * Find tattoo by id.
      *
      * @param id the id
-     * @return the optional
+     * @return the optional of found tattoo
      * @throws ServiceException the service exception
      */
     Optional<Tattoo> findTattooById(String id) throws ServiceException;
 
     /**
-     * Find tattoos by name substring list.
+     * Find tattoos by name substring.
      *
      * @param nameSubstring the name substring
-     * @return the list
+     * @return the list of found tattoos
      * @throws ServiceException the service exception
      */
     List<Tattoo> findTattoosByNameSubstring(String nameSubstring) throws ServiceException;
 
     /**
-     * Find tattoos by allowed list.
+     * Find tattoos by allowed.
      *
      * @param isAllowed the is allowed
-     * @return the list
+     * @return the list of found tattoos
      * @throws ServiceException the service exception
      */
     List<Tattoo> findTattoosByAllowed(boolean isAllowed) throws ServiceException;
 
     /**
-     * Find tattoos by archived list.
+     * Find tattoos by archived.
      *
      * @param isArchived the is archived
-     * @return the list
+     * @return the list of found tattoos
      * @throws ServiceException the service exception
      */
     List<Tattoo> findTattoosByArchived(boolean isArchived) throws ServiceException;
 
     /**
-     * Find all tattoos catalog list.
+     * Find all tattoos catalog.
      *
-     * @return the list
+     * @return the list of found tattoos
      * @throws ServiceException the service exception
      */
     List<Tattoo> findAllTattoosCatalog() throws ServiceException;
 
     /**
-     * Find tattoo by id catalog optional.
+     * Find tattoo by id catalog.
      *
      * @param id the id
-     * @return the optional
+     * @return the optional of found tattoo
      * @throws ServiceException the service exception
      */
     Optional<Tattoo> findTattooByIdCatalog(String id) throws ServiceException;
 
     /**
-     * Find tattoos by name substring catalog list.
+     * Find tattoos by name substring catalog.
      *
      * @param nameSubstring the name substring
-     * @return the list
+     * @return the list of found tattoos
      * @throws ServiceException the service exception
      */
     List<Tattoo> findTattoosByNameSubstringCatalog(String nameSubstring) throws ServiceException;

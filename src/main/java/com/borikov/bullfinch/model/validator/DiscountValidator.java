@@ -1,7 +1,10 @@
 package com.borikov.bullfinch.model.validator;
 
 /**
- * The type Discount validator.
+ * The {@code DiscountValidator} class represents discount validator.
+ *
+ * @author Oleg Borikov
+ * @version 1.0
  */
 public class DiscountValidator {
     private static final String ID_REGEX = "^[1-9]\\d{0,9}$";
@@ -11,7 +14,7 @@ public class DiscountValidator {
     }
 
     /**
-     * Is id correct boolean.
+     * Check id for correct.
      *
      * @param id the id
      * @return the boolean
@@ -21,7 +24,7 @@ public class DiscountValidator {
     }
 
     /**
-     * Is discount percent correct boolean.
+     * Check discount percent for correct.
      *
      * @param discountPercent the discount percent
      * @return the boolean

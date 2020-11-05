@@ -17,7 +17,10 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * The type User dao.
+ * The {@code UserDaoImpl} class represents user dao implementation.
+ *
+ * @author Oleg Borikov
+ * @version 1.0
  */
 public class UserDaoImpl implements UserDao {
     private static final UserDaoImpl INSTANCE = new UserDaoImpl();

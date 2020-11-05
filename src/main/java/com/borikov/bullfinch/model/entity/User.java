@@ -1,11 +1,10 @@
 package com.borikov.bullfinch.model.entity;
 
 /**
- * The {@code User} class represents user_account entity.
+ * The {@code User} class represents user entity.
  *
  * @author Oleg Borikov
  * @version 1.0
- * @since 2020-10-16
  */
 public class User {
     /**
@@ -39,12 +38,12 @@ public class User {
     private String phoneNumber;
 
     /**
-     * The value is used for block flag storage.
+     * The value is used for blocked storage.
      */
     private boolean isBlocked;
 
     /**
-     * The value is used for active flag storage.
+     * The value is used for activated storage.
      */
     private boolean isActivated;
 
@@ -57,12 +56,6 @@ public class User {
      * The value is used for wallet storage.
      */
     private Wallet wallet;
-
-    /**
-     * Instantiates a new User.
-     */
-    public User() {
-    }
 
     /**
      * Instantiates a new User.
@@ -201,7 +194,7 @@ public class User {
     }
 
     /**
-     * Is blocked boolean.
+     * Gets blocked.
      *
      * @return the boolean
      */
@@ -219,7 +212,7 @@ public class User {
     }
 
     /**
-     * Is activated boolean.
+     * Gets activated.
      *
      * @return the boolean
      */

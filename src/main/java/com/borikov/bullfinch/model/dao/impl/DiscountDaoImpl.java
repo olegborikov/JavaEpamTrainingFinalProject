@@ -12,7 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * The type Discount dao.
+ * The {@code DiscountDaoImpl} class represents discount dao implementation.
+ *
+ * @author Oleg Borikov
+ * @version 1.0
  */
 public class DiscountDaoImpl implements DiscountDao {
     private static final DiscountDaoImpl INSTANCE = new DiscountDaoImpl();

@@ -17,7 +17,10 @@ import java.sql.SQLException;
 import java.util.Optional;
 
 /**
- * The type Transaction manager.
+ * The {@code TransactionManager} class represents transaction manager.
+ *
+ * @author Oleg Borikov
+ * @version 1.0
  */
 public class TransactionManager {
     private static final TransactionManager INSTANCE = new TransactionManager();
@@ -36,7 +39,7 @@ public class TransactionManager {
     }
 
     /**
-     * Add image and tattoo boolean.
+     * Add image and tattoo transaction.
      *
      * @param tattoo the tattoo
      * @return the boolean
@@ -64,7 +67,7 @@ public class TransactionManager {
     }
 
     /**
-     * Offer image and tattoo boolean.
+     * Offer image and tattoo transaction.
      *
      * @param tattoo the tattoo
      * @return the boolean
@@ -92,7 +95,7 @@ public class TransactionManager {
     }
 
     /**
-     * Remove tattoo and image boolean.
+     * Remove tattoo and image transaction.
      *
      * @param tattooId the tattoo id
      * @param imageId  the image id
@@ -122,7 +125,7 @@ public class TransactionManager {
     }
 
     /**
-     * Add wallet and user boolean.
+     * Add wallet and user transaction.
      *
      * @param user     the user
      * @param password the password
@@ -151,7 +154,7 @@ public class TransactionManager {
     }
 
     /**
-     * Order submit process boolean.
+     * Order submit process transaction.
      *
      * @param orderId the order id
      * @return the boolean

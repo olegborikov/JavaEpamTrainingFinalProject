@@ -18,7 +18,10 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * The type User service.
+ * The {@code UserServiceImpl} class represents user service implementation.
+ *
+ * @author Oleg Borikov
+ * @version 1.0
  */
 public class UserServiceImpl implements UserService {
     private final TransactionManager transactionManager = TransactionManager.getInstance();

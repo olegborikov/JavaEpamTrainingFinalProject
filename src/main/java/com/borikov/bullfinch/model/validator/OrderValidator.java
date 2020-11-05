@@ -1,7 +1,10 @@
 package com.borikov.bullfinch.model.validator;
 
 /**
- * The type Order validator.
+ * The {@code OrderValidator} class represents order validator.
+ *
+ * @author Oleg Borikov
+ * @version 1.0
  */
 public class OrderValidator {
     private static final String ID_REGEX = "^[1-9]\\d{0,9}$";
@@ -13,7 +16,7 @@ public class OrderValidator {
     }
 
     /**
-     * Is id correct boolean.
+     * Check id for correct.
      *
      * @param id the id
      * @return the boolean
@@ -23,7 +26,7 @@ public class OrderValidator {
     }
 
     /**
-     * Is price correct boolean.
+     * Check price for correct.
      *
      * @param price the price
      * @return the boolean
@@ -33,7 +36,7 @@ public class OrderValidator {
     }
 
     /**
-     * Is date correct boolean.
+     * Check date for correct.
      *
      * @param date the date
      * @return the boolean
@@ -43,7 +46,7 @@ public class OrderValidator {
     }
 
     /**
-     * Is description correct boolean.
+     * Check description for correct.
      *
      * @param description the description
      * @return the boolean

@@ -27,7 +27,10 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * The type Order service.
+ * The {@code OrderServiceImpl} class represents order service implementation.
+ *
+ * @author Oleg Borikov
+ * @version 1.0
  */
 public class OrderServiceImpl implements OrderService {
     private final OrderDao orderDao = OrderDaoImpl.getInstance();

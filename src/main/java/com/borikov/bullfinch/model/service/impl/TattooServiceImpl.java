@@ -18,7 +18,10 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * The type Tattoo service.
+ * The {@code TattooServiceImpl} class represents tattoo service implementation.
+ *
+ * @author Oleg Borikov
+ * @version 1.0
  */
 public class TattooServiceImpl implements TattooService {
     private final TattooDao tattooDao = TattooDaoImpl.getInstance();

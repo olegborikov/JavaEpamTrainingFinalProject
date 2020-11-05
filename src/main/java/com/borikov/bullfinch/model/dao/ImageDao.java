@@ -6,11 +6,14 @@ import com.borikov.bullfinch.model.exception.DaoException;
 import java.sql.Connection;
 
 /**
- * The interface Image dao.
+ * The {@code ImageDao} interface represents image dao.
+ *
+ * @author Oleg Borikov
+ * @version 1.0
  */
 public interface ImageDao {
     /**
-     * Add boolean.
+     * Add image.
      *
      * @param image      the image
      * @param connection the connection
@@ -20,7 +23,7 @@ public interface ImageDao {
     boolean add(Image image, Connection connection) throws DaoException;
 
     /**
-     * Remove boolean.
+     * Remove image.
      *
      * @param id         the id
      * @param connection the connection

@@ -8,11 +8,14 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * The interface Order dao.
+ * The {@code OrderDao} interface represents order dao.
+ *
+ * @author Oleg Borikov
+ * @version 1.0
  */
 public interface OrderDao {
     /**
-     * Add boolean.
+     * Add order.
      *
      * @param order the order
      * @return the boolean
@@ -21,7 +24,7 @@ public interface OrderDao {
     boolean add(Order order) throws DaoException;
 
     /**
-     * Remove boolean.
+     * Remove order.
      *
      * @param id the id
      * @return the boolean
@@ -30,7 +33,7 @@ public interface OrderDao {
     boolean remove(long id) throws DaoException;
 
     /**
-     * Submit boolean.
+     * Submit order.
      *
      * @param id the id
      * @return the boolean
@@ -39,37 +42,37 @@ public interface OrderDao {
     boolean submit(long id) throws DaoException;
 
     /**
-     * Find all list.
+     * Find all orders.
      *
-     * @return the list
+     * @return the list of found orders
      * @throws DaoException the dao exception
      */
     List<Order> findAll() throws DaoException;
 
     /**
-     * Find by id optional.
+     * Find order by id.
      *
      * @param id the id
-     * @return the optional
+     * @return the optional of found order
      * @throws DaoException the dao exception
      */
     Optional<Order> findById(long id) throws DaoException;
 
     /**
-     * Find by dates list.
+     * Find orders by dates.
      *
      * @param beginDate the begin date
      * @param endDate   the end date
-     * @return the list
+     * @return the list of found orders
      * @throws DaoException the dao exception
      */
     List<Order> findByDates(LocalDate beginDate, LocalDate endDate) throws DaoException;
 
     /**
-     * Find by user login list.
+     * Find orders by user login.
      *
      * @param userLogin the user login
-     * @return the list
+     * @return the list of found orders
      * @throws DaoException the dao exception
      */
     List<Order> findByUserLogin(String userLogin) throws DaoException;

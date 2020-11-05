@@ -7,7 +7,10 @@ import com.borikov.bullfinch.model.entity.User;
 import java.time.LocalDate;
 
 /**
- * The type Order builder.
+ * The {@code OrderBuilder} class represents order builder.
+ *
+ * @author Oleg Borikov
+ * @version 1.0
  */
 public class OrderBuilder {
     private Long orderId;

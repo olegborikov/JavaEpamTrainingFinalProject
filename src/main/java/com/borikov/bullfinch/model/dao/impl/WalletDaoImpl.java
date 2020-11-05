@@ -10,7 +10,10 @@ import java.sql.*;
 import java.util.Optional;
 
 /**
- * The type Wallet dao.
+ * The {@code WalletDaoImpl} class represents wallet dao implementation.
+ *
+ * @author Oleg Borikov
+ * @version 1.0
  */
 public class WalletDaoImpl implements WalletDao {
     private static final WalletDaoImpl INSTANCE = new WalletDaoImpl();

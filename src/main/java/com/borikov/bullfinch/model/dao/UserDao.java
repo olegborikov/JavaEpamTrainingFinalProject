@@ -8,11 +8,14 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * The interface User dao.
+ * The {@code UserDao} interface represents user dao.
+ *
+ * @author Oleg Borikov
+ * @version 1.0
  */
 public interface UserDao {
     /**
-     * Add boolean.
+     * Add user.
      *
      * @param user       the user
      * @param password   the password
@@ -23,7 +26,7 @@ public interface UserDao {
     boolean add(User user, String password, Connection connection) throws DaoException;
 
     /**
-     * Update boolean.
+     * Update user.
      *
      * @param user the user
      * @return the boolean
@@ -32,16 +35,16 @@ public interface UserDao {
     boolean update(User user) throws DaoException;
 
     /**
-     * Authorize optional.
+     * Authorize user.
      *
      * @param login the login
-     * @return the optional
+     * @return the optional of authorized user
      * @throws DaoException the dao exception
      */
     Optional<User> authorize(String login) throws DaoException;
 
     /**
-     * Confirm email boolean.
+     * Confirm user email.
      *
      * @param login the login
      * @return the boolean
@@ -50,7 +53,7 @@ public interface UserDao {
     boolean confirmEmail(String login) throws DaoException;
 
     /**
-     * Block boolean.
+     * Block user.
      *
      * @param login the login
      * @return the boolean
@@ -59,7 +62,7 @@ public interface UserDao {
     boolean block(String login) throws DaoException;
 
     /**
-     * Unblock boolean.
+     * Unblock user.
      *
      * @param login the login
      * @return the boolean
@@ -68,16 +71,16 @@ public interface UserDao {
     boolean unblock(String login) throws DaoException;
 
     /**
-     * Check existing by login optional.
+     * Check user existing by login.
      *
      * @param login the login
-     * @return the optional
+     * @return the optional of found user password
      * @throws DaoException the dao exception
      */
     Optional<String> checkExistingByLogin(String login) throws DaoException;
 
     /**
-     * Check existing by email boolean.
+     * Check user existing by email.
      *
      * @param email the email
      * @return the boolean
@@ -86,27 +89,27 @@ public interface UserDao {
     boolean checkExistingByEmail(String email) throws DaoException;
 
     /**
-     * Find all list.
+     * Find all users.
      *
-     * @return the list
+     * @return the list of found users
      * @throws DaoException the dao exception
      */
     List<User> findAll() throws DaoException;
 
     /**
-     * Find by login optional.
+     * Find user by login.
      *
      * @param login the login
-     * @return the optional
+     * @return the optional of found user
      * @throws DaoException the dao exception
      */
     Optional<User> findByLogin(String login) throws DaoException;
 
     /**
-     * Find by login substring list.
+     * Find users by login substrings.
      *
      * @param loginSubstring the login substring
-     * @return the list
+     * @return the list of found users
      * @throws DaoException the dao exception
      */
     List<User> findByLoginSubstring(String loginSubstring) throws DaoException;

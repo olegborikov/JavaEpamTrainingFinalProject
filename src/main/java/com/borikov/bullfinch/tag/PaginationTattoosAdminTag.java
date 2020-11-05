@@ -16,7 +16,10 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 /**
- * The type Pagination tattoos admin tag.
+ * The {@code PaginationTattoosAdminTag} class represents admin pagination tag for tattoos.
+ *
+ * @author Oleg Borikov
+ * @version 1.0
  */
 public class PaginationTattoosAdminTag extends TagSupport {
     private static final Logger LOGGER = LogManager.getLogger();

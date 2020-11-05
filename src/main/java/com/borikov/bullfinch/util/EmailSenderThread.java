@@ -18,9 +18,8 @@ import java.util.Properties;
  *
  * @author Oleg Borikov
  * @version 1.0
- * @since 2020-10-16
  */
-public class EmailSenderThread implements Runnable {
+class EmailSenderThread implements Runnable {
     private MimeMessage message;
     private final String sendToEmail;
     private final String mailSubject;

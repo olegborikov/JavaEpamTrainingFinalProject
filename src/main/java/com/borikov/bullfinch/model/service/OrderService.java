@@ -7,11 +7,14 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * The interface Order service.
+ * The {@code OrderService} interface represents order service.
+ *
+ * @author Oleg Borikov
+ * @version 1.0
  */
 public interface OrderService {
     /**
-     * Add order boolean.
+     * Add order.
      *
      * @param date        the date
      * @param description the description
@@ -26,7 +29,7 @@ public interface OrderService {
                      String userLogin, String discountId) throws ServiceException;
 
     /**
-     * Remove order boolean.
+     * Remove order.
      *
      * @param id the id
      * @return the boolean
@@ -35,7 +38,7 @@ public interface OrderService {
     boolean removeOrder(String id) throws ServiceException;
 
     /**
-     * Submit order boolean.
+     * Submit order.
      *
      * @param id the id
      * @return the boolean
@@ -44,37 +47,37 @@ public interface OrderService {
     boolean submitOrder(String id) throws ServiceException;
 
     /**
-     * Find all orders list.
+     * Find all orders.
      *
-     * @return the list
+     * @return the list of found orders
      * @throws ServiceException the service exception
      */
     List<Order> findAllOrders() throws ServiceException;
 
     /**
-     * Find order by id optional.
+     * Find order by id.
      *
      * @param id the id
-     * @return the optional
+     * @return the optional of found order
      * @throws ServiceException the service exception
      */
     Optional<Order> findOrderById(String id) throws ServiceException;
 
     /**
-     * Find orders by dates list.
+     * Find orders by dates.
      *
      * @param beginDate the begin date
      * @param endDate   the end date
-     * @return the list
+     * @return the list of found orders
      * @throws ServiceException the service exception
      */
     List<Order> findOrdersByDates(String beginDate, String endDate) throws ServiceException;
 
     /**
-     * Find orders by user login list.
+     * Find orders by user login.
      *
      * @param userLogin the user login
-     * @return the list
+     * @return the list of found orders
      * @throws ServiceException the service exception
      */
     List<Order> findOrdersByUserLogin(String userLogin) throws ServiceException;

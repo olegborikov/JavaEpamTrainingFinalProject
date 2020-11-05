@@ -5,7 +5,10 @@ import com.borikov.bullfinch.model.entity.Tattoo;
 import com.borikov.bullfinch.model.entity.User;
 
 /**
- * The type Tattoo builder.
+ * The {@code TattooBuilder} class represents tattoo builder.
+ *
+ * @author Oleg Borikov
+ * @version 1.0
  */
 public class TattooBuilder {
     private Long tattooId;

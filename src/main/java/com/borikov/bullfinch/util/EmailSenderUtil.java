@@ -13,7 +13,6 @@ import java.util.Properties;
  *
  * @author Oleg Borikov
  * @version 1.0
- * @since 2020-10-16
  */
 public class EmailSenderUtil {
     private static final String EMAIL_HEAD = "Bullfinch tattoo";

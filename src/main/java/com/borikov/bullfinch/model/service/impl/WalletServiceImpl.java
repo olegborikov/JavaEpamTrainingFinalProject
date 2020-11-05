@@ -16,7 +16,10 @@ import com.borikov.bullfinch.model.validator.WalletValidator;
 import java.util.Optional;
 
 /**
- * The type Wallet service.
+ * The {@code WalletServiceImpl} class represents wallet service implementation.
+ *
+ * @author Oleg Borikov
+ * @version 1.0
  */
 public class WalletServiceImpl implements WalletService {
     private final WalletDao walletDao = WalletDaoImpl.getInstance();

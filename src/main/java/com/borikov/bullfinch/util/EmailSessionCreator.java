@@ -9,9 +9,8 @@ import java.util.Properties;
  *
  * @author Oleg Borikov
  * @version 1.0
- * @since 2020-10-16
  */
-public class EmailSessionCreator {
+class EmailSessionCreator {
     private static final String MAIL_USER_NAME = "mail.user.name";
     private static final String MAIL_USER_PASSWORD = "mail.user.password";
 

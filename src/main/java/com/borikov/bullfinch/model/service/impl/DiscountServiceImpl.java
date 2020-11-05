@@ -16,7 +16,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * The type Discount service.
+ * The {@code DiscountServiceImpl} class represents discount service implementation.
+ *
+ * @author Oleg Borikov
+ * @version 1.0
  */
 public class DiscountServiceImpl implements DiscountService {
     private final DiscountDao discountDao = DiscountDaoImpl.getInstance();

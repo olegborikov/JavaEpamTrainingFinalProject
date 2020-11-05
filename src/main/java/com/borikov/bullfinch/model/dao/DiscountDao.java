@@ -6,11 +6,14 @@ import com.borikov.bullfinch.model.exception.DaoException;
 import java.util.List;
 
 /**
- * The interface Discount dao.
+ * The {@code DiscountDao} interface represents discount dao.
+ *
+ * @author Oleg Borikov
+ * @version 1.0
  */
 public interface DiscountDao {
     /**
-     * Add boolean.
+     * Add discount.
      *
      * @param discount the discount
      * @return the boolean
@@ -19,7 +22,7 @@ public interface DiscountDao {
     boolean add(Discount discount) throws DaoException;
 
     /**
-     * Remove boolean.
+     * Remove discount.
      *
      * @param id the id
      * @return the boolean
@@ -28,10 +31,10 @@ public interface DiscountDao {
     boolean remove(long id) throws DaoException;
 
     /**
-     * Find by user login list.
+     * Find discounts by user login.
      *
      * @param userLogin the user login
-     * @return the list
+     * @return the list of found discounts
      * @throws DaoException the dao exception
      */
     List<Discount> findByUserLogin(String userLogin) throws DaoException;

@@ -15,11 +15,10 @@ import java.util.Optional;
 import java.util.UUID;
 
 /**
- * The {@code PhotoFileManager} class represents photo manager.
+ * The {@code PhotoFileManager} class represents file photo manager.
  *
  * @author Oleg Borikov
  * @version 1.0
- * @since 2020-10-16
  */
 public class PhotoFileManager {
     private static final String UPLOAD_DIRECTORY = "C:\\uploads";
@@ -29,8 +28,8 @@ public class PhotoFileManager {
     /**
      * Add photo.
      *
-     * @param photoParts the photo parts
-     * @return the optional
+     * @param photoParts the parts of photo
+     * @return the optional of new generated photo name
      */
     public Optional<String> add(Collection<Part> photoParts) {
         Path path = Paths.get(UPLOAD_DIRECTORY);

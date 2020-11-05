@@ -3,11 +3,14 @@ package com.borikov.bullfinch.model.service;
 import com.borikov.bullfinch.model.exception.ServiceException;
 
 /**
- * The interface Wallet service.
+ * The {@code WalletService} interface represents wallet service.
+ *
+ * @author Oleg Borikov
+ * @version 1.0
  */
 public interface WalletService {
     /**
-     * Enrich balance boolean.
+     * Enrich wallet balance.
      *
      * @param walletId     the wallet id
      * @param enrichAmount the enrich amount
@@ -17,7 +20,7 @@ public interface WalletService {
     boolean enrichBalance(String walletId, String enrichAmount) throws ServiceException;
 
     /**
-     * Check balance size boolean.
+     * Check wallet balance size.
      *
      * @param userLogin the user login
      * @param price     the price
@@ -27,7 +30,7 @@ public interface WalletService {
     boolean checkBalanceSize(String userLogin, String price) throws ServiceException;
 
     /**
-     * Check balance size boolean.
+     * Check wallet balance size.
      *
      * @param orderId the order id
      * @return the boolean

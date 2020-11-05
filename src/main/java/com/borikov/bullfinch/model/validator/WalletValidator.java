@@ -1,7 +1,10 @@
 package com.borikov.bullfinch.model.validator;
 
 /**
- * The type Wallet validator.
+ * The {@code WalletValidator} class represents wallet validator.
+ *
+ * @author Oleg Borikov
+ * @version 1.0
  */
 public class WalletValidator {
     private static final String ID_REGEX = "^[1-9]\\d{0,9}$";
@@ -13,7 +16,7 @@ public class WalletValidator {
     }
 
     /**
-     * Is id correct boolean.
+     * Check id for correct.
      *
      * @param id the id
      * @return the boolean
@@ -23,7 +26,7 @@ public class WalletValidator {
     }
 
     /**
-     * Is enrich amount correct boolean.
+     * Check enrich amount for correct.
      *
      * @param enrichAmount the enrich amount
      * @return the boolean
@@ -33,7 +36,7 @@ public class WalletValidator {
     }
 
     /**
-     * Is balance correct boolean.
+     * Check balance for correct.
      *
      * @param balance the balance
      * @return the boolean

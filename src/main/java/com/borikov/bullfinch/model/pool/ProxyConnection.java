@@ -6,7 +6,10 @@ import java.util.Properties;
 import java.util.concurrent.Executor;
 
 /**
- * The type Proxy connection.
+ * The {@code ProxyConnection} class represents proxy connection.
+ *
+ * @author Oleg Borikov
+ * @version 1.0
  */
 public class ProxyConnection implements Connection {
     private final Connection connection;

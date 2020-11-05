@@ -13,11 +13,10 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * The {@code PaginationUsersAdminTag} class represents pagination users admin.
+ * The {@code PaginationUsersAdminTag} class represents admin pagination tag for users.
  *
  * @author Oleg Borikov
  * @version 1.0
- * @since 2020-10-16
  */
 public class PaginationUsersAdminTag extends TagSupport {
     private static final Logger LOGGER = LogManager.getLogger();

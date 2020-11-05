@@ -1,7 +1,10 @@
 package com.borikov.bullfinch.model.exception;
 
 /**
- * The type Transaction exception.
+ * The {@code TransactionException} class represents transaction exception.
+ *
+ * @author Oleg Borikov
+ * @version 1.0
  */
 public class TransactionException extends Exception {
     /**

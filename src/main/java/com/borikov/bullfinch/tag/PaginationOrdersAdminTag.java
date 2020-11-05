@@ -16,7 +16,10 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 /**
- * The type Pagination orders admin tag.
+ * The {@code PaginationOrdersAdminTag} class represents admin pagination tag for orders.
+ *
+ * @author Oleg Borikov
+ * @version 1.0
  */
 public class PaginationOrdersAdminTag extends TagSupport {
     private static final Logger LOGGER = LogManager.getLogger();
