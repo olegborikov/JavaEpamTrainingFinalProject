@@ -129,10 +129,6 @@
             <c:if test="${discountDeleteErrorMessage}">
                 <h2><fmt:message key="message.discountDeleteErrorMessage"/></h2>
             </c:if>
-
-            <c:if test="${roleSecurityErrorMessage}">
-                <h2><fmt:message key="message.roleSecurityErrorMessage"/></h2>
-            </c:if>
         </div>
     </div>
 </section>

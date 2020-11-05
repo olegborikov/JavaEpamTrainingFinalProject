@@ -85,7 +85,6 @@ public class RequestParameter {
     public static final String TATTOO_ORDER_BALANCE_ERROR_MESSAGE = "tattooOrderBalanceErrorMessage";
     public static final String DISCOUNT_ADD_CONFIRM_MESSAGE = "discountAddConfirmMessage";
     public static final String DISCOUNT_DELETE_ERROR_MESSAGE = "discountDeleteErrorMessage";
-    public static final String ROLE_SECURITY_ERROR_MESSAGE = "roleSecurityErrorMessage";
 
     private RequestParameter() {
     }

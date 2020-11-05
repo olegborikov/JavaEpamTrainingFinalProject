@@ -36,7 +36,7 @@ public class ConfirmEmailCommand implements Command {
         } catch (ServiceException e) {
             LOGGER.log(Level.ERROR, "Error while confirming email", e);
             request.setAttribute(RequestParameter.ERROR_MESSAGE, e);
-            page = PagePath.ERROR505;
+            page = PagePath.ERROR_500;
         }
         return page;
     }

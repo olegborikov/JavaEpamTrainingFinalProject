@@ -46,7 +46,7 @@ public class OfferTattooCommand implements Command {
         } catch (ServiceException e) {
             LOGGER.log(Level.ERROR, "Error while offering tattoo", e);
             request.setAttribute(RequestParameter.ERROR_MESSAGE, e);
-            page = PagePath.ERROR505;
+            page = PagePath.ERROR_500;
             photoFileManager.delete(photoName);
         }
         return page;

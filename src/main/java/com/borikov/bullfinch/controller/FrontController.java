@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.Optional;
 
 /**
  * The {@code FrontController} class represents front controller.
@@ -36,7 +37,8 @@ public class FrontController extends HttpServlet {
     private void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String commandName = request.getParameter(RequestParameter.COMMAND_NAME);
-        Command command = CommandProvider.defineCommand(commandName);
+        Optional<Command> commandOptional = CommandProvider.defineCommand(commandName);
+        Command command = commandOptional.orElseThrow(IllegalArgumentException::new);
         String page = command.execute(request);
         HttpSession session = request.getSession();
         session.setAttribute(RequestParameter.CURRENT_PAGE, page);

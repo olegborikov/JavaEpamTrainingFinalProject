@@ -4,6 +4,8 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.Optional;
+
 /**
  * The {@code CommandProvider} class represents command provider.
  *
@@ -12,7 +14,6 @@ import org.apache.logging.log4j.Logger;
  */
 public class CommandProvider {
     private static final Logger LOGGER = LogManager.getLogger();
-    private static final Command DEFAULT_COMMAND = CommandType.BROWSE_HOME_PAGE_COMMAND.getCommand();
 
     private CommandProvider() {
     }
@@ -21,20 +22,20 @@ public class CommandProvider {
      * Define command.
      *
      * @param commandName the command name
-     * @return the command
+     * @return the optional of created command
      */
-    public static Command defineCommand(String commandName) {
-        Command currentCommand;
+    public static Optional<Command> defineCommand(String commandName) {
+        Optional<Command> currentCommand;
         if (commandName != null && !commandName.isBlank()) {
             try {
                 CommandType currentType = CommandType.valueOf(commandName.toUpperCase());
-                currentCommand = currentType.getCommand();
+                currentCommand = Optional.of(currentType.getCommand());
             } catch (IllegalArgumentException e) {
                 LOGGER.log(Level.ERROR, "Incorrect command type: {}", commandName, e);
-                currentCommand = DEFAULT_COMMAND;
+                currentCommand = Optional.empty();
             }
         } else {
-            currentCommand = DEFAULT_COMMAND;
+            currentCommand = Optional.empty();
         }
         return currentCommand;
     }
