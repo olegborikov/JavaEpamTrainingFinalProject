@@ -15,7 +15,10 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
- * The type Find tattoos admin command.
+ * The {@code FindTattoosAdminCommand} class represents find tattoos admin command.
+ *
+ * @author Oleg Borikov
+ * @version 1.0
  */
 public class FindTattoosAdminCommand implements Command {
     private static final Logger LOGGER = LogManager.getLogger();

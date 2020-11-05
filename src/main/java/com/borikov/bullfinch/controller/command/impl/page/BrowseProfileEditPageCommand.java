@@ -16,7 +16,10 @@ import javax.servlet.http.HttpSession;
 import java.util.Optional;
 
 /**
- * The type Browse profile edit page command.
+ * The {@code BrowseProfileEditPageCommand} class represents browse profile edit page command.
+ *
+ * @author Oleg Borikov
+ * @version 1.0
  */
 public class BrowseProfileEditPageCommand implements Command {
     private static final Logger LOGGER = LogManager.getLogger();

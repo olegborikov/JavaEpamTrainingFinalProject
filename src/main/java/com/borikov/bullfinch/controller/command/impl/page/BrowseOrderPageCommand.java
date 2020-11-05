@@ -15,7 +15,10 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
 
 /**
- * The type Browse order page command.
+ * The {@code BrowseOrderPageCommand} class represents browse order page command.
+ *
+ * @author Oleg Borikov
+ * @version 1.0
  */
 public class BrowseOrderPageCommand implements Command {
     private static final OrderService orderService = new OrderServiceImpl();

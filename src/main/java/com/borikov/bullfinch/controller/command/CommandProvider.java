@@ -5,7 +5,10 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 /**
- * The type Command provider.
+ * The {@code CommandProvider} class represents command provider.
+ *
+ * @author Oleg Borikov
+ * @version 1.0
  */
 public class CommandProvider {
     private static final Logger LOGGER = LogManager.getLogger();
@@ -15,7 +18,7 @@ public class CommandProvider {
     }
 
     /**
-     * Define command command.
+     * Define command.
      *
      * @param commandName the command name
      * @return the command

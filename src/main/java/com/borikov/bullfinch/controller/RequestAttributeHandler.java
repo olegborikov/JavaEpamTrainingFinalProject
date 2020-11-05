@@ -7,7 +7,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * The type Request attribute handler.
+ * The {@code RequestAttributeHandler} class represents request attribute handler.
+ *
+ * @author Oleg Borikov
+ * @version 1.0
  */
 public class RequestAttributeHandler {
     private Map<String, Object> attributes = new HashMap<>();

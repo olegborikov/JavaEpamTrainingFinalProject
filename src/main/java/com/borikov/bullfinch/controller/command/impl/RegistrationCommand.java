@@ -14,7 +14,10 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * The type Registration command.
+ * The {@code RegistrationCommand} class represents registration command.
+ *
+ * @author Oleg Borikov
+ * @version 1.0
  */
 public class RegistrationCommand implements Command {
     private static final Logger LOGGER = LogManager.getLogger();

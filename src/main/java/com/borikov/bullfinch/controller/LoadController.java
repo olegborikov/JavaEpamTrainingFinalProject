@@ -10,10 +10,13 @@ import java.io.IOException;
 import java.nio.file.Files;
 
 /**
- * The type Image controller.
+ * The {@code UploadController} class represents images load controller.
+ *
+ * @author Oleg Borikov
+ * @version 1.0
  */
 @WebServlet("/images/*")
-public class ImageController extends HttpServlet {
+public class LoadController extends HttpServlet {
     private static final int BEGIN_INDEX = 1;
     private static final String UPLOAD_DIRECTORY = "C:\\uploads";
     private static final String CONTENT_DISPOSITION_VALUE = "inline; filename=\"%s\"";

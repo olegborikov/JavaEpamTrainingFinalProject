@@ -17,7 +17,10 @@ import javax.servlet.http.HttpSession;
 import java.util.Optional;
 
 /**
- * The type Login command.
+ * The {@code LoginCommand} class represents login command.
+ *
+ * @author Oleg Borikov
+ * @version 1.0
  */
 public class LoginCommand implements Command {
     private static final Logger LOGGER = LogManager.getLogger();

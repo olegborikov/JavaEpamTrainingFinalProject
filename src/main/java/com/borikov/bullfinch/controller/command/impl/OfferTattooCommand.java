@@ -15,7 +15,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 /**
- * The type Offer tattoo command.
+ * The {@code OfferTattooCommand} class represents offer tattoo command.
+ *
+ * @author Oleg Borikov
+ * @version 1.0
  */
 public class OfferTattooCommand implements Command {
     private static final PhotoFileManager photoFileManager = new PhotoFileManager();

@@ -7,7 +7,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 /**
- * The type Logout command.
+ * The {@code LogoutCommand} class represents logout command.
+ *
+ * @author Oleg Borikov
+ * @version 1.0
  */
 public class LogoutCommand implements Command {
     @Override

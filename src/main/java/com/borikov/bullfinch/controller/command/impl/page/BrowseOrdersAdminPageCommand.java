@@ -16,7 +16,10 @@ import java.time.LocalDate;
 import java.util.List;
 
 /**
- * The type Browse orders admin page command.
+ * The {@code BrowseOrdersAdminPageCommand} class represents browse orders admin page command.
+ *
+ * @author Oleg Borikov
+ * @version 1.0
  */
 public class BrowseOrdersAdminPageCommand implements Command {
     private static final Logger LOGGER = LogManager.getLogger();

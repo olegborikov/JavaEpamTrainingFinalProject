@@ -13,7 +13,10 @@ import java.io.IOException;
 import java.util.Optional;
 
 /**
- * The type Upload controller.
+ * The {@code UploadController} class represents file upload controller.
+ *
+ * @author Oleg Borikov
+ * @version 1.0
  */
 @WebServlet(urlPatterns = {"/upload/*"})
 @MultipartConfig(fileSizeThreshold = 1024 * 1024,

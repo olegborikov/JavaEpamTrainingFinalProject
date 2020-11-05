@@ -9,10 +9,13 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * The type Page redirect security filter.
+ * The {@code PageSecurityFilter} class represents page security filter.
+ *
+ * @author Oleg Borikov
+ * @version 1.0
  */
 @WebFilter(urlPatterns = {"/jsp/*"})
-public class PageRedirectSecurityFilter implements Filter {
+public class PageSecurityFilter implements Filter {
     @Override
     public void init(FilterConfig config) {
     }

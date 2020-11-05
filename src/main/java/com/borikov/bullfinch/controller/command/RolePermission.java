@@ -7,7 +7,10 @@ import java.util.stream.Stream;
 import static com.borikov.bullfinch.controller.command.CommandType.*;
 
 /**
- * The enum Role permission.
+ * The {@code RolePermission} enum represents role permission.
+ *
+ * @author Oleg Borikov
+ * @version 1.0
  */
 public enum RolePermission {
     /**
@@ -84,7 +87,7 @@ public enum RolePermission {
             ADD_DISCOUNT_COMMAND,
             DELETE_DISCOUNT_COMMAND,
             BROWSE_ORDERS_ADMIN_PAGE_COMMAND,
-            BROWSE_USERS_PAGE_COMMAND
+            BROWSE_USERS_ADMIN_PAGE_COMMAND
     ).map(CommandType::getCommand).collect(Collectors.toSet()));
 
     private final Set<Command> commands;

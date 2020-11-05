@@ -23,7 +23,10 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * The type Browse profile page command.
+ * The {@code BrowseProfilePageCommand} class represents browse profile page command.
+ *
+ * @author Oleg Borikov
+ * @version 1.0
  */
 public class BrowseProfilePageCommand implements Command {
     private static final Logger LOGGER = LogManager.getLogger();

@@ -15,7 +15,10 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
 
 /**
- * The type Allow tattoo command.
+ * The {@code AllowTattooCommand} class represents allow tattoo command.
+ *
+ * @author Oleg Borikov
+ * @version 1.0
  */
 public class AllowTattooCommand implements Command {
     private static final TattooService tattooService = new TattooServiceImpl();

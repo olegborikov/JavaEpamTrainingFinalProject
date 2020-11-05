@@ -15,7 +15,10 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
- * The type Browse catalog page command.
+ * The {@code BrowseCatalogPageCommand} class represents browse catalog page command.
+ *
+ * @author Oleg Borikov
+ * @version 1.0
  */
 public class BrowseCatalogPageCommand implements Command {
     private static final Logger LOGGER = LogManager.getLogger();

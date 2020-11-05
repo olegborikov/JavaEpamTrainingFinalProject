@@ -15,7 +15,10 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
 
 /**
- * The type Browse order admin page command.
+ * The {@code BrowseOrderAdminPageCommand} class represents browse order admin page command.
+ *
+ * @author Oleg Borikov
+ * @version 1.0
  */
 public class BrowseOrderAdminPageCommand implements Command {
     private static final OrderService orderService = new OrderServiceImpl();

@@ -16,7 +16,10 @@ import java.time.LocalDate;
 import java.util.List;
 
 /**
- * The type Find orders admin command.
+ * The {@code FindOrdersAdminCommand} class represents find orders admin command.
+ *
+ * @author Oleg Borikov
+ * @version 1.0
  */
 public class FindOrdersAdminCommand implements Command {
     private static final Logger LOGGER = LogManager.getLogger();

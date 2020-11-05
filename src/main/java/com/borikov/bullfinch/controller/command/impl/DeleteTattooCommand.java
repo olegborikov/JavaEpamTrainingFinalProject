@@ -14,7 +14,10 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * The type Delete tattoo command.
+ * The {@code DeleteTattooCommand} class represents delete tattoo command.
+ *
+ * @author Oleg Borikov
+ * @version 1.0
  */
 public class DeleteTattooCommand implements Command {
     private static final TattooService tattooService = new TattooServiceImpl();

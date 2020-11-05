@@ -121,7 +121,7 @@
                                 <button style="color:white"
                                         class="btn navbar-brand js-scroll-trigger"
                                         name="commandName"
-                                        value="browse_users_page_command">
+                                        value="browse_users_admin_page_command">
                                     <fmt:message key="navbar.users"/>
                                 </button>
                             </li>

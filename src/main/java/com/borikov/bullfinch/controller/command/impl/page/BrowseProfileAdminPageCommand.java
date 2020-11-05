@@ -22,7 +22,10 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * The type Browse profile admin page command.
+ * The {@code BrowseProfileAdminPageCommand} class represents browse profile admin page command.
+ *
+ * @author Oleg Borikov
+ * @version 1.0
  */
 public class BrowseProfileAdminPageCommand implements Command {
     private static final Logger LOGGER = LogManager.getLogger();

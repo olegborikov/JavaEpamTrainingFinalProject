@@ -6,7 +6,10 @@ import com.borikov.bullfinch.controller.command.Command;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * The type Browse registration page command.
+ * The {@code BrowseRegistrationPageCommand} class represents browse registration page command.
+ *
+ * @author Oleg Borikov
+ * @version 1.0
  */
 public class BrowseRegistrationPageCommand implements Command {
     @Override

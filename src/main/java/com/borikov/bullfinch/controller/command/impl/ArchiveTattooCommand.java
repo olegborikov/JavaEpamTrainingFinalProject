@@ -15,7 +15,10 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
 
 /**
- * The type Archive tattoo command.
+ * The {@code ArchiveTattooCommand} class represents archive tattoo command.
+ *
+ * @author Oleg Borikov
+ * @version 1.0
  */
 public class ArchiveTattooCommand implements Command {
     private static final TattooService tattooService = new TattooServiceImpl();

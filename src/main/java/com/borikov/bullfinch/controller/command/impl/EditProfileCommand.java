@@ -19,7 +19,10 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * The type Edit profile command.
+ * The {@code EditProfileCommand} class represents edit profile command.
+ *
+ * @author Oleg Borikov
+ * @version 1.0
  */
 public class EditProfileCommand implements Command {
     private static final UserService userService = new UserServiceImpl();

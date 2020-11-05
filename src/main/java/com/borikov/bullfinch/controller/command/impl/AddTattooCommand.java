@@ -15,7 +15,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 /**
- * The type Add tattoo command.
+ * The {@code AddTattooCommand} class represents add tattoo command.
+ *
+ * @author Oleg Borikov
+ * @version 1.0
  */
 public class AddTattooCommand implements Command {
     private static final PhotoFileManager photoFileManager = new PhotoFileManager();

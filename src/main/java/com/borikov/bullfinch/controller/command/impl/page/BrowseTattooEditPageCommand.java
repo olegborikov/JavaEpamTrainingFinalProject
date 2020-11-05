@@ -15,7 +15,10 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
 
 /**
- * The type Browse tattoo edit page command.
+ * The {@code BrowseTattooEditPageCommand} class represents browse tattoo edit page command.
+ *
+ * @author Oleg Borikov
+ * @version 1.0
  */
 public class BrowseTattooEditPageCommand implements Command {
     private static final TattooService tattooService = new TattooServiceImpl();

@@ -6,7 +6,10 @@ import com.borikov.bullfinch.controller.command.Command;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * The type Browse login page command.
+ * The {@code BrowseLoginPageCommand} class represents browse login page command.
+ *
+ * @author Oleg Borikov
+ * @version 1.0
  */
 public class BrowseLoginPageCommand implements Command {
     @Override

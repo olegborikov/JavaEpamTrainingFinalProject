@@ -14,7 +14,10 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
- * The type Front controller.
+ * The {@code FrontController} class represents front controller.
+ *
+ * @author Oleg Borikov
+ * @version 1.0
  */
 @WebServlet(urlPatterns = "/controller")
 public class FrontController extends HttpServlet {

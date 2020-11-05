@@ -15,9 +15,12 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
- * The type Browse users page command.
+ * The {@code BrowseUsersAdminPageCommand} class represents browse users admin page command.
+ *
+ * @author Oleg Borikov
+ * @version 1.0
  */
-public class BrowseUsersPageCommand implements Command {
+public class BrowseUsersAdminPageCommand implements Command {
     private static final Logger LOGGER = LogManager.getLogger();
     private static final UserService userService = new UserServiceImpl();
     private static final int FIRST_PAGE_NUMBER = 1;

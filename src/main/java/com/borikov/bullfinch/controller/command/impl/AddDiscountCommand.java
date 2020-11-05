@@ -13,7 +13,10 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * The type Add discount command.
+ * The {@code AddDiscountCommand} class represents add discount command.
+ *
+ * @author Oleg Borikov
+ * @version 1.0
  */
 public class AddDiscountCommand implements Command {
     private static final DiscountService discountService = new DiscountServiceImpl();

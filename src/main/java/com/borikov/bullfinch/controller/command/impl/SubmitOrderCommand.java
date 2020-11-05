@@ -17,7 +17,10 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
 
 /**
- * The type Submit order command.
+ * The {@code SubmitOrderCommand} class represents submit order command.
+ *
+ * @author Oleg Borikov
+ * @version 1.0
  */
 public class SubmitOrderCommand implements Command {
     private static final OrderService orderService = new OrderServiceImpl();

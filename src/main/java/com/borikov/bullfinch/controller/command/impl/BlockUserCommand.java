@@ -22,7 +22,10 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * The type Block user command.
+ * The {@code BlockUserCommand} class represents block user command.
+ *
+ * @author Oleg Borikov
+ * @version 1.0
  */
 public class BlockUserCommand implements Command {
     private static final UserService userService = new UserServiceImpl();

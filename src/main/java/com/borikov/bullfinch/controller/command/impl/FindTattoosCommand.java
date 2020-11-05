@@ -15,7 +15,10 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
- * The type Find tattoos command.
+ * The {@code FindTattoosCommand} class represents find tattoos command.
+ *
+ * @author Oleg Borikov
+ * @version 1.0
  */
 public class FindTattoosCommand implements Command {
     private static final Logger LOGGER = LogManager.getLogger();

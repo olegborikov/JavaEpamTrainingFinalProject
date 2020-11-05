@@ -13,7 +13,10 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * The type Enrich balance command.
+ * The {@code EnrichBalanceCommand} class represents enrich balance command.
+ *
+ * @author Oleg Borikov
+ * @version 1.0
  */
 public class EnrichBalanceCommand implements Command {
     private static final Logger LOGGER = LogManager.getLogger();

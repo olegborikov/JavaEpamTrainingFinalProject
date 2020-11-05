@@ -13,7 +13,10 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * The type Cancel order command.
+ * The {@code CancelOrderCommand} class represents cancel order command.
+ *
+ * @author Oleg Borikov
+ * @version 1.0
  */
 public class CancelOrderCommand implements Command {
     private static final OrderService orderService = new OrderServiceImpl();

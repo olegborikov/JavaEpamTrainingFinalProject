@@ -15,7 +15,10 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
 
 /**
- * The type Unarchive tattoo command.
+ * The {@code UnarchiveTattooCommand} class represents unarchive tattoo command.
+ *
+ * @author Oleg Borikov
+ * @version 1.0
  */
 public class UnarchiveTattooCommand implements Command {
     private static final TattooService tattooService = new TattooServiceImpl();

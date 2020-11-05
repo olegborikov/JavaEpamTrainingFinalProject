@@ -7,7 +7,10 @@ import com.borikov.bullfinch.controller.command.Command;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * The type Browse balance enrich page command.
+ * The {@code BrowseBalanceEnrichPageCommand} class represents browse balance enrich page command.
+ *
+ * @author Oleg Borikov
+ * @version 1.0
  */
 public class BrowseBalanceEnrichPageCommand implements Command {
     @Override

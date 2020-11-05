@@ -15,7 +15,10 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
- * The type Browse offered tattoos admin page command.
+ * The {@code BrowseOfferedTattoosAdminPageCommand} class represents browse offered tattoos admin page command.
+ *
+ * @author Oleg Borikov
+ * @version 1.0
  */
 public class BrowseOfferedTattoosAdminPageCommand implements Command {
     private static final Logger LOGGER = LogManager.getLogger();

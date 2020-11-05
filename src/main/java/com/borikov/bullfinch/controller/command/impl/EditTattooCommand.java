@@ -15,7 +15,10 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
 
 /**
- * The type Edit tattoo command.
+ * The {@code EditTattooCommand} class represents edit tattoo command.
+ *
+ * @author Oleg Borikov
+ * @version 1.0
  */
 public class EditTattooCommand implements Command {
     private static final TattooService tattooService = new TattooServiceImpl();

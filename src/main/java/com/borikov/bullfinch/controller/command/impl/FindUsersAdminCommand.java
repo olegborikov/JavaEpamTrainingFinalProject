@@ -15,7 +15,10 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
- * The type Find users admin command.
+ * The {@code FindUsersAdminCommand} class represents find users admin command.
+ *
+ * @author Oleg Borikov
+ * @version 1.0
  */
 public class FindUsersAdminCommand implements Command {
     private static final Logger LOGGER = LogManager.getLogger();

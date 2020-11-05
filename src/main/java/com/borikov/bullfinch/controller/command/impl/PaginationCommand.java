@@ -9,7 +9,10 @@ import javax.servlet.http.HttpSession;
 import java.util.Map;
 
 /**
- * The type Pagination command.
+ * The {@code PaginationCommand} class represents pagination command.
+ *
+ * @author Oleg Borikov
+ * @version 1.0
  */
 public class PaginationCommand implements Command {
     @Override

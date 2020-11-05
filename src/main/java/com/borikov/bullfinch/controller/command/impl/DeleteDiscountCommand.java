@@ -22,7 +22,10 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * The type Delete discount command.
+ * The {@code DeleteDiscountCommand} class represents delete discount command.
+ *
+ * @author Oleg Borikov
+ * @version 1.0
  */
 public class DeleteDiscountCommand implements Command {
     private static final Logger LOGGER = LogManager.getLogger();

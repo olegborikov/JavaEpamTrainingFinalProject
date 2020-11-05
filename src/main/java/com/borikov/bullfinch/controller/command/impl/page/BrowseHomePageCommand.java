@@ -9,7 +9,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 /**
- * The type Browse home page command.
+ * The {@code BrowseHomePageCommand} class represents browse home page command.
+ *
+ * @author Oleg Borikov
+ * @version 1.0
  */
 public class BrowseHomePageCommand implements Command {
     private static final String ENGLISH_LOCALE = "en_US";

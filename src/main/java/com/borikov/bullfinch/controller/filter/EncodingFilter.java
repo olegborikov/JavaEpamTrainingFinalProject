@@ -5,7 +5,10 @@ import javax.servlet.annotation.WebFilter;
 import java.io.IOException;
 
 /**
- * The type Encoding filter.
+ * The {@code RoleSecurityFilter} class represents encoding filter.
+ *
+ * @author Oleg Borikov
+ * @version 1.0
  */
 @WebFilter(urlPatterns = {"/*"})
 public class EncodingFilter implements Filter {

@@ -21,7 +21,10 @@ import java.time.LocalDate;
 import java.util.Optional;
 
 /**
- * The type Order tattoo command.
+ * The {@code OrderTattooCommand} class represents order tattoo command.
+ *
+ * @author Oleg Borikov
+ * @version 1.0
  */
 public class OrderTattooCommand implements Command {
     private static final OrderService orderService = new OrderServiceImpl();

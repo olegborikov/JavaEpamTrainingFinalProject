@@ -22,7 +22,10 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * The type Unblock user command.
+ * The {@code UnblockUserCommand} class represents unblock user command.
+ *
+ * @author Oleg Borikov
+ * @version 1.0
  */
 public class UnblockUserCommand implements Command {
     private static final UserService userService = new UserServiceImpl();
