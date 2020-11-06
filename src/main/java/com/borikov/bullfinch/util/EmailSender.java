@@ -9,19 +9,19 @@ import java.io.InputStream;
 import java.util.Properties;
 
 /**
- * The {@code EmailSenderUtil} class represents email sender.
+ * The {@code EmailSender} class represents email sender.
  *
  * @author Oleg Borikov
  * @version 1.0
  */
-public class EmailSenderUtil {
+public class EmailSender {
     private static final String EMAIL_HEAD = "Bullfinch tattoo";
     private static final String EMAIL_BODY = "Follow link to confirm your mail to register "
             + "on site bullfinch: %s?commandName=confirm_email_command&login=";
     private static final String FILE_NAME = "property/mail.properties";
     private static final Logger LOGGER = LogManager.getLogger();
 
-    private EmailSenderUtil() {
+    private EmailSender() {
     }
 
     /**
@@ -34,7 +34,7 @@ public class EmailSenderUtil {
     public static void sendMessage(String email, String login, String url) {
         try {
             Properties properties = new Properties();
-            ClassLoader classLoader = EmailSenderUtil.class.getClassLoader();
+            ClassLoader classLoader = EmailSender.class.getClassLoader();
             InputStream inputStream = classLoader.getResourceAsStream(FILE_NAME);
             properties.load(inputStream);
             Thread thread = new Thread(new EmailSenderThread(email, EMAIL_HEAD,

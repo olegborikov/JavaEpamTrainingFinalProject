@@ -149,8 +149,10 @@ public class OrderDaoImpl implements OrderDao {
             }
             return orders;
         } catch (SQLException e) {
-            throw new DaoException("Error while finding orders by dates: begin date = "
-                    + beginDate + ", end date = " + endDate, e);
+            StringBuilder sb = new StringBuilder("Error while finding orders by dates: ");
+            sb.append("begin date = ").append(beginDate);
+            sb.append(", end date = ").append(endDate);
+            throw new DaoException(sb.toString(), e);
         }
     }
 

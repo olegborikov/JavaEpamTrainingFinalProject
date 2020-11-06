@@ -54,9 +54,13 @@ public class UserServiceImpl implements UserService {
             }
             return result;
         } catch (DaoException | TransactionException e) {
-            throw new ServiceException("Error while adding user: email = " + email
-                    + ", login = " + login + ", first name = " + firstName + ", second name = "
-                    + secondName + ", phone number = " + phoneNumber, e);
+            StringBuilder sb = new StringBuilder("Error while adding user: ");
+            sb.append("email = ").append(email);
+            sb.append(", login = ").append(login);
+            sb.append(", first name = ").append(firstName);
+            sb.append(", second name = ").append(secondName);
+            sb.append(", phone number = ").append(phoneNumber);
+            throw new ServiceException(sb.toString(), e);
         }
     }
 
@@ -82,9 +86,14 @@ public class UserServiceImpl implements UserService {
             }
             return result;
         } catch (DaoException e) {
-            throw new ServiceException("Error while editing user: id = " + id + ", email = " + email
-                    + ", login = " + login + ", first name = " + firstName + ", second name = "
-                    + secondName + ", phone number = " + phoneNumber, e);
+            StringBuilder sb = new StringBuilder("Error while editing user: ");
+            sb.append("id = ").append(id);
+            sb.append(", email = ").append(email);
+            sb.append(", login = ").append(login);
+            sb.append(", first name = ").append(firstName);
+            sb.append(", second name = ").append(secondName);
+            sb.append(", phone number = ").append(phoneNumber);
+            throw new ServiceException(sb.toString(), e);
         }
     }
 

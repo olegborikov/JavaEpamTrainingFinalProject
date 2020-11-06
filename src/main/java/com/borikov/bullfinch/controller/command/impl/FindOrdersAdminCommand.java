@@ -7,6 +7,7 @@ import com.borikov.bullfinch.model.entity.Order;
 import com.borikov.bullfinch.model.exception.ServiceException;
 import com.borikov.bullfinch.model.service.OrderService;
 import com.borikov.bullfinch.model.service.impl.OrderServiceImpl;
+import com.borikov.bullfinch.util.XssSecurity;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -33,14 +34,16 @@ public class FindOrdersAdminCommand implements Command {
         String beginDate = request.getParameter(RequestParameter.BEGIN_DATE);
         String endDate = request.getParameter(RequestParameter.END_DATE);
         try {
-            List<Order> orders = orderService.findOrdersByDates(beginDate, endDate);
+            String beginDateSecured = XssSecurity.secure(beginDate);
+            String endDateSecured = XssSecurity.secure(endDate);
+            List<Order> orders = orderService.findOrdersByDates(beginDateSecured, endDateSecured);
             request.setAttribute(RequestParameter.ORDERS, orders);
             request.setAttribute(RequestParameter.PAGE_AMOUNT,
                     Math.ceil((double) orders.size() / ORDERS_AMOUNT_ON_PAGE));
             request.setAttribute(RequestParameter.PAGE_NUMBER, FIRST_PAGE_NUMBER);
             request.setAttribute(RequestParameter.ORDERS_AMOUNT_ON_PAGE, ORDERS_AMOUNT_ON_PAGE);
-            request.setAttribute(RequestParameter.BEGIN_DATE, beginDate);
-            request.setAttribute(RequestParameter.END_DATE, endDate);
+            request.setAttribute(RequestParameter.BEGIN_DATE, beginDateSecured);
+            request.setAttribute(RequestParameter.END_DATE, endDateSecured);
             request.setAttribute(RequestParameter.CURRENT_DATE, LocalDate.now());
             page = PagePath.ORDERS_ADMIN;
         } catch (ServiceException e) {

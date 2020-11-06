@@ -7,6 +7,7 @@ import com.borikov.bullfinch.model.entity.User;
 import com.borikov.bullfinch.model.exception.ServiceException;
 import com.borikov.bullfinch.model.service.UserService;
 import com.borikov.bullfinch.model.service.impl.UserServiceImpl;
+import com.borikov.bullfinch.util.XssSecurity;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -31,13 +32,14 @@ public class FindUsersAdminCommand implements Command {
         String page;
         String searchLogin = request.getParameter(RequestParameter.SEARCH_LOGIN);
         try {
-            List<User> users = userService.findUsersByLoginSubstring(searchLogin);
+            String searchLoginSecured = XssSecurity.secure(searchLogin);
+            List<User> users = userService.findUsersByLoginSubstring(searchLoginSecured);
             request.setAttribute(RequestParameter.USERS, users);
             request.setAttribute(RequestParameter.PAGE_AMOUNT,
                     Math.ceil((double) users.size() / USERS_AMOUNT_ON_PAGE));
             request.setAttribute(RequestParameter.PAGE_NUMBER, FIRST_PAGE_NUMBER);
             request.setAttribute(RequestParameter.USERS_AMOUNT_ON_PAGE, USERS_AMOUNT_ON_PAGE);
-            request.setAttribute(RequestParameter.SEARCH_LOGIN, searchLogin);
+            request.setAttribute(RequestParameter.SEARCH_LOGIN, searchLoginSecured);
             page = PagePath.USERS_ADMIN;
         } catch (ServiceException e) {
             LOGGER.log(Level.ERROR, "Error while finding users", e);

@@ -6,7 +6,7 @@ import com.borikov.bullfinch.controller.command.Command;
 import com.borikov.bullfinch.model.exception.ServiceException;
 import com.borikov.bullfinch.model.service.UserService;
 import com.borikov.bullfinch.model.service.impl.UserServiceImpl;
-import com.borikov.bullfinch.util.EmailSenderUtil;
+import com.borikov.bullfinch.util.EmailSender;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -35,7 +35,7 @@ public class RegistrationCommand implements Command {
         String confirmedPassword = request.getParameter(RequestParameter.CONFIRMED_PASSWORD);
         try {
             if (userService.addUser(email, login, firstName, secondName, phoneNumber, password, confirmedPassword)) {
-                EmailSenderUtil.sendMessage(email, login, request.getRequestURL().toString());
+                EmailSender.sendMessage(email, login, request.getRequestURL().toString());
                 request.setAttribute(RequestParameter.USER_EMAIL_CONFIRM_MESSAGE, true);
                 page = PagePath.MESSAGE;
             } else {

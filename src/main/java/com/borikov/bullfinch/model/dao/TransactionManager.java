@@ -117,8 +117,11 @@ public class TransactionManager {
             return result;
         } catch (SQLException | DaoException e) {
             rollbackConnection(connection);
-            throw new TransactionException("Error while removing tattoo: id = "
-                    + tattooId + " and image: id = " + imageId, e);
+            StringBuilder sb = new StringBuilder("Error while removing tattoo: ");
+            sb.append("id = ").append(tattooId);
+            sb.append(" and image: ");
+            sb.append("id = ").append(imageId);
+            throw new TransactionException(sb.toString(), e);
         } finally {
             closeConnection(connection);
         }

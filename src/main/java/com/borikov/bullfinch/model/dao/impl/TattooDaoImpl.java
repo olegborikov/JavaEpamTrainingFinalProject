@@ -193,7 +193,7 @@ public class TattooDaoImpl implements TattooDao {
             }
             return tattooOptional;
         } catch (SQLException e) {
-            throw new DaoException("Error while finding tattoo by id: ", e);
+            throw new DaoException("Error while finding tattoo by id: " + id, e);
         }
     }
 
@@ -289,8 +289,7 @@ public class TattooDaoImpl implements TattooDao {
             }
             return tattoos;
         } catch (SQLException e) {
-            throw new DaoException("Error while finding tattoos in catalog"
-                    + "by name substring: " + nameSubstring, e);
+            throw new DaoException("Error while finding tattoos in catalog by name substring: " + nameSubstring, e);
         }
     }
 

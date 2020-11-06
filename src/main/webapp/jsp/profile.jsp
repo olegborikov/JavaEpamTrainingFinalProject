@@ -48,7 +48,7 @@
                     <p><fmt:message key="profile.name"/> ${user.firstName} </p>
                     <p><fmt:message key="profile.surname"/> ${user.secondName} </p>
                     <p><fmt:message key="profile.phoneNumber"/> ${user.phoneNumber} </p>
-                    <p><fmt:message key="profile.walletBalance"/> ${user.wallet.balance}</p>
+                    <p><fmt:message key="profile.walletBalance"/> ${user.wallet.balance} <fmt:message key="profile.rubles"/></p>
                     <form name="allowDeleteForm" method="post" action="controller">
                         <input type="hidden" name="walletId" value="${user.wallet.walletId}">
                         <button type="submit" class="btn btn-outline-secondary" name="commandName"

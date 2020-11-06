@@ -26,9 +26,9 @@
             <div class="col-lg-4 mb-5">
                 <form method="post" action="controller" autocomplete="off">
                     <div class="input-group">
-                        <input style="background-color: black" maxlength="25"
+                        <input style="background-color: black" maxlength="20"
                                type="text" class="form-control text-white"
-                               name="searchLogin" value="${searchLogin}"
+                               name="searchLogin" value="<c:out value="${searchLogin}"/>"
                                placeholder=<fmt:message key="usersAdmin.login"/>>
                         <div class="input-group-btn">
                             <button type="submit"

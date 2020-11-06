@@ -48,9 +48,13 @@ public class TattooServiceImpl implements TattooService {
             }
             return result;
         } catch (TransactionException e) {
-            throw new ServiceException("Error while adding tattoo: tattoo name = " + tattooName
-                    + ", description = " + description + ", price = " + price + ", image name = "
-                    + imageName + ", proposed login = " + proposedLogin, e);
+            StringBuilder sb = new StringBuilder("Error while adding tattoo: ");
+            sb.append("tattoo name = ").append(tattooName);
+            sb.append(", description = ").append(description);
+            sb.append(", price = ").append(price);
+            sb.append(", image name = ").append(imageName);
+            sb.append(", proposed login = ").append(proposedLogin);
+            throw new ServiceException(sb.toString(), e);
         }
     }
 
@@ -87,8 +91,12 @@ public class TattooServiceImpl implements TattooService {
             }
             return result;
         } catch (DaoException e) {
-            throw new ServiceException("Error while editing tattoo: id = " + id + ", name = "
-                    + name + ", description = " + description + ", price = " + price, e);
+            StringBuilder sb = new StringBuilder("Error while editing tattoo: ");
+            sb.append("id = ").append(id);
+            sb.append(", name = ").append(name);
+            sb.append(", description = ").append(description);
+            sb.append(", price = ").append(price);
+            throw new ServiceException(sb.toString(), e);
         }
     }
 
@@ -113,9 +121,13 @@ public class TattooServiceImpl implements TattooService {
             }
             return result;
         } catch (TransactionException e) {
-            throw new ServiceException("Error while offering tattoo: tattoo name = " + tattooName
-                    + ", description = " + description + ", price = " + price + ", image name = "
-                    + imageName + ", proposed login = " + proposedLogin, e);
+            StringBuilder sb = new StringBuilder("Error while offering tattoo: ");
+            sb.append("tattoo name = ").append(tattooName);
+            sb.append(", description = ").append(description);
+            sb.append(", price = ").append(price);
+            sb.append(", image name = ").append(imageName);
+            sb.append(", proposed login = ").append(proposedLogin);
+            throw new ServiceException(sb.toString(), e);
         }
     }
 

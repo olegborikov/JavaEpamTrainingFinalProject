@@ -42,8 +42,10 @@ public class DiscountServiceImpl implements DiscountService {
             }
             return result;
         } catch (DaoException e) {
-            throw new ServiceException("Error while adding discount: discount percent = "
-                    + discountPercent + ", user id = " + userId, e);
+            StringBuilder sb = new StringBuilder("Error while adding discount: ");
+            sb.append("discount percent = ").append(discountPercent);
+            sb.append(", user id = ").append(userId);
+            throw new ServiceException(sb.toString(), e);
         }
     }
 

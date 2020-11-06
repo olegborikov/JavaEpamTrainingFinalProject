@@ -42,10 +42,10 @@
                                        type="text" class="form-control text-white"
                                        oninvalid="this.setCustomValidity('<fmt:message key="tattooEdit.nameValidate"/>')"
                                        onchange="this.setCustomValidity('')"
-                                       pattern="^[\p{L}]{2,25}"
+                                       pattern="^[^<>]{2,25}$"
                                        title='<fmt:message key="tattooEdit.nameValidate"/>'
                                        placeholder='<fmt:message key="tattooEdit.name"/>'
-                                       value="${tattoo.name}">
+                                       value="<c:out value="${tattoo.name}"/>">
                             </div>
                         </div>
                         <div class="row form-group">

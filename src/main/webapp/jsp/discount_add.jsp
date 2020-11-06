@@ -31,7 +31,7 @@
                                    maxlength="2" required
                                    oninvalid="this.setCustomValidity('<fmt:message key="discountAdd.discountPercentValidate"/>')"
                                    onchange="this.setCustomValidity('')"
-                                   pattern="^[1-9]\d$"
+                                   pattern="^[1-9]\d?$"
                                    title='<fmt:message key="discountAdd.discountPercentValidate"/>'
                                    placeholder='<fmt:message key="discountAdd.discountPercent"/>'>
                         </div>

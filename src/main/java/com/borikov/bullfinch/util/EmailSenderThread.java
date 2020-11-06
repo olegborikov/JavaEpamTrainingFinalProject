@@ -4,10 +4,7 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.Session;
-import javax.mail.Transport;
+import javax.mail.*;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
@@ -27,6 +24,8 @@ class EmailSenderThread implements Runnable {
     private final Properties properties;
     private static final Logger LOGGER = LogManager.getLogger();
     private static final String TEXT_TYPE = "text/html";
+    private static final String MAIL_USER_NAME = "mail.user.name";
+    private static final String MAIL_USER_PASSWORD = "mail.user.password";
 
     /**
      * Instantiates a new Email sender thread.
@@ -43,8 +42,18 @@ class EmailSenderThread implements Runnable {
         this.properties = properties;
     }
 
+    @Override
+    public void run() {
+        initMessage();
+        try {
+            Transport.send(message);
+        } catch (MessagingException e) {
+            LOGGER.log(Level.ERROR, "Error while generating or sending message: {}", message, e);
+        }
+    }
+
     private void initMessage() {
-        Session mailSession = EmailSessionCreator.createSession(properties);
+        Session mailSession = createSession(properties);
         try {
             message = new MimeMessage(mailSession);
             message.setSubject(mailSubject);
@@ -57,13 +66,16 @@ class EmailSenderThread implements Runnable {
         }
     }
 
-    @Override
-    public void run() {
-        initMessage();
-        try {
-            Transport.send(message);
-        } catch (MessagingException e) {
-            LOGGER.log(Level.ERROR, "Error while generating or sending message: {}", message, e);
-        }
+    private Session createSession(Properties properties) {
+        String userName = properties.getProperty(MAIL_USER_NAME);
+        String userPasswordHidden = properties.getProperty(MAIL_USER_PASSWORD);
+        String userPassword = System.getenv(userPasswordHidden);
+        return Session.getDefaultInstance(properties,
+                new javax.mail.Authenticator() {
+                    @Override
+                    protected PasswordAuthentication getPasswordAuthentication() {
+                        return new PasswordAuthentication(userName, userPassword);
+                    }
+                });
     }
 }
