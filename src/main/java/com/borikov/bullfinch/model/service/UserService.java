@@ -4,6 +4,7 @@ import com.borikov.bullfinch.model.entity.User;
 import com.borikov.bullfinch.model.exception.ServiceException;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -16,18 +17,11 @@ public interface UserService {
     /**
      * Add user.
      *
-     * @param email             the email
-     * @param login             the login
-     * @param firstName         the first name
-     * @param secondName        the second name
-     * @param phoneNumber       the phone number
-     * @param password          the password
-     * @param confirmedPassword the confirmed password
+     * @param registrationParameters the registration parameters
      * @return the boolean
      * @throws ServiceException the service exception
      */
-    boolean addUser(String email, String login, String firstName, String secondName, String phoneNumber,
-                    String password, String confirmedPassword) throws ServiceException;
+    boolean addUser(Map<String, String> registrationParameters) throws ServiceException;
 
     /**
      * Edit user.

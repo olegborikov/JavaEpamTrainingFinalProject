@@ -22,6 +22,7 @@ public class RequestParameter {
     public static final String FIRST_NAME = "firstName";
     public static final String SECOND_NAME = "secondName";
     public static final String PHONE_NUMBER = "phoneNumber";
+    public static final String REGISTRATION_PARAMETERS = "registrationParameters";
     public static final String COMMAND_NAME = "commandName";
     public static final String ERROR_MESSAGE = "errorMessage";
     public static final String TATTOOS = "tattoos";

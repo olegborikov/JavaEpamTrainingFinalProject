@@ -13,8 +13,10 @@ import com.borikov.bullfinch.model.exception.TransactionException;
 import com.borikov.bullfinch.model.service.UserService;
 import com.borikov.bullfinch.model.validator.UserValidator;
 import com.borikov.bullfinch.util.PasswordEncryptor;
+import com.borikov.bullfinch.util.RegistrationParameter;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -28,24 +30,23 @@ public class UserServiceImpl implements UserService {
     private final UserDao userDao = UserDaoImpl.getInstance();
 
     @Override
-    public boolean addUser(String email, String login, String firstName, String secondName, String phoneNumber,
-                           String password, String confirmedPassword) throws ServiceException {
+    public boolean addUser(Map<String, String> registrationParameters) throws ServiceException {
         try {
             boolean result = false;
-            if (UserValidator.isEmailCorrect(email) && UserValidator.isLoginCorrect(login)
-                    && UserValidator.isFirstNameCorrect(firstName) && UserValidator.isSecondNameCorrect(secondName)
-                    && UserValidator.isPhoneNumberCorrect(phoneNumber) && UserValidator.isPasswordCorrect(password)
-                    && password.equals(confirmedPassword)) {
-                Optional<String> encryptedPassword = PasswordEncryptor.encrypt(password);
-                Optional<String> existingUserPassword = userDao.checkExistingByLogin(login);
-                boolean existingUserEmail = userDao.checkExistingByEmail(email);
+            if (UserValidator.isRegistrationParametersCorrect(registrationParameters)) {
+                Optional<String> encryptedPassword =
+                        PasswordEncryptor.encrypt(registrationParameters.get(RegistrationParameter.PASSWORD));
+                Optional<String> existingUserPassword =
+                        userDao.checkExistingByLogin(registrationParameters.get(RegistrationParameter.LOGIN));
+                boolean existingUserEmail =
+                        userDao.checkExistingByEmail(registrationParameters.get(RegistrationParameter.EMAIL));
                 if (existingUserPassword.isEmpty() && !existingUserEmail && encryptedPassword.isPresent()) {
                     UserBuilder userBuilder = new UserBuilder();
-                    userBuilder.setEmail(email);
-                    userBuilder.setLogin(login);
-                    userBuilder.setFirstName(firstName);
-                    userBuilder.setSecondName(secondName);
-                    userBuilder.setPhoneNumber(phoneNumber);
+                    userBuilder.setEmail(registrationParameters.get(RegistrationParameter.EMAIL));
+                    userBuilder.setLogin(registrationParameters.get(RegistrationParameter.LOGIN));
+                    userBuilder.setFirstName(registrationParameters.get(RegistrationParameter.FIRST_NAME));
+                    userBuilder.setSecondName(registrationParameters.get(RegistrationParameter.SECOND_NAME));
+                    userBuilder.setPhoneNumber(registrationParameters.get(RegistrationParameter.PHONE_NUMBER));
                     userBuilder.setUserRole(UserRole.USER);
                     userBuilder.setWallet(new Wallet(null, 0));
                     User user = userBuilder.getUser();
@@ -55,11 +56,11 @@ public class UserServiceImpl implements UserService {
             return result;
         } catch (DaoException | TransactionException e) {
             StringBuilder sb = new StringBuilder("Error while adding user: ");
-            sb.append("email = ").append(email);
-            sb.append(", login = ").append(login);
-            sb.append(", first name = ").append(firstName);
-            sb.append(", second name = ").append(secondName);
-            sb.append(", phone number = ").append(phoneNumber);
+            sb.append("email = ").append(registrationParameters.get(RegistrationParameter.EMAIL));
+            sb.append(", login = ").append(registrationParameters.get(RegistrationParameter.LOGIN));
+            sb.append(", first name = ").append(registrationParameters.get(RegistrationParameter.FIRST_NAME));
+            sb.append(", second name = ").append(registrationParameters.get(RegistrationParameter.SECOND_NAME));
+            sb.append(", phone number = ").append(registrationParameters.get(RegistrationParameter.PHONE_NUMBER));
             throw new ServiceException(sb.toString(), e);
         }
     }
