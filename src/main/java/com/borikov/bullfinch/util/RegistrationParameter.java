@@ -14,6 +14,8 @@ public class RegistrationParameter {
     public static final String PHONE_NUMBER = "phoneNumber";
     public static final String PASSWORD = "password";
     public static final String CONFIRMED_PASSWORD = "confirmedPassword";
+    public static final String LOGIN_EXISTS = "loginExists";
+    public static final String EMAIL_EXISTS = "emailExists";
 
     private RegistrationParameter() {
     }

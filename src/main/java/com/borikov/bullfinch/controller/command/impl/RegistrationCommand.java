@@ -44,6 +44,8 @@ public class RegistrationCommand implements Command {
                 request.getParameter(RequestParameter.PASSWORD));
         registrationParameters.put(RegistrationParameter.CONFIRMED_PASSWORD,
                 request.getParameter(RequestParameter.CONFIRMED_PASSWORD));
+        registrationParameters.put(RegistrationParameter.LOGIN_EXISTS, login);
+        registrationParameters.put(RegistrationParameter.EMAIL_EXISTS, email);
         try {
             if (userService.addUser(registrationParameters)) {
                 EmailSender.sendMessage(email, login, request.getRequestURL().toString());

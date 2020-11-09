@@ -9,14 +9,13 @@ import com.borikov.bullfinch.model.exception.DaoException;
 import com.borikov.bullfinch.model.exception.ServiceException;
 import com.borikov.bullfinch.model.exception.TransactionException;
 import com.borikov.bullfinch.model.service.UserService;
+import com.borikov.bullfinch.util.RegistrationParameter;
 import org.powermock.reflect.Whitebox;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
@@ -47,11 +46,32 @@ public class UserServiceImplTest {
     @Test
     public void addUserPositiveTest() {
         try {
+            when(userDao.checkExistingByLogin(any(String.class))).thenReturn(Optional.empty());
+            when(userDao.checkExistingByEmail(any(String.class))).thenReturn(true);
             when(transactionManager.addWalletAndUser(any(User.class), any(String.class))).thenReturn(true);
-            boolean actual = userService.addUser("oleg@gmail.com", "oleg", "oleg",
-                    "black", "375251111111", "123456Aa", "123456Aa");
-            assertTrue(actual);
-        } catch (ServiceException | TransactionException e) {
+            Map<String, String> actual = new HashMap<>();
+            actual.put(RegistrationParameter.EMAIL, "example@gmail.com");
+            actual.put(RegistrationParameter.LOGIN, "oleg");
+            actual.put(RegistrationParameter.FIRST_NAME, "qwe");
+            actual.put(RegistrationParameter.SECOND_NAME, "qwe");
+            actual.put(RegistrationParameter.PHONE_NUMBER, "375251111111");
+            actual.put(RegistrationParameter.PASSWORD, "123456Aa");
+            actual.put(RegistrationParameter.CONFIRMED_PASSWORD, "123456Aa");
+            actual.put(RegistrationParameter.LOGIN_EXISTS, "oleg");
+            actual.put(RegistrationParameter.EMAIL_EXISTS, "example@gmail.com");
+            Map<String, String> expected = new HashMap<>();
+            expected.put(RegistrationParameter.EMAIL, "example@gmail.com");
+            expected.put(RegistrationParameter.LOGIN, "oleg");
+            expected.put(RegistrationParameter.FIRST_NAME, "qwe");
+            expected.put(RegistrationParameter.SECOND_NAME, "qwe");
+            expected.put(RegistrationParameter.PHONE_NUMBER, "375251111111");
+            expected.put(RegistrationParameter.PASSWORD, "123456Aa");
+            expected.put(RegistrationParameter.CONFIRMED_PASSWORD, "123456Aa");
+            expected.put(RegistrationParameter.LOGIN_EXISTS, "oleg");
+            expected.put(RegistrationParameter.EMAIL_EXISTS, "");
+            userService.addUser(actual);
+            assertEquals(actual, expected);
+        } catch (ServiceException | TransactionException | DaoException e) {
             fail("Incorrect data", e);
         }
     }
@@ -59,11 +79,32 @@ public class UserServiceImplTest {
     @Test
     public void addUserNegativeTest() {
         try {
+            when(userDao.checkExistingByLogin(any(String.class))).thenReturn(Optional.empty());
+            when(userDao.checkExistingByEmail(any(String.class))).thenReturn(false);
             when(transactionManager.addWalletAndUser(any(User.class), any(String.class))).thenReturn(true);
-            boolean actual = userService.addUser("", "oleg", "oleg",
-                    "black", "375251111111", "123456Aa", "123456Aa");
-            assertFalse(actual);
-        } catch (ServiceException | TransactionException e) {
+            Map<String, String> actual = new HashMap<>();
+            actual.put(RegistrationParameter.EMAIL, "example@gmail.com");
+            actual.put(RegistrationParameter.LOGIN, "oleg");
+            actual.put(RegistrationParameter.FIRST_NAME, "qwe");
+            actual.put(RegistrationParameter.SECOND_NAME, "qwe");
+            actual.put(RegistrationParameter.PHONE_NUMBER, "375251111111");
+            actual.put(RegistrationParameter.PASSWORD, "123456Aa");
+            actual.put(RegistrationParameter.CONFIRMED_PASSWORD, "123456Aa");
+            actual.put(RegistrationParameter.LOGIN_EXISTS, "oleg");
+            actual.put(RegistrationParameter.EMAIL_EXISTS, "example@gmail.com");
+            Map<String, String> expected = new HashMap<>();
+            expected.put(RegistrationParameter.EMAIL, "example@gmail.com");
+            expected.put(RegistrationParameter.LOGIN, "oleg");
+            expected.put(RegistrationParameter.FIRST_NAME, "qwe");
+            expected.put(RegistrationParameter.SECOND_NAME, "qwe");
+            expected.put(RegistrationParameter.PHONE_NUMBER, "375251111111");
+            expected.put(RegistrationParameter.PASSWORD, "123456Aa");
+            expected.put(RegistrationParameter.CONFIRMED_PASSWORD, "123456Aa");
+            expected.put(RegistrationParameter.LOGIN_EXISTS, "oleg");
+            expected.put(RegistrationParameter.EMAIL_EXISTS, "");
+            userService.addUser(actual);
+            assertNotEquals(actual, expected);
+        } catch (ServiceException | TransactionException | DaoException e) {
             fail("Incorrect data", e);
         }
     }

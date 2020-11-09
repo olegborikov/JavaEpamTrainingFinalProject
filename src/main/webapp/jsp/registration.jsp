@@ -32,9 +32,15 @@
                                        class="form-control text-white" name="email" maxlength="55" required
                                        oninvalid="this.setCustomValidity('<fmt:message key="registration.emailValidate"/>')"
                                        onchange="this.setCustomValidity('')"
+                                       value="${registrationParameters.get('email')}"
                                        pattern="^[a-zA-Z_0-9.+-]{3,30}@[a-zA-Z_0-9.-]{2,15}\.[a-z]{2,4}$"
                                        title='<fmt:message key="registration.emailValidate"/>'
                                        placeholder='<fmt:message key="registration.email"/>'>
+                                <c:if test="${not empty registrationParameters && empty registrationParameters.get('email')}">
+                                    <div style="color: red">
+                                        <fmt:message key="registration.incorrectEmail"/>
+                                    </div>
+                                </c:if>
                             </div>
                             <div class="form-group">
                                 <label><fmt:message key="registration.login"/></label>
@@ -42,9 +48,15 @@
                                        class="form-control text-white" name="login" maxlength="20" required
                                        oninvalid="this.setCustomValidity('<fmt:message key="registration.loginValidate"/>')"
                                        onchange="this.setCustomValidity('')"
+                                       value="${registrationParameters.get('login')}"
                                        pattern="^[a-zA-Z_0-9.]{3,20}$"
                                        title='<fmt:message key="registration.loginValidate"/>'
                                        placeholder='<fmt:message key="registration.login"/>'>
+                                <c:if test="${not empty registrationParameters && empty registrationParameters.get('login')}">
+                                    <div style="color: red">
+                                        <fmt:message key="registration.incorrectLogin"/>
+                                    </div>
+                                </c:if>
                             </div>
                             <div class="row">
                                 <div class="col-sm-6">
@@ -53,9 +65,15 @@
                                            class="form-control text-white" name="firstName" maxlength="25" required
                                            oninvalid="this.setCustomValidity('<fmt:message key="registration.firstNameValidate"/>')"
                                            onchange="this.setCustomValidity('')"
+                                           value="${registrationParameters.get('firstName')}"
                                            pattern="^[a-zA-ZА-Яа-яЁё]{2,25}$"
                                            title='<fmt:message key="registration.firstNameValidate"/>'
                                            placeholder='<fmt:message key="registration.firstName"/>'>
+                                    <c:if test="${not empty registrationParameters && empty registrationParameters.get('firstName')}">
+                                        <div style="color: red">
+                                            <fmt:message key="registration.incorrectFirstName"/>
+                                        </div>
+                                    </c:if>
                                 </div>
                                 <div class="form-group col-sm-6">
                                     <label><fmt:message key="registration.secondName"/></label>
@@ -63,9 +81,15 @@
                                            class="form-control text-white" name="secondName" maxlength="25" required
                                            oninvalid="this.setCustomValidity('<fmt:message key="registration.secondNameValidate"/>')"
                                            onchange="this.setCustomValidity('')"
+                                           value="${registrationParameters.get('secondName')}"
                                            pattern="^[a-zA-ZА-Яа-яЁё]{2,25}$"
                                            title='<fmt:message key="registration.secondNameValidate"/>'
                                            placeholder='<fmt:message key="registration.secondName"/>'>
+                                    <c:if test="${not empty registrationParameters && empty registrationParameters.get('secondName')}">
+                                        <div style="color: red">
+                                            <fmt:message key="registration.incorrectSecondName"/>
+                                        </div>
+                                    </c:if>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -74,9 +98,15 @@
                                        class="form-control text-white" name="phoneNumber" maxlength="13" required
                                        oninvalid="this.setCustomValidity('<fmt:message key="registration.phoneNumberValidate"/>')"
                                        onchange="this.setCustomValidity('')"
+                                       value="${registrationParameters.get('phoneNumber')}"
                                        pattern="\+?375(24|25|29|33|44)\d{7}|80(24|25|29|33|44)\d{7}$"
                                        title='<fmt:message key="registration.phoneNumberValidate"/>'
                                        placeholder='<fmt:message key="registration.phoneNumber"/>'>
+                                <c:if test="${not empty registrationParameters && empty registrationParameters.get('phoneNumber')}">
+                                    <div style="color: red">
+                                        <fmt:message key="registration.incorrectPhoneNumber"/>
+                                    </div>
+                                </c:if>
                             </div>
                             <div class="form-group">
                                 <label><fmt:message key="registration.password"/></label>
@@ -84,8 +114,14 @@
                                        class="form-control text-white" name="password" maxlength="20" required
                                        oninvalid="this.setCustomValidity('<fmt:message key="registration.passwordValidate"/>')"
                                        onchange="this.setCustomValidity('')"
+                                       value="${registrationParameters.get('password')}"
                                        title='<fmt:message key="registration.passwordValidate"/>'
                                        placeholder='<fmt:message key="registration.password"/>'>
+                                <c:if test="${not empty registrationParameters && empty registrationParameters.get('password')}">
+                                    <div style="color: red">
+                                        <fmt:message key="registration.incorrectPassword"/>
+                                    </div>
+                                </c:if>
                             </div>
                             <div class="form-group">
                                 <label><fmt:message key="registration.passwordConfirm"/></label>
@@ -93,14 +129,25 @@
                                        class="form-control text-white" name="confirmedPassword" maxlength="20" required
                                        oninvalid="this.setCustomValidity('<fmt:message key="registration.passwordValidate"/>')"
                                        onchange="this.setCustomValidity('')"
+                                       value="${registrationParameters.get('confirmedPassword')}"
                                        title='<fmt:message key="registration.passwordValidate"/>'
                                        placeholder='<fmt:message key="registration.passwordConfirm"/>'>
+                                <c:if test="${not empty registrationParameters && empty registrationParameters.get('confirmedPassword')}">
+                                    <div style="color: red">
+                                        <fmt:message key="registration.incorrectConfirmedPassword"/>
+                                    </div>
+                                </c:if>
+                                <c:if test="${not empty registrationParameters && empty registrationParameters.get('loginExists')}">
+                                    <div style="color: red">
+                                        <fmt:message key="registration.loginExists"/>
+                                    </div>
+                                </c:if>
+                                <c:if test="${not empty registrationParameters && empty registrationParameters.get('emailExists')}">
+                                    <div style="color: red">
+                                        <fmt:message key="registration.emailExists"/>
+                                    </div>
+                                </c:if>
                             </div>
-                            <c:if test="${incorrectDataMessage}">
-                                <div style="color: red">
-                                    <fmt:message key="registration.incorrectDataMessage"/>
-                                </div>
-                            </c:if>
                             <button class="btn btn-outline-secondary"
                                     name="commandName" value="registration_command">
                                 <fmt:message key="registration.signUp"/>

@@ -1,12 +1,63 @@
 package com.borikov.bullfinch.model.validator;
 
+import com.borikov.bullfinch.util.RegistrationParameter;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.assertFalse;
-import static org.testng.Assert.assertTrue;
+import java.util.HashMap;
+import java.util.Map;
+
+import static org.testng.Assert.*;
 
 public class UserValidatorTest {
+    @Test
+    public void isRegistrationParametersCorrectPositiveTest() {
+        Map<String, String> actual = new HashMap<>();
+        actual.put(RegistrationParameter.EMAIL, null);
+        actual.put(RegistrationParameter.LOGIN, "oleg");
+        actual.put(RegistrationParameter.FIRST_NAME, "d");
+        actual.put(RegistrationParameter.SECOND_NAME, " ");
+        actual.put(RegistrationParameter.PHONE_NUMBER, "375251111111");
+        actual.put(RegistrationParameter.PASSWORD, "123456Aa");
+        actual.put(RegistrationParameter.CONFIRMED_PASSWORD, "123456AA");
+        actual.put(RegistrationParameter.LOGIN_EXISTS, " ");
+        Map<String, String> expected = new HashMap<>();
+        expected.put(RegistrationParameter.EMAIL, "");
+        expected.put(RegistrationParameter.LOGIN, "oleg");
+        expected.put(RegistrationParameter.FIRST_NAME, "");
+        expected.put(RegistrationParameter.SECOND_NAME, "");
+        expected.put(RegistrationParameter.PHONE_NUMBER, "375251111111");
+        expected.put(RegistrationParameter.PASSWORD, "123456Aa");
+        expected.put(RegistrationParameter.CONFIRMED_PASSWORD, "");
+        expected.put(RegistrationParameter.LOGIN_EXISTS, " ");
+        UserValidator.isRegistrationParametersCorrect(actual);
+        assertEquals(actual, expected);
+    }
+
+    @Test
+    public void isRegistrationParametersCorrectNegativeTest() {
+        Map<String, String> actual = new HashMap<>();
+        actual.put(RegistrationParameter.EMAIL, null);
+        actual.put(RegistrationParameter.LOGIN, "oleg");
+        actual.put(RegistrationParameter.FIRST_NAME, "d");
+        actual.put(RegistrationParameter.SECOND_NAME, " ");
+        actual.put(RegistrationParameter.PHONE_NUMBER, "375251111111");
+        actual.put(RegistrationParameter.PASSWORD, "123456Aa");
+        actual.put(RegistrationParameter.CONFIRMED_PASSWORD, "123456AA");
+        actual.put(RegistrationParameter.LOGIN_EXISTS, " ");
+        Map<String, String> expected = new HashMap<>();
+        expected.put(RegistrationParameter.EMAIL, "");
+        expected.put(RegistrationParameter.LOGIN, "oleg");
+        expected.put(RegistrationParameter.FIRST_NAME, "");
+        expected.put(RegistrationParameter.SECOND_NAME, "");
+        expected.put(RegistrationParameter.PHONE_NUMBER, "375251111111");
+        expected.put(RegistrationParameter.PASSWORD, "");
+        expected.put(RegistrationParameter.CONFIRMED_PASSWORD, "");
+        expected.put(RegistrationParameter.LOGIN_EXISTS, " ");
+        UserValidator.isRegistrationParametersCorrect(actual);
+        assertNotEquals(actual, expected);
+    }
+
     @DataProvider(name = "isIdCorrectPositiveData")
     public Object[][] createIsIdCorrectPositiveData() {
         return new Object[][]{

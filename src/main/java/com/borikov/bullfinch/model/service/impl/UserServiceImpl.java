@@ -26,6 +26,7 @@ import java.util.Optional;
  * @version 1.0
  */
 public class UserServiceImpl implements UserService {
+    private static final String EMPTY_VALUE = "";
     private final TransactionManager transactionManager = TransactionManager.getInstance();
     private final UserDao userDao = UserDaoImpl.getInstance();
 
@@ -34,23 +35,31 @@ public class UserServiceImpl implements UserService {
         try {
             boolean result = false;
             if (UserValidator.isRegistrationParametersCorrect(registrationParameters)) {
-                Optional<String> encryptedPassword =
-                        PasswordEncryptor.encrypt(registrationParameters.get(RegistrationParameter.PASSWORD));
                 Optional<String> existingUserPassword =
                         userDao.checkExistingByLogin(registrationParameters.get(RegistrationParameter.LOGIN));
-                boolean existingUserEmail =
-                        userDao.checkExistingByEmail(registrationParameters.get(RegistrationParameter.EMAIL));
-                if (existingUserPassword.isEmpty() && !existingUserEmail && encryptedPassword.isPresent()) {
-                    UserBuilder userBuilder = new UserBuilder();
-                    userBuilder.setEmail(registrationParameters.get(RegistrationParameter.EMAIL));
-                    userBuilder.setLogin(registrationParameters.get(RegistrationParameter.LOGIN));
-                    userBuilder.setFirstName(registrationParameters.get(RegistrationParameter.FIRST_NAME));
-                    userBuilder.setSecondName(registrationParameters.get(RegistrationParameter.SECOND_NAME));
-                    userBuilder.setPhoneNumber(registrationParameters.get(RegistrationParameter.PHONE_NUMBER));
-                    userBuilder.setUserRole(UserRole.USER);
-                    userBuilder.setWallet(new Wallet(null, 0));
-                    User user = userBuilder.getUser();
-                    result = transactionManager.addWalletAndUser(user, encryptedPassword.get());
+                if (existingUserPassword.isEmpty()) {
+                    boolean existingUserEmail =
+                            userDao.checkExistingByEmail(registrationParameters.get(RegistrationParameter.EMAIL));
+                    if (!existingUserEmail) {
+                        Optional<String> encryptedPassword =
+                                PasswordEncryptor.encrypt(registrationParameters.get(RegistrationParameter.PASSWORD));
+                        if (encryptedPassword.isPresent()) {
+                            UserBuilder userBuilder = new UserBuilder();
+                            userBuilder.setEmail(registrationParameters.get(RegistrationParameter.EMAIL));
+                            userBuilder.setLogin(registrationParameters.get(RegistrationParameter.LOGIN));
+                            userBuilder.setFirstName(registrationParameters.get(RegistrationParameter.FIRST_NAME));
+                            userBuilder.setSecondName(registrationParameters.get(RegistrationParameter.SECOND_NAME));
+                            userBuilder.setPhoneNumber(registrationParameters.get(RegistrationParameter.PHONE_NUMBER));
+                            userBuilder.setUserRole(UserRole.USER);
+                            userBuilder.setWallet(new Wallet(null, 0));
+                            User user = userBuilder.getUser();
+                            result = transactionManager.addWalletAndUser(user, encryptedPassword.get());
+                        }
+                    } else {
+                        registrationParameters.put(RegistrationParameter.EMAIL_EXISTS, EMPTY_VALUE);
+                    }
+                } else {
+                    registrationParameters.put(RegistrationParameter.LOGIN_EXISTS, EMPTY_VALUE);
                 }
             }
             return result;
