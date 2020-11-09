@@ -30,7 +30,7 @@
                 </div>
                 <div class="col-md-4">
                     <br/>
-                    <form action="controller" method="post" autocomplete="off">
+                    <form action="/bullfinch" method="post" autocomplete="off">
                         <input type="hidden" name="commandName" value="order_tattoo_command">
                         <input type="hidden" name="tattooId" value="${tattoo.tattooId}">
                         <input type="hidden" id="discountId" name="discountId">

@@ -23,7 +23,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 mx-auto">
-                    <form method="post" action="controller" autocomplete="off">
+                    <form method="post" action="/bullfinch" autocomplete="off">
                         <div class="form-group">
                             <input type="hidden" name="userId" value="${userId}">
                             <input style="background-color: black" type="text"

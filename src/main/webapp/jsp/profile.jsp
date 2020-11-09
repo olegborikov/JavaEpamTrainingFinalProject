@@ -32,7 +32,7 @@
             <div class="row">
                 <div class="col-md-2"></div>
                 <div class="col-md-5">
-                    <form name="editProfileForm" method="post" action="controller">
+                    <form name="editProfileForm" method="post" action="/bullfinch">
                         <input type="hidden" name="userId" value="${user.userId}">
                         <div style="text-align: left">
                             <button class="btn btn-outline-secondary"
@@ -49,7 +49,7 @@
                     <p><fmt:message key="profile.surname"/> ${user.secondName} </p>
                     <p><fmt:message key="profile.phoneNumber"/> ${user.phoneNumber} </p>
                     <p><fmt:message key="profile.walletBalance"/> ${user.wallet.balance} <fmt:message key="profile.rubles"/></p>
-                    <form name="allowDeleteForm" method="post" action="controller">
+                    <form name="allowDeleteForm" method="post" action="/bullfinch">
                         <input type="hidden" name="walletId" value="${user.wallet.walletId}">
                         <button type="submit" class="btn btn-outline-secondary" name="commandName"
                                 value="browse_balance_enrich_page_command">
@@ -62,7 +62,7 @@
                         <div class="panel-heading"><h3 class="panel-title">
                             <fmt:message key="profile.orders"/></h3>
                         </div>
-                        <form method="post" action="controller">
+                        <form method="post" action="/bullfinch">
                             <div class="panel-body">
                                 <ul class="list-group">
                                     <c:if test="${empty orders}">

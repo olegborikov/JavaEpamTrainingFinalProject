@@ -32,7 +32,7 @@
             <div class="row">
                 <div class="col-md-2"></div>
                 <div class="col-md-5">
-                    <form name="editProfileForm" method="post" action="controller">
+                    <form name="editProfileForm" method="post" action="/bullfinch">
                         <input type="hidden" name="userId" value="${user.userId}">
                         <div style="text-align: left">
                             <button class="btn btn-outline-secondary"
@@ -66,7 +66,7 @@
                         </c:if>
                     </p>
                     <c:if test="${user.blocked}">
-                        <form name="" method="post" action="controller">
+                        <form name="" method="post" action="/bullfinch">
                             <input type="hidden" name="userId" value="${user.userId}">
                             <div style="text-align: left">
                                 <input type="hidden" name="login" value="${user.login}">
@@ -78,7 +78,7 @@
                         </form>
                     </c:if>
                     <c:if test="${!user.blocked}">
-                        <form method="post" action="controller">
+                        <form method="post" action="/bullfinch">
                             <input type="hidden" name="userId" value="${user.userId}">
                             <div style="text-align: left">
                                 <input type="hidden" name="login" value="${user.login}">
@@ -95,7 +95,7 @@
                         <div class="panel-heading"><h3 class="panel-title">
                             <fmt:message key="profileAdmin.orders"/></h3>
                         </div>
-                        <form method="post" action="controller">
+                        <form method="post" action="/bullfinch">
                             <div class="panel-body">
                                 <ul class="list-group">
                                     <c:if test="${empty orders}">
@@ -122,7 +122,7 @@
                         <div class="panel-heading"><h3 class="panel-title">
                             <fmt:message key="profileAdmin.discounts"/></h3>
                         </div>
-                        <form action="controller" method="post">
+                        <form action="/bullfinch" method="post">
                             <div class="panel-body">
                                 <ul class="list-group">
                                     <c:if test="${empty discounts}">

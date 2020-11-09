@@ -24,7 +24,7 @@
             <div class="row">
                 <div class="col-lg-4 mx-auto">
                     <div class="register-form">
-                        <form method="post" action="controller"
+                        <form method="post" action="/bullfinch"
                               autocomplete="off">
                             <div class="form-group">
                                 <label><fmt:message key="registration.email"/></label>

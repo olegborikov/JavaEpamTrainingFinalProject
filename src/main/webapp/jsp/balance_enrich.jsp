@@ -26,7 +26,7 @@
                     <div style="color: black" class="padding ">
                         <div class="row">
                             <div class="col-sm-6">
-                                <form method="post" action="controller" autocomplete="off">
+                                <form method="post" action="/bullfinch" autocomplete="off">
                                     <div class="card">
                                         <div class="card-header">
                                             <strong><fmt:message key="balanceEnrich.creditCard"/></strong>

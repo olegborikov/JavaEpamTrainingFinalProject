@@ -10,13 +10,13 @@
          class="navbar navbar-light navbar-expand-md navbar navbar-expand-lg fixed-top"
          id="mainNav">
         <div class="container">
-            <form method="post" action="controller">
+            <form method="post" action="/bullfinch">
                 <button style="color:white" class="btn navbar-brand js-scroll-trigger"
                         name="commandName" value="browse_home_page_command">
                     <fmt:message key="navbar.home"/>
                 </button>
             </form>
-            <form method="post" action="controller">
+            <form method="post" action="/bullfinch">
                 <input type="hidden" name="commandName" value="switch_locale_command">
                 <button style="color:white" class="btn navbar-brand js-scroll-trigger"
                         name="newLocale" value=<fmt:message key="navbar.switchLanguage"/>>
@@ -31,7 +31,7 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="nav navbar-nav ml-auto">
                     <c:if test="${!role.equals('admin')}">
-                        <form method="post" action="controller">
+                        <form method="post" action="/bullfinch">
                             <li class="nav-item nav-link js-scroll-trigger" role="presentation">
                                 <button style="color:white"
                                         class="btn navbar-brand js-scroll-trigger"
@@ -42,7 +42,7 @@
                         </form>
                     </c:if>
                     <c:if test="${role.equals('guest')}">
-                        <form method="post" action="controller">
+                        <form method="post" action="/bullfinch">
                             <li class="nav-item nav-link js-scroll-trigger" role="presentation">
                                 <button style="color:white"
                                         class="btn navbar-brand js-scroll-trigger"
@@ -51,7 +51,7 @@
                                 </button>
                             </li>
                         </form>
-                        <form method="post" action="controller">
+                        <form method="post" action="/bullfinch">
                             <li class="nav-item nav-link js-scroll-trigger" role="presentation">
                                 <button style="color:white"
                                         class="btn navbar-brand js-scroll-trigger"
@@ -62,7 +62,7 @@
                         </form>
                     </c:if>
                     <c:if test="${role.equals('user')}">
-                        <form method="post" action="controller">
+                        <form method="post" action="/bullfinch">
                             <li class="nav-item nav-link js-scroll-trigger" role="presentation">
                                 <button style="color:white"
                                         class="btn navbar-brand js-scroll-trigger"
@@ -74,7 +74,7 @@
                         </form>
                     </c:if>
                     <c:if test="${role.equals('admin')}">
-                        <form method="post" action="controller">
+                        <form method="post" action="/bullfinch">
                             <li class="nav-item nav-link js-scroll-trigger" role="presentation">
                                 <div class="dropdown">
                                     <button style="color:white"
@@ -106,7 +106,7 @@
                                 </div>
                             </li>
                         </form>
-                        <form method="post" action="controller">
+                        <form method="post" action="/bullfinch">
                             <li class="nav-item nav-link js-scroll-trigger" role="presentation">
                                 <button style="color:white"
                                         class="btn navbar-brand js-scroll-trigger"
@@ -116,7 +116,7 @@
                                 </button>
                             </li>
                         </form>
-                        <form method="post" action="controller">
+                        <form method="post" action="/bullfinch">
                             <li class="nav-item nav-link js-scroll-trigger" role="presentation">
                                 <button style="color:white"
                                         class="btn navbar-brand js-scroll-trigger"
@@ -128,7 +128,7 @@
                         </form>
                     </c:if>
                     <c:if test="${!role.equals('guest')}">
-                        <form method="post" action="controller">
+                        <form method="post" action="/bullfinch">
                             <li class="nav-item nav-link js-scroll-trigger" role="presentation">
                                 <button style="color:white"
                                         class="btn navbar-brand js-scroll-trigger"

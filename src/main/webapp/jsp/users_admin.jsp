@@ -24,7 +24,7 @@
         <div class="row">
             <div class="col-lg-6"></div>
             <div class="col-lg-4 mb-5">
-                <form method="post" action="controller" autocomplete="off">
+                <form method="post" action="/bullfinch" autocomplete="off">
                     <div class="input-group">
                         <input style="background-color: black" maxlength="20"
                                type="text" class="form-control text-white"
@@ -57,7 +57,7 @@
                                           usersAmountOnPage="${usersAmountOnPage}"/>
                 </div>
                 <c:if test="${not empty users && users.size() > usersAmountOnPage}">
-                    <form method="post" action="controller">
+                    <form method="post" action="/bullfinch">
                         <input type="hidden" name="commandName" value="pagination_command">
                         <c:choose>
                             <c:when test="${pageNumber != 1}">

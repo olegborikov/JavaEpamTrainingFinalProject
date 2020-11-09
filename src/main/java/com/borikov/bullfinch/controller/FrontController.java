@@ -20,7 +20,6 @@ import java.util.Optional;
  * @author Oleg Borikov
  * @version 1.0
  */
-@WebServlet(urlPatterns = "/controller")
 public class FrontController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

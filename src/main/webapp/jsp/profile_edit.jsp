@@ -24,7 +24,7 @@
                 <div class="col-md-2"></div>
                 <div class="col-md-3">
                     <div>
-                        <form method="post" action="controller"
+                        <form method="post" action="/bullfinch"
                               autocomplete="off">
                             <input type="hidden" name="userId" value="${user.userId}">
                             <div class="form-group">

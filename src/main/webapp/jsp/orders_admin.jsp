@@ -23,7 +23,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-3">
-                <form action="controller" method="post" class="form">
+                <form action="/bullfinch" method="post" class="form">
                     <div class="form-group">
                         <strong class="form-label"><fmt:message key="ordersAdmin.beginDate"/></strong>
                         <input type="date" style=" filter: invert(1);" name="beginDate"
@@ -61,7 +61,7 @@
                                                  ordersAmountOnPage="${ordersAmountOnPage}"/>
                 </div>
                 <c:if test="${not empty orders && orders.size() > ordersAmountOnPage}">
-                    <form method="post" action="controller">
+                    <form method="post" action="/bullfinch">
                         <input type="hidden" name="commandName" value="pagination_command">
                         <c:choose>
                             <c:when test="${pageNumber != 1}">

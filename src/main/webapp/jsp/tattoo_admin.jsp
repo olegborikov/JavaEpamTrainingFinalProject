@@ -27,7 +27,7 @@
                     <br/>
                 </div>
                 <div class="col-12 col-md-3">
-                    <form name="editTattooForm" method="post" action="controller">
+                    <form name="editTattooForm" method="post" action="/bullfinch">
                         <input type="hidden" name="tattooId" value="${tattoo.tattooId}">
                         <div style="text-align: right">
                             <button style="vertical-align: center" class="btn btn-outline-secondary"
@@ -73,7 +73,7 @@
                         </c:when>
                         <c:otherwise>
                             <fmt:message key="tattooAdmin.no"/>
-                    <form name="allowDeleteForm" method="post" action="controller">
+                    <form name="allowDeleteForm" method="post" action="/bullfinch">
                         <input type="hidden" name="tattooId" value="${tattoo.tattooId}">
                         <button type="submit" class="btn btn-outline-secondary" name="commandName"
                                 value="allow_tattoo_command">
@@ -95,7 +95,7 @@
                         <c:when test="${tattoo.archived}">
                             <fmt:message key="tattooAdmin.yes"/>
                         <c:if test="${tattoo.allowed}">
-                    <form name="archiveForm" method="post" action="controller">
+                    <form name="archiveForm" method="post" action="/bullfinch">
                         <input type="hidden" name="tattooId" value="${tattoo.tattooId}">
                         <button type="submit" class="btn btn-outline-secondary" name="commandName"
                                 value="unarchive_tattoo_command">
@@ -107,7 +107,7 @@
                     <c:otherwise>
                         <fmt:message key="tattooAdmin.no"/>
                         <c:if test="${tattoo.allowed}">
-                            <form name="unArchiveForm" method="post" action="controller">
+                            <form name="unArchiveForm" method="post" action="/bullfinch">
                                 <input type="hidden" name="tattooId" value="${tattoo.tattooId}">
                                 <button type="submit" class="btn btn-outline-secondary"
                                         name="commandName"

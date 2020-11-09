@@ -25,7 +25,7 @@
             <div class="row col-12">
                 <div class="col-md-3">
                     <c:if test="${allTattoos}">
-                        <form name="offerForm" method="post" action="controller">
+                        <form name="offerForm" method="post" action="/bullfinch">
                             <button style="vertical-align: center" class="btn btn-outline-secondary"
                                     name="commandName" value="browse_tattoo_add_page_command">
                                 <fmt:message key="tattoosAdmin.addTattoo"/>
@@ -38,7 +38,7 @@
                 </div>
                 <div class="col-12 col-md-3">
                     <c:if test="${allTattoos}">
-                        <form method="post" action="controller" autocomplete="off">
+                        <form method="post" action="/bullfinch" autocomplete="off">
                             <div class="input-group">
                                 <input style="background-color: black"  type="text"
                                        class="form-control text-white" maxlength="25"
@@ -69,7 +69,7 @@
                                             tattoosAmountOnPage="${tattoosAmountOnPage}"/>
                 </div>
                 <c:if test="${not empty tattoos && tattoos.size() > tattoosAmountOnPage}">
-                    <form method="post" action="controller">
+                    <form method="post" action="/bullfinch">
                         <input type="hidden" name="commandName" value="pagination_command">
                         <c:choose>
                             <c:when test="${pageNumber != 1}">

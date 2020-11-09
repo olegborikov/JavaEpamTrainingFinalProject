@@ -50,7 +50,7 @@ public class PaginationUsersAdminTag extends TagSupport {
         while (currentIndex < users.size() && currentIndex <= lastIndex) {
             try {
                 pageContext.getOut().write("<div class=\"col-md-12\">\n"
-                        + "<form method=\"post\" action=\"controller\">\n"
+                        + "<form method=\"post\" action=\"/bullfinch\">\n"
                         + "<input type=\"hidden\" name=\"commandName\"\n"
                         + "value=\"browse_profile_admin_page_command\">\n"
                         + "<button style=\"background-color: black; text-align: left\"\n"

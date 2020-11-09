@@ -40,7 +40,7 @@
                     <c:choose>
                         <c:when test="${!order.confirmed}">
                             <fmt:message key="order.no"/>
-                                <form name="deleteForm" method="post" action="controller">
+                                <form name="deleteForm" method="post" action="/bullfinch">
                                     <input type="hidden" name="orderId" value="${order.orderId}">
                                     <button type="submit" class="btn btn-outline-secondary"
                                             name="commandName"

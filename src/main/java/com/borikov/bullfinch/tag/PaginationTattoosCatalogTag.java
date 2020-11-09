@@ -66,7 +66,7 @@ public class PaginationTattoosCatalogTag extends TagSupport {
                         + "<div class=\"image-info\">\n"
                         + "<h2 class=\"mb-3\">"
                         + tattoos.get(currentIndex).getName() + "</h2>\n"
-                        + "<form name=\"tattooInfoForm\" method=\"post\" action=\"controller\">\n"
+                        + "<form name=\"tattooInfoForm\" method=\"post\" action=\"/bullfinch\">\n"
                         + "<input type=\"hidden\" name=\"commandName\"\n"
                         + "value=\"browse_tattoo_page_command\">\n"
                         + "<button class=\"btn btn-outline-white py-2 px-4\"\n"

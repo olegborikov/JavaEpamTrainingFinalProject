@@ -41,7 +41,7 @@
                         <c:choose>
                             <c:when test="${!order.confirmed}">
                                 <fmt:message key="orderAdmin.no"/>
-                                <form method="post" action="controller">
+                                <form method="post" action="/bullfinch">
                                     <input type="hidden" name="orderId" value="${order.orderId}">
                                     <button class="btn btn-outline-secondary"
                                             name="commandName"

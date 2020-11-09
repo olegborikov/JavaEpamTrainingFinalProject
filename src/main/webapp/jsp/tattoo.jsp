@@ -35,7 +35,7 @@
                     <p><fmt:message key="tattoo.description"/> ${tattoo.description}</p>
                     <p><fmt:message key="tattoo.price"/> ${tattoo.price} <fmt:message key="tattoo.rubles"/></p>
                     <c:if test="${role.equals('user')}">
-                        <form method="post" action="controller">
+                        <form method="post" action="/bullfinch">
                             <input type="hidden" name="tattooId" value="${tattoo.tattooId}">
                             <button type="submit" class="btn btn-outline-secondary"
                                     name="commandName"

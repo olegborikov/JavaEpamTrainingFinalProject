@@ -24,7 +24,7 @@ import java.util.Optional;
         maxRequestSize = 1024 * 1024 * 5 * 5)
 public class UploadController extends HttpServlet {
     private static final PhotoFileManager photoFileManager = new PhotoFileManager();
-    private static final String DISPATCHER_PATH_CONTROLLER = "/controller";
+    private static final String DISPATCHER_PATH_CONTROLLER = "/bullfinch";
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
