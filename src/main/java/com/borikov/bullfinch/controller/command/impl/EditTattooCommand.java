@@ -32,11 +32,11 @@ public class EditTattooCommand implements Command {
         String description = request.getParameter(RequestParameter.DESCRIPTION);
         String price = request.getParameter(RequestParameter.PRICE);
         try {
-            boolean result = tattooService.editTattoo(id, name, description, price);
+            boolean isTattooEdited = tattooService.editTattoo(id, name, description, price);
             Optional<Tattoo> tattoo = tattooService.findTattooById(id);
             if (tattoo.isPresent()) {
                 request.setAttribute(RequestParameter.TATTOO, tattoo.get());
-                if (result) {
+                if (isTattooEdited) {
                     page = PagePath.TATTOO_ADMIN;
                 } else {
                     request.setAttribute(RequestParameter.INCORRECT_DATA_MESSAGE, true);

@@ -79,12 +79,12 @@ public class TattooDaoImpl implements TattooDao {
             statement.setDouble(3, tattoo.getPrice());
             statement.setLong(4, tattoo.getImage().getImageId());
             statement.setString(5, tattoo.getUser().getLogin());
-            boolean result = statement.executeUpdate() > 0;
+            boolean isAdded = statement.executeUpdate() > 0;
             ResultSet generatedKeys = statement.getGeneratedKeys();
             if (generatedKeys.next()) {
                 tattoo.setTattooId(generatedKeys.getLong(1));
             }
-            return result;
+            return isAdded;
         } catch (SQLException e) {
             throw new DaoException("Error while adding tattoo: " + tattoo, e);
         }
@@ -122,12 +122,12 @@ public class TattooDaoImpl implements TattooDao {
             statement.setDouble(3, tattoo.getPrice());
             statement.setLong(4, tattoo.getImage().getImageId());
             statement.setString(5, tattoo.getUser().getLogin());
-            boolean result = statement.executeUpdate() > 0;
+            boolean isOffered = statement.executeUpdate() > 0;
             ResultSet generatedKeys = statement.getGeneratedKeys();
             if (generatedKeys.next()) {
                 tattoo.setTattooId(generatedKeys.getLong(1));
             }
-            return result;
+            return isOffered;
         } catch (SQLException e) {
             throw new DaoException("Error while offering tattoo: " + tattoo, e);
         }

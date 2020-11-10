@@ -30,37 +30,37 @@ public class UserValidator {
      * @return the boolean
      */
     public static boolean isRegistrationParametersCorrect(Map<String, String> registrationParameters) {
-        boolean result = true;
+        boolean isRegistrationParametersCorrect = true;
         if (!isEmailCorrect(registrationParameters.get(RegistrationParameter.EMAIL))) {
-            result = false;
+            isRegistrationParametersCorrect = false;
             registrationParameters.put(RegistrationParameter.EMAIL, EMPTY_VALUE);
         }
         if (!isLoginCorrect(registrationParameters.get(RegistrationParameter.LOGIN))) {
-            result = false;
+            isRegistrationParametersCorrect = false;
             registrationParameters.put(RegistrationParameter.LOGIN, EMPTY_VALUE);
         }
         if (!isFirstNameCorrect(registrationParameters.get(RegistrationParameter.FIRST_NAME))) {
-            result = false;
+            isRegistrationParametersCorrect = false;
             registrationParameters.put(RegistrationParameter.FIRST_NAME, EMPTY_VALUE);
         }
         if (!isSecondNameCorrect(registrationParameters.get(RegistrationParameter.SECOND_NAME))) {
-            result = false;
+            isRegistrationParametersCorrect = false;
             registrationParameters.put(RegistrationParameter.SECOND_NAME, EMPTY_VALUE);
         }
         if (!isPhoneNumberCorrect(registrationParameters.get(RegistrationParameter.PHONE_NUMBER))) {
-            result = false;
+            isRegistrationParametersCorrect = false;
             registrationParameters.put(RegistrationParameter.PHONE_NUMBER, EMPTY_VALUE);
         }
         if (!isPasswordCorrect(registrationParameters.get(RegistrationParameter.PASSWORD))) {
-            result = false;
+            isRegistrationParametersCorrect = false;
             registrationParameters.put(RegistrationParameter.PASSWORD, EMPTY_VALUE);
         }
         if (!registrationParameters.get(RegistrationParameter.PASSWORD).equals(
                 registrationParameters.get(RegistrationParameter.CONFIRMED_PASSWORD))) {
-            result = false;
+            isRegistrationParametersCorrect = false;
             registrationParameters.put(RegistrationParameter.CONFIRMED_PASSWORD, EMPTY_VALUE);
         }
-        return result;
+        return isRegistrationParametersCorrect;
     }
 
     /**
@@ -134,10 +134,10 @@ public class UserValidator {
     }
 
     private static boolean isStringCorrect(String line, String regex) {
-        boolean result = false;
+        boolean isStringCorrect = false;
         if (line != null) {
-            result = line.matches(regex);
+            isStringCorrect = line.matches(regex);
         }
-        return result;
+        return isStringCorrect;
     }
 }

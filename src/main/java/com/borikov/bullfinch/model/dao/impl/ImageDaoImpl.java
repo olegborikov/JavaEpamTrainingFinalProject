@@ -33,12 +33,12 @@ public class ImageDaoImpl implements ImageDao {
     public boolean add(Image image, Connection connection) throws DaoException {
         try (PreparedStatement statement = connection.prepareStatement(ADD, Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, image.getName());
-            boolean result = statement.executeUpdate() > 0;
+            boolean isAdded = statement.executeUpdate() > 0;
             ResultSet generatedKeys = statement.getGeneratedKeys();
             if (generatedKeys.next()) {
                 image.setImageId(generatedKeys.getLong(1));
             }
-            return result;
+            return isAdded;
         } catch (SQLException e) {
             throw new DaoException("Error while adding image: " + image, e);
         }

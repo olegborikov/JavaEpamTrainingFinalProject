@@ -71,12 +71,12 @@ public class UserDaoImpl implements UserDao {
             statement.setString(6, user.getPhoneNumber());
             statement.setLong(7, user.getUserRole().getUserRoleId());
             statement.setLong(8, user.getWallet().getWalletId());
-            boolean result = statement.executeUpdate() > 0;
+            boolean isAdded = statement.executeUpdate() > 0;
             ResultSet generatedKeys = statement.getGeneratedKeys();
             if (generatedKeys.next()) {
                 user.setUserId(generatedKeys.getLong(1));
             }
-            return result;
+            return isAdded;
         } catch (SQLException e) {
             throw new DaoException("Error while adding user: " + user, e);
         }

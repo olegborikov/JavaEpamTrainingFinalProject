@@ -33,7 +33,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean addUser(Map<String, String> registrationParameters) throws ServiceException {
         try {
-            boolean result = false;
+            boolean isUserAdded = false;
             if (UserValidator.isRegistrationParametersCorrect(registrationParameters)) {
                 Optional<String> existingUserPassword =
                         userDao.checkExistingByLogin(registrationParameters.get(RegistrationParameter.LOGIN));
@@ -53,7 +53,7 @@ public class UserServiceImpl implements UserService {
                             userBuilder.setUserRole(UserRole.USER);
                             userBuilder.setWallet(new Wallet(null, 0));
                             User user = userBuilder.getUser();
-                            result = transactionManager.addWalletAndUser(user, encryptedPassword.get());
+                            isUserAdded = transactionManager.addWalletAndUser(user, encryptedPassword.get());
                         }
                     } else {
                         registrationParameters.put(RegistrationParameter.EMAIL_EXISTS, EMPTY_VALUE);
@@ -62,7 +62,7 @@ public class UserServiceImpl implements UserService {
                     registrationParameters.put(RegistrationParameter.LOGIN_EXISTS, EMPTY_VALUE);
                 }
             }
-            return result;
+            return isUserAdded;
         } catch (DaoException | TransactionException e) {
             StringBuilder sb = new StringBuilder("Error while adding user: ");
             sb.append("email = ").append(registrationParameters.get(RegistrationParameter.EMAIL));
@@ -78,7 +78,7 @@ public class UserServiceImpl implements UserService {
     public boolean editUser(String id, String email, String login, String firstName, String secondName,
                             String phoneNumber) throws ServiceException {
         try {
-            boolean result = false;
+            boolean isUserEdited = false;
             if (UserValidator.isIdCorrect(id) && UserValidator.isEmailCorrect(email)
                     && UserValidator.isLoginCorrect(login) && UserValidator.isFirstNameCorrect(firstName)
                     && UserValidator.isSecondNameCorrect(secondName)
@@ -92,9 +92,9 @@ public class UserServiceImpl implements UserService {
                 userBuilder.setSecondName(secondName);
                 userBuilder.setPhoneNumber(phoneNumber);
                 User user = userBuilder.getUser();
-                result = userDao.update(user);
+                isUserEdited = userDao.update(user);
             }
-            return result;
+            return isUserEdited;
         } catch (DaoException e) {
             StringBuilder sb = new StringBuilder("Error while editing user: ");
             sb.append("id = ").append(id);
@@ -110,11 +110,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean confirmUserEmail(String login) throws ServiceException {
         try {
-            boolean result = false;
+            boolean isUserEmailConfirmed = false;
             if (UserValidator.isLoginCorrect(login)) {
-                result = userDao.confirmEmail(login);
+                isUserEmailConfirmed = userDao.confirmEmail(login);
             }
-            return result;
+            return isUserEmailConfirmed;
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
@@ -123,11 +123,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean blockUser(String login) throws ServiceException {
         try {
-            boolean result = false;
+            boolean isUserBlocked = false;
             if (UserValidator.isLoginCorrect(login)) {
-                result = userDao.block(login);
+                isUserBlocked = userDao.block(login);
             }
-            return result;
+            return isUserBlocked;
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
@@ -136,11 +136,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean unblockUser(String login) throws ServiceException {
         try {
-            boolean result = false;
+            boolean isUserUnblocked = false;
             if (UserValidator.isLoginCorrect(login)) {
-                result = userDao.unblock(login);
+                isUserUnblocked = userDao.unblock(login);
             }
-            return result;
+            return isUserUnblocked;
         } catch (DaoException e) {
             throw new ServiceException(e);
         }

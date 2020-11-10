@@ -41,7 +41,7 @@ public class OrderServiceImpl implements OrderService {
     public boolean addOrder(String date, String description, String price, String tattooId, String userLogin,
                             String discountId) throws ServiceException {
         try {
-            boolean result = false;
+            boolean isOrderAdded = false;
             if (OrderValidator.isDateCorrect(date) && OrderValidator.isDescriptionCorrect(description)
                     && OrderValidator.isPriceCorrect(price) && TattooValidator.isIdCorrect(tattooId)
                     && UserValidator.isLoginCorrect(userLogin)) {
@@ -58,15 +58,15 @@ public class OrderServiceImpl implements OrderService {
                 User user = userBuilder.getUser();
                 orderBuilder.setUser(user);
                 Order order = orderBuilder.getOrder();
-                result = orderDao.add(order);
-                if (result) {
+                isOrderAdded = orderDao.add(order);
+                if (isOrderAdded) {
                     if (DiscountValidator.isIdCorrect(discountId)) {
                         long discountIdParsed = Long.parseLong(discountId);
                         discountDao.remove(discountIdParsed);
                     }
                 }
             }
-            return result;
+            return isOrderAdded;
         } catch (DaoException e) {
             StringBuilder sb = new StringBuilder("Error while adding order: ");
             sb.append("date = ").append(date);
@@ -82,12 +82,12 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public boolean removeOrder(String id) throws ServiceException {
         try {
-            boolean result = false;
+            boolean isOrderRemoved = false;
             if (OrderValidator.isIdCorrect(id)) {
                 long orderId = Long.parseLong(id);
-                result = orderDao.remove(orderId);
+                isOrderRemoved = orderDao.remove(orderId);
             }
-            return result;
+            return isOrderRemoved;
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
@@ -96,12 +96,12 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public boolean submitOrder(String id) throws ServiceException {
         try {
-            boolean result = false;
+            boolean isOrderSubmited = false;
             if (OrderValidator.isIdCorrect(id)) {
                 long orderId = Long.parseLong(id);
-                result = transactionManager.orderSubmitProcess(orderId);
+                isOrderSubmited = transactionManager.orderSubmitProcess(orderId);
             }
-            return result;
+            return isOrderSubmited;
         } catch (TransactionException e) {
             throw new ServiceException(e);
         }

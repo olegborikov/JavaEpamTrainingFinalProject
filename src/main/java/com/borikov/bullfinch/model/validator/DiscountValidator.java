@@ -34,10 +34,10 @@ public class DiscountValidator {
     }
 
     private static boolean isStringCorrect(String line, String regex) {
-        boolean result = false;
+        boolean isStringCorrect = false;
         if (line != null) {
-            result = line.matches(regex);
+            isStringCorrect = line.matches(regex);
         }
-        return result;
+        return isStringCorrect;
     }
 }

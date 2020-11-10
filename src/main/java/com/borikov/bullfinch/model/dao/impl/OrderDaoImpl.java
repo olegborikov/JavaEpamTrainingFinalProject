@@ -70,12 +70,12 @@ public class OrderDaoImpl implements OrderDao {
             statement.setString(3, order.getDescription());
             statement.setLong(4, order.getTattoo().getTattooId());
             statement.setString(5, order.getUser().getLogin());
-            boolean result = statement.executeUpdate() > 0;
+            boolean isAdded = statement.executeUpdate() > 0;
             ResultSet generatedKeysOrder = statement.getGeneratedKeys();
             if (generatedKeysOrder.next()) {
                 order.setOrderId(generatedKeysOrder.getLong(1));
             }
-            return result;
+            return isAdded;
         } catch (SQLException e) {
             throw new DaoException("Error while adding order: " + order, e);
         }

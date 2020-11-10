@@ -31,7 +31,7 @@ public class TattooServiceImpl implements TattooService {
     public boolean addTattoo(String tattooName, String description, String price, String imageName,
                              String proposedLogin) throws ServiceException {
         try {
-            boolean result = false;
+            boolean isTattooAdded = false;
             if (TattooValidator.isNameCorrect(tattooName) && TattooValidator.isDescriptionCorrect(description)
                     && TattooValidator.isPriceCorrect(price) && UserValidator.isLoginCorrect(proposedLogin)) {
                 double tattooPrice = Double.parseDouble(price);
@@ -44,9 +44,9 @@ public class TattooServiceImpl implements TattooService {
                 userBuilder.setLogin(proposedLogin);
                 tattooBuilder.setUser(userBuilder.getUser());
                 Tattoo tattoo = tattooBuilder.getTattoo();
-                result = transactionManager.addImageAndTattoo(tattoo);
+                isTattooAdded = transactionManager.addImageAndTattoo(tattoo);
             }
-            return result;
+            return isTattooAdded;
         } catch (TransactionException e) {
             StringBuilder sb = new StringBuilder("Error while adding tattoo: ");
             sb.append("tattoo name = ").append(tattooName);
@@ -61,13 +61,13 @@ public class TattooServiceImpl implements TattooService {
     @Override
     public boolean removeTattoo(String tattooId, String imageId) throws ServiceException {
         try {
-            boolean result = false;
+            boolean isTattooRemoved = false;
             if (TattooValidator.isIdCorrect(tattooId) && TattooValidator.isIdCorrect(imageId)) {
                 long tattooIdParsed = Long.parseLong(tattooId);
                 long imageIdParsed = Long.parseLong(imageId);
-                result = transactionManager.removeTattooAndImage(tattooIdParsed, imageIdParsed);
+                isTattooRemoved = transactionManager.removeTattooAndImage(tattooIdParsed, imageIdParsed);
             }
-            return result;
+            return isTattooRemoved;
         } catch (TransactionException e) {
             throw new ServiceException(e);
         }
@@ -76,7 +76,7 @@ public class TattooServiceImpl implements TattooService {
     @Override
     public boolean editTattoo(String id, String name, String description, String price) throws ServiceException {
         try {
-            boolean result = false;
+            boolean isTattooEdited = false;
             if (TattooValidator.isIdCorrect(id) && TattooValidator.isNameCorrect(name)
                     && TattooValidator.isDescriptionCorrect(description) && TattooValidator.isPriceCorrect(price)) {
                 long tattooId = Long.parseLong(id);
@@ -87,9 +87,9 @@ public class TattooServiceImpl implements TattooService {
                 tattooBuilder.setDescription(description);
                 tattooBuilder.setPrice(tattooPrice);
                 Tattoo tattoo = tattooBuilder.getTattoo();
-                result = tattooDao.update(tattoo);
+                isTattooEdited = tattooDao.update(tattoo);
             }
-            return result;
+            return isTattooEdited;
         } catch (DaoException e) {
             StringBuilder sb = new StringBuilder("Error while editing tattoo: ");
             sb.append("id = ").append(id);
@@ -104,7 +104,7 @@ public class TattooServiceImpl implements TattooService {
     public boolean offerTattoo(String tattooName, String description, String price, String imageName,
                                String proposedLogin) throws ServiceException {
         try {
-            boolean result = false;
+            boolean isTattooOffered = false;
             if (TattooValidator.isNameCorrect(tattooName) && TattooValidator.isDescriptionCorrect(description)
                     && TattooValidator.isPriceCorrect(price) && UserValidator.isLoginCorrect(proposedLogin)) {
                 double tattooPrice = Double.parseDouble(price);
@@ -117,9 +117,9 @@ public class TattooServiceImpl implements TattooService {
                 userBuilder.setLogin(proposedLogin);
                 tattooBuilder.setUser(userBuilder.getUser());
                 Tattoo tattoo = tattooBuilder.getTattoo();
-                result = transactionManager.offerImageAndTattoo(tattoo);
+                isTattooOffered = transactionManager.offerImageAndTattoo(tattoo);
             }
-            return result;
+            return isTattooOffered;
         } catch (TransactionException e) {
             StringBuilder sb = new StringBuilder("Error while offering tattoo: ");
             sb.append("tattoo name = ").append(tattooName);
@@ -134,12 +134,12 @@ public class TattooServiceImpl implements TattooService {
     @Override
     public boolean allowTattoo(String id) throws ServiceException {
         try {
-            boolean result = false;
+            boolean isTattooAllowed = false;
             if (TattooValidator.isIdCorrect(id)) {
                 long tattooId = Long.parseLong(id);
-                result = tattooDao.allow(tattooId);
+                isTattooAllowed = tattooDao.allow(tattooId);
             }
-            return result;
+            return isTattooAllowed;
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
@@ -148,12 +148,12 @@ public class TattooServiceImpl implements TattooService {
     @Override
     public boolean archiveTattoo(String id) throws ServiceException {
         try {
-            boolean result = false;
+            boolean isTattooArchived = false;
             if (TattooValidator.isIdCorrect(id)) {
                 long tattooId = Long.parseLong(id);
-                result = tattooDao.archive(tattooId);
+                isTattooArchived = tattooDao.archive(tattooId);
             }
-            return result;
+            return isTattooArchived;
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
@@ -162,12 +162,12 @@ public class TattooServiceImpl implements TattooService {
     @Override
     public boolean unarchiveTattoo(String id) throws ServiceException {
         try {
-            boolean result = false;
+            boolean isTattooUnarchived = false;
             if (TattooValidator.isIdCorrect(id)) {
                 long tattooId = Long.parseLong(id);
-                result = tattooDao.unarchive(tattooId);
+                isTattooUnarchived = tattooDao.unarchive(tattooId);
             }
-            return result;
+            return isTattooUnarchived;
         } catch (DaoException e) {
             throw new ServiceException(e);
         }

@@ -39,11 +39,11 @@ public class EditProfileCommand implements Command {
         String secondName = request.getParameter(RequestParameter.SECOND_NAME);
         String phoneNumber = request.getParameter(RequestParameter.PHONE_NUMBER);
         try {
-            boolean result = userService.editUser(id, email, login, firstName, secondName, phoneNumber);
+            boolean isUserEdited = userService.editUser(id, email, login, firstName, secondName, phoneNumber);
             Optional<User> user = userService.findUserByLogin(login);
             if (user.isPresent()) {
                 request.setAttribute(RequestParameter.USER, user.get());
-                if (result) {
+                if (isUserEdited) {
                     page = PagePath.PROFILE;
                     List<Order> orders = orderService.findOrdersByUserLogin(login);
                     request.setAttribute(RequestParameter.ORDERS, orders);

@@ -41,12 +41,12 @@ public class WalletDaoImpl implements WalletDao {
     @Override
     public boolean add(Wallet wallet, Connection connection) throws DaoException {
         try (PreparedStatement statement = connection.prepareStatement(ADD, Statement.RETURN_GENERATED_KEYS)) {
-            boolean result = statement.executeUpdate() > 0;
+            boolean isAdded = statement.executeUpdate() > 0;
             ResultSet generatedKeys = statement.getGeneratedKeys();
             if (generatedKeys.next()) {
                 wallet.setWalletId(generatedKeys.getLong(1));
             }
-            return result;
+            return isAdded;
         } catch (SQLException e) {
             throw new DaoException("Error while adding wallet: " + wallet, e);
         }

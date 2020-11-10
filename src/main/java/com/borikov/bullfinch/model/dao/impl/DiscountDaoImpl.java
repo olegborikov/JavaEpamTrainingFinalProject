@@ -43,12 +43,12 @@ public class DiscountDaoImpl implements DiscountDao {
              PreparedStatement statement = connection.prepareStatement(ADD, Statement.RETURN_GENERATED_KEYS)) {
             statement.setInt(1, discount.getDiscountPercent());
             statement.setLong(2, discount.getUser().getUserId());
-            boolean result = statement.executeUpdate() > 0;
+            boolean isAdded = statement.executeUpdate() > 0;
             ResultSet generatedKeysOrder = statement.getGeneratedKeys();
             if (generatedKeysOrder.next()) {
                 discount.setDiscountId(generatedKeysOrder.getLong(1));
             }
-            return result;
+            return isAdded;
         } catch (SQLException e) {
             throw new DaoException("Error while adding discount: " + discount, e);
         }

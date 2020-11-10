@@ -52,12 +52,12 @@ public class TransactionManager {
         try {
             connection = ConnectionPool.INSTANCE.getConnection();
             connection.setAutoCommit(false);
-            boolean result = imageDao.add(tattoo.getImage(), connection);
-            if (result) {
-                result = tattooDao.add(tattoo, connection);
+            boolean isImageAndTattooAdded = imageDao.add(tattoo.getImage(), connection);
+            if (isImageAndTattooAdded) {
+                isImageAndTattooAdded = tattooDao.add(tattoo, connection);
             }
             connection.commit();
-            return result;
+            return isImageAndTattooAdded;
         } catch (SQLException | DaoException e) {
             rollbackConnection(connection);
             throw new TransactionException("Error while adding image and tattoo: " + tattoo, e);
@@ -80,12 +80,12 @@ public class TransactionManager {
         try {
             connection = ConnectionPool.INSTANCE.getConnection();
             connection.setAutoCommit(false);
-            boolean result = imageDao.add(tattoo.getImage(), connection);
-            if (result) {
-                result = tattooDao.offer(tattoo, connection);
+            boolean isImageAndTattooOffered = imageDao.add(tattoo.getImage(), connection);
+            if (isImageAndTattooOffered) {
+                isImageAndTattooOffered = tattooDao.offer(tattoo, connection);
             }
             connection.commit();
-            return result;
+            return isImageAndTattooOffered;
         } catch (SQLException | DaoException e) {
             rollbackConnection(connection);
             throw new TransactionException("Error while offering image and tattoo: " + tattoo, e);
@@ -109,12 +109,12 @@ public class TransactionManager {
         try {
             connection = ConnectionPool.INSTANCE.getConnection();
             connection.setAutoCommit(false);
-            boolean result = tattooDao.remove(tattooId, connection);
-            if (result) {
-                result = imageDao.remove(imageId, connection);
+            boolean isTattooAndImageRemoved = tattooDao.remove(tattooId, connection);
+            if (isTattooAndImageRemoved) {
+                isTattooAndImageRemoved = imageDao.remove(imageId, connection);
             }
             connection.commit();
-            return result;
+            return isTattooAndImageRemoved;
         } catch (SQLException | DaoException e) {
             rollbackConnection(connection);
             StringBuilder sb = new StringBuilder("Error while removing tattoo: ");
@@ -142,12 +142,12 @@ public class TransactionManager {
         try {
             connection = ConnectionPool.INSTANCE.getConnection();
             connection.setAutoCommit(false);
-            boolean result = walletDao.add(user.getWallet(), connection);
-            if (result) {
-                result = userDao.add(user, password, connection);
+            boolean isWalletAndUserAdded = walletDao.add(user.getWallet(), connection);
+            if (isWalletAndUserAdded) {
+                isWalletAndUserAdded = userDao.add(user, password, connection);
             }
             connection.commit();
-            return result;
+            return isWalletAndUserAdded;
         } catch (SQLException | DaoException e) {
             rollbackConnection(connection);
             throw new TransactionException("Error while adding wallet and user: " + user, e);
@@ -165,7 +165,7 @@ public class TransactionManager {
      */
     public boolean orderSubmitProcess(long orderId) throws TransactionException {
         Connection connection = null;
-        boolean result = false;
+        boolean isOrderSubmitted = false;
         WalletDao walletDao = WalletDaoImpl.getInstance();
         OrderDao orderDao = OrderDaoImpl.getInstance();
         try {
@@ -178,13 +178,13 @@ public class TransactionManager {
                 Order order = orderOptional.get();
                 double newBalance = wallet.getBalance() - order.getPrice();
                 wallet.setBalance(newBalance);
-                result = walletDao.update(wallet);
-                if (result) {
+                isOrderSubmitted = walletDao.update(wallet);
+                if (isOrderSubmitted) {
                     orderDao.submit(orderId);
                 }
             }
             connection.commit();
-            return result;
+            return isOrderSubmitted;
         } catch (SQLException | DaoException e) {
             rollbackConnection(connection);
             throw new TransactionException("Error while process order submit: id = " + orderId, e);
