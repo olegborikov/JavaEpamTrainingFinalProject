@@ -48,13 +48,13 @@ public class TattooServiceImpl implements TattooService {
             }
             return isTattooAdded;
         } catch (TransactionException e) {
-            StringBuilder sb = new StringBuilder("Error while adding tattoo: ");
-            sb.append("tattoo name = ").append(tattooName);
-            sb.append(", description = ").append(description);
-            sb.append(", price = ").append(price);
-            sb.append(", image name = ").append(imageName);
-            sb.append(", proposed login = ").append(proposedLogin);
-            throw new ServiceException(sb.toString(), e);
+            StringBuilder message = new StringBuilder("Error while adding tattoo: ");
+            message.append("tattoo name = ").append(tattooName);
+            message.append(", description = ").append(description);
+            message.append(", price = ").append(price);
+            message.append(", image name = ").append(imageName);
+            message.append(", proposed login = ").append(proposedLogin);
+            throw new ServiceException(message.toString(), e);
         }
     }
 
@@ -91,12 +91,12 @@ public class TattooServiceImpl implements TattooService {
             }
             return isTattooEdited;
         } catch (DaoException e) {
-            StringBuilder sb = new StringBuilder("Error while editing tattoo: ");
-            sb.append("id = ").append(id);
-            sb.append(", name = ").append(name);
-            sb.append(", description = ").append(description);
-            sb.append(", price = ").append(price);
-            throw new ServiceException(sb.toString(), e);
+            StringBuilder message = new StringBuilder("Error while editing tattoo: ");
+            message.append("id = ").append(id);
+            message.append(", name = ").append(name);
+            message.append(", description = ").append(description);
+            message.append(", price = ").append(price);
+            throw new ServiceException(message.toString(), e);
         }
     }
 
@@ -121,13 +121,13 @@ public class TattooServiceImpl implements TattooService {
             }
             return isTattooOffered;
         } catch (TransactionException e) {
-            StringBuilder sb = new StringBuilder("Error while offering tattoo: ");
-            sb.append("tattoo name = ").append(tattooName);
-            sb.append(", description = ").append(description);
-            sb.append(", price = ").append(price);
-            sb.append(", image name = ").append(imageName);
-            sb.append(", proposed login = ").append(proposedLogin);
-            throw new ServiceException(sb.toString(), e);
+            StringBuilder message = new StringBuilder("Error while offering tattoo: ");
+            message.append("tattoo name = ").append(tattooName);
+            message.append(", description = ").append(description);
+            message.append(", price = ").append(price);
+            message.append(", image name = ").append(imageName);
+            message.append(", proposed login = ").append(proposedLogin);
+            throw new ServiceException(message.toString(), e);
         }
     }
 

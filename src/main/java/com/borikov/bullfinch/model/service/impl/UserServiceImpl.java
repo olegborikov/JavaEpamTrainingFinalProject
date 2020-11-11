@@ -64,13 +64,13 @@ public class UserServiceImpl implements UserService {
             }
             return isUserAdded;
         } catch (DaoException | TransactionException e) {
-            StringBuilder sb = new StringBuilder("Error while adding user: ");
-            sb.append("email = ").append(registrationParameters.get(RegistrationParameter.EMAIL));
-            sb.append(", login = ").append(registrationParameters.get(RegistrationParameter.LOGIN));
-            sb.append(", first name = ").append(registrationParameters.get(RegistrationParameter.FIRST_NAME));
-            sb.append(", second name = ").append(registrationParameters.get(RegistrationParameter.SECOND_NAME));
-            sb.append(", phone number = ").append(registrationParameters.get(RegistrationParameter.PHONE_NUMBER));
-            throw new ServiceException(sb.toString(), e);
+            StringBuilder message = new StringBuilder("Error while adding user: ");
+            message.append("email = ").append(registrationParameters.get(RegistrationParameter.EMAIL));
+            message.append(", login = ").append(registrationParameters.get(RegistrationParameter.LOGIN));
+            message.append(", first name = ").append(registrationParameters.get(RegistrationParameter.FIRST_NAME));
+            message.append(", second name = ").append(registrationParameters.get(RegistrationParameter.SECOND_NAME));
+            message.append(", phone number = ").append(registrationParameters.get(RegistrationParameter.PHONE_NUMBER));
+            throw new ServiceException(message.toString(), e);
         }
     }
 
@@ -96,14 +96,14 @@ public class UserServiceImpl implements UserService {
             }
             return isUserEdited;
         } catch (DaoException e) {
-            StringBuilder sb = new StringBuilder("Error while editing user: ");
-            sb.append("id = ").append(id);
-            sb.append(", email = ").append(email);
-            sb.append(", login = ").append(login);
-            sb.append(", first name = ").append(firstName);
-            sb.append(", second name = ").append(secondName);
-            sb.append(", phone number = ").append(phoneNumber);
-            throw new ServiceException(sb.toString(), e);
+            StringBuilder message = new StringBuilder("Error while editing user: ");
+            message.append("id = ").append(id);
+            message.append(", email = ").append(email);
+            message.append(", login = ").append(login);
+            message.append(", first name = ").append(firstName);
+            message.append(", second name = ").append(secondName);
+            message.append(", phone number = ").append(phoneNumber);
+            throw new ServiceException(message.toString(), e);
         }
     }
 

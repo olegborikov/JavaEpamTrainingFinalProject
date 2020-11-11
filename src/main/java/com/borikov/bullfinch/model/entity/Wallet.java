@@ -81,20 +81,20 @@ public class Wallet {
 
     @Override
     public int hashCode() {
-        int result;
+        int hashCode;
         long temp;
-        result = walletId != null ? walletId.hashCode() : 0;
+        hashCode = walletId != null ? walletId.hashCode() : 0;
         temp = Double.doubleToLongBits(balance);
-        result = 31 * result + (int) (temp ^ (temp >>> 32));
-        return result;
+        hashCode = 31 * hashCode + (int) (temp ^ (temp >>> 32));
+        return hashCode;
     }
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Wallet{");
-        sb.append("walletId=").append(walletId);
-        sb.append(", balance=").append(balance);
-        sb.append('}');
-        return sb.toString();
+        final StringBuilder stringRepresentation = new StringBuilder("Wallet{");
+        stringRepresentation.append("walletId=").append(walletId);
+        stringRepresentation.append(", balance=").append(balance);
+        stringRepresentation.append('}');
+        return stringRepresentation.toString();
     }
 }

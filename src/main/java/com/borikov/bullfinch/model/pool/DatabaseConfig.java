@@ -83,12 +83,12 @@ class DatabaseConfig {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("DatabaseConfig{");
-        sb.append("driverName='").append(driverName).append('\'');
-        sb.append(", url='").append(url).append('\'');
-        sb.append(", username='").append(username).append('\'');
-        sb.append(", password='").append(password).append('\'');
-        sb.append('}');
-        return sb.toString();
+        final StringBuilder stringRepresentation = new StringBuilder("DatabaseConfig{");
+        stringRepresentation.append("driverName='").append(driverName).append('\'');
+        stringRepresentation.append(", url='").append(url).append('\'');
+        stringRepresentation.append(", username='").append(username).append('\'');
+        stringRepresentation.append(", password='").append(password).append('\'');
+        stringRepresentation.append('}');
+        return stringRepresentation.toString();
     }
 }

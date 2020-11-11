@@ -224,30 +224,30 @@ public class Order {
 
     @Override
     public int hashCode() {
-        int result;
+        int hashCode;
         long temp;
-        result = orderId != null ? orderId.hashCode() : 0;
+        hashCode = orderId != null ? orderId.hashCode() : 0;
         temp = Double.doubleToLongBits(price);
-        result = 31 * result + (int) (temp ^ (temp >>> 32));
-        result = 31 * result + (date != null ? date.hashCode() : 0);
-        result = 31 * result + (description != null ? description.hashCode() : 0);
-        result = 31 * result + (isConfirmed ? 1 : 0);
-        result = 31 * result + (user != null ? user.hashCode() : 0);
-        result = 31 * result + (tattoo != null ? tattoo.hashCode() : 0);
-        return result;
+        hashCode = 31 * hashCode + (int) (temp ^ (temp >>> 32));
+        hashCode = 31 * hashCode + (date != null ? date.hashCode() : 0);
+        hashCode = 31 * hashCode + (description != null ? description.hashCode() : 0);
+        hashCode = 31 * hashCode + (isConfirmed ? 1 : 0);
+        hashCode = 31 * hashCode + (user != null ? user.hashCode() : 0);
+        hashCode = 31 * hashCode + (tattoo != null ? tattoo.hashCode() : 0);
+        return hashCode;
     }
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Order{");
-        sb.append("orderId=").append(orderId);
-        sb.append(", price=").append(price);
-        sb.append(", date=").append(date);
-        sb.append(", description='").append(description).append('\'');
-        sb.append(", isConfirmed=").append(isConfirmed);
-        sb.append(", user=").append(user);
-        sb.append(", tattoo=").append(tattoo);
-        sb.append('}');
-        return sb.toString();
+        final StringBuilder stringRepresentation = new StringBuilder("Order{");
+        stringRepresentation.append("orderId=").append(orderId);
+        stringRepresentation.append(", price=").append(price);
+        stringRepresentation.append(", date=").append(date);
+        stringRepresentation.append(", description='").append(description).append('\'');
+        stringRepresentation.append(", isConfirmed=").append(isConfirmed);
+        stringRepresentation.append(", user=").append(user);
+        stringRepresentation.append(", tattoo=").append(tattoo);
+        stringRepresentation.append('}');
+        return stringRepresentation.toString();
     }
 }

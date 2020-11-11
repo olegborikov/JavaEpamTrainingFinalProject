@@ -44,10 +44,10 @@ public class WalletServiceImpl implements WalletService {
             }
             return isBalanceEnriched;
         } catch (DaoException e) {
-            StringBuilder sb = new StringBuilder("Error while enriching balance: ");
-            sb.append("id = ").append(walletId);
-            sb.append(", enrich amount = ").append(enrichAmount);
-            throw new ServiceException(sb.toString(), e);
+            StringBuilder message = new StringBuilder("Error while enriching balance: ");
+            message.append("id = ").append(walletId);
+            message.append(", enrich amount = ").append(enrichAmount);
+            throw new ServiceException(message.toString(), e);
         }
     }
 
@@ -65,10 +65,10 @@ public class WalletServiceImpl implements WalletService {
             }
             return isBalanceSizeChecked;
         } catch (DaoException e) {
-            StringBuilder sb = new StringBuilder("Error while checking balance size: ");
-            sb.append("user login = ").append(userLogin);
-            sb.append(", price = ").append(price);
-            throw new ServiceException(sb.toString(), e);
+            StringBuilder message = new StringBuilder("Error while checking balance size: ");
+            message.append("user login = ").append(userLogin);
+            message.append(", price = ").append(price);
+            throw new ServiceException(message.toString(), e);
         }
     }
 

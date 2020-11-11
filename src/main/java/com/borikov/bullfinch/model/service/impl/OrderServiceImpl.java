@@ -68,14 +68,14 @@ public class OrderServiceImpl implements OrderService {
             }
             return isOrderAdded;
         } catch (DaoException e) {
-            StringBuilder sb = new StringBuilder("Error while adding order: ");
-            sb.append("date = ").append(date);
-            sb.append(", description = ").append(description);
-            sb.append(", price = ").append(price);
-            sb.append(", tattoo id = ").append(tattooId);
-            sb.append(", user login = ").append(userLogin);
-            sb.append(", discount id = ").append(discountId);
-            throw new ServiceException(sb.toString(), e);
+            StringBuilder message = new StringBuilder("Error while adding order: ");
+            message.append("date = ").append(date);
+            message.append(", description = ").append(description);
+            message.append(", price = ").append(price);
+            message.append(", tattoo id = ").append(tattooId);
+            message.append(", user login = ").append(userLogin);
+            message.append(", discount id = ").append(discountId);
+            throw new ServiceException(message.toString(), e);
         }
     }
 

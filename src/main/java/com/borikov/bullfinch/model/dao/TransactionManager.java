@@ -117,11 +117,11 @@ public class TransactionManager {
             return isTattooAndImageRemoved;
         } catch (SQLException | DaoException e) {
             rollbackConnection(connection);
-            StringBuilder sb = new StringBuilder("Error while removing tattoo: ");
-            sb.append("id = ").append(tattooId);
-            sb.append(" and image: ");
-            sb.append("id = ").append(imageId);
-            throw new TransactionException(sb.toString(), e);
+            StringBuilder message = new StringBuilder("Error while removing tattoo: ");
+            message.append("id = ").append(tattooId);
+            message.append(" and image: ");
+            message.append("id = ").append(imageId);
+            throw new TransactionException(message.toString(), e);
         } finally {
             closeConnection(connection);
         }

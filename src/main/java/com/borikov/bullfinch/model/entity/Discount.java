@@ -109,19 +109,19 @@ public class Discount {
 
     @Override
     public int hashCode() {
-        int result = discountId != null ? discountId.hashCode() : 0;
-        result = 31 * result + discountPercent;
-        result = 31 * result + (user != null ? user.hashCode() : 0);
-        return result;
+        int hashCode = discountId != null ? discountId.hashCode() : 0;
+        hashCode = 31 * hashCode + discountPercent;
+        hashCode = 31 * hashCode + (user != null ? user.hashCode() : 0);
+        return hashCode;
     }
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Discount{");
-        sb.append("discountId=").append(discountId);
-        sb.append(", discountPercent=").append(discountPercent);
-        sb.append(", user=").append(user);
-        sb.append('}');
-        return sb.toString();
+        final StringBuilder stringRepresentation = new StringBuilder("Discount{");
+        stringRepresentation.append("discountId=").append(discountId);
+        stringRepresentation.append(", discountPercent=").append(discountPercent);
+        stringRepresentation.append(", user=").append(user);
+        stringRepresentation.append('}');
+        return stringRepresentation.toString();
     }
 }

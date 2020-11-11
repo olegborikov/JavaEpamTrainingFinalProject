@@ -81,17 +81,17 @@ public class Image {
 
     @Override
     public int hashCode() {
-        int result = imageId != null ? imageId.hashCode() : 0;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        return result;
+        int hashCode = imageId != null ? imageId.hashCode() : 0;
+        hashCode = 31 * hashCode + (name != null ? name.hashCode() : 0);
+        return hashCode;
     }
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Image{");
-        sb.append("imageId=").append(imageId);
-        sb.append(", name='").append(name).append('\'');
-        sb.append('}');
-        return sb.toString();
+        final StringBuilder stringRepresentation = new StringBuilder("Image{");
+        stringRepresentation.append("imageId=").append(imageId);
+        stringRepresentation.append(", name='").append(name).append('\'');
+        stringRepresentation.append('}');
+        return stringRepresentation.toString();
     }
 }

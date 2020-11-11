@@ -250,32 +250,32 @@ public class Tattoo {
 
     @Override
     public int hashCode() {
-        int result;
+        int hashCode;
         long temp;
-        result = tattooId != null ? tattooId.hashCode() : 0;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (description != null ? description.hashCode() : 0);
+        hashCode = tattooId != null ? tattooId.hashCode() : 0;
+        hashCode = 31 * hashCode + (name != null ? name.hashCode() : 0);
+        hashCode = 31 * hashCode + (description != null ? description.hashCode() : 0);
         temp = Double.doubleToLongBits(price);
-        result = 31 * result + (int) (temp ^ (temp >>> 32));
-        result = 31 * result + (isAllowed ? 1 : 0);
-        result = 31 * result + (isArchived ? 1 : 0);
-        result = 31 * result + (image != null ? image.hashCode() : 0);
-        result = 31 * result + (user != null ? user.hashCode() : 0);
-        return result;
+        hashCode = 31 * hashCode + (int) (temp ^ (temp >>> 32));
+        hashCode = 31 * hashCode + (isAllowed ? 1 : 0);
+        hashCode = 31 * hashCode + (isArchived ? 1 : 0);
+        hashCode = 31 * hashCode + (image != null ? image.hashCode() : 0);
+        hashCode = 31 * hashCode + (user != null ? user.hashCode() : 0);
+        return hashCode;
     }
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Tattoo{");
-        sb.append("tattooId=").append(tattooId);
-        sb.append(", name='").append(name).append('\'');
-        sb.append(", description='").append(description).append('\'');
-        sb.append(", price=").append(price);
-        sb.append(", isAllowed=").append(isAllowed);
-        sb.append(", isArchived=").append(isArchived);
-        sb.append(", image=").append(image);
-        sb.append(", user=").append(user);
-        sb.append('}');
-        return sb.toString();
+        final StringBuilder stringRepresentation = new StringBuilder("Tattoo{");
+        stringRepresentation.append("tattooId=").append(tattooId);
+        stringRepresentation.append(", name='").append(name).append('\'');
+        stringRepresentation.append(", description='").append(description).append('\'');
+        stringRepresentation.append(", price=").append(price);
+        stringRepresentation.append(", isAllowed=").append(isAllowed);
+        stringRepresentation.append(", isArchived=").append(isArchived);
+        stringRepresentation.append(", image=").append(image);
+        stringRepresentation.append(", user=").append(user);
+        stringRepresentation.append('}');
+        return stringRepresentation.toString();
     }
 }

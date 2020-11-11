@@ -306,33 +306,33 @@ public class User {
 
     @Override
     public int hashCode() {
-        int result = userId != null ? userId.hashCode() : 0;
-        result = 31 * result + (email != null ? email.hashCode() : 0);
-        result = 31 * result + (login != null ? login.hashCode() : 0);
-        result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
-        result = 31 * result + (secondName != null ? secondName.hashCode() : 0);
-        result = 31 * result + (phoneNumber != null ? phoneNumber.hashCode() : 0);
-        result = 31 * result + (isBlocked ? 1 : 0);
-        result = 31 * result + (isActivated ? 1 : 0);
-        result = 31 * result + (userRole != null ? userRole.hashCode() : 0);
-        result = 31 * result + (wallet != null ? wallet.hashCode() : 0);
-        return result;
+        int hashCode = userId != null ? userId.hashCode() : 0;
+        hashCode = 31 * hashCode + (email != null ? email.hashCode() : 0);
+        hashCode = 31 * hashCode + (login != null ? login.hashCode() : 0);
+        hashCode = 31 * hashCode + (firstName != null ? firstName.hashCode() : 0);
+        hashCode = 31 * hashCode + (secondName != null ? secondName.hashCode() : 0);
+        hashCode = 31 * hashCode + (phoneNumber != null ? phoneNumber.hashCode() : 0);
+        hashCode = 31 * hashCode + (isBlocked ? 1 : 0);
+        hashCode = 31 * hashCode + (isActivated ? 1 : 0);
+        hashCode = 31 * hashCode + (userRole != null ? userRole.hashCode() : 0);
+        hashCode = 31 * hashCode + (wallet != null ? wallet.hashCode() : 0);
+        return hashCode;
     }
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("User{");
-        sb.append("userId=").append(userId);
-        sb.append(", email='").append(email).append('\'');
-        sb.append(", login='").append(login).append('\'');
-        sb.append(", firstName='").append(firstName).append('\'');
-        sb.append(", secondName='").append(secondName).append('\'');
-        sb.append(", phoneNumber='").append(phoneNumber).append('\'');
-        sb.append(", isBlocked=").append(isBlocked);
-        sb.append(", isActivated=").append(isActivated);
-        sb.append(", userRole=").append(userRole);
-        sb.append(", wallet=").append(wallet);
-        sb.append('}');
-        return sb.toString();
+        final StringBuilder stringRepresentation = new StringBuilder("User{");
+        stringRepresentation.append("userId=").append(userId);
+        stringRepresentation.append(", email='").append(email).append('\'');
+        stringRepresentation.append(", login='").append(login).append('\'');
+        stringRepresentation.append(", firstName='").append(firstName).append('\'');
+        stringRepresentation.append(", secondName='").append(secondName).append('\'');
+        stringRepresentation.append(", phoneNumber='").append(phoneNumber).append('\'');
+        stringRepresentation.append(", isBlocked=").append(isBlocked);
+        stringRepresentation.append(", isActivated=").append(isActivated);
+        stringRepresentation.append(", userRole=").append(userRole);
+        stringRepresentation.append(", wallet=").append(wallet);
+        stringRepresentation.append('}');
+        return stringRepresentation.toString();
     }
 }
