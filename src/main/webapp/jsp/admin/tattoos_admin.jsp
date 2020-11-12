@@ -1,5 +1,5 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="ctg" uri="customTags" %>
 
@@ -7,7 +7,7 @@
 <fmt:setBundle basename="i18n.application_message"/>
 <html>
 <head>
-    <title><fmt:message key="usersAdmin.title"/></title>
+    <title><fmt:message key="tattoosAdmin.title"/></title>
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <link rel="stylesheet" type="text/css"
@@ -18,57 +18,69 @@
           href="${pageContext.request.contextPath}/assets/css/project.css">
 </head>
 <body id="page-top">
-<jsp:include page="navbar.jsp"/>
-<section style="padding-top: 120px" class="masthead">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-6"></div>
-            <div class="col-lg-4 mb-5">
-                <form method="post" action="/bullfinch" autocomplete="off">
-                    <div class="input-group">
-                        <input style="background-color: black" maxlength="20"
-                               type="text" class="form-control text-white"
-                               name="searchLogin" value="<c:out value="${searchLogin}"/>"
-                               placeholder=<fmt:message key="usersAdmin.login"/>>
-                        <div class="input-group-btn">
-                            <button type="submit"
-                                    class="btn btn-outline-secondary"
-                                    name="commandName"
-                                    value="find_users_admin_command">
-                                <fmt:message key="usersAdmin.search"/>
+<jsp:include page="${pageContext.request.contextPath}/jsp/fragment/navbar.jsp"/>
+<section style="padding-top: 120px" class="masthead content-section text-center">
+    <div class="intro-body">
+        <div class="container-fluid">
+            <div class="row col-12">
+                <div class="col-md-3">
+                    <c:if test="${allTattoos}">
+                        <form name="offerForm" method="post" action="/bullfinch">
+                            <button style="vertical-align: center" class="btn btn-outline-secondary"
+                                    name="commandName" value="browse_tattoo_add_page_command">
+                                <fmt:message key="tattoosAdmin.addTattoo"/>
                             </button>
-                        </div>
-                    </div>
-                </form>
+                        </form>
+                    </c:if>
+                </div>
+                <div class="col-md-6">
+                    <br/>
+                </div>
+                <div class="col-12 col-md-3">
+                    <c:if test="${allTattoos}">
+                        <form method="post" action="/bullfinch" autocomplete="off">
+                            <div class="input-group">
+                                <input style="background-color: black"  type="text"
+                                       class="form-control text-white" maxlength="25"
+                                       name="tattooName" value="<c:out value="${tattooName}"/>"
+                                       placeholder=<fmt:message key="tattoosAdmin.name"/>>
+                                <div class="input-group-btn">
+                                    <button type="submit" class="btn btn-outline-secondary"
+                                            name="commandName" value="find_tattoos_admin_command">
+                                        <fmt:message key="tattoosAdmin.search"/>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </c:if>
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-2"></div>
-            <div class="col-lg-8 mb-5">
-                <div class="row form-group">
-                    <c:if test="${empty users}">
+            <br/>
+            <div class="container-fluid">
+                <div class="row">
+                    <c:if test="${empty tattoos}">
                         <div class="masthead content-section text-center">
                             <div class="container">
-                                <h3><fmt:message key="catalog.empty"/></h3>
+                                <h3><fmt:message key="tattoosAdmin.empty"/></h3>
                             </div>
                         </div>
                     </c:if>
-                    <ctg:pagination-users-admin pageNumber="${pageNumber}"
-                                          usersAmountOnPage="${usersAmountOnPage}"/>
+                    <ctg:pagination-tattoos-admin pageNumber="${pageNumber}"
+                                            tattoosAmountOnPage="${tattoosAmountOnPage}"/>
                 </div>
-                <c:if test="${not empty users && users.size() > usersAmountOnPage}">
+                <c:if test="${not empty tattoos && tattoos.size() > tattoosAmountOnPage}">
                     <form method="post" action="/bullfinch">
                         <input type="hidden" name="commandName" value="pagination_command">
                         <c:choose>
                             <c:when test="${pageNumber != 1}">
                                 <button type="submit" class="btn btn-outline-secondary"
                                         name="pageNumber" value=${pageNumber - 1}>
-                                    <fmt:message key="catalog.paginationPrevious"/>
+                                    <fmt:message key="tattoosAdmin.paginationPrevious"/>
                                 </button>
                             </c:when>
                             <c:otherwise>
                                 <button type="submit" class="btn btn-outline-secondary" disabled>
-                                    <fmt:message key="catalog.paginationPrevious"/>
+                                    <fmt:message key="tattoosAdmin.paginationPrevious"/>
                                 </button>
                             </c:otherwise>
                         </c:choose>
@@ -78,12 +90,12 @@
                             <c:when test="${pageNumber < pageAmount}">
                                 <button type="submit" class="btn btn-outline-secondary"
                                         name="pageNumber" value=${pageNumber + 1}>
-                                    <fmt:message key="catalog.paginationNext"/>
+                                    <fmt:message key="tattoosAdmin.paginationNext"/>
                                 </button>
                             </c:when>
                             <c:otherwise>
                                 <button type="submit" class="btn btn-outline-secondary" disabled>
-                                    <fmt:message key="catalog.paginationNext"/>
+                                    <fmt:message key="tattoosAdmin.paginationNext"/>
                                 </button>
                             </c:otherwise>
                         </c:choose>
@@ -93,7 +105,7 @@
         </div>
     </div>
 </section>
-<jsp:include page="footer.jsp"/>
+<jsp:include page="${pageContext.request.contextPath}/jsp/fragment/footer.jsp"/>
 <script type="text/javascript"
         src="${pageContext.request.contextPath}/assets/js/jquery.min.js"></script>
 <script type="text/javascript"

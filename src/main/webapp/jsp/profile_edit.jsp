@@ -16,7 +16,7 @@
           href="${pageContext.request.contextPath}/assets/css/project.css">
 </head>
 <body>
-<jsp:include page="navbar.jsp"/>
+<jsp:include page="${pageContext.request.contextPath}/jsp/fragment/navbar.jsp"/>
 <section style="text-align: left" class="masthead">
     <div class="intro-body">
         <div class="container-fluid">
@@ -94,7 +94,7 @@
         </div>
     </div>
 </section>
-<jsp:include page="footer.jsp"/>
+<jsp:include page="${pageContext.request.contextPath}/jsp/fragment/footer.jsp"/>
 <script type="text/javascript"
         src="${pageContext.request.contextPath}/assets/js/jquery.min.js"></script>
 <script type="text/javascript"
