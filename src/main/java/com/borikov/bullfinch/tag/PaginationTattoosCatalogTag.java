@@ -24,7 +24,7 @@ import java.util.ResourceBundle;
 public class PaginationTattoosCatalogTag extends TagSupport {
     private static final Logger LOGGER = LogManager.getLogger();
     private static final String BUNDLE_PATH = "i18n.application_message";
-    private static final String TATTOOS_INFO = "tattoosAdmin.info";
+    private static final String TATTOOS_INFO = "catalog.info";
     private static final String SPLIT_SYMBOL = "_";
     private int pageNumber;
     private int tattoosAmountOnPage;

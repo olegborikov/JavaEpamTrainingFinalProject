@@ -137,17 +137,19 @@
                                         <fmt:message key="registration.incorrectConfirmedPassword"/>
                                     </div>
                                 </c:if>
-                                <c:if test="${not empty registrationParameters && empty registrationParameters.get('loginExists')}">
-                                    <div style="color: red">
-                                        <fmt:message key="registration.loginExists"/>
-                                    </div>
-                                </c:if>
-                                <c:if test="${not empty registrationParameters && empty registrationParameters.get('emailExists')}">
-                                    <div style="color: red">
-                                        <fmt:message key="registration.emailExists"/>
-                                    </div>
-                                </c:if>
                             </div>
+                            <c:if test="${not empty registrationParameters && empty registrationParameters.get('loginExists')}">
+                                <div style="color: red">
+                                    <fmt:message key="registration.loginExists"/>
+                                </div>
+                                <br>
+                            </c:if>
+                            <c:if test="${not empty registrationParameters && empty registrationParameters.get('emailExists')}">
+                                <div style="color: red">
+                                    <fmt:message key="registration.emailExists"/>
+                                </div>
+                                <br>
+                            </c:if>
                             <button class="btn btn-outline-secondary"
                                     name="commandName" value="registration_command">
                                 <fmt:message key="registration.signUp"/>
