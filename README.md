@@ -1,82 +1,114 @@
-# Project description
-Website for maintaining the operability of the tattoo parlor, and managing internal information. The client has the opportunity to replenish the balance, search and order images in the catalog. The order confirm or reject by the administrator. The client can offer his images to the salon, for which he can receive a discount. The administrator manages the clients and the content of the system.
+# Site of the tattoo parlor "Bullfinch" <a name="english"> </a>
+#### Author: Borikov Oleg
+#### [Functionality demonstration](https://youtu.be/13-piVMcKw0)
+#### [RUS](#russian)
 #
-### Actors
-#### Guest
-An unauthorized user can go to the site and get acquainted with the catalog of tattoos, as well as register or authorize to be able to make an order.
-#### User
-An authorized user has access to the catalog of tattoos, can make an order and offer his own tattoo. It is also possible to top up the balance and view discounts and order statuses in your personal profile.
-#### Administrator
-Manages the system: users and tattoo catalog. Works with the proposed content, also monitors the relevance of goods and prices.
+## Short description
+Website for maintaining the working capacity of the tattoo parlor.
+The client, having replenished the balance, can leave an order for a tattoo session.
+The administrator has the ability to confirm or cancel the order.
+After confirming the order, the specified amount is debited from the client's account.
+The client can offer his own sketches to the salon, for that he can get a discount.
+The administrator decides if the content is suitable for the salon, and if it does, he adds a sketch to the catalog.
 #
-### Description of actors' actions
-* General actions
+## Actors
+#### A guest
+An unauthorized user can go to the site and see the catalog of tattoos,
+as well as register or authorize to be able to place an order.
+* Description of guest actions
+  * Check in
+  * Authorization
   * Browse catalog
   * Search in catalog
   * View tattoo information
-  * Change localization
-* Guest
-  * Registration
-  * Authorization
-* User
-  * Suggest own tattoo
-  * Checkout tattoo
+  * Change of localization
+#### User
+An authorized user has access to the catalog of tattoos, can make an order and offer his own tattoo.
+It is also possible to replenish the balance, view discounts and order statuses in the personal profile, change personal information.
+* Description of user actions
+  * Tattoo offer
+  * Checkout
   * View order
-  * Cancel order
+  * Cancellations
   * View personal profile
-  * View order history
+  * View all orders
   * View available discounts
   * Balance replenishment
-  * Edit profile information
-* Administrator
+  * Editing profile information
+  * Browse catalog
+  * Search in catalog
+  * View tattoo information
+  * Change of localization
+#### Administrator
+Manages the system: users and tattoo catalog.
+He works with the proposed content, also monitors the relevance of goods and prices.
+* Description of user actions
   * Add tattoo
   * Accept or refuse the proposed tattoo
-  * Manage tattoo archive
-  * Edit tattoo
+  * Tattoo archive management
+  * Tattoo editing
   * View all users
   * Search by users
   * View user profile
   * View user's orders
-  * View user's order
-  * Acceptance or refusal to user order
+  * View order
+  * Acceptance or refusal of an order
   * View user's discounts
-  * Add discount to the user
-  * Remove user discount
+  * Add or remove discounts
   * User lock control
-
-##
-
-# Описание проекта
-Сайт по поддержанию работоспособности тату-салона, а также управлением внутренней информацией. Клиент имеет возможность пополнять баланс, осуществлять поиск и заказ изображений в каталоге. Заказ подтверждает или отклоняет администратор. Клиент может предлагать свои изображения салону, за что может получить скидку. Администратор управляет клиентами и контентом системы.
+  * Browse catalog
+  * View all orders
+  * Search for all orders
+  * View all tattoos
+  * Search all tattoos
+  * View tattoo information
+  * Change of localization
+---
+# Сайт тату-салона "Bullfinch" <a name="russian"></a>
+#### Автор: Бориков Олег
+#### [Демонстрация функциональности](https://youtu.be/13-piVMcKw0)
+#### [ENG](#english)
+# 
+## Краткое описание
+Сайт по поддержанию работоспособности тату-салона.
+Клиент, пополнив баланс, может оставить заказ на проведение тату-сеанса.
+Администратор в свою очередь имеет возможность подтвердить или отменить заказ. 
+После подтверждения заказа указанная сумма списывается со счёта клиента.
+Клиент может предлагать собственные эскизы салону, за что может получить скидку.
+Администратор решает, подходит ли контент для салона, и если подходит, то добавляет эскиз в каталог.
 #
-### Актёры
+## Актёры
 #### Гость 
-Неавторизованный пользователь может зайти на сайт и ознакомиться с каталогом татуировок, а также пройти регистрацию или авторизацию для возможности сделать заказ.
-#### Пользователь
-Авторизованный пользователь имеет доступ к каталогу татуировок, может сделать заказ и предложить свою татуировку. А также возможно пополнение баланса и просмотр скидок и статусов заказов в личном профиле.
-#### Администратор
-Управляет системой: пользователями и каталогом татуировок. Работает с предложенным контентом, также следит за актуальностью товаров и цен. 
-#
-### Описание действий актёров
-* Общие действия
+Неавторизованный пользователь может зайти на сайт и ознакомиться с каталогом татуировок, 
+а также пройти регистрацию или авторизацию для возможности сделать заказ.
+*Описание действий гостя
+  * Регистрация
+  * Авторизация
   * Просмотр каталога
   * Поиск по каталогу
   * Просмотр информации о татуировке
   * Смена локализации
-* Гость
-  * Регистрация
-  * Авторизация
-* Пользователь
-  * Предложение собственной татуировки
+#### Пользователь
+Авторизованный пользователь имеет доступ к каталогу татуировок, может сделать заказ и предложить свою татуировку.
+А также возможно пополнение баланса, просмотр скидок и статусов заказов в личном профиле, изменение личной информации.
+*Описание действий пользователя
+  * Предложение татуировки
   * Оформление заказа
   * Просмотр заказа
   * Отмена заказа
   * Просмотр личного профиля
-  * Просмотр истории заказов
+  * Просмотр всех заказов
   * Просмотр доступных скидок
   * Пополнение баланса
   * Редактирование информации профиля
-* Администратор
+  * Просмотр каталога
+  * Поиск по каталогу
+  * Просмотр информации о татуировке
+  * Смена локализации
+#### Администратор
+Управляет системой: пользователями и каталогом татуировок.
+Работает с предложенным контентом, также следит за актуальностью товаров и цен. 
+*Описание действий пользователя
   * Добавление татуировки
   * Прием или отказ предложенной татуировки
   * Управление архивом татуировок
@@ -85,9 +117,15 @@ Manages the system: users and tattoo catalog. Works with the proposed content, a
   * Поиск по пользователям
   * Просмотр профиля пользователя
   * Просмотр заказов пользователя
-  * Просмотр заказа пользователя
-  * Прием или отказ в заказе пользователю
+  * Просмотр заказа
+  * Прием или отказ заказа
   * Просмотр скидок пользователя
-  * Добавление скидки пользователю
-  * Удаление скидки пользователя
+  * Добавление или удаление скидки
   * Управление блокировкой пользователя
+  * Просмотр каталога
+  * Просмотр всех заказов
+  * Поиск по всем заказам
+  * Просмотр всех татуировок
+  * Поиск по всем татуировкам
+  * Просмотр информации о татуировке
+  * Смена локализации
