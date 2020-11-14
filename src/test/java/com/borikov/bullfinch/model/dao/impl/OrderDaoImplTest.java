@@ -343,7 +343,6 @@ public class OrderDaoImplTest {
             TattooBuilder tattooBuilder2 = new TattooBuilder();
             tattooBuilder2.setName("Street");
             Date date2 = new Date(11111111111161L);
-            System.out.println(new Date(11111111111161L));
             Order order6 = new Order(2L, 300, date2.toLocalDate(),
                     null, false, null, tattooBuilder2.getTattoo());
             List<Order> expected = new ArrayList<>();
