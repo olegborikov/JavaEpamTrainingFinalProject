@@ -26,16 +26,16 @@ public class DiscountDaoImplTest {
         discountDao = DiscountDaoImpl.getInstance();
         UserBuilder userBuilder1 = new UserBuilder();
         userBuilder1.setUserId(2L);
-        discount1 = new Discount(null, 50, userBuilder1.getUser());
+        discount1 = new Discount(null, 50, userBuilder1.buildUser());
         UserBuilder userBuilder2 = new UserBuilder();
         userBuilder2.setUserId(3L);
-        discount2 = new Discount(null, 10, userBuilder2.getUser());
+        discount2 = new Discount(null, 10, userBuilder2.buildUser());
         UserBuilder userBuilder3 = new UserBuilder();
         userBuilder3.setUserId(4L);
-        discount3 = new Discount(null, 30, userBuilder3.getUser());
+        discount3 = new Discount(null, 30, userBuilder3.buildUser());
         UserBuilder userBuilder4 = new UserBuilder();
         userBuilder4.setUserId(4L);
-        discount4 = new Discount(null, 1000, userBuilder4.getUser());
+        discount4 = new Discount(null, 1000, userBuilder4.buildUser());
     }
 
     @AfterClass

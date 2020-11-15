@@ -85,11 +85,11 @@ public class OrderBuilder {
     }
 
     /**
-     * Gets order.
+     * Build order.
      *
      * @return the order
      */
-    public Order getOrder() {
+    public Order buildOrder() {
         return new Order(orderId, price, date, description, isConfirmed, user, tattoo);
     }
 }

@@ -98,7 +98,7 @@
                                 <c:forEach var="discount" items="${discounts}">
                                     <li style="color: black" class="list-group-item">
                                             <span class="btn">
-                                                <strong>${discount.discountPercent}
+                                                <strong>${discount.percent}
                                                  <fmt:message key="profile.percent"/></strong>
                                             </span>
                                     </li>

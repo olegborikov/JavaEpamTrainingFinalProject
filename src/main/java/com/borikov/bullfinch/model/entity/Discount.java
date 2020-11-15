@@ -13,9 +13,9 @@ public class Discount {
     private Long discountId;
 
     /**
-     * The value is used for discount percent storage.
+     * The value is used for percent storage.
      */
-    private int discountPercent;
+    private int percent;
 
     /**
      * The value is used for user storage.
@@ -25,13 +25,13 @@ public class Discount {
     /**
      * Instantiates a new Discount.
      *
-     * @param discountId      the discount id
-     * @param discountPercent the discount percent
-     * @param user            the user
+     * @param discountId the discount id
+     * @param percent    the percent
+     * @param user       the user
      */
-    public Discount(Long discountId, int discountPercent, User user) {
+    public Discount(Long discountId, int percent, User user) {
         this.discountId = discountId;
-        this.discountPercent = discountPercent;
+        this.percent = percent;
         this.user = user;
     }
 
@@ -54,21 +54,21 @@ public class Discount {
     }
 
     /**
-     * Gets discount percent.
+     * Gets percent.
      *
-     * @return the discount percent
+     * @return the percent
      */
-    public int getDiscountPercent() {
-        return discountPercent;
+    public int getPercent() {
+        return percent;
     }
 
     /**
-     * Sets discount percent.
+     * Sets percent.
      *
-     * @param discountPercent the discount percent
+     * @param percent the percent
      */
-    public void setDiscountPercent(int discountPercent) {
-        this.discountPercent = discountPercent;
+    public void setPercent(int percent) {
+        this.percent = percent;
     }
 
     /**
@@ -98,7 +98,7 @@ public class Discount {
             return false;
         }
         Discount discount = (Discount) o;
-        if (discountPercent != discount.discountPercent) {
+        if (percent != discount.percent) {
             return false;
         }
         if (discountId != null ? !discountId.equals(discount.discountId) : discount.discountId != null) {
@@ -110,7 +110,7 @@ public class Discount {
     @Override
     public int hashCode() {
         int hashCode = discountId != null ? discountId.hashCode() : 0;
-        hashCode = 31 * hashCode + discountPercent;
+        hashCode = 31 * hashCode + percent;
         hashCode = 31 * hashCode + (user != null ? user.hashCode() : 0);
         return hashCode;
     }
@@ -119,7 +119,7 @@ public class Discount {
     public String toString() {
         final StringBuilder stringRepresentation = new StringBuilder("Discount{");
         stringRepresentation.append("discountId=").append(discountId);
-        stringRepresentation.append(", discountPercent=").append(discountPercent);
+        stringRepresentation.append(", percent=").append(percent);
         stringRepresentation.append(", user=").append(user);
         stringRepresentation.append('}');
         return stringRepresentation.toString();

@@ -11,7 +11,7 @@ import com.borikov.bullfinch.model.entity.User;
  */
 public class DiscountBuilder {
     private Long discountId;
-    private int discountPercent;
+    private int percent;
     private User user;
 
     /**
@@ -24,12 +24,12 @@ public class DiscountBuilder {
     }
 
     /**
-     * Sets discount percent.
+     * Sets percent.
      *
-     * @param discountPercent the discount percent
+     * @param percent the percent
      */
-    public void setDiscountPercent(int discountPercent) {
-        this.discountPercent = discountPercent;
+    public void setPercent(int percent) {
+        this.percent = percent;
     }
 
     /**
@@ -42,11 +42,11 @@ public class DiscountBuilder {
     }
 
     /**
-     * Gets discount.
+     * Build discount.
      *
      * @return the discount
      */
-    public Discount getDiscount() {
-        return new Discount(discountId, discountPercent, user);
+    public Discount buildDiscount() {
+        return new Discount(discountId, percent, user);
     }
 }

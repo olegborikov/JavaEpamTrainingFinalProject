@@ -8,7 +8,7 @@ package com.borikov.bullfinch.model.validator;
  */
 public class DiscountValidator {
     private static final String ID_REGEX = "^[1-9]\\d{0,9}$";
-    private static final String DISCOUNT_PERCENT_REGEX = "^[1-9]\\d{0,1}$";
+    private static final String PERCENT_REGEX = "^[1-9]\\d?$";
 
     private DiscountValidator() {
     }
@@ -24,13 +24,13 @@ public class DiscountValidator {
     }
 
     /**
-     * Check discount percent for correct.
+     * Check percent for correct.
      *
-     * @param discountPercent the discount percent
+     * @param percent the percent
      * @return the boolean
      */
-    public static boolean isDiscountPercentCorrect(String discountPercent) {
-        return isStringCorrect(discountPercent, DISCOUNT_PERCENT_REGEX);
+    public static boolean isPercentCorrect(String percent) {
+        return isStringCorrect(percent, PERCENT_REGEX);
     }
 
     private static boolean isStringCorrect(String line, String regex) {

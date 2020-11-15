@@ -23,7 +23,7 @@ import java.util.Optional;
  * @version 1.0
  */
 public class TattooDaoImpl implements TattooDao {
-    private static final TattooDaoImpl INSTANCE = new TattooDaoImpl();
+    private static final TattooDaoImpl instance = new TattooDaoImpl();
     private static final String ADD = "INSERT INTO tattoo (tattoo_name, tattoo_description, tattoo_price, "
             + "is_allowed, is_archived, image_id_fk, user_account_id_fk) VALUES (?, ?, ?, 1, 0, ?, "
             + "(SELECT user_account_id FROM user_account WHERE BINARY login LIKE ?))";
@@ -68,7 +68,7 @@ public class TattooDaoImpl implements TattooDao {
      * @return the instance
      */
     public static TattooDaoImpl getInstance() {
-        return INSTANCE;
+        return instance;
     }
 
     @Override
@@ -323,8 +323,8 @@ public class TattooDaoImpl implements TattooDao {
             String login = resultSet.getString(ColumnName.LOGIN);
             UserBuilder userBuilder = new UserBuilder();
             userBuilder.setLogin(login);
-            tattooBuilder.setUser(userBuilder.getUser());
+            tattooBuilder.setUser(userBuilder.buildUser());
         }
-        return tattooBuilder.getTattoo();
+        return tattooBuilder.buildTattoo();
     }
 }

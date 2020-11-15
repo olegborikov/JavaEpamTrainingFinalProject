@@ -42,9 +42,9 @@ public class TattooDaoImplTest {
         tattooBuilder1.setImage(new Image(1L, null));
         UserBuilder userBuilder1 = new UserBuilder();
         userBuilder1.setLogin("oleg");
-        User user1 = userBuilder1.getUser();
+        User user1 = userBuilder1.buildUser();
         tattooBuilder1.setUser(user1);
-        tattoo1 = tattooBuilder1.getTattoo();
+        tattoo1 = tattooBuilder1.buildTattoo();
         TattooBuilder tattooBuilder2 = new TattooBuilder();
         tattooBuilder2.setName("Qwe");
         tattooBuilder2.setDescription("Nice");
@@ -52,9 +52,9 @@ public class TattooDaoImplTest {
         tattooBuilder2.setImage(new Image(1L, null));
         UserBuilder userBuilder2 = new UserBuilder();
         userBuilder2.setLogin("alex");
-        User user2 = userBuilder2.getUser();
+        User user2 = userBuilder2.buildUser();
         tattooBuilder2.setUser(user2);
-        tattoo2 = tattooBuilder2.getTattoo();
+        tattoo2 = tattooBuilder2.buildTattoo();
         TattooBuilder tattooBuilder3 = new TattooBuilder();
         tattooBuilder3.setName("Qwe");
         tattooBuilder3.setDescription("Nice");
@@ -62,9 +62,9 @@ public class TattooDaoImplTest {
         tattooBuilder3.setImage(new Image(1L, null));
         UserBuilder userBuilder3 = new UserBuilder();
         userBuilder3.setLogin("alex");
-        User user3 = userBuilder3.getUser();
+        User user3 = userBuilder3.buildUser();
         tattooBuilder3.setUser(user3);
-        tattoo3 = tattooBuilder3.getTattoo();
+        tattoo3 = tattooBuilder3.buildTattoo();
         connection = ConnectionPool.INSTANCE.getConnection();
     }
 
@@ -116,9 +116,9 @@ public class TattooDaoImplTest {
         tattooBuilder.setImage(new Image(1L, null));
         UserBuilder userBuilder = new UserBuilder();
         userBuilder.setLogin("o");
-        User user = userBuilder.getUser();
+        User user = userBuilder.buildUser();
         tattooBuilder.setUser(user);
-        tattooDao.add(tattooBuilder.getTattoo(), connection);
+        tattooDao.add(tattooBuilder.buildTattoo(), connection);
     }
 
     @Test(priority = 3)
@@ -141,9 +141,9 @@ public class TattooDaoImplTest {
         tattooBuilder.setImage(new Image(1L, null));
         UserBuilder userBuilder = new UserBuilder();
         userBuilder.setLogin("o");
-        User user = userBuilder.getUser();
+        User user = userBuilder.buildUser();
         tattooBuilder.setUser(user);
-        tattooDao.offer(tattooBuilder.getTattoo(), connection);
+        tattooDao.offer(tattooBuilder.buildTattoo(), connection);
     }
 
     @DataProvider(name = "removePositiveData")
@@ -196,9 +196,9 @@ public class TattooDaoImplTest {
             tattooBuilder.setImage(new Image(1L, null));
             UserBuilder userBuilder = new UserBuilder();
             userBuilder.setLogin("o");
-            User user = userBuilder.getUser();
+            User user = userBuilder.buildUser();
             tattooBuilder.setUser(user);
-            boolean actual = tattooDao.update(tattooBuilder.getTattoo());
+            boolean actual = tattooDao.update(tattooBuilder.buildTattoo());
             assertFalse(actual);
         } catch (DaoException e) {
             fail("Incorrect data", e);

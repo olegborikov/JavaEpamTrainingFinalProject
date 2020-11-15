@@ -113,11 +113,11 @@ public class UserBuilder {
     }
 
     /**
-     * Gets user.
+     * Build user.
      *
      * @return the user
      */
-    public User getUser() {
+    public User buildUser() {
         return new User(userId, email, login, firstName, secondName,
                 phoneNumber, isBlocked, isActivated, userRole, wallet);
     }

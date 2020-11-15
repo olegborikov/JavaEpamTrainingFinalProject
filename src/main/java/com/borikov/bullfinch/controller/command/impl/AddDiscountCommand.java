@@ -26,9 +26,9 @@ public class AddDiscountCommand implements Command {
     public String execute(HttpServletRequest request) {
         String page;
         String userId = request.getParameter(RequestParameter.USER_ID);
-        String discountPercent = request.getParameter(RequestParameter.DISCOUNT_PERCENT);
+        String percent = request.getParameter(RequestParameter.PERCENT);
         try {
-            if (discountService.addDiscount(discountPercent, userId)) {
+            if (discountService.addDiscount(percent, userId)) {
                 request.setAttribute(RequestParameter.DISCOUNT_ADD_CONFIRM_MESSAGE, true);
                 page = PagePath.MESSAGE;
             } else {

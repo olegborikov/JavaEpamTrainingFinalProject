@@ -43,25 +43,26 @@ public class DiscountValidatorTest {
         assertFalse(actual);
     }
 
-    @DataProvider(name = "isDiscountPercentCorrectPositiveData")
-    public Object[][] createDiscountPercentIdCorrectPositiveData() {
+    @DataProvider(name = "isPercentCorrectPositiveData")
+    public Object[][] createPercentCorrectPositiveData() {
         return new Object[][]{
                 {"10"},
                 {"1"},
+                {"8"},
                 {"30"},
                 {"99"},
                 {"50"}
         };
     }
 
-    @Test(dataProvider = "isDiscountPercentCorrectPositiveData")
-    public void isDiscountPercentCorrectPositiveTest(String discountPercent) {
-        boolean actual = DiscountValidator.isDiscountPercentCorrect(discountPercent);
+    @Test(dataProvider = "isPercentCorrectPositiveData")
+    public void isPercentCorrectPositiveTest(String percent) {
+        boolean actual = DiscountValidator.isPercentCorrect(percent);
         assertTrue(actual);
     }
 
-    @DataProvider(name = "isDiscountPercentCorrectNegativeData")
-    public Object[][] createIsDiscountPercentCorrectNegativeData() {
+    @DataProvider(name = "isPercentCorrectNegativeData")
+    public Object[][] createIsPercentCorrectNegativeData() {
         return new Object[][]{
                 {"-123"},
                 {"100"},
@@ -73,9 +74,9 @@ public class DiscountValidatorTest {
         };
     }
 
-    @Test(dataProvider = "isDiscountPercentCorrectNegativeData")
-    public void isDiscountPercentCorrectNegativeTest(String discountPercent) {
-        boolean actual = DiscountValidator.isDiscountPercentCorrect(discountPercent);
+    @Test(dataProvider = "isPercentCorrectNegativeData")
+    public void isPercentCorrectNegativeTest(String percent) {
+        boolean actual = DiscountValidator.isPercentCorrect(percent);
         assertFalse(actual);
     }
 }

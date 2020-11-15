@@ -120,15 +120,15 @@ VALUES ('Girl',
         'A tattoo in the form of a girl on the skin is some kind of warning sign. You can even say that this sign shouts to others: “Caution! It''s a bad joke with this person! " Most often, such a tattoo is stuffed by people for whom character traits such as vindictiveness and rigidity are not an empty phrase',
         400, 0, 0, 10, 2);
 
-INSERT INTO discount(discount_percent, user_account_id_fk)
+INSERT INTO discount(percent, user_account_id_fk)
 VALUES (50, 2);
-INSERT INTO discount(discount_percent, user_account_id_fk)
+INSERT INTO discount(percent, user_account_id_fk)
 VALUES (70, 2);
-INSERT INTO discount(discount_percent, user_account_id_fk)
+INSERT INTO discount(percent, user_account_id_fk)
 VALUES (20, 2);
-INSERT INTO discount(discount_percent, user_account_id_fk)
+INSERT INTO discount(percent, user_account_id_fk)
 VALUES (40, 3);
-INSERT INTO discount(discount_percent, user_account_id_fk)
+INSERT INTO discount(percent, user_account_id_fk)
 VALUES (60, 4);
 
 INSERT INTO tattoo_order(tattoo_order_price, date, tattoo_order_description,

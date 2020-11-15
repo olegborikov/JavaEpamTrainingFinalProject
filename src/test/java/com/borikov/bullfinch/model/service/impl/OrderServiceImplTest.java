@@ -34,8 +34,8 @@ public class OrderServiceImplTest {
     public void setUp() {
         transactionManager = mock(TransactionManager.class);
         orderDao = mock(OrderDaoImpl.class);
-        Whitebox.setInternalState(TransactionManager.class, "INSTANCE", transactionManager);
-        Whitebox.setInternalState(OrderDaoImpl.class, "INSTANCE", orderDao);
+        Whitebox.setInternalState(TransactionManager.class, "instance", transactionManager);
+        Whitebox.setInternalState(OrderDaoImpl.class, "instance", orderDao);
         orderService = new OrderServiceImpl();
     }
 
@@ -175,7 +175,7 @@ public class OrderServiceImplTest {
     @Test
     public void findOrderByIdPositiveTest() {
         try {
-            Optional<Order> expected = Optional.of(new OrderBuilder().getOrder());
+            Optional<Order> expected = Optional.of(new OrderBuilder().buildOrder());
             when(orderDao.findById(any(Long.class))).thenReturn(expected);
             Optional<Order> actual = orderService.findOrderById("1");
             assertEquals(actual, expected);
@@ -187,7 +187,7 @@ public class OrderServiceImplTest {
     @Test
     public void findOrderByIdNegativeTest() {
         try {
-            Optional<Order> expected = Optional.of(new OrderBuilder().getOrder());
+            Optional<Order> expected = Optional.of(new OrderBuilder().buildOrder());
             when(orderDao.findById(any(Long.class))).thenReturn(expected);
             Optional<Order> actual = orderService.findOrderById("oleg");
             assertNotEquals(actual, expected);
@@ -200,7 +200,7 @@ public class OrderServiceImplTest {
     public void findOrdersByDatesPositiveTest() {
         try {
             List<Order> expected = new ArrayList<>();
-            expected.add(new OrderBuilder().getOrder());
+            expected.add(new OrderBuilder().buildOrder());
             when(orderDao.findByDates(any(LocalDate.class), any(LocalDate.class))).thenReturn(expected);
             List<Order> actual = orderService.findOrdersByDates("2020-10-11", "2020-10-12");
             assertEquals(actual, expected);
@@ -213,7 +213,7 @@ public class OrderServiceImplTest {
     public void findOrdersByDatesNegativeTest() {
         try {
             List<Order> expected = new ArrayList<>();
-            expected.add(new OrderBuilder().getOrder());
+            expected.add(new OrderBuilder().buildOrder());
             when(orderDao.findByDates(any(LocalDate.class), any(LocalDate.class))).thenReturn(expected);
             List<Order> actual = orderService.findOrdersByDates("2020-10-11", "2020-10-10");
             assertNotEquals(actual, expected);
@@ -226,7 +226,7 @@ public class OrderServiceImplTest {
     public void findOrdersByUserLoginPositiveTest() {
         try {
             List<Order> expected = new ArrayList<>();
-            expected.add(new OrderBuilder().getOrder());
+            expected.add(new OrderBuilder().buildOrder());
             when(orderDao.findByUserLogin(any(String.class))).thenReturn(expected);
             List<Order> actual = orderService.findOrdersByUserLogin("oleg");
             assertEquals(actual, expected);
@@ -239,7 +239,7 @@ public class OrderServiceImplTest {
     public void findOrdersByUserLoginNegativeTest() {
         try {
             List<Order> expected = new ArrayList<>();
-            expected.add(new OrderBuilder().getOrder());
+            expected.add(new OrderBuilder().buildOrder());
             when(orderDao.findByUserLogin(any(String.class))).thenReturn(new ArrayList<>());
             List<Order> actual = orderService.findOrdersByUserLogin(null);
             assertNotEquals(actual, expected);

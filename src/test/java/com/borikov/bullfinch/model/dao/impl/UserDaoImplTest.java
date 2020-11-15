@@ -39,7 +39,7 @@ public class UserDaoImplTest {
         userBuilder.setPhoneNumber("375251111111");
         userBuilder.setWallet(new Wallet(4L, 100));
         userBuilder.setUserRole(UserRole.USER);
-        user = userBuilder.getUser();
+        user = userBuilder.buildUser();
         connection = ConnectionPool.INSTANCE.getConnection();
     }
 
@@ -100,7 +100,7 @@ public class UserDaoImplTest {
             userBuilder.setPhoneNumber("375251111111");
             userBuilder.setWallet(new Wallet(4L, 100));
             userBuilder.setUserRole(UserRole.USER);
-            boolean actual = userDao.update(userBuilder.getUser());
+            boolean actual = userDao.update(userBuilder.buildUser());
             assertFalse(actual);
         } catch (DaoException e) {
             fail("Incorrect data", e);

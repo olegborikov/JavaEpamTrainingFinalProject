@@ -31,8 +31,8 @@ public class WalletServiceImplTest {
     public void setUp() {
         walletDao = mock(WalletDaoImpl.class);
         orderDao = mock(OrderDaoImpl.class);
-        Whitebox.setInternalState(WalletDaoImpl.class, "INSTANCE", walletDao);
-        Whitebox.setInternalState(OrderDaoImpl.class, "INSTANCE", orderDao);
+        Whitebox.setInternalState(WalletDaoImpl.class, "instance", walletDao);
+        Whitebox.setInternalState(OrderDaoImpl.class, "instance", orderDao);
         walletService = new WalletServiceImpl();
     }
 
@@ -122,7 +122,7 @@ public class WalletServiceImplTest {
             when(walletDao.findByOrderId(any(Long.class))).thenReturn(Optional.of(new Wallet(1L, 500)));
             OrderBuilder orderBuilder = new OrderBuilder();
             orderBuilder.setPrice(500);
-            when(orderDao.findById(any(Long.class))).thenReturn(Optional.of(orderBuilder.getOrder()));
+            when(orderDao.findById(any(Long.class))).thenReturn(Optional.of(orderBuilder.buildOrder()));
             boolean actual = walletService.checkBalanceSize("1");
             assertTrue(actual);
         } catch (ServiceException | DaoException e) {
@@ -136,7 +136,7 @@ public class WalletServiceImplTest {
             when(walletDao.findByOrderId(any(Long.class))).thenReturn(Optional.of(new Wallet(1L, 500)));
             OrderBuilder orderBuilder = new OrderBuilder();
             orderBuilder.setPrice(501);
-            when(orderDao.findById(any(Long.class))).thenReturn(Optional.of(orderBuilder.getOrder()));
+            when(orderDao.findById(any(Long.class))).thenReturn(Optional.of(orderBuilder.buildOrder()));
             boolean actual = walletService.checkBalanceSize("1");
             assertFalse(actual);
         } catch (ServiceException | DaoException e) {

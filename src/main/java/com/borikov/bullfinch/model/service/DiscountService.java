@@ -15,12 +15,12 @@ public interface DiscountService {
     /**
      * Add discount.
      *
-     * @param discountPercent the discount percent
-     * @param userId          the user id
+     * @param percent the percent
+     * @param userId  the user id
      * @return the boolean
      * @throws ServiceException the service exception
      */
-    boolean addDiscount(String discountPercent, String userId) throws ServiceException;
+    boolean addDiscount(String percent, String userId) throws ServiceException;
 
     /**
      * Remove discount.

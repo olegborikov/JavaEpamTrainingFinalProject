@@ -27,13 +27,13 @@
                         <div class="form-group">
                             <input type="hidden" name="userId" value="${userId}">
                             <input style="background-color: black" type="text"
-                                   class="form-control text-white" name="discountPercent"
+                                   class="form-control text-white" name="percent"
                                    maxlength="2" required
-                                   oninvalid="this.setCustomValidity('<fmt:message key="discountAdd.discountPercentValidate"/>')"
+                                   oninvalid="this.setCustomValidity('<fmt:message key="discountAdd.percentValidate"/>')"
                                    onchange="this.setCustomValidity('')"
                                    pattern="^[1-9]\d?$"
-                                   title='<fmt:message key="discountAdd.discountPercentValidate"/>'
-                                   placeholder='<fmt:message key="discountAdd.discountPercent"/>'>
+                                   title='<fmt:message key="discountAdd.percentValidate"/>'
+                                   placeholder='<fmt:message key="discountAdd.percent"/>'>
                         </div>
                         <c:if test="${incorrectDataMessage}">
                             <div style="color: red">

@@ -31,8 +31,8 @@ public class UserServiceImplTest {
     public void setUp() {
         userDao = mock(UserDaoImpl.class);
         transactionManager = mock(TransactionManager.class);
-        Whitebox.setInternalState(UserDaoImpl.class, "INSTANCE", userDao);
-        Whitebox.setInternalState(TransactionManager.class, "INSTANCE", transactionManager);
+        Whitebox.setInternalState(UserDaoImpl.class, "instance", userDao);
+        Whitebox.setInternalState(TransactionManager.class, "instance", transactionManager);
         userService = new UserServiceImpl();
     }
 
@@ -200,10 +200,10 @@ public class UserServiceImplTest {
     @Test
     public void authorizeUserPositiveTest() {
         try {
-            User expected = new UserBuilder().getUser();
+            User expected = new UserBuilder().buildUser();
             when(userDao.checkExistingByLogin(any(String.class)))
                     .thenReturn(Optional.of("3b648288c16bba6bf7b6dbceb1c179a7e6ce26cc"));
-            when(userDao.authorize(any(String.class))).thenReturn(Optional.of(new UserBuilder().getUser()));
+            when(userDao.authorize(any(String.class))).thenReturn(Optional.of(new UserBuilder().buildUser()));
             Optional<User> actual = userService.authorizeUser("oleg", "1234567Aa");
             assertEquals(actual.get(), expected);
         } catch (ServiceException | DaoException e) {
@@ -214,10 +214,10 @@ public class UserServiceImplTest {
     @Test
     public void authorizeUserNegativeTest() {
         try {
-            Optional<User> expected = Optional.of(new UserBuilder().getUser());
+            Optional<User> expected = Optional.of(new UserBuilder().buildUser());
             when(userDao.checkExistingByLogin(any(String.class)))
                     .thenReturn(Optional.of("3b648288c16bba6bf7b6dbceb1c179a7e6ce26cc"));
-            when(userDao.authorize(any(String.class))).thenReturn(Optional.of(new UserBuilder().getUser()));
+            when(userDao.authorize(any(String.class))).thenReturn(Optional.of(new UserBuilder().buildUser()));
             Optional<User> actual = userService.authorizeUser("oleg", "123456Aa");
             assertNotEquals(actual, expected);
         } catch (ServiceException | DaoException e) {
@@ -252,8 +252,8 @@ public class UserServiceImplTest {
     @Test
     public void findUserByLoginPositiveTest() {
         try {
-            User expected = new UserBuilder().getUser();
-            when(userDao.findByLogin(any(String.class))).thenReturn(Optional.of(new UserBuilder().getUser()));
+            User expected = new UserBuilder().buildUser();
+            when(userDao.findByLogin(any(String.class))).thenReturn(Optional.of(new UserBuilder().buildUser()));
             Optional<User> actual = userService.findUserByLogin("oleg");
             assertEquals(actual.get(), expected);
         } catch (ServiceException | DaoException e) {
@@ -264,8 +264,8 @@ public class UserServiceImplTest {
     @Test
     public void findUserByLoginNegativeTest() {
         try {
-            Optional<User> expected = Optional.of(new UserBuilder().getUser());
-            when(userDao.findByLogin(any(String.class))).thenReturn(Optional.of(new UserBuilder().getUser()));
+            Optional<User> expected = Optional.of(new UserBuilder().buildUser());
+            when(userDao.findByLogin(any(String.class))).thenReturn(Optional.of(new UserBuilder().buildUser()));
             Optional<User> actual = userService.findUserByLogin(" ");
             assertNotEquals(actual, expected);
         } catch (ServiceException | DaoException e) {

@@ -32,8 +32,8 @@ public class TattooServiceImplTest {
     public void setUp() {
         tattooDao = mock(TattooDaoImpl.class);
         transactionManager = mock(TransactionManager.class);
-        Whitebox.setInternalState(TattooDaoImpl.class, "INSTANCE", tattooDao);
-        Whitebox.setInternalState(TransactionManager.class, "INSTANCE", transactionManager);
+        Whitebox.setInternalState(TattooDaoImpl.class, "instance", tattooDao);
+        Whitebox.setInternalState(TransactionManager.class, "instance", transactionManager);
         tattooService = new TattooServiceImpl();
     }
 
@@ -229,8 +229,8 @@ public class TattooServiceImplTest {
     @Test
     public void findTattooByIdPositiveTest() {
         try {
-            Tattoo expected = new TattooBuilder().getTattoo();
-            when(tattooDao.findById(any(Long.class))).thenReturn(Optional.of(new TattooBuilder().getTattoo()));
+            Tattoo expected = new TattooBuilder().buildTattoo();
+            when(tattooDao.findById(any(Long.class))).thenReturn(Optional.of(new TattooBuilder().buildTattoo()));
             Optional<Tattoo> actual = tattooService.findTattooById("1");
             assertEquals(actual.get(), expected);
         } catch (ServiceException | DaoException e) {
@@ -241,8 +241,8 @@ public class TattooServiceImplTest {
     @Test
     public void findTattooByIdNegativeTest() {
         try {
-            Optional<Tattoo> expected = Optional.of(new TattooBuilder().getTattoo());
-            when(tattooDao.findById(any(Long.class))).thenReturn(Optional.of(new TattooBuilder().getTattoo()));
+            Optional<Tattoo> expected = Optional.of(new TattooBuilder().buildTattoo());
+            when(tattooDao.findById(any(Long.class))).thenReturn(Optional.of(new TattooBuilder().buildTattoo()));
             Optional<Tattoo> actual = tattooService.findTattooById("d");
             assertNotEquals(actual, expected);
         } catch (ServiceException | DaoException e) {
@@ -349,9 +349,9 @@ public class TattooServiceImplTest {
     @Test
     public void testFindTattooByIdCatalogPositiveTest() {
         try {
-            Tattoo expected = new TattooBuilder().getTattoo();
+            Tattoo expected = new TattooBuilder().buildTattoo();
             when(tattooDao.findByIdCatalog(any(Long.class)))
-                    .thenReturn(Optional.of(new TattooBuilder().getTattoo()));
+                    .thenReturn(Optional.of(new TattooBuilder().buildTattoo()));
             Optional<Tattoo> actual = tattooService.findTattooByIdCatalog("1");
             assertEquals(actual.get(), expected);
         } catch (ServiceException | DaoException e) {
@@ -362,9 +362,9 @@ public class TattooServiceImplTest {
     @Test
     public void testFindTattooByIdCatalogNegativeTest() {
         try {
-            Optional<Tattoo> expected = Optional.of(new TattooBuilder().getTattoo());
+            Optional<Tattoo> expected = Optional.of(new TattooBuilder().buildTattoo());
             when(tattooDao.findByIdCatalog(any(Long.class)))
-                    .thenReturn(Optional.of(new TattooBuilder().getTattoo()));
+                    .thenReturn(Optional.of(new TattooBuilder().buildTattoo()));
             Optional<Tattoo> actual = tattooService.findTattooByIdCatalog("d");
             assertNotEquals(actual, expected);
         } catch (ServiceException | DaoException e) {

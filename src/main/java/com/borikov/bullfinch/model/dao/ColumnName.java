@@ -11,7 +11,7 @@ public class ColumnName {
      * Constants for discount table
      */
     public static final String DISCOUNT_ID = "discount_id";
-    public static final String DISCOUNT_PERCENT = "discount_percent";
+    public static final String PERCENT = "percent";
 
     /**
      * Constants for image table

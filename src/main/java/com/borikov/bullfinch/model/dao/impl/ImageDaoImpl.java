@@ -13,7 +13,7 @@ import java.sql.*;
  * @version 1.0
  */
 public class ImageDaoImpl implements ImageDao {
-    private static final ImageDaoImpl INSTANCE = new ImageDaoImpl();
+    private static final ImageDaoImpl instance = new ImageDaoImpl();
     private static final String ADD = "INSERT INTO image (image_name) VALUES (?)";
     private static final String REMOVE = "DELETE FROM image WHERE image_id = ?";
 
@@ -26,7 +26,7 @@ public class ImageDaoImpl implements ImageDao {
      * @return the instance
      */
     public static ImageDaoImpl getInstance() {
-        return INSTANCE;
+        return instance;
     }
 
     @Override

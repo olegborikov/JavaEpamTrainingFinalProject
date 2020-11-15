@@ -29,7 +29,7 @@ public class RequestParameter {
     public static final String ORDERS = "orders";
     public static final String DISCOUNTS = "discounts";
     public static final String CURRENT_DATE = "currentDate";
-    public static final String DISCOUNT_PERCENT = "discountPercent";
+    public static final String PERCENT = "percent";
     public static final String ORDER = "order";
     public static final String ALL_TATTOOS = "allTattoos";
     public static final String TATTOO_NAME = "tattooName";

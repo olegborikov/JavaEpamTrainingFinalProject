@@ -25,25 +25,25 @@ public class DiscountServiceImpl implements DiscountService {
     private final DiscountDao discountDao = DiscountDaoImpl.getInstance();
 
     @Override
-    public boolean addDiscount(String discountPercent, String userId) throws ServiceException {
+    public boolean addDiscount(String percent, String userId) throws ServiceException {
         try {
             boolean isDiscountAdded = false;
-            if (DiscountValidator.isDiscountPercentCorrect(discountPercent) && UserValidator.isIdCorrect(userId)) {
-                int discountPercentParsed = Integer.parseInt(discountPercent);
+            if (DiscountValidator.isPercentCorrect(percent) && UserValidator.isIdCorrect(userId)) {
+                int percentParsed = Integer.parseInt(percent);
                 long userIdParsed = Long.parseLong(userId);
                 DiscountBuilder discountBuilder = new DiscountBuilder();
-                discountBuilder.setDiscountPercent(discountPercentParsed);
+                discountBuilder.setPercent(percentParsed);
                 UserBuilder userBuilder = new UserBuilder();
                 userBuilder.setUserId(userIdParsed);
-                User user = userBuilder.getUser();
+                User user = userBuilder.buildUser();
                 discountBuilder.setUser(user);
-                Discount discount = discountBuilder.getDiscount();
+                Discount discount = discountBuilder.buildDiscount();
                 isDiscountAdded = discountDao.add(discount);
             }
             return isDiscountAdded;
         } catch (DaoException e) {
             StringBuilder message = new StringBuilder("Error while adding discount: ");
-            message.append("discount percent = ").append(discountPercent);
+            message.append("percent = ").append(percent);
             message.append(", user id = ").append(userId);
             throw new ServiceException(message.toString(), e);
         }

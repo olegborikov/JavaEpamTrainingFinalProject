@@ -18,10 +18,10 @@ import java.util.List;
  * @version 1.0
  */
 public class DiscountDaoImpl implements DiscountDao {
-    private static final DiscountDaoImpl INSTANCE = new DiscountDaoImpl();
-    private static final String ADD = "INSERT INTO discount(discount_percent, user_account_id_fk) VALUES (?, ?)";
+    private static final DiscountDaoImpl instance = new DiscountDaoImpl();
+    private static final String ADD = "INSERT INTO discount(percent, user_account_id_fk) VALUES (?, ?)";
     private static final String REMOVE = "DELETE FROM discount WHERE discount_id = ?";
-    private static final String FIND_BY_USER_LOGIN = "SELECT discount_id, discount_percent FROM discount "
+    private static final String FIND_BY_USER_LOGIN = "SELECT discount_id, percent FROM discount "
             + "INNER JOIN user_account ON discount.user_account_id_fk = user_account.user_account_id "
             + "WHERE BINARY login LIKE ?";
 
@@ -34,14 +34,14 @@ public class DiscountDaoImpl implements DiscountDao {
      * @return the instance
      */
     public static DiscountDaoImpl getInstance() {
-        return INSTANCE;
+        return instance;
     }
 
     @Override
     public boolean add(Discount discount) throws DaoException {
         try (Connection connection = ConnectionPool.INSTANCE.getConnection();
              PreparedStatement statement = connection.prepareStatement(ADD, Statement.RETURN_GENERATED_KEYS)) {
-            statement.setInt(1, discount.getDiscountPercent());
+            statement.setInt(1, discount.getPercent());
             statement.setLong(2, discount.getUser().getUserId());
             boolean isAdded = statement.executeUpdate() > 0;
             ResultSet generatedKeysOrder = statement.getGeneratedKeys();
@@ -83,10 +83,10 @@ public class DiscountDaoImpl implements DiscountDao {
 
     private Discount createDiscountFromResultSet(ResultSet resultSet) throws SQLException {
         long id = resultSet.getLong(ColumnName.DISCOUNT_ID);
-        int discountPercent = resultSet.getInt(ColumnName.DISCOUNT_PERCENT);
+        int percent = resultSet.getInt(ColumnName.PERCENT);
         DiscountBuilder discountBuilder = new DiscountBuilder();
         discountBuilder.setDiscountId(id);
-        discountBuilder.setDiscountPercent(discountPercent);
-        return discountBuilder.getDiscount();
+        discountBuilder.setPercent(percent);
+        return discountBuilder.buildDiscount();
     }
 }

@@ -82,7 +82,7 @@ Discounts that the user has are applicable to the order.
 After adding an order, the administrator needs to confirm (or cancel) it.
 Before confirming the order, the user can cancel it himself.
 The cost of the order will be deducted from the user's account only after confirmation by the administrator.
----
+#
 # Сайт тату-салона "Bullfinch" <a name="russian"></a>
 ### Автор: Бориков Олег
 ### [Демонстрация функциональности](https://youtu.be/13-piVMcKw0)
@@ -167,4 +167,4 @@ The cost of the order will be deducted from the user's account only after confir
 После добавления заказа, администратору необходимо его подтвердить(или отменить).
 До подтверждения заказа, пользователь может отменить его самостоятельно.
 Стоимость заказа будет вычтена со счёта пользователя только после подтверждения администратора.
----
+#

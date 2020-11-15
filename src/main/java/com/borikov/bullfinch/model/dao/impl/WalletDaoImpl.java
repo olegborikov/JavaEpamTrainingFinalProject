@@ -16,7 +16,7 @@ import java.util.Optional;
  * @version 1.0
  */
 public class WalletDaoImpl implements WalletDao {
-    private static final WalletDaoImpl INSTANCE = new WalletDaoImpl();
+    private static final WalletDaoImpl instance = new WalletDaoImpl();
     private static final String ADD = "INSERT INTO wallet (balance) VALUES (0)";
     private static final String UPDATE = "UPDATE wallet SET balance = ? WHERE wallet_id = ?";
     private static final String FIND_BY_ID = "SELECT wallet_id, balance FROM wallet WHERE wallet_id = ?";
@@ -35,7 +35,7 @@ public class WalletDaoImpl implements WalletDao {
      * @return the instance
      */
     public static WalletDaoImpl getInstance() {
-        return INSTANCE;
+        return instance;
     }
 
     @Override

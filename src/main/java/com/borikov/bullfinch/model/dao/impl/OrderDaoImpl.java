@@ -25,7 +25,7 @@ import java.util.Optional;
  * @version 1.0
  */
 public class OrderDaoImpl implements OrderDao {
-    private static final OrderDaoImpl INSTANCE = new OrderDaoImpl();
+    private static final OrderDaoImpl instance = new OrderDaoImpl();
     private static final String ADD = "INSERT INTO tattoo_order (tattoo_order_price, date, "
             + "tattoo_order_description, is_confirmed, tattoo_id_fk, user_account_id_fk) VALUES (?, ?, ?, 0, ?, "
             + "(SELECT user_account_id FROM user_account WHERE BINARY login LIKE ?))";
@@ -57,7 +57,7 @@ public class OrderDaoImpl implements OrderDao {
      * @return the instance
      */
     public static OrderDaoImpl getInstance() {
-        return INSTANCE;
+        return instance;
     }
 
     @Override
@@ -190,7 +190,7 @@ public class OrderDaoImpl implements OrderDao {
             String imageName = resultSet.getString(ColumnName.IMAGE_NAME);
             tattooBuilder.setImage(new Image(null, imageName));
         }
-        orderBuilder.setTattoo(tattooBuilder.getTattoo());
+        orderBuilder.setTattoo(tattooBuilder.buildTattoo());
         if (columnDefinition.findColumn(ColumnName.TATTOO_ORDER_DESCRIPTION, true, 1) != -1) {
             String description = resultSet.getString(ColumnName.TATTOO_ORDER_DESCRIPTION);
             orderBuilder.setDescription(description);
@@ -199,8 +199,8 @@ public class OrderDaoImpl implements OrderDao {
             String login = resultSet.getString(ColumnName.LOGIN);
             UserBuilder userBuilder = new UserBuilder();
             userBuilder.setLogin(login);
-            orderBuilder.setUser(userBuilder.getUser());
+            orderBuilder.setUser(userBuilder.buildUser());
         }
-        return orderBuilder.getOrder();
+        return orderBuilder.buildOrder();
     }
 }

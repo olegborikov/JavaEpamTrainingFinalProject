@@ -23,7 +23,7 @@ import java.util.Optional;
  * @version 1.0
  */
 public class TransactionManager {
-    private static final TransactionManager INSTANCE = new TransactionManager();
+    private static final TransactionManager instance = new TransactionManager();
     private static final Logger LOGGER = LogManager.getLogger();
 
     private TransactionManager() {
@@ -35,7 +35,7 @@ public class TransactionManager {
      * @return the instance
      */
     public static TransactionManager getInstance() {
-        return INSTANCE;
+        return instance;
     }
 
     /**

@@ -3,11 +3,14 @@ package com.borikov.bullfinch.controller.command.impl;
 import com.borikov.bullfinch.controller.PagePath;
 import com.borikov.bullfinch.controller.RequestParameter;
 import com.borikov.bullfinch.controller.command.Command;
+import com.borikov.bullfinch.model.entity.Discount;
 import com.borikov.bullfinch.model.entity.Tattoo;
 import com.borikov.bullfinch.model.exception.ServiceException;
+import com.borikov.bullfinch.model.service.DiscountService;
 import com.borikov.bullfinch.model.service.OrderService;
 import com.borikov.bullfinch.model.service.TattooService;
 import com.borikov.bullfinch.model.service.WalletService;
+import com.borikov.bullfinch.model.service.impl.DiscountServiceImpl;
 import com.borikov.bullfinch.model.service.impl.OrderServiceImpl;
 import com.borikov.bullfinch.model.service.impl.TattooServiceImpl;
 import com.borikov.bullfinch.model.service.impl.WalletServiceImpl;
@@ -18,6 +21,7 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -30,6 +34,7 @@ public class OrderTattooCommand implements Command {
     private static final OrderService orderService = new OrderServiceImpl();
     private static final TattooService tattooService = new TattooServiceImpl();
     private static final WalletService walletService = new WalletServiceImpl();
+    private static final DiscountService discountService = new DiscountServiceImpl();
     private static final Logger LOGGER = LogManager.getLogger();
 
     @Override
@@ -48,11 +53,13 @@ public class OrderTattooCommand implements Command {
                     request.setAttribute(RequestParameter.TATTOO_ORDER_CONFIRM_MESSAGE, true);
                     page = PagePath.MESSAGE;
                 } else {
-                    request.setAttribute(RequestParameter.CURRENT_DATE, LocalDate.now());
-                    request.setAttribute(RequestParameter.INCORRECT_DATA_MESSAGE, true);
                     Optional<Tattoo> tattoo = tattooService.findTattooByIdCatalog(tattooId);
                     if (tattoo.isPresent()) {
                         request.setAttribute(RequestParameter.TATTOO, tattoo.get());
+                        List<Discount> discounts = discountService.findDiscountsByUserLogin(userLogin);
+                        request.setAttribute(RequestParameter.DISCOUNTS, discounts);
+                        request.setAttribute(RequestParameter.CURRENT_DATE, LocalDate.now());
+                        request.setAttribute(RequestParameter.INCORRECT_DATA_MESSAGE, true);
                         page = PagePath.TATTOO_ORDER;
                     } else {
                         request.setAttribute(RequestParameter.TATTOO_FIND_ERROR_MESSAGE, true);

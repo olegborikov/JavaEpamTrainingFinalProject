@@ -23,7 +23,7 @@ import java.util.Optional;
  * @version 1.0
  */
 public class UserDaoImpl implements UserDao {
-    private static final UserDaoImpl INSTANCE = new UserDaoImpl();
+    private static final UserDaoImpl instance = new UserDaoImpl();
     private static final String ADD = "INSERT INTO user_account (email, login, password, first_name, second_name, "
             + "phone_number, is_blocked, is_activated, role_id_fk, wallet_id_fk) "
             + "VALUES (?, ?, ?, ?, ?, ?, 0, 0, ?, ?)";
@@ -57,7 +57,7 @@ public class UserDaoImpl implements UserDao {
      * @return the instance
      */
     public static UserDaoImpl getInstance() {
-        return INSTANCE;
+        return instance;
     }
 
     @Override
@@ -266,6 +266,6 @@ public class UserDaoImpl implements UserDao {
             double balance = resultSet.getDouble(ColumnName.BALANCE);
             userBuilder.setWallet(new Wallet(walletId, balance));
         }
-        return userBuilder.getUser();
+        return userBuilder.buildUser();
     }
 }

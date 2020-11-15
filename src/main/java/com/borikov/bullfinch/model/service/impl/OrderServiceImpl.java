@@ -51,13 +51,13 @@ public class OrderServiceImpl implements OrderService {
                 orderBuilder.setPrice(Double.parseDouble(price));
                 TattooBuilder tattooBuilder = new TattooBuilder();
                 tattooBuilder.setTattooId(Long.parseLong(tattooId));
-                Tattoo tattoo = tattooBuilder.getTattoo();
+                Tattoo tattoo = tattooBuilder.buildTattoo();
                 orderBuilder.setTattoo(tattoo);
                 UserBuilder userBuilder = new UserBuilder();
                 userBuilder.setLogin(userLogin);
-                User user = userBuilder.getUser();
+                User user = userBuilder.buildUser();
                 orderBuilder.setUser(user);
-                Order order = orderBuilder.getOrder();
+                Order order = orderBuilder.buildOrder();
                 isOrderAdded = orderDao.add(order);
                 if (isOrderAdded) {
                     if (DiscountValidator.isIdCorrect(discountId)) {

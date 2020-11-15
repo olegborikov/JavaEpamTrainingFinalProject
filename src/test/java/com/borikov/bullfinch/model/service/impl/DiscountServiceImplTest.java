@@ -28,7 +28,7 @@ public class DiscountServiceImplTest {
     @BeforeClass
     public void setUp() {
         discountDao = mock(DiscountDaoImpl.class);
-        Whitebox.setInternalState(DiscountDaoImpl.class, "INSTANCE", discountDao);
+        Whitebox.setInternalState(DiscountDaoImpl.class, "instance", discountDao);
         discountService = new DiscountServiceImpl();
     }
 
@@ -48,10 +48,10 @@ public class DiscountServiceImplTest {
     }
 
     @Test(dataProvider = "addDiscountPositiveData")
-    public void addDiscountPositiveTest(String discountPercent, String userId) {
+    public void addDiscountPositiveTest(String percent, String userId) {
         try {
             when(discountDao.add(any(Discount.class))).thenReturn(true);
-            boolean actual = discountService.addDiscount(discountPercent, userId);
+            boolean actual = discountService.addDiscount(percent, userId);
             assertTrue(actual);
         } catch (ServiceException | DaoException e) {
             fail("Incorrect data", e);
@@ -68,10 +68,10 @@ public class DiscountServiceImplTest {
     }
 
     @Test(dataProvider = "addDiscountNegativeData")
-    public void addDiscountNegativeTest(String discountPercent, String userId) {
+    public void addDiscountNegativeTest(String percent, String userId) {
         try {
             when(discountDao.add(any(Discount.class))).thenReturn(true);
-            boolean actual = discountService.addDiscount(discountPercent, userId);
+            boolean actual = discountService.addDiscount(percent, userId);
             assertFalse(actual);
         } catch (ServiceException | DaoException e) {
             fail("Incorrect data", e);
@@ -122,7 +122,7 @@ public class DiscountServiceImplTest {
     public void findDiscountsByUserLoginPositiveTest() {
         try {
             List<Discount> expected = new ArrayList<>();
-            expected.add(new Discount(1L, 10, new UserBuilder().getUser()));
+            expected.add(new Discount(1L, 10, new UserBuilder().buildUser()));
             when(discountDao.findByUserLogin(any(String.class))).thenReturn(expected);
             List<Discount> actual = discountService.findDiscountsByUserLogin("oleg");
             assertEquals(actual, expected);
@@ -135,7 +135,7 @@ public class DiscountServiceImplTest {
     public void findDiscountsByUserLoginNegativeTest() {
         try {
             List<Discount> expected = new ArrayList<>();
-            expected.add(new Discount(1L, 10, new UserBuilder().getUser()));
+            expected.add(new Discount(1L, 10, new UserBuilder().buildUser()));
             when(discountDao.findByUserLogin(any(String.class))).thenReturn(expected);
             List<Discount> actual = discountService.findDiscountsByUserLogin(null);
             assertNotEquals(actual, expected);

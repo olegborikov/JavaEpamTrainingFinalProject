@@ -52,7 +52,7 @@ public class UserServiceImpl implements UserService {
                             userBuilder.setPhoneNumber(registrationParameters.get(RegistrationParameter.PHONE_NUMBER));
                             userBuilder.setUserRole(UserRole.USER);
                             userBuilder.setWallet(new Wallet(null, 0));
-                            User user = userBuilder.getUser();
+                            User user = userBuilder.buildUser();
                             isUserAdded = transactionManager.addWalletAndUser(user, encryptedPassword.get());
                         }
                     } else {
@@ -91,7 +91,7 @@ public class UserServiceImpl implements UserService {
                 userBuilder.setFirstName(firstName);
                 userBuilder.setSecondName(secondName);
                 userBuilder.setPhoneNumber(phoneNumber);
-                User user = userBuilder.getUser();
+                User user = userBuilder.buildUser();
                 isUserEdited = userDao.update(user);
             }
             return isUserEdited;

@@ -42,8 +42,8 @@ public class TattooServiceImpl implements TattooService {
                 tattooBuilder.setImage(new Image(null, imageName));
                 UserBuilder userBuilder = new UserBuilder();
                 userBuilder.setLogin(proposedLogin);
-                tattooBuilder.setUser(userBuilder.getUser());
-                Tattoo tattoo = tattooBuilder.getTattoo();
+                tattooBuilder.setUser(userBuilder.buildUser());
+                Tattoo tattoo = tattooBuilder.buildTattoo();
                 isTattooAdded = transactionManager.addImageAndTattoo(tattoo);
             }
             return isTattooAdded;
@@ -86,7 +86,7 @@ public class TattooServiceImpl implements TattooService {
                 tattooBuilder.setName(name);
                 tattooBuilder.setDescription(description);
                 tattooBuilder.setPrice(tattooPrice);
-                Tattoo tattoo = tattooBuilder.getTattoo();
+                Tattoo tattoo = tattooBuilder.buildTattoo();
                 isTattooEdited = tattooDao.update(tattoo);
             }
             return isTattooEdited;
@@ -115,8 +115,8 @@ public class TattooServiceImpl implements TattooService {
                 tattooBuilder.setImage(new Image(null, imageName));
                 UserBuilder userBuilder = new UserBuilder();
                 userBuilder.setLogin(proposedLogin);
-                tattooBuilder.setUser(userBuilder.getUser());
-                Tattoo tattoo = tattooBuilder.getTattoo();
+                tattooBuilder.setUser(userBuilder.buildUser());
+                Tattoo tattoo = tattooBuilder.buildTattoo();
                 isTattooOffered = transactionManager.offerImageAndTattoo(tattoo);
             }
             return isTattooOffered;

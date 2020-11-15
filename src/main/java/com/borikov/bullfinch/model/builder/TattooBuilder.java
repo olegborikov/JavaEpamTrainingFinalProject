@@ -93,11 +93,11 @@ public class TattooBuilder {
     }
 
     /**
-     * Gets tattoo.
+     * Build tattoo.
      *
      * @return the tattoo
      */
-    public Tattoo getTattoo() {
+    public Tattoo buildTattoo() {
         return new Tattoo(tattooId, name, description, price, isAllowed, isArchived, image, user);
     }
 }

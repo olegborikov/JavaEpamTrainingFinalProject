@@ -67,9 +67,9 @@
                                     </option>
                                     <c:forEach var="discount" items="${discounts}">
                                         <option onclick='document.getElementById("price").value =
-                                            ${(100 - discount.discountPercent) * tattoo.price / 100};
+                                            ${(100 - discount.percent) * tattoo.price / 100};
                                                 document.getElementById("discountId").value = ${discount.discountId}'>
-                                                ${discount.discountPercent}
+                                                ${discount.percent}
                                         </option>
                                     </c:forEach>
                                 </select>
