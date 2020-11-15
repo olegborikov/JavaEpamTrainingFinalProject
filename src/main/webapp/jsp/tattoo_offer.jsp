@@ -4,6 +4,7 @@
 
 <fmt:setLocale value="${currentLocale}"/>
 <fmt:setBundle basename="i18n.application_message"/>
+
 <html>
 <head>
     <title><fmt:message key="tattooOffer.title"/></title>
@@ -45,7 +46,7 @@
                                     <fmt:message key="tattooOffer.price"/>
                                 </label>
                                 <input style="background-color: black" type="text"
-                                       class="form-control text-white" name="price" required maxlength="10"
+                                       class="form-control text-white" name="price" required maxlength="8"
                                        oninvalid="this.setCustomValidity('<fmt:message key="tattooOffer.priceValidate"/>')"
                                        onchange="this.setCustomValidity('')"
                                        title='<fmt:message key="tattooOffer.priceValidate"/>'

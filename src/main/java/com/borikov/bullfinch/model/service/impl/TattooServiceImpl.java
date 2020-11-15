@@ -14,6 +14,7 @@ import com.borikov.bullfinch.model.service.TattooService;
 import com.borikov.bullfinch.model.validator.TattooValidator;
 import com.borikov.bullfinch.model.validator.UserValidator;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -199,7 +200,11 @@ public class TattooServiceImpl implements TattooService {
     @Override
     public List<Tattoo> findTattoosByNameSubstring(String nameSubstring) throws ServiceException {
         try {
-            return tattooDao.findByNameSubstring(nameSubstring);
+            List<Tattoo> tattoos = new ArrayList<>();
+            if (TattooValidator.isNameSubstringCorrect(nameSubstring)) {
+                tattoos = tattooDao.findByNameSubstring(nameSubstring);
+            }
+            return tattoos;
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
@@ -249,7 +254,11 @@ public class TattooServiceImpl implements TattooService {
     @Override
     public List<Tattoo> findTattoosByNameSubstringCatalog(String nameSubstring) throws ServiceException {
         try {
-            return tattooDao.findByNameSubstringCatalog(nameSubstring);
+            List<Tattoo> tattoos = new ArrayList<>();
+            if (TattooValidator.isNameSubstringCorrect(nameSubstring)) {
+                tattoos = tattooDao.findByNameSubstringCatalog(nameSubstring);
+            }
+            return tattoos;
         } catch (DaoException e) {
             throw new ServiceException(e);
         }

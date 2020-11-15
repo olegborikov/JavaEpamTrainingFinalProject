@@ -9,6 +9,7 @@ package com.borikov.bullfinch.model.validator;
 public class TattooValidator {
     private static final String ID_REGEX = "^[1-9]\\d{0,9}$";
     private static final String NAME_REGEX = "^[^<>]{2,25}$";
+    private static final String NAME_SUBSTRING_REGEX = "^[^<>]{0,25}$";
     private static final String DESCRIPTION_REGEX = "^[^<>]{1,1000}$";
     private static final String PRICE_REGEX = "^[1-9]\\d{0,4}(\\.\\d{0,2})?$";
 
@@ -33,6 +34,16 @@ public class TattooValidator {
      */
     public static boolean isNameCorrect(String name) {
         return isStringCorrect(name, NAME_REGEX) && !name.isBlank();
+    }
+
+    /**
+     * Check name substring for correct.
+     *
+     * @param nameSubstring the nameSubstring
+     * @return the boolean
+     */
+    public static boolean isNameSubstringCorrect(String nameSubstring) {
+        return isStringCorrect(nameSubstring, NAME_SUBSTRING_REGEX);
     }
 
     /**

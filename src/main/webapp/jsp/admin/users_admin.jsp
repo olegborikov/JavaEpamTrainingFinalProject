@@ -5,6 +5,7 @@
 
 <fmt:setLocale value="${currentLocale}"/>
 <fmt:setBundle basename="i18n.application_message"/>
+
 <html>
 <head>
     <title><fmt:message key="usersAdmin.title"/></title>
@@ -54,7 +55,7 @@
                         </div>
                     </c:if>
                     <ctg:pagination-users-admin pageNumber="${pageNumber}"
-                                          usersAmountOnPage="${usersAmountOnPage}"/>
+                                                usersAmountOnPage="${usersAmountOnPage}"/>
                 </div>
                 <c:if test="${not empty users && users.size() > usersAmountOnPage}">
                     <form method="post" action="/bullfinch">

@@ -15,6 +15,7 @@ public class UserValidator {
     private static final String ID_REGEX = "^[1-9]\\d{0,9}$";
     private static final String EMAIL_REGEX = "^[\\w.+-]{3,30}@[\\w.-]{2,15}\\.[\\p{Lower}]{2,4}$";
     private static final String LOGIN_REGEX = "^[\\w.]{3,20}$";
+    private static final String LOGIN_SUBSTRING_REGEX = "^[\\w.]{0,20}$";
     private static final String FIRST_NAME_REGEX = "^\\p{L}{2,25}$";
     private static final String SECOND_NAME_REGEX = "^\\p{L}{2,25}$";
     private static final String PASSWORD_REGEX = "^(?=.*\\p{Lower})(?=.*\\p{Upper})(?=.*\\d)\\p{Alnum}{8,20}$";
@@ -91,6 +92,16 @@ public class UserValidator {
      */
     public static boolean isLoginCorrect(String login) {
         return isStringCorrect(login, LOGIN_REGEX);
+    }
+
+    /**
+     * Check login substring for correct.
+     *
+     * @param loginSubstring the loginSubstring
+     * @return the boolean
+     */
+    public static boolean isLoginSubstringCorrect(String loginSubstring) {
+        return isStringCorrect(loginSubstring, LOGIN_SUBSTRING_REGEX);
     }
 
     /**

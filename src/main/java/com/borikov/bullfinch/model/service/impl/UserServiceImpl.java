@@ -15,6 +15,7 @@ import com.borikov.bullfinch.model.validator.UserValidator;
 import com.borikov.bullfinch.util.PasswordEncryptor;
 import com.borikov.bullfinch.util.RegistrationParameter;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -191,7 +192,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> findUsersByLoginSubstring(String loginSubstring) throws ServiceException {
         try {
-            return userDao.findByLoginSubstring(loginSubstring);
+            List<User> users = new ArrayList<>();
+            if (UserValidator.isLoginSubstringCorrect(loginSubstring)) {
+                users = userDao.findByLoginSubstring(loginSubstring);
+            }
+            return users;
         } catch (DaoException e) {
             throw new ServiceException(e);
         }

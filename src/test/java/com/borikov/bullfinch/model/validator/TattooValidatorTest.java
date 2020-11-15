@@ -63,6 +63,7 @@ public class TattooValidatorTest {
     public Object[][] createIsNameCorrectNegativeData() {
         return new Object[][]{
                 {""},
+                {"a"},
                 {"<dads"},
                 {"hello< goodbye"},
                 {"qqqqqqqqqqqqqqqqqqqqqqqqqqqqq"},
@@ -75,6 +76,43 @@ public class TattooValidatorTest {
     @Test(dataProvider = "isNameCorrectNegativeData")
     public void isNameCorrectNegativeTest(String name) {
         boolean actual = TattooValidator.isNameCorrect(name);
+        assertFalse(actual);
+    }
+
+    @DataProvider(name = "isNameSubstringCorrectPositiveData")
+    public Object[][] createIsNameSubstringCorrectPositiveData() {
+        return new Object[][]{
+                {"hello, i want to take it"},
+                {""},
+                {"goodbue"},
+                {"..."},
+                {"12345678910"},
+                {"   "},
+                {"d"}
+        };
+    }
+
+    @Test(dataProvider = "isNameSubstringCorrectPositiveData")
+    public void isNameSubstringCorrectPositiveTest(String nameSubstring) {
+        boolean actual = TattooValidator.isNameSubstringCorrect(nameSubstring);
+        assertTrue(actual);
+    }
+
+    @DataProvider(name = "isNameSubstringCorrectNegativeData")
+    public Object[][] createIsNameSubstringCorrectNegativeData() {
+        return new Object[][]{
+                {"<dads"},
+                {"<"},
+                {"hello< goodbye"},
+                {"qqqqqqqqqqqqqqqqqqqqqqqqqqqqq"},
+                {"<script>alert</script>"},
+                {null}
+        };
+    }
+
+    @Test(dataProvider = "isNameSubstringCorrectNegativeData")
+    public void isNameSubstringCorrectNegativeTest(String nameSubstring) {
+        boolean actual = TattooValidator.isNameSubstringCorrect(nameSubstring);
         assertFalse(actual);
     }
 

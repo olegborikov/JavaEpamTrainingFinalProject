@@ -171,6 +171,44 @@ public class UserValidatorTest {
         assertFalse(actual);
     }
 
+    @DataProvider(name = "isLoginSubstringCorrectPositiveData")
+    public Object[][] createIsLoginSubstringCorrectPositiveData() {
+        return new Object[][]{
+                {"oleg"},
+                {"qwe_qwe.."},
+                {""},
+                {"a"},
+                {"..1"},
+                {"__oleg__"},
+                {"o12"},
+                {"oleg.borikov"}
+        };
+    }
+
+    @Test(dataProvider = "isLoginSubstringCorrectPositiveData")
+    public void isLoginSubstringCorrectPositiveTest(String loginSubstring) {
+        boolean actual = UserValidator.isLoginSubstringCorrect(loginSubstring);
+        assertTrue(actual);
+    }
+
+    @DataProvider(name = "isLoginSubstringCorrectNegativeData")
+    public Object[][] createIsLoginSubstringCorrectNegativeData() {
+        return new Object[][]{
+                {"olegolegolegolegoelgoleg"},
+                {"qwe_qwe..?"},
+                {"#fsdfsdf"},
+                {"?"},
+                {"   "},
+                {null}
+        };
+    }
+
+    @Test(dataProvider = "isLoginSubstringCorrectNegativeData")
+    public void isLoginSubstringCorrectNegativeTest(String loginSubstring) {
+        boolean actual = UserValidator.isLoginSubstringCorrect(loginSubstring);
+        assertFalse(actual);
+    }
+
     @DataProvider(name = "isPasswordCorrectPositiveData")
     public Object[][] createIsPasswordCorrectPositiveData() {
         return new Object[][]{

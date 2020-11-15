@@ -289,8 +289,8 @@ public class UserServiceImplTest {
     public void findUsersByLoginSubstringNegativeTest() {
         try {
             List<User> expected = null;
-            when(userDao.findByLoginSubstring(any(String.class))).thenReturn(new ArrayList<>());
-            List<User> actual = userService.findUsersByLoginSubstring("a");
+            when(userDao.findByLoginSubstring(any(String.class))).thenReturn(null);
+            List<User> actual = userService.findUsersByLoginSubstring("<");
             assertNotEquals(actual, expected);
         } catch (ServiceException | DaoException e) {
             fail("Incorrect data", e);

@@ -25,107 +25,81 @@
             <c:if test="${tattooFindErrorMessage}">
                 <h2><fmt:message key="message.tattooFindErrorMessage"/></h2>
             </c:if>
-
             <c:if test="${tattooAllowErrorMessage}">
                 <h2><fmt:message key="message.tattooAllowErrorMessage"/></h2>
             </c:if>
-
             <c:if test="${tattooArchiveErrorMessage}">
                 <h2><fmt:message key="message.tattooArchiveErrorMessage"/></h2>
             </c:if>
-
             <c:if test="${tattooUnarchiveErrorMessage}">
                 <fmt:message key="message.tattooUnarchiveErrorMessage"/>
             </c:if>
-
             <c:if test="${userEmailConfirmMessage}">
                 <h2><fmt:message key="message.userEmailConfirmMessage"/></h2>
             </c:if>
-
             <c:if test="${userEmailConfirmPositiveMessage}">
                 <h2><fmt:message key="message.userEmailConfirmPositiveMessage"/></h2>
             </c:if>
-
             <c:if test="${userEmailConfirmErrorMessage}">
                 <h2><fmt:message key="message.userEmailConfirmErrorMessage"/></h2>
             </c:if>
-
             <c:if test="${tattooDeleteConfirmMessage}">
                 <h2><fmt:message key="message.tattooDeleteConfirmMessage"/></h2>
             </c:if>
-
             <c:if test="${tattooDeleteErrorMessage}">
                 <h2><fmt:message key="message.tattooDeleteErrorMessage"/></h2>
             </c:if>
-
             <c:if test="${tattooOfferConfirmMessage}">
                 <h2><fmt:message key="message.tattooOfferConfirmMessage"/></h2>
             </c:if>
-
             <c:if test="${tattooAddConfirmMessage}">
                 <h2><fmt:message key="message.tattooAddConfirmMessage"/></h2>
             </c:if>
-
             <c:if test="${userFindErrorMessage}">
                 <h2><fmt:message key="message.userFindErrorMessage"/></h2>
             </c:if>
-
             <c:if test="${tattooOrderConfirmMessage}">
                 <h2><fmt:message key="message.tattooOrderConfirmMessage"/></h2>
             </c:if>
-
             <c:if test="${balanceEnrichConfirmMessage}">
                 <h2><fmt:message key="message.balanceEnrichConfirmMessage"/></h2>
             </c:if>
-
             <c:if test="${balanceEnrichErrorMessage}">
                 <h2><fmt:message key="message.balanceEnrichErrorMessage"/></h2>
             </c:if>
-
             <c:if test="${userBlockErrorMessage}">
                 <h2><fmt:message key="message.userBlockErrorMessage"/></h2>
             </c:if>
-
             <c:if test="${userUnblockErrorMessage}">
                 <h2><fmt:message key="message.userUnblockErrorMessage"/></h2>
             </c:if>
-
             <c:if test="${userBlockedMessage}">
                 <h2><fmt:message key="message.userBlockedMessage"/></h2>
             </c:if>
-
             <c:if test="${orderFindErrorMessage}">
                 <h2><fmt:message key="message.orderFindErrorMessage"/></h2>
             </c:if>
-
             <c:if test="${orderCancelConfirmMessage}">
                 <h2><fmt:message key="message.orderCancelConfirmMessage"/></h2>
             </c:if>
-
             <c:if test="${orderCancelErrorMessage}">
                 <h2><fmt:message key="message.orderCancelErrorMessage"/></h2>
             </c:if>
-
             <c:if test="${orderDenyConfirmMessage}">
                 <h2><fmt:message key="message.orderDenyConfirmMessage"/></h2>
             </c:if>
-
             <c:if test="${orderDenyErrorMessage}">
                 <h2><fmt:message key="message.orderDenyErrorMessage"/></h2>
             </c:if>
-
             <c:if test="${orderSubmitErrorMessage}">
                 <h2><fmt:message key="message.orderSubmitErrorMessage"/></h2>
             </c:if>
-
             <c:if test="${tattooOrderBalanceErrorMessage}">
                 <h2><fmt:message key="message.tattooOrderBalanceErrorMessage"/></h2>
             </c:if>
-
             <c:if test="${discountAddConfirmMessage}">
                 <h2><fmt:message key="message.discountAddConfirmMessage"/></h2>
             </c:if>
-
             <c:if test="${discountDeleteErrorMessage}">
                 <h2><fmt:message key="message.discountDeleteErrorMessage"/></h2>
             </c:if>

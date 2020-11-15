@@ -4,6 +4,7 @@
 
 <fmt:setLocale value="${currentLocale}"/>
 <fmt:setBundle basename="i18n.application_message"/>
+
 <html>
 <head>
     <title><fmt:message key="tattooEdit.title"/></title>
@@ -54,8 +55,7 @@
                                     <fmt:message key="tattooEdit.price"/>
                                 </label>
                                 <input style="background-color: black" name="price" required
-                                       maxlength="10"
-                                       type="text" class="form-control text-white"
+                                       type="text" class="form-control text-white" maxlength="8"
                                        oninvalid="this.setCustomValidity('<fmt:message key="tattooEdit.priceValidate"/>')"
                                        onchange="this.setCustomValidity('')"
                                        pattern="^[1-9]\d{0,4}(\.\d{0,2})?$"

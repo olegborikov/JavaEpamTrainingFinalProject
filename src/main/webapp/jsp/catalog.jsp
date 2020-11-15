@@ -65,7 +65,7 @@
                         </div>
                     </c:if>
                     <ctg:pagination-tattoos-catalog pageNumber="${pageNumber}"
-                                            tattoosAmountOnPage="${tattoosAmountOnPage}"/>
+                                                    tattoosAmountOnPage="${tattoosAmountOnPage}"/>
                 </div>
                 <c:if test="${not empty tattoos && tattoos.size() > tattoosAmountOnPage}">
                     <form method="post" action="/bullfinch">

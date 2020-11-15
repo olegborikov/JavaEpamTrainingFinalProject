@@ -266,8 +266,8 @@ public class TattooServiceImplTest {
     public void findTattoosByNameSubstringNegativeTest() {
         try {
             List<Tattoo> expected = null;
-            when(tattooDao.findByNameSubstring(any(String.class))).thenReturn(new ArrayList<>());
-            List<Tattoo> actual = tattooService.findTattoosByNameSubstring("moon");
+            when(tattooDao.findByNameSubstring(any(String.class))).thenReturn(null);
+            List<Tattoo> actual = tattooService.findTattoosByNameSubstring("<");
             assertNotEquals(actual, expected);
         } catch (ServiceException | DaoException e) {
             fail("Incorrect data", e);
@@ -388,8 +388,8 @@ public class TattooServiceImplTest {
     public void findTattoosByNameSubstringCatalogNegativeTest() {
         try {
             List<Tattoo> expected = null;
-            when(tattooDao.findByNameSubstringCatalog(any(String.class))).thenReturn(new ArrayList<>());
-            List<Tattoo> actual = tattooService.findTattoosByNameSubstringCatalog("moon");
+            when(tattooDao.findByNameSubstringCatalog(any(String.class))).thenReturn(null);
+            List<Tattoo> actual = tattooService.findTattoosByNameSubstringCatalog("<");
             assertNotEquals(actual, expected);
         } catch (ServiceException | DaoException e) {
             fail("Incorrect data", e);

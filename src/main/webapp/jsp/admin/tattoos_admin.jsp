@@ -5,6 +5,7 @@
 
 <fmt:setLocale value="${currentLocale}"/>
 <fmt:setBundle basename="i18n.application_message"/>
+
 <html>
 <head>
     <title><fmt:message key="tattoosAdmin.title"/></title>
@@ -66,7 +67,7 @@
                         </div>
                     </c:if>
                     <ctg:pagination-tattoos-admin pageNumber="${pageNumber}"
-                                            tattoosAmountOnPage="${tattoosAmountOnPage}"/>
+                                                  tattoosAmountOnPage="${tattoosAmountOnPage}"/>
                 </div>
                 <c:if test="${not empty tattoos && tattoos.size() > tattoosAmountOnPage}">
                     <form method="post" action="/bullfinch">

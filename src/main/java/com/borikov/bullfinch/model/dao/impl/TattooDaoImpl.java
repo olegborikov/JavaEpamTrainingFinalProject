@@ -277,8 +277,7 @@ public class TattooDaoImpl implements TattooDao {
     }
 
     @Override
-    public List<Tattoo> findByNameSubstringCatalog(String nameSubstring)
-            throws DaoException {
+    public List<Tattoo> findByNameSubstringCatalog(String nameSubstring) throws DaoException {
         try (Connection connection = ConnectionPool.INSTANCE.getConnection();
              PreparedStatement statement = connection.prepareStatement(FIND_BY_NAME_CATALOG)) {
             statement.setString(1, PERCENT + nameSubstring + PERCENT);
