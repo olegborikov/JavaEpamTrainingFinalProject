@@ -43,10 +43,10 @@ public class UploadController extends HttpServlet {
         String page = PagePath.TATTOO_OFFER;
         Optional<String> photoName = photoFileManager.add(request.getParts());
         if (photoName.isPresent()) {
-            request.setAttribute(RequestParameter.PHOTO_NAME, photoName.get());
+            request.setAttribute(RequestAttribute.PHOTO_NAME, photoName.get());
             page = DISPATCHER_PATH_CONTROLLER;
         } else {
-            request.setAttribute(RequestParameter.INCORRECT_IMAGE_MESSAGE, true);
+            request.setAttribute(RequestAttribute.INCORRECT_IMAGE_MESSAGE, true);
         }
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(page);
         dispatcher.forward(request, response);

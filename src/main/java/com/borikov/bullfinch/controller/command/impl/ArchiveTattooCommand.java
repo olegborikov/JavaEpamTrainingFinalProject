@@ -1,6 +1,7 @@
 package com.borikov.bullfinch.controller.command.impl;
 
 import com.borikov.bullfinch.controller.PagePath;
+import com.borikov.bullfinch.controller.RequestAttribute;
 import com.borikov.bullfinch.controller.RequestParameter;
 import com.borikov.bullfinch.controller.command.Command;
 import com.borikov.bullfinch.model.entity.Tattoo;
@@ -21,8 +22,8 @@ import java.util.Optional;
  * @version 1.0
  */
 public class ArchiveTattooCommand implements Command {
-    private static final TattooService tattooService = new TattooServiceImpl();
     private static final Logger LOGGER = LogManager.getLogger();
+    private static final TattooService tattooService = new TattooServiceImpl();
 
     @Override
     public String execute(HttpServletRequest request) {
@@ -32,19 +33,19 @@ public class ArchiveTattooCommand implements Command {
             if (tattooService.archiveTattoo(tattooId)) {
                 Optional<Tattoo> tattoo = tattooService.findTattooById(tattooId);
                 if (tattoo.isPresent()) {
-                    request.setAttribute(RequestParameter.TATTOO, tattoo.get());
+                    request.setAttribute(RequestAttribute.TATTOO, tattoo.get());
                     page = PagePath.TATTOO_ADMIN;
                 } else {
-                    request.setAttribute(RequestParameter.TATTOO_FIND_ERROR_MESSAGE, true);
+                    request.setAttribute(RequestAttribute.TATTOO_FIND_ERROR_MESSAGE, true);
                     page = PagePath.MESSAGE;
                 }
             } else {
-                request.setAttribute(RequestParameter.TATTOO_ARCHIVE_ERROR_MESSAGE, true);
+                request.setAttribute(RequestAttribute.TATTOO_ARCHIVE_ERROR_MESSAGE, true);
                 page = PagePath.MESSAGE;
             }
         } catch (ServiceException e) {
             LOGGER.log(Level.ERROR, "Error while archiving tattoo", e);
-            request.setAttribute(RequestParameter.ERROR_MESSAGE, e);
+            request.setAttribute(RequestAttribute.ERROR_MESSAGE, e);
             page = PagePath.ERROR_500;
         }
         return page;

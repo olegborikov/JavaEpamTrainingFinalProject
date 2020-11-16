@@ -1,6 +1,7 @@
 package com.borikov.bullfinch.controller.command.impl;
 
 import com.borikov.bullfinch.controller.PagePath;
+import com.borikov.bullfinch.controller.RequestAttribute;
 import com.borikov.bullfinch.controller.RequestParameter;
 import com.borikov.bullfinch.controller.command.Command;
 import com.borikov.bullfinch.model.exception.ServiceException;
@@ -19,8 +20,8 @@ import javax.servlet.http.HttpServletRequest;
  * @version 1.0
  */
 public class CancelOrderCommand implements Command {
-    private static final OrderService orderService = new OrderServiceImpl();
     private static final Logger LOGGER = LogManager.getLogger();
+    private static final OrderService orderService = new OrderServiceImpl();
 
     @Override
     public String execute(HttpServletRequest request) {
@@ -28,14 +29,14 @@ public class CancelOrderCommand implements Command {
         String orderId = request.getParameter(RequestParameter.ORDER_ID);
         try {
             if (orderService.removeOrder(orderId)) {
-                request.setAttribute(RequestParameter.ORDER_CANCEL_CONFIRM_MESSAGE, true);
+                request.setAttribute(RequestAttribute.ORDER_CANCEL_CONFIRM_MESSAGE, true);
             } else {
-                request.setAttribute(RequestParameter.ORDER_CANCEL_ERROR_MESSAGE, true);
+                request.setAttribute(RequestAttribute.ORDER_CANCEL_ERROR_MESSAGE, true);
             }
             page = PagePath.MESSAGE;
         } catch (ServiceException e) {
             LOGGER.log(Level.ERROR, "Error while canceling order", e);
-            request.setAttribute(RequestParameter.ERROR_MESSAGE, e);
+            request.setAttribute(RequestAttribute.ERROR_MESSAGE, e);
             page = PagePath.ERROR_500;
         }
         return page;

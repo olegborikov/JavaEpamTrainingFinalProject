@@ -1,7 +1,9 @@
 package com.borikov.bullfinch.controller.command.impl;
 
 import com.borikov.bullfinch.controller.PagePath;
+import com.borikov.bullfinch.controller.RequestAttribute;
 import com.borikov.bullfinch.controller.RequestParameter;
+import com.borikov.bullfinch.controller.SessionAttribute;
 import com.borikov.bullfinch.controller.command.Command;
 import com.borikov.bullfinch.model.entity.Discount;
 import com.borikov.bullfinch.model.entity.Tattoo;
@@ -44,35 +46,35 @@ public class OrderTattooCommand implements Command {
         String date = request.getParameter(RequestParameter.DATE);
         String description = request.getParameter(RequestParameter.DESCRIPTION);
         String price = request.getParameter(RequestParameter.PRICE);
-        HttpSession httpSession = request.getSession();
-        String userLogin = (String) httpSession.getAttribute(RequestParameter.LOGIN);
         String discountId = request.getParameter(RequestParameter.DISCOUNT_ID);
+        HttpSession session = request.getSession();
+        String userLogin = (String) session.getAttribute(SessionAttribute.LOGIN);
         try {
             if (walletService.checkBalanceSize(userLogin, price)) {
                 if (orderService.addOrder(date, description, price, tattooId, userLogin, discountId)) {
-                    request.setAttribute(RequestParameter.TATTOO_ORDER_CONFIRM_MESSAGE, true);
+                    request.setAttribute(RequestAttribute.TATTOO_ORDER_CONFIRM_MESSAGE, true);
                     page = PagePath.MESSAGE;
                 } else {
                     Optional<Tattoo> tattoo = tattooService.findTattooByIdCatalog(tattooId);
                     if (tattoo.isPresent()) {
-                        request.setAttribute(RequestParameter.TATTOO, tattoo.get());
+                        request.setAttribute(RequestAttribute.TATTOO, tattoo.get());
                         List<Discount> discounts = discountService.findDiscountsByUserLogin(userLogin);
-                        request.setAttribute(RequestParameter.DISCOUNTS, discounts);
-                        request.setAttribute(RequestParameter.CURRENT_DATE, LocalDate.now());
-                        request.setAttribute(RequestParameter.INCORRECT_DATA_MESSAGE, true);
+                        request.setAttribute(RequestAttribute.DISCOUNTS, discounts);
+                        request.setAttribute(RequestAttribute.CURRENT_DATE, LocalDate.now());
+                        request.setAttribute(RequestAttribute.INCORRECT_DATA_MESSAGE, true);
                         page = PagePath.TATTOO_ORDER;
                     } else {
-                        request.setAttribute(RequestParameter.TATTOO_FIND_ERROR_MESSAGE, true);
+                        request.setAttribute(RequestAttribute.TATTOO_FIND_ERROR_MESSAGE, true);
                         page = PagePath.MESSAGE;
                     }
                 }
             } else {
-                request.setAttribute(RequestParameter.TATTOO_ORDER_BALANCE_ERROR_MESSAGE, true);
+                request.setAttribute(RequestAttribute.TATTOO_ORDER_BALANCE_ERROR_MESSAGE, true);
                 page = PagePath.MESSAGE;
             }
         } catch (ServiceException e) {
             LOGGER.log(Level.ERROR, "Error while ordering tattoo", e);
-            request.setAttribute(RequestParameter.ERROR_MESSAGE, e);
+            request.setAttribute(RequestAttribute.ERROR_MESSAGE, e);
             page = PagePath.ERROR_500;
         }
         return page;

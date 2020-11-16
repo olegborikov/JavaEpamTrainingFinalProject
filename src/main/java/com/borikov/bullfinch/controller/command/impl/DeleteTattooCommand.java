@@ -1,6 +1,7 @@
 package com.borikov.bullfinch.controller.command.impl;
 
 import com.borikov.bullfinch.controller.PagePath;
+import com.borikov.bullfinch.controller.RequestAttribute;
 import com.borikov.bullfinch.controller.RequestParameter;
 import com.borikov.bullfinch.controller.command.Command;
 import com.borikov.bullfinch.model.exception.ServiceException;
@@ -20,9 +21,9 @@ import javax.servlet.http.HttpServletRequest;
  * @version 1.0
  */
 public class DeleteTattooCommand implements Command {
+    private static final Logger LOGGER = LogManager.getLogger();
     private static final TattooService tattooService = new TattooServiceImpl();
     private static final PhotoFileManager photoFileManager = new PhotoFileManager();
-    private static final Logger LOGGER = LogManager.getLogger();
 
     @Override
     public String execute(HttpServletRequest request) {
@@ -33,14 +34,14 @@ public class DeleteTattooCommand implements Command {
         try {
             if (tattooService.removeTattoo(tattooId, imageId)) {
                 photoFileManager.delete(imageName);
-                request.setAttribute(RequestParameter.TATTOO_DELETE_CONFIRM_MESSAGE, true);
+                request.setAttribute(RequestAttribute.TATTOO_DELETE_CONFIRM_MESSAGE, true);
             } else {
-                request.setAttribute(RequestParameter.TATTOO_DELETE_ERROR_MESSAGE, true);
+                request.setAttribute(RequestAttribute.TATTOO_DELETE_ERROR_MESSAGE, true);
             }
             page = PagePath.MESSAGE;
         } catch (ServiceException e) {
             LOGGER.log(Level.ERROR, "Error while deleting tattoo", e);
-            request.setAttribute(RequestParameter.ERROR_MESSAGE, e);
+            request.setAttribute(RequestAttribute.ERROR_MESSAGE, e);
             page = PagePath.ERROR_500;
         }
         return page;

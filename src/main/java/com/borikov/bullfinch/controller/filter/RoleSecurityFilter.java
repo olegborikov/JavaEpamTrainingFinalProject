@@ -1,9 +1,9 @@
 package com.borikov.bullfinch.controller.filter;
 
+import com.borikov.bullfinch.controller.RequestAttribute;
 import com.borikov.bullfinch.controller.RequestParameter;
-import com.borikov.bullfinch.controller.command.Command;
-import com.borikov.bullfinch.controller.command.CommandProvider;
-import com.borikov.bullfinch.controller.command.RolePermission;
+import com.borikov.bullfinch.controller.SessionAttribute;
+import com.borikov.bullfinch.controller.command.*;
 import com.borikov.bullfinch.model.entity.UserRole;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -34,16 +34,16 @@ public class RoleSecurityFilter implements Filter {
     }
 
     @Override
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain chain)
             throws ServletException, IOException {
-        HttpServletRequest httpRequest = (HttpServletRequest) request;
-        HttpServletResponse httpResponse = (HttpServletResponse) response;
-        HttpSession httpSession = httpRequest.getSession();
-        String commandName = httpRequest.getParameter(RequestParameter.COMMAND_NAME);
+        HttpServletRequest request = (HttpServletRequest) servletRequest;
+        HttpServletResponse response = (HttpServletResponse) servletResponse;
+        HttpSession session = request.getSession();
+        String commandName = request.getParameter(RequestParameter.COMMAND_NAME);
         Optional<Command> commandOptional = CommandProvider.defineCommand(commandName);
         if (commandOptional.isPresent()) {
             Command command = commandOptional.get();
-            String roleName = (String) httpSession.getAttribute(RequestParameter.ROLE);
+            String roleName = (String) session.getAttribute(SessionAttribute.ROLE);
             UserRole userRole;
             if (roleName != null) {
                 userRole = UserRole.valueOf(roleName.toUpperCase());
@@ -57,11 +57,11 @@ public class RoleSecurityFilter implements Filter {
             };
             if (!commands.contains(command)) {
                 LOGGER.log(Level.ERROR, "Role {} has no access to {} command", roleName, commandName);
-                httpResponse.sendError(FORBIDDEN_ACCESS_ERROR_NUMBER);
+                response.sendError(FORBIDDEN_ACCESS_ERROR_NUMBER);
                 return;
             }
         }
-        chain.doFilter(request, response);
+        chain.doFilter(servletRequest, servletResponse);
     }
 
     @Override

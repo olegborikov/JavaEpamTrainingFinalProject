@@ -1,7 +1,9 @@
 package com.borikov.bullfinch.controller.command.impl;
 
 import com.borikov.bullfinch.controller.PagePath;
+import com.borikov.bullfinch.controller.RequestAttribute;
 import com.borikov.bullfinch.controller.RequestParameter;
+import com.borikov.bullfinch.controller.SessionAttribute;
 import com.borikov.bullfinch.controller.command.Command;
 import com.borikov.bullfinch.model.exception.ServiceException;
 import com.borikov.bullfinch.model.service.TattooService;
@@ -21,31 +23,31 @@ import javax.servlet.http.HttpSession;
  * @version 1.0
  */
 public class AddTattooCommand implements Command {
+    private static final Logger LOGGER = LogManager.getLogger();
     private static final PhotoFileManager photoFileManager = new PhotoFileManager();
     private static final TattooService tattooService = new TattooServiceImpl();
-    private static final Logger LOGGER = LogManager.getLogger();
 
     @Override
     public String execute(HttpServletRequest request) {
         String page;
         String tattooName = request.getParameter(RequestParameter.NAME);
         String description = request.getParameter(RequestParameter.DESCRIPTION);
-        String photoName = (String) request.getAttribute(RequestParameter.PHOTO_NAME);
+        String photoName = (String) request.getAttribute(RequestAttribute.PHOTO_NAME);
         String price = request.getParameter(RequestParameter.PRICE);
-        HttpSession httpSession = request.getSession();
-        String proposedLogin = (String) httpSession.getAttribute(RequestParameter.LOGIN);
+        HttpSession session = request.getSession();
+        String proposedLogin = (String) session.getAttribute(SessionAttribute.LOGIN);
         try {
             if (tattooService.addTattoo(tattooName, description, price, photoName, proposedLogin)) {
-                request.setAttribute(RequestParameter.TATTOO_ADD_CONFIRM_MESSAGE, true);
+                request.setAttribute(RequestAttribute.TATTOO_ADD_CONFIRM_MESSAGE, true);
                 page = PagePath.MESSAGE;
             } else {
-                request.setAttribute(RequestParameter.INCORRECT_DATA_MESSAGE, true);
+                request.setAttribute(RequestAttribute.INCORRECT_DATA_MESSAGE, true);
                 page = PagePath.TATTOO_OFFER;
                 photoFileManager.delete(photoName);
             }
         } catch (ServiceException e) {
             LOGGER.log(Level.ERROR, "Error while adding tattoo", e);
-            request.setAttribute(RequestParameter.ERROR_MESSAGE, e);
+            request.setAttribute(RequestAttribute.ERROR_MESSAGE, e);
             page = PagePath.ERROR_500;
             photoFileManager.delete(photoName);
         }

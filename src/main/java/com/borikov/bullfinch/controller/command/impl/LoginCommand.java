@@ -1,7 +1,9 @@
 package com.borikov.bullfinch.controller.command.impl;
 
 import com.borikov.bullfinch.controller.PagePath;
+import com.borikov.bullfinch.controller.RequestAttribute;
 import com.borikov.bullfinch.controller.RequestParameter;
+import com.borikov.bullfinch.controller.SessionAttribute;
 import com.borikov.bullfinch.controller.command.Command;
 import com.borikov.bullfinch.model.entity.User;
 import com.borikov.bullfinch.model.entity.UserRole;
@@ -37,31 +39,31 @@ public class LoginCommand implements Command {
                 HttpSession session = request.getSession();
                 User user = userOptional.get();
                 if (user.getUserRole().equals(UserRole.ADMIN)) {
-                    session.setAttribute(RequestParameter.ROLE, user.getUserRole().getName());
-                    session.setAttribute(RequestParameter.LOGIN, user.getLogin());
+                    session.setAttribute(SessionAttribute.ROLE, user.getUserRole().getName());
+                    session.setAttribute(SessionAttribute.LOGIN, user.getLogin());
                     page = PagePath.HOME;
                 } else {
                     if (user.isBlocked()) {
-                        request.setAttribute(RequestParameter.USER_BLOCKED_MESSAGE, true);
+                        request.setAttribute(RequestAttribute.USER_BLOCKED_MESSAGE, true);
                         page = PagePath.MESSAGE;
                     } else {
                         if (user.isActivated()) {
                             page = PagePath.HOME;
-                            session.setAttribute(RequestParameter.ROLE, user.getUserRole().getName());
-                            session.setAttribute(RequestParameter.LOGIN, user.getLogin());
+                            session.setAttribute(SessionAttribute.ROLE, user.getUserRole().getName());
+                            session.setAttribute(SessionAttribute.LOGIN, user.getLogin());
                         } else {
-                            request.setAttribute(RequestParameter.USER_EMAIL_CONFIRM_MESSAGE, true);
+                            request.setAttribute(RequestAttribute.USER_EMAIL_CONFIRM_MESSAGE, true);
                             page = PagePath.MESSAGE;
                         }
                     }
                 }
             } else {
-                request.setAttribute(RequestParameter.INCORRECT_DATA_MESSAGE, true);
+                request.setAttribute(RequestAttribute.INCORRECT_DATA_MESSAGE, true);
                 page = PagePath.LOGIN;
             }
         } catch (ServiceException e) {
             LOGGER.log(Level.ERROR, "Error while logging in user", e);
-            request.setAttribute(RequestParameter.ERROR_MESSAGE, e);
+            request.setAttribute(RequestAttribute.ERROR_MESSAGE, e);
             page = PagePath.ERROR_500;
         }
         return page;

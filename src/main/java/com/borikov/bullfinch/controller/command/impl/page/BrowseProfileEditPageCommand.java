@@ -1,7 +1,8 @@
 package com.borikov.bullfinch.controller.command.impl.page;
 
 import com.borikov.bullfinch.controller.PagePath;
-import com.borikov.bullfinch.controller.RequestParameter;
+import com.borikov.bullfinch.controller.RequestAttribute;
+import com.borikov.bullfinch.controller.SessionAttribute;
 import com.borikov.bullfinch.controller.command.Command;
 import com.borikov.bullfinch.model.entity.User;
 import com.borikov.bullfinch.model.exception.ServiceException;
@@ -28,20 +29,20 @@ public class BrowseProfileEditPageCommand implements Command {
     @Override
     public String execute(HttpServletRequest request) {
         String page;
-        HttpSession httpSession = request.getSession();
-        String login = (String) httpSession.getAttribute(RequestParameter.LOGIN);
+        HttpSession session = request.getSession();
+        String login = (String) session.getAttribute(SessionAttribute.LOGIN);
         try {
             Optional<User> user = userService.findUserByLogin(login);
             if (user.isPresent()) {
-                request.setAttribute(RequestParameter.USER, user.get());
+                request.setAttribute(RequestAttribute.USER, user.get());
                 page = PagePath.PROFILE_EDIT;
             } else {
-                request.setAttribute(RequestParameter.USER_FIND_ERROR_MESSAGE, true);
+                request.setAttribute(RequestAttribute.USER_FIND_ERROR_MESSAGE, true);
                 page = PagePath.MESSAGE;
             }
         } catch (ServiceException e) {
             LOGGER.log(Level.ERROR, "Error while browsing profile edit page", e);
-            request.setAttribute(RequestParameter.ERROR_MESSAGE, e);
+            request.setAttribute(RequestAttribute.ERROR_MESSAGE, e);
             page = PagePath.ERROR_500;
         }
         return page;

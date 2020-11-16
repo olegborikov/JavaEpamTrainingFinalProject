@@ -1,7 +1,7 @@
 package com.borikov.bullfinch.controller.command.impl.page;
 
 import com.borikov.bullfinch.controller.PagePath;
-import com.borikov.bullfinch.controller.RequestParameter;
+import com.borikov.bullfinch.controller.RequestAttribute;
 import com.borikov.bullfinch.controller.command.Command;
 import com.borikov.bullfinch.model.entity.Tattoo;
 import com.borikov.bullfinch.model.exception.ServiceException;
@@ -31,15 +31,15 @@ public class BrowseCatalogPageCommand implements Command {
         String page;
         try {
             List<Tattoo> tattoos = tattooService.findAllTattoosCatalog();
-            request.setAttribute(RequestParameter.TATTOOS, tattoos);
-            request.setAttribute(RequestParameter.PAGE_AMOUNT,
+            request.setAttribute(RequestAttribute.TATTOOS, tattoos);
+            request.setAttribute(RequestAttribute.PAGE_AMOUNT,
                     Math.ceil((double) tattoos.size() / TATTOOS_AMOUNT_ON_PAGE));
-            request.setAttribute(RequestParameter.PAGE_NUMBER, FIRST_PAGE_NUMBER);
-            request.setAttribute(RequestParameter.TATTOOS_AMOUNT_ON_PAGE, TATTOOS_AMOUNT_ON_PAGE);
+            request.setAttribute(RequestAttribute.PAGE_NUMBER, FIRST_PAGE_NUMBER);
+            request.setAttribute(RequestAttribute.TATTOOS_AMOUNT_ON_PAGE, TATTOOS_AMOUNT_ON_PAGE);
             page = PagePath.CATALOG;
         } catch (ServiceException e) {
             LOGGER.log(Level.ERROR, "Error while browsing catalog page", e);
-            request.setAttribute(RequestParameter.ERROR_MESSAGE, e);
+            request.setAttribute(RequestAttribute.ERROR_MESSAGE, e);
             page = PagePath.ERROR_500;
         }
         return page;

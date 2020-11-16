@@ -1,6 +1,7 @@
 package com.borikov.bullfinch.controller.command.impl;
 
 import com.borikov.bullfinch.controller.PagePath;
+import com.borikov.bullfinch.controller.RequestAttribute;
 import com.borikov.bullfinch.controller.RequestParameter;
 import com.borikov.bullfinch.controller.command.Command;
 import com.borikov.bullfinch.model.entity.Tattoo;
@@ -21,8 +22,8 @@ import java.util.Optional;
  * @version 1.0
  */
 public class EditTattooCommand implements Command {
-    private static final TattooService tattooService = new TattooServiceImpl();
     private static final Logger LOGGER = LogManager.getLogger();
+    private static final TattooService tattooService = new TattooServiceImpl();
 
     @Override
     public String execute(HttpServletRequest request) {
@@ -35,20 +36,20 @@ public class EditTattooCommand implements Command {
             boolean isTattooEdited = tattooService.editTattoo(id, name, description, price);
             Optional<Tattoo> tattoo = tattooService.findTattooById(id);
             if (tattoo.isPresent()) {
-                request.setAttribute(RequestParameter.TATTOO, tattoo.get());
+                request.setAttribute(RequestAttribute.TATTOO, tattoo.get());
                 if (isTattooEdited) {
                     page = PagePath.TATTOO_ADMIN;
                 } else {
-                    request.setAttribute(RequestParameter.INCORRECT_DATA_MESSAGE, true);
+                    request.setAttribute(RequestAttribute.INCORRECT_DATA_MESSAGE, true);
                     page = PagePath.TATTOO_EDIT;
                 }
             } else {
-                request.setAttribute(RequestParameter.TATTOO_FIND_ERROR_MESSAGE, true);
+                request.setAttribute(RequestAttribute.TATTOO_FIND_ERROR_MESSAGE, true);
                 page = PagePath.MESSAGE;
             }
         } catch (ServiceException e) {
             LOGGER.log(Level.ERROR, "Error while editing tattoo", e);
-            request.setAttribute(RequestParameter.ERROR_MESSAGE, e);
+            request.setAttribute(RequestAttribute.ERROR_MESSAGE, e);
             page = PagePath.ERROR_500;
         }
         return page;

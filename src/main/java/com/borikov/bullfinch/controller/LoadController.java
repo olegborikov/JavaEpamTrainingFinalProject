@@ -18,16 +18,31 @@ import java.nio.file.Files;
 @WebServlet("/images/*")
 public class LoadController extends HttpServlet {
     private static final int BEGIN_INDEX = 1;
+    public static final String CONTENT_TYPE = "Content-Type";
+    public static final String CONTENT_LENGTH = "Content-Length";
+    public static final String CONTENT_DISPOSITION = "Content-Disposition";
     private static final String UPLOAD_DIRECTORY = "C:\\uploads";
     private static final String CONTENT_DISPOSITION_VALUE = "inline; filename=\"%s\"";
 
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
+    private void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String filename = request.getPathInfo().substring(BEGIN_INDEX);
         File file = new File(UPLOAD_DIRECTORY, filename);
-        response.setHeader(RequestParameter.CONTENT_TYPE, getServletContext().getMimeType(filename));
-        response.setHeader(RequestParameter.CONTENT_LENGTH, String.valueOf(file.length()));
-        response.setHeader(RequestParameter.CONTENT_DISPOSITION, String.format(CONTENT_DISPOSITION_VALUE, filename));
+        response.setHeader(CONTENT_TYPE, getServletContext().getMimeType(filename));
+        response.setHeader(CONTENT_LENGTH, String.valueOf(file.length()));
+        response.setHeader(CONTENT_DISPOSITION, String.format(CONTENT_DISPOSITION_VALUE, filename));
         Files.copy(file.toPath(), response.getOutputStream());
     }
 }

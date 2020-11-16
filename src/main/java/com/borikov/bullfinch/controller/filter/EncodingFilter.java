@@ -12,21 +12,21 @@ import java.io.IOException;
  */
 @WebFilter(urlPatterns = {"/*"})
 public class EncodingFilter implements Filter {
-    private static final String CODE = "UTF-8";
+    private static final String ENCODING = "UTF-8";
 
     @Override
     public void init(FilterConfig fConfig) {
     }
 
     @Override
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain chain)
             throws IOException, ServletException {
-        String codeRequest = request.getCharacterEncoding();
-        if (!CODE.equalsIgnoreCase(codeRequest)) {
-            request.setCharacterEncoding(CODE);
-            response.setCharacterEncoding(CODE);
+        String codeRequest = servletRequest.getCharacterEncoding();
+        if (!ENCODING.equalsIgnoreCase(codeRequest)) {
+            servletRequest.setCharacterEncoding(ENCODING);
+            servletResponse.setCharacterEncoding(ENCODING);
         }
-        chain.doFilter(request, response);
+        chain.doFilter(servletRequest, servletResponse);
     }
 
     @Override

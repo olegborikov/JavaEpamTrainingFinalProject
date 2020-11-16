@@ -1,6 +1,7 @@
 package com.borikov.bullfinch.controller.command.impl;
 
 import com.borikov.bullfinch.controller.PagePath;
+import com.borikov.bullfinch.controller.RequestAttribute;
 import com.borikov.bullfinch.controller.RequestParameter;
 import com.borikov.bullfinch.controller.command.Command;
 import com.borikov.bullfinch.model.entity.User;
@@ -34,16 +35,16 @@ public class FindUsersAdminCommand implements Command {
         try {
             String searchLoginSecured = XssSecurity.secure(searchLogin);
             List<User> users = userService.findUsersByLoginSubstring(searchLoginSecured);
-            request.setAttribute(RequestParameter.USERS, users);
-            request.setAttribute(RequestParameter.PAGE_AMOUNT,
+            request.setAttribute(RequestAttribute.USERS, users);
+            request.setAttribute(RequestAttribute.PAGE_AMOUNT,
                     Math.ceil((double) users.size() / USERS_AMOUNT_ON_PAGE));
-            request.setAttribute(RequestParameter.PAGE_NUMBER, FIRST_PAGE_NUMBER);
-            request.setAttribute(RequestParameter.USERS_AMOUNT_ON_PAGE, USERS_AMOUNT_ON_PAGE);
-            request.setAttribute(RequestParameter.SEARCH_LOGIN, searchLoginSecured);
+            request.setAttribute(RequestAttribute.PAGE_NUMBER, FIRST_PAGE_NUMBER);
+            request.setAttribute(RequestAttribute.USERS_AMOUNT_ON_PAGE, USERS_AMOUNT_ON_PAGE);
+            request.setAttribute(RequestAttribute.SEARCH_LOGIN, searchLoginSecured);
             page = PagePath.USERS_ADMIN;
         } catch (ServiceException e) {
             LOGGER.log(Level.ERROR, "Error while finding users", e);
-            request.setAttribute(RequestParameter.ERROR_MESSAGE, e);
+            request.setAttribute(RequestAttribute.ERROR_MESSAGE, e);
             page = PagePath.ERROR_500;
         }
         return page;

@@ -1,6 +1,7 @@
 package com.borikov.bullfinch.controller.command.impl;
 
 import com.borikov.bullfinch.controller.PagePath;
+import com.borikov.bullfinch.controller.RequestAttribute;
 import com.borikov.bullfinch.controller.RequestParameter;
 import com.borikov.bullfinch.controller.command.Command;
 import com.borikov.bullfinch.model.entity.Order;
@@ -37,18 +38,18 @@ public class FindOrdersAdminCommand implements Command {
             String beginDateSecured = XssSecurity.secure(beginDate);
             String endDateSecured = XssSecurity.secure(endDate);
             List<Order> orders = orderService.findOrdersByDates(beginDateSecured, endDateSecured);
-            request.setAttribute(RequestParameter.ORDERS, orders);
-            request.setAttribute(RequestParameter.PAGE_AMOUNT,
+            request.setAttribute(RequestAttribute.ORDERS, orders);
+            request.setAttribute(RequestAttribute.PAGE_AMOUNT,
                     Math.ceil((double) orders.size() / ORDERS_AMOUNT_ON_PAGE));
-            request.setAttribute(RequestParameter.PAGE_NUMBER, FIRST_PAGE_NUMBER);
-            request.setAttribute(RequestParameter.ORDERS_AMOUNT_ON_PAGE, ORDERS_AMOUNT_ON_PAGE);
-            request.setAttribute(RequestParameter.BEGIN_DATE, beginDateSecured);
-            request.setAttribute(RequestParameter.END_DATE, endDateSecured);
-            request.setAttribute(RequestParameter.CURRENT_DATE, LocalDate.now());
+            request.setAttribute(RequestAttribute.PAGE_NUMBER, FIRST_PAGE_NUMBER);
+            request.setAttribute(RequestAttribute.ORDERS_AMOUNT_ON_PAGE, ORDERS_AMOUNT_ON_PAGE);
+            request.setAttribute(RequestAttribute.BEGIN_DATE, beginDateSecured);
+            request.setAttribute(RequestAttribute.END_DATE, endDateSecured);
+            request.setAttribute(RequestAttribute.CURRENT_DATE, LocalDate.now());
             page = PagePath.ORDERS_ADMIN;
         } catch (ServiceException e) {
             LOGGER.log(Level.ERROR, "Error while finding orders", e);
-            request.setAttribute(RequestParameter.ERROR_MESSAGE, e);
+            request.setAttribute(RequestAttribute.ERROR_MESSAGE, e);
             page = PagePath.ERROR_500;
         }
         return page;

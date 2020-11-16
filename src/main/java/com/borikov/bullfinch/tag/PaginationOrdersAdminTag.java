@@ -1,6 +1,7 @@
 package com.borikov.bullfinch.tag;
 
-import com.borikov.bullfinch.controller.RequestParameter;
+import com.borikov.bullfinch.controller.RequestAttribute;
+import com.borikov.bullfinch.controller.SessionAttribute;
 import com.borikov.bullfinch.model.entity.Order;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -51,11 +52,11 @@ public class PaginationOrdersAdminTag extends TagSupport {
     @Override
     public int doStartTag() throws JspException {
         ServletRequest request = pageContext.getRequest();
-        List<Order> orders = (List<Order>) request.getAttribute(RequestParameter.ORDERS);
+        List<Order> orders = (List<Order>) request.getAttribute(RequestAttribute.ORDERS);
         int currentIndex = pageNumber * ordersAmountOnPage - ordersAmountOnPage;
         int lastIndex = pageNumber * ordersAmountOnPage - 1;
         HttpSession session = pageContext.getSession();
-        String localeName = (String) session.getAttribute(RequestParameter.CURRENT_LOCALE);
+        String localeName = (String) session.getAttribute(SessionAttribute.CURRENT_LOCALE);
         String language = localeName.split(SPLIT_SYMBOL)[0];
         String country = localeName.split(SPLIT_SYMBOL)[1];
         Locale locale = new Locale(language, country);

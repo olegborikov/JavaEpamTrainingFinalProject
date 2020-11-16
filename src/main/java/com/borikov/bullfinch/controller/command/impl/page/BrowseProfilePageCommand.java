@@ -1,7 +1,8 @@
 package com.borikov.bullfinch.controller.command.impl.page;
 
 import com.borikov.bullfinch.controller.PagePath;
-import com.borikov.bullfinch.controller.RequestParameter;
+import com.borikov.bullfinch.controller.RequestAttribute;
+import com.borikov.bullfinch.controller.SessionAttribute;
 import com.borikov.bullfinch.controller.command.Command;
 import com.borikov.bullfinch.model.entity.Discount;
 import com.borikov.bullfinch.model.entity.Order;
@@ -37,24 +38,24 @@ public class BrowseProfilePageCommand implements Command {
     @Override
     public String execute(HttpServletRequest request) {
         String page;
-        HttpSession httpSession = request.getSession();
-        String login = (String) httpSession.getAttribute(RequestParameter.LOGIN);
+        HttpSession session = request.getSession();
+        String login = (String) session.getAttribute(SessionAttribute.LOGIN);
         try {
             Optional<User> user = userService.findUserByLogin(login);
             if (user.isPresent()) {
-                request.setAttribute(RequestParameter.USER, user.get());
+                request.setAttribute(RequestAttribute.USER, user.get());
                 List<Order> orders = orderService.findOrdersByUserLogin(login);
                 List<Discount> discounts = discountService.findDiscountsByUserLogin(login);
-                request.setAttribute(RequestParameter.ORDERS, orders);
-                request.setAttribute(RequestParameter.DISCOUNTS, discounts);
+                request.setAttribute(RequestAttribute.ORDERS, orders);
+                request.setAttribute(RequestAttribute.DISCOUNTS, discounts);
                 page = PagePath.PROFILE;
             } else {
-                request.setAttribute(RequestParameter.USER_FIND_ERROR_MESSAGE, true);
+                request.setAttribute(RequestAttribute.USER_FIND_ERROR_MESSAGE, true);
                 page = PagePath.MESSAGE;
             }
         } catch (ServiceException e) {
             LOGGER.log(Level.ERROR, "Error while browsing profile page", e);
-            request.setAttribute(RequestParameter.ERROR_MESSAGE, e);
+            request.setAttribute(RequestAttribute.ERROR_MESSAGE, e);
             page = PagePath.ERROR_500;
         }
         return page;

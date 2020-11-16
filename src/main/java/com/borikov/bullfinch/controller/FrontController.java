@@ -1,7 +1,6 @@
 package com.borikov.bullfinch.controller;
 
-import com.borikov.bullfinch.controller.command.Command;
-import com.borikov.bullfinch.controller.command.CommandProvider;
+import com.borikov.bullfinch.controller.command.*;
 import com.borikov.bullfinch.model.pool.ConnectionPool;
 
 import javax.servlet.RequestDispatcher;
@@ -39,10 +38,10 @@ public class FrontController extends HttpServlet {
         Command command = commandOptional.orElseThrow(IllegalArgumentException::new);
         String page = command.execute(request);
         HttpSession session = request.getSession();
-        session.setAttribute(RequestParameter.CURRENT_PAGE, page);
+        session.setAttribute(SessionAttribute.CURRENT_PAGE, page);
         RequestAttributeHandler requestAttributeHandler = new RequestAttributeHandler();
         requestAttributeHandler.setAttributes(request);
-        session.setAttribute(RequestParameter.REQUEST_ATTRIBUTE_HANDLER, requestAttributeHandler);
+        session.setAttribute(SessionAttribute.REQUEST_ATTRIBUTE_HANDLER, requestAttributeHandler);
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(page);
         dispatcher.forward(request, response);
     }

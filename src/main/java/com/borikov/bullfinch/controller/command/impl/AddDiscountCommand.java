@@ -1,6 +1,7 @@
 package com.borikov.bullfinch.controller.command.impl;
 
 import com.borikov.bullfinch.controller.PagePath;
+import com.borikov.bullfinch.controller.RequestAttribute;
 import com.borikov.bullfinch.controller.RequestParameter;
 import com.borikov.bullfinch.controller.command.Command;
 import com.borikov.bullfinch.model.exception.ServiceException;
@@ -19,8 +20,8 @@ import javax.servlet.http.HttpServletRequest;
  * @version 1.0
  */
 public class AddDiscountCommand implements Command {
-    private static final DiscountService discountService = new DiscountServiceImpl();
     private static final Logger LOGGER = LogManager.getLogger();
+    private static final DiscountService discountService = new DiscountServiceImpl();
 
     @Override
     public String execute(HttpServletRequest request) {
@@ -29,16 +30,16 @@ public class AddDiscountCommand implements Command {
         String percent = request.getParameter(RequestParameter.PERCENT);
         try {
             if (discountService.addDiscount(percent, userId)) {
-                request.setAttribute(RequestParameter.DISCOUNT_ADD_CONFIRM_MESSAGE, true);
+                request.setAttribute(RequestAttribute.DISCOUNT_ADD_CONFIRM_MESSAGE, true);
                 page = PagePath.MESSAGE;
             } else {
-                request.setAttribute(RequestParameter.INCORRECT_DATA_MESSAGE, true);
-                request.setAttribute(RequestParameter.USER_ID, userId);
+                request.setAttribute(RequestAttribute.INCORRECT_DATA_MESSAGE, true);
+                request.setAttribute(RequestAttribute.USER_ID, userId);
                 page = PagePath.TATTOO_OFFER;
             }
         } catch (ServiceException e) {
             LOGGER.log(Level.ERROR, "Error while adding discount", e);
-            request.setAttribute(RequestParameter.ERROR_MESSAGE, e);
+            request.setAttribute(RequestAttribute.ERROR_MESSAGE, e);
             page = PagePath.ERROR_500;
         }
         return page;

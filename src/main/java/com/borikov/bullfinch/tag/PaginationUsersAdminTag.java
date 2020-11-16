@@ -1,6 +1,6 @@
 package com.borikov.bullfinch.tag;
 
-import com.borikov.bullfinch.controller.RequestParameter;
+import com.borikov.bullfinch.controller.RequestAttribute;
 import com.borikov.bullfinch.model.entity.User;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -44,7 +44,7 @@ public class PaginationUsersAdminTag extends TagSupport {
     @Override
     public int doStartTag() throws JspException {
         ServletRequest request = pageContext.getRequest();
-        List<User> users = (List<User>) request.getAttribute(RequestParameter.USERS);
+        List<User> users = (List<User>) request.getAttribute(RequestAttribute.USERS);
         int currentIndex = pageNumber * usersAmountOnPage - usersAmountOnPage;
         int lastIndex = pageNumber * usersAmountOnPage - 1;
         while (currentIndex < users.size() && currentIndex <= lastIndex) {

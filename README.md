@@ -71,7 +71,7 @@ He works with the proposed content, also monitors the relevance of goods and pri
 ## Objects of subject area
 ### Tattoo
 Tattooing is the main subject area of the site.
-All actions on the site mainly affect her.
+All actions on the site mainly affect it.
 A tattoo can have several statuses: archived, if the administrator added the tattoo to the archive,
 suggested, if the tattoo is suggested by the user and not confirmed by the admin,
 and active, if the tattoo is in the catalog.

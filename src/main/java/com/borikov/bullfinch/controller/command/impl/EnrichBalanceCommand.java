@@ -1,6 +1,7 @@
 package com.borikov.bullfinch.controller.command.impl;
 
 import com.borikov.bullfinch.controller.PagePath;
+import com.borikov.bullfinch.controller.RequestAttribute;
 import com.borikov.bullfinch.controller.RequestParameter;
 import com.borikov.bullfinch.controller.command.Command;
 import com.borikov.bullfinch.model.exception.ServiceException;
@@ -29,14 +30,14 @@ public class EnrichBalanceCommand implements Command {
         String enrichAmount = request.getParameter(RequestParameter.ENRICH_AMOUNT);
         try {
             if (walletService.enrichBalance(walletId, enrichAmount)) {
-                request.setAttribute(RequestParameter.BALANCE_ENRICH_CONFIRM_MESSAGE, true);
+                request.setAttribute(RequestAttribute.BALANCE_ENRICH_CONFIRM_MESSAGE, true);
             } else {
-                request.setAttribute(RequestParameter.BALANCE_ENRICH_ERROR_MESSAGE, true);
+                request.setAttribute(RequestAttribute.BALANCE_ENRICH_ERROR_MESSAGE, true);
             }
             page = PagePath.MESSAGE;
         } catch (ServiceException e) {
             LOGGER.log(Level.ERROR, "Error while enriching balance", e);
-            request.setAttribute(RequestParameter.ERROR_MESSAGE, e);
+            request.setAttribute(RequestAttribute.ERROR_MESSAGE, e);
             page = PagePath.ERROR_500;
         }
         return page;

@@ -1,6 +1,7 @@
 package com.borikov.bullfinch.controller.command.impl;
 
 import com.borikov.bullfinch.controller.PagePath;
+import com.borikov.bullfinch.controller.RequestAttribute;
 import com.borikov.bullfinch.controller.RequestParameter;
 import com.borikov.bullfinch.controller.command.Command;
 import com.borikov.bullfinch.model.entity.Discount;
@@ -28,8 +29,8 @@ import java.util.Optional;
  * @version 1.0
  */
 public class UnblockUserCommand implements Command {
-    private static final UserService userService = new UserServiceImpl();
     private static final Logger LOGGER = LogManager.getLogger();
+    private static final UserService userService = new UserServiceImpl();
     private static final OrderService orderService = new OrderServiceImpl();
     private static final DiscountService discountService = new DiscountServiceImpl();
 
@@ -41,23 +42,23 @@ public class UnblockUserCommand implements Command {
             if (userService.unblockUser(login)) {
                 Optional<User> user = userService.findUserByLogin(login);
                 if (user.isPresent()) {
-                    request.setAttribute(RequestParameter.USER, user.get());
+                    request.setAttribute(RequestAttribute.USER, user.get());
                     List<Order> orders = orderService.findOrdersByUserLogin(login);
                     List<Discount> discounts = discountService.findDiscountsByUserLogin(login);
-                    request.setAttribute(RequestParameter.ORDERS, orders);
-                    request.setAttribute(RequestParameter.DISCOUNTS, discounts);
+                    request.setAttribute(RequestAttribute.ORDERS, orders);
+                    request.setAttribute(RequestAttribute.DISCOUNTS, discounts);
                     page = PagePath.PROFILE_ADMIN;
                 } else {
-                    request.setAttribute(RequestParameter.USER_FIND_ERROR_MESSAGE, true);
+                    request.setAttribute(RequestAttribute.USER_FIND_ERROR_MESSAGE, true);
                     page = PagePath.MESSAGE;
                 }
             } else {
-                request.setAttribute(RequestParameter.USER_UNBLOCK_ERROR_MESSAGE, true);
+                request.setAttribute(RequestAttribute.USER_UNBLOCK_ERROR_MESSAGE, true);
                 page = PagePath.MESSAGE;
             }
         } catch (ServiceException e) {
             LOGGER.log(Level.ERROR, "Error while unblocking user", e);
-            request.setAttribute(RequestParameter.ERROR_MESSAGE, e);
+            request.setAttribute(RequestAttribute.ERROR_MESSAGE, e);
             page = PagePath.ERROR_500;
         }
         return page;

@@ -1,6 +1,7 @@
 package com.borikov.bullfinch.controller.command.impl;
 
 import com.borikov.bullfinch.controller.PagePath;
+import com.borikov.bullfinch.controller.RequestAttribute;
 import com.borikov.bullfinch.controller.RequestParameter;
 import com.borikov.bullfinch.controller.command.Command;
 import com.borikov.bullfinch.model.exception.ServiceException;
@@ -49,15 +50,15 @@ public class RegistrationCommand implements Command {
         try {
             if (userService.addUser(registrationParameters)) {
                 EmailSender.sendMessage(email, login, request.getRequestURL().toString());
-                request.setAttribute(RequestParameter.USER_EMAIL_CONFIRM_MESSAGE, true);
+                request.setAttribute(RequestAttribute.USER_EMAIL_CONFIRM_MESSAGE, true);
                 page = PagePath.MESSAGE;
             } else {
-                request.setAttribute(RequestParameter.REGISTRATION_PARAMETERS, registrationParameters);
+                request.setAttribute(RequestAttribute.REGISTRATION_PARAMETERS, registrationParameters);
                 page = PagePath.REGISTRATION;
             }
         } catch (ServiceException e) {
             LOGGER.log(Level.ERROR, "Error while registering user", e);
-            request.setAttribute(RequestParameter.ERROR_MESSAGE, e);
+            request.setAttribute(RequestAttribute.ERROR_MESSAGE, e);
             page = PagePath.ERROR_500;
         }
         return page;
