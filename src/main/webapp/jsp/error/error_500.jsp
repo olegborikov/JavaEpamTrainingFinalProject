@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page isErrorPage="true" contentType="text/html;charset=UTF-8" %>
 
 <html>
@@ -16,14 +17,26 @@
 <jsp:include page="${pageContext.request.contextPath}/jsp/fragment/navbar.jsp"/>
 <section class="masthead">
     <div class="intro-body">
-        <div class="container">
-            <h5>Request from ${pageContext.errorData.requestURI} is failed</h5>
-            <br/>
-            <h5>Status code: 500</h5>
-            <br/>
-            <h5>Error: ${pageContext.exception}</h5>
-            <br/>
-        </div>
+        <c:if test="${not empty errorMessage}">
+            <div class="container">
+                <h5>Request is failed</h5>
+                <br/>
+                <h5>Status code: 500</h5>
+                <br/>
+                <h5>Error: ${errorMessage.getClass().getCanonicalName()}</h5>
+                <br/>
+            </div>
+        </c:if>
+        <c:if test="${empty errorMessage}">
+            <div class="container">
+                <h5>Request from ${pageContext.errorData.requestURI} is failed</h5>
+                <br/>
+                <h5>Status code: 500</h5>
+                <br/>
+                <h5>Error: ${pageContext.exception}</h5>
+                <br/>
+            </div>
+        </c:if>
     </div>
 </section>
 <jsp:include page="${pageContext.request.contextPath}/jsp/fragment/footer.jsp"/>
